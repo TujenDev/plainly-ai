@@ -1,0 +1,436 @@
+/* Plainly — shared stylesheet
+   Design intent: a reference site, not a course funnel.
+   Reads like documentation you trust: serif body for long-form,
+   tight sans for structure, one accent colour, generous measure. */
+
+:root {
+  --paper: #fcfcfa;
+  --paper-sunk: #f4f4f0;
+  --ink: #1a2029;
+  --ink-soft: #4a5560;
+  --ink-faint: #78838d;
+  --rule: #e2e4df;
+  --accent: #0b6e63;
+  --accent-soft: #e6f2f0;
+  --flag: #9a5b12;
+  --flag-soft: #fdf3e4;
+
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
+
+  --measure: 34rem;
+  --wide: 64rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14181d;
+    --paper-sunk: #1b2027;
+    --ink: #e8eaec;
+    --ink-soft: #b0b8c0;
+    --ink-faint: #8a939c;
+    --rule: #2b323a;
+    --accent: #5fc7b8;
+    --accent-soft: #17302d;
+    --flag: #e0a860;
+    --flag-soft: #2c2318;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+/* ---------- Structure ---------- */
+
+.wrap {
+  width: 100%;
+  max-width: var(--wide);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+main { padding-bottom: 5rem; }
+
+/* ---------- Header ---------- */
+
+.site-head {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.1rem 0;
+  margin-bottom: 3rem;
+}
+
+.site-head .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 2rem;
+}
+
+.wordmark {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wordmark span { color: var(--accent); }
+
+.site-nav {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-left: auto;
+}
+
+.site-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--accent);
+}
+
+/* ---------- Typography ---------- */
+
+h1, h2, h3 {
+  font-family: var(--sans);
+  letter-spacing: -0.021em;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+  margin: 0 0 0.75rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  margin: 3rem 0 0.75rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin: 2rem 0 0.5rem;
+}
+
+.standfirst {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+  max-width: 38rem;
+}
+
+p { margin: 0 0 1.25rem; }
+
+a { color: var(--accent); }
+
+strong { font-weight: 600; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.87em;
+  background: var(--paper-sunk);
+  padding: 0.12em 0.34em;
+  border-radius: 3px;
+}
+
+ul, ol { padding-left: 1.35rem; margin: 0 0 1.25rem; }
+li { margin-bottom: 0.5rem; }
+
+.kicker {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.6rem;
+}
+
+/* ---------- Verification stamp ---------- */
+/* The load-bearing element of this whole site. Every page carries one. */
+
+.stamp {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  border-left: 2px solid var(--accent);
+  padding: 0.15rem 0 0.15rem 0.75rem;
+  margin: 0 0 2.5rem;
+}
+
+.stamp b { color: var(--ink-soft); font-weight: 600; }
+
+/* ---------- Level tracks ---------- */
+
+.tracks {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin: 2.5rem 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.35rem;
+  background: var(--paper);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  margin: 0;
+}
+
+.track:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.track-num {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.track h3 { margin: 0 0 0.4rem; font-size: 1.18rem; }
+
+.track p {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0 0 0.9rem;
+  line-height: 1.5;
+}
+
+.track-you {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  margin-top: auto;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.75rem;
+}
+
+/* ---------- Callouts ---------- */
+
+.note {
+  background: var(--accent-soft);
+  border-radius: 6px;
+  padding: 1.1rem 1.35rem;
+  margin: 2rem 0;
+  font-size: 1.02rem;
+}
+
+.note p:last-child { margin-bottom: 0; }
+
+.note-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.gap {
+  background: var(--flag-soft);
+  border-radius: 6px;
+  padding: 1.1rem 1.35rem;
+  margin: 2rem 0;
+  font-size: 1.02rem;
+}
+
+.gap .note-title { color: var(--flag); }
+.gap p:last-child { margin-bottom: 0; }
+
+/* ---------- Tables ---------- */
+
+.table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0 0.75rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+
+th {
+  background: var(--paper-sunk);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+td.num { font-variant-numeric: tabular-nums; }
+
+.unverified {
+  color: var(--flag);
+  font-style: italic;
+  font-family: var(--serif);
+}
+
+.table-note {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  margin: 0 0 2rem;
+}
+
+/* ---------- Resource lists ---------- */
+
+.resources { list-style: none; padding: 0; }
+
+.resources li {
+  border-bottom: 1px solid var(--rule);
+  padding: 1.1rem 0;
+  margin: 0;
+}
+
+.resources li:last-child { border-bottom: none; }
+
+.res-name {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+
+.res-meta {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  margin-left: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin-left: 0.4rem;
+  vertical-align: 0.1em;
+}
+
+.tag.paid { background: var(--flag-soft); color: var(--flag); }
+
+.resources p {
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  line-height: 1.5;
+}
+
+/* ---------- Concept index ---------- */
+
+.concept-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+}
+
+.concept-list li { margin: 0; }
+
+.concept-list a {
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1rem 1.15rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease;
+  height: 100%;
+}
+
+.concept-list a:hover { border-color: var(--accent); }
+
+.concept-list .res-name { display: block; margin-bottom: 0.2rem; }
+
+.concept-list p { margin: 0; font-size: 0.94rem; }
+
+.soon {
+  border: 1px dashed var(--rule) !important;
+  opacity: 0.62;
+}
+
+/* ---------- Footer ---------- */
+
+.site-foot {
+  border-top: 1px solid var(--rule);
+  padding: 2rem 0 3rem;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  color: var(--ink-faint);
+}
+
+.site-foot p { margin: 0 0 0.5rem; max-width: 40rem; }
+.site-foot a { color: var(--ink-soft); }
+
+/* ---------- Utilities ---------- */
+
+.next {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}

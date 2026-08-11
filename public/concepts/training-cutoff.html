@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training cutoff — Plainly</title>
+<meta name="description" content="The date an AI model's knowledge stops, why there are actually two such dates, and why models are unreliable about reporting their own.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://plainlyai.org/concepts/training-cutoff.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/concepts/training-cutoff.html">
+<meta property="og:title" content="Training cutoff — Plainly">
+<meta property="og:description" content="The date an AI model&#x27;s knowledge stops, why there are actually two such dates, and why models are unreliable about reporting their own.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Training cutoff — Plainly">
+<meta name="twitter:description" content="The date an AI model&#x27;s knowledge stops, why there are actually two such dates, and why models are unreliable about reporting their own.">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">Plain<span>ly</span></a>
+    <nav class="site-nav">
+      <a href="../index.html">Home</a>
+      <a href="../start-here.html">Start here</a>
+      <a href="index.html">Concepts</a>
+      <a href="../model-facts.html">Model facts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="kicker">Concept · Foundational</p>
+  <h1>Training cutoff</h1>
+  <p class="standfirst">
+    The date a model's knowledge stops. Simple in principle, and the source of
+    more quiet errors than almost anything else, because the model does not
+    reliably know where its own boundary is.
+  </p>
+
+  <p class="stamp">
+    Last verified <b>11 August 2026</b> &nbsp;·&nbsp; Per-model dates live on
+    <a href="../model-facts.html">Model facts</a>
+  </p>
+
+  <div class="prose">
+
+    <h2>A model is a snapshot, not a subscription</h2>
+    <p>
+      Training happens once. An enormous quantity of text is gathered, the model
+      learns from it over a period of months, and then it is finished and shipped.
+      From that point on, the thing you are talking to does not learn. It does not
+      read the news. It is not quietly updated overnight.
+      What it absorbed during training is what it has, permanently.
+    </p>
+    <p>
+      This runs hard against the instinct that software gets better in the
+      background. The chat product around the model changes constantly, so the
+      whole thing feels live. The model underneath is a fixed artefact, and the only
+      way it learns anything new is if you or the product put that information in
+      front of it. Which is exactly what a search tool does, and why models with
+      one behave so differently on anything current.
+    </p>
+
+    <h2>There are actually two dates, and the gap matters</h2>
+    <p>
+      Here is the part that almost nobody covers. A single "cutoff" implies a clean
+      line: everything before it known, everything after unknown. The reality is
+      blurrier, and at least one vendor is now honest enough to publish both edges.
+      Anthropic lists two separate dates for every model:
+    </p>
+    <ul>
+      <li><strong>Training data cutoff</strong> — the outer edge of the material used. Nothing after this date was seen at all.</li>
+      <li><strong>Reliable knowledge cutoff</strong> — the earlier date through which the model's knowledge is, in Anthropic's own wording, most extensive and reliable.</li>
+    </ul>
+    <p>
+      Between those two dates sits a band where the model has <em>some</em>
+      coverage, but thin and patchy coverage. And thin coverage is arguably more
+      dangerous than none, because a model with fragments of a topic will
+      confidently assemble them into a whole, whereas a model with nothing at all is
+      at least more likely to say so.
+    </p>
+    <p>
+      The gap is not trivial. On at least one current model the two dates sit
+      several months apart. Both are on
+      <a href="../model-facts.html">Model facts</a>, per model, side by side.
+    </p>
+
+    <div class="note">
+      <p class="note-title">The practical reading</p>
+      <p>
+        Treat the <em>reliable</em> date as the real cutoff for anything you care
+        about, and treat the months after it as a zone of confident half-knowledge
+        rather than a bonus.
+      </p>
+    </div>
+
+    <h2>The model doesn't know its own cutoff</h2>
+    <p>
+      This one surprises people, and it's the reason you can't simply ask.
+    </p>
+    <p>
+      Everything a model knows, it knows from training data. So for a model to know
+      its own cutoff date, that date would have to have been well documented in text
+      that existed <em>before</em> the model was trained. Which it obviously wasn't.
+      At training time, the model's own release was still in the future.
+    </p>
+    <p>
+      So when you ask a model when its knowledge ends, it is not consulting a
+      specification. It is inferring, from a sense of which events feel recent and
+      which feel well covered. That inference is systematically biased early:
+      the most recent months before a cutoff are always underrepresented, because
+      the internet had not yet finished writing about them when the data was
+      collected. A model therefore tends to <em>underestimate</em> its own cutoff,
+      sometimes by a lot, and will state the wrong date with the same steady
+      confidence it applies to everything else. → <a href="hallucination.html">Hallucination</a>
+    </p>
+
+    <h3>It also doesn't know what today is</h3>
+    <p>
+      A model has no clock. It cannot perceive the passage of time between your
+      messages, and it has no idea how long ago it shipped. Chat products handle this
+      by quietly inserting the current date into the conversation before you ever
+      see it, which is why an assistant usually gets today's date right.
+    </p>
+    <p>
+      Strip that away — call the model directly through an API without supplying the
+      date — and ask what year it is, and you'll get a guess anchored near the
+      training data. If you're building anything where the current date matters,
+      you have to tell it. It will not ask.
+    </p>
+
+    <h2>Where this bites</h2>
+
+    <p><strong>Version-specific technical detail.</strong> The worst category, and
+    the one that catches builders. Library APIs, framework conventions, config
+    syntax, deprecations. A model will confidently give you code against the
+    version it learned, and stale code is uniquely nasty because it looks completely
+    correct and fails for reasons that seem unrelated. Anything version-sensitive
+    should come from current documentation, not from recall.</p>
+
+    <p><strong>Prices and product specifics.</strong> Never trust a model on
+    pricing. It changes without notice, promotional rates expire, and the model has
+    no way to know that. This site's <a href="../model-facts.html">Model facts</a>
+    page exists precisely because that information cannot live in a model's head or
+    in an undated paragraph.</p>
+
+    <p><strong>Its own family.</strong> A model cannot tell you about models
+    released after it, including its own successors. Asked to compare itself to
+    something newer, it will either not recognise the name or reason about it from
+    nothing. If a model tells you it's the latest available, that statement carries
+    no information at all.</p>
+
+    <p><strong>Anything that changed recently.</strong> Regulations, rankings,
+    who holds which job, whether a company still exists, what the current advice
+    is on something. All of it silently frozen.</p>
+
+    <p><strong>The asymmetry that makes this hard.</strong> The model has no
+    internal flag marking a topic as post-cutoff. It cannot detect the boundary from
+    the inside — there's no felt difference between recalling something it learned
+    and constructing something plausible about a period it never saw. Which means
+    the burden of noticing sits entirely with you.</p>
+
+    <h2>What to do about it</h2>
+
+    <p><strong>Give it a way to look things up.</strong> The single fix that
+    addresses the root cause. A model with a working search tool is not limited to
+    its training data. This is the main reason to prefer an assistant that can
+    search over a raw model for anything factual, and it converts a recall problem
+    into a reading problem.</p>
+
+    <p><strong>Paste current material in.</strong> Same move as everywhere else on
+    this site: put the up-to-date documentation, page or figures on the desk rather
+    than asking the model to remember them. → <a href="context-windows.html">Context windows</a></p>
+
+    <p><strong>State the date when it matters.</strong> If you're working via an
+    API, or asking anything time-sensitive, say what today is. Cheap, and it removes
+    a whole class of confusion.</p>
+
+    <p><strong>Look up the cutoff rather than asking for it.</strong> Vendors
+    publish these dates. The model's own answer is a guess. Check the documentation,
+    or <a href="../model-facts.html">Model facts</a>.</p>
+
+    <p><strong>Ask "as of when?" and treat the answer as a prompt to verify,</strong>
+    not as an answer. It's a useful habit because it surfaces that a claim is
+    time-sensitive at all, which is the part people miss.</p>
+
+    <h2>Why this concept shaped this site</h2>
+    <p>
+      Worth being explicit, since it's the clearest example of the idea in action.
+      Every page here carries a "last verified" date because of exactly this
+      problem. Written content has a cutoff too, and it has the same defect as a
+      model: an undated page cannot tell you how stale it is, and it goes on
+      sounding just as authoritative years later.
+    </p>
+    <p>
+      A date stamp is the smallest possible fix. It doesn't make a page current, it
+      makes the page's currency <em>checkable</em>, and that's the part that lets you
+      calibrate how much to trust it. The same logic is why every hard number on
+      this site is quarantined onto one dated page instead of scattered through
+      prose that would rot invisibly.
+    </p>
+
+    <div class="gap">
+      <p class="note-title">Where this page stops</p>
+      <p>
+        The two engineering answers to this problem each get their own page.
+        <strong>Tool use</strong> covers how a model reaches outside itself to
+        search and fetch, and is next. <strong>RAG and retrieval</strong> covers
+        pulling in your own documents at question time.
+      </p>
+    </div>
+
+    <h2>Sources</h2>
+    <p class="table-note">
+      The two-date distinction, and the definitions quoted for each, come from
+      Anthropic's
+      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+      fetched 11 August 2026, which publishes a <em>reliable knowledge cutoff</em>
+      and a <em>training data cutoff</em> separately for every model. Anthropic is
+      the only major vendor known to us to publish both; if others have begun doing
+      so, this page should be updated to say so. The explanation of why models
+      underestimate their own cutoff is a mechanical argument from how training data
+      accumulates, not a vendor claim, and is presented as reasoning rather than
+      citation.
+    </p>
+
+    <p class="next">
+      Related → <a href="hallucination.html">Hallucination</a> ·
+      <a href="context-windows.html">Context windows</a> ·
+      All → <a href="index.html">Concepts</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      This site date-stamps every page for the reasons set out above.
+    </p>
+    <p>
+      <a href="../index.html">Home</a> ·
+      <a href="../start-here.html">Start here</a> ·
+      <a href="index.html">Concepts</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Internal working documents — must never be deployed or published.
+# The site's deployable surface is public/ only; Cloudflare Pages is configured
+# with public/ as the build output directory so nothing outside it can ship.
+# CONTENT-PLAN.md contains candid strategy and business assessment.
+CONTENT-PLAN.md
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+.vscode/
+.idea/

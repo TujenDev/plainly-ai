@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model facts — Plainly</title>
+<meta name="description" content="One dated table of context windows, output limits and prices for current AI models. Every figure cited to a primary source, every gap visibly flagged.">
+<link rel="stylesheet" href="style.css">
+<link rel="canonical" href="https://plainlyai.org/model-facts.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/model-facts.html">
+<meta property="og:title" content="Model facts — Plainly">
+<meta property="og:description" content="One dated table of context windows, output limits and prices for current AI models. Every figure cited to a primary source, every gap visibly flagged.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Model facts — Plainly">
+<meta name="twitter:description" content="One dated table of context windows, output limits and prices for current AI models. Every figure cited to a primary source, every gap visibly flagged.">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="index.html">Plain<span>ly</span></a>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="start-here.html">Start here</a>
+      <a href="concepts/index.html">Concepts</a>
+      <a href="model-facts.html" aria-current="page">Model facts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="kicker">The one page with numbers on it</p>
+  <h1>Model facts</h1>
+  <p class="standfirst">
+    Every hard figure on this site lives here, so there is exactly one page to
+    keep current instead of a hundred. If an explainer quotes a number, it links
+    back to this table.
+  </p>
+
+  <p class="stamp">
+    Last verified <b>11 August 2026</b> against each vendor's own documentation.
+    Anything not verified is flagged in orange below.
+  </p>
+
+  <div class="prose">
+    <div class="note">
+      <p class="note-title">How to read this</p>
+      <p>
+        <strong>Context window</strong> is how much the model can hold in mind at
+        once, input and output together. <strong>Max output</strong> is the ceiling
+        on a single reply. <strong>Price</strong> is per million tokens, quoted
+        separately for what you send (input) and what you get back (output) —
+        output almost always costs several times more.
+      </p>
+    </div>
+  </div>
+
+  <h2>Anthropic (Claude)</h2>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>API ID</th>
+          <th>Context</th>
+          <th>Max output</th>
+          <th>Input / MTok</th>
+          <th>Output / MTok</th>
+          <th>Reliable cutoff</th>
+          <th>Training cutoff</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Claude Fable 5</td>
+          <td><code>claude-fable-5</code></td>
+          <td class="num">1M</td>
+          <td class="num">128k</td>
+          <td class="num">$10</td>
+          <td class="num">$50</td>
+          <td>Jan 2026</td>
+          <td>Jan 2026</td>
+        </tr>
+        <tr>
+          <td>Claude Opus 5</td>
+          <td><code>claude-opus-5</code></td>
+          <td class="num">1M</td>
+          <td class="num">128k</td>
+          <td class="num">$5</td>
+          <td class="num">$25</td>
+          <td>May 2026</td>
+          <td>May 2026</td>
+        </tr>
+        <tr>
+          <td>Claude Sonnet 5</td>
+          <td><code>claude-sonnet-5</code></td>
+          <td class="num">1M</td>
+          <td class="num">128k</td>
+          <td class="num">$2 *</td>
+          <td class="num">$10 *</td>
+          <td>Jan 2026</td>
+          <td>Jan 2026</td>
+        </tr>
+        <tr>
+          <td>Claude Haiku 4.5</td>
+          <td><code>claude-haiku-4-5</code></td>
+          <td class="num">200k</td>
+          <td class="num">64k</td>
+          <td class="num">$1</td>
+          <td class="num">$5</td>
+          <td>Feb 2025</td>
+          <td>Jul 2025</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="table-note">
+    <strong>* Sonnet 5 is on an introductory price.</strong> The $2 / $10 rate is
+    promotional and the standard rate is $3 / $15. Anyone budgeting off the
+    current figure should check whether the promotion has ended before relying on
+    it. This is a good example of why undated pricing pages are dangerous.<br>
+    Source: <a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic models overview</a>,
+    fetched 11 August 2026. Batch processing and prompt caching change these
+    numbers substantially and are covered on Anthropic's pricing page.<br>
+    <strong>Two cutoff columns:</strong> the <em>reliable</em> date is how far the
+    model's knowledge is dependable; the <em>training</em> date is the outer edge
+    of its data. The months between are thin, half-known territory — note Haiku's
+    five-month gap. Explained properly in
+    <a href="concepts/training-cutoff.html">Training cutoff</a>.
+  </p>
+
+  <h2>OpenAI, Google and others</h2>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Vendor</th>
+          <th>Model</th>
+          <th>Context</th>
+          <th>Max output</th>
+          <th>Input / MTok</th>
+          <th>Output / MTok</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OpenAI</td>
+          <td class="unverified">not yet verified</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+        </tr>
+        <tr>
+          <td>Google</td>
+          <td class="unverified">not yet verified</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+        </tr>
+        <tr>
+          <td>Meta (Llama)</td>
+          <td class="unverified">not yet verified</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+          <td class="unverified">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <div class="gap">
+      <p class="note-title">Deliberately blank</p>
+      <p>
+        These rows are empty because they have not been checked against each
+        vendor's own pricing page yet, and filling them in from memory is how
+        every other comparison site ends up quietly wrong. They get populated
+        when they get verified, with the date attached. An empty cell is
+        information; a confident wrong number is not.
+      </p>
+    </div>
+
+    <h2>What changes, and how fast</h2>
+    <p>
+      Rough guide to how much you should trust a figure of a given age:
+    </p>
+    <ul>
+      <li><strong>Prices:</strong> can change with no notice, and introductory rates expire. Treat anything over three months old as unreliable.</li>
+      <li><strong>Model names and IDs:</strong> new models land every few months and old ones get retired. An ID from a year-old tutorial may simply error.</li>
+      <li><strong>Context windows and output limits:</strong> slower moving, and generally only go up.</li>
+      <li><strong>Concepts:</strong> stable for years. What a token is has not changed. This is why the explainers on this site avoid numbers and link here instead.</li>
+    </ul>
+
+    <p class="next">
+      Concepts behind these numbers → <a href="concepts/context-windows.html">Context windows</a>
+    </p>
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      Figures here are cited to primary sources and dated. Spotted a stale one? That's a bug.
+    </p>
+    <p>
+      <a href="index.html">Home</a> ·
+      <a href="start-here.html">Start here</a> ·
+      <a href="concepts/index.html">Concepts</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

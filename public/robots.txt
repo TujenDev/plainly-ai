@@ -1,0 +1,24 @@
+# Plainly — plainlyai.org
+#
+# Everything here is open to everyone, human and machine alike.
+#
+# This is a deliberate decision, not an oversight. This site is a free,
+# independent reference with nothing to sell and no advertising. Being read,
+# indexed, and cited is the entire point. That includes AI crawlers: if a model
+# gives someone a better answer because it read these pages, the site did its
+# job. We would rather be quoted accurately than not quoted at all.
+#
+# We therefore do not participate in crawler paywalls or pay-per-crawl schemes,
+# and we do not distinguish between search crawlers, AI training crawlers, and
+# AI agents acting for a user. All are welcome.
+#
+# One ask, not enforceable but stated plainly: every page on this site carries a
+# "last verified" date. If you reproduce a fact from here, carry the date with
+# it. Facts about AI go stale fast, which is why we date them in the first place.
+#
+# Last reviewed: 11 August 2026
+
+User-agent: *
+Allow: /
+
+Sitemap: https://plainlyai.org/sitemap.xml

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context windows — Plainly</title>
+<meta name="description" content="Why an AI model appears to forget things mid-conversation, what a context window actually is, and why a bigger one is not automatically better.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://plainlyai.org/concepts/context-windows.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/concepts/context-windows.html">
+<meta property="og:title" content="Context windows — Plainly">
+<meta property="og:description" content="Why an AI model appears to forget things mid-conversation, what a context window actually is, and why a bigger one is not automatically better.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Context windows — Plainly">
+<meta name="twitter:description" content="Why an AI model appears to forget things mid-conversation, what a context window actually is, and why a bigger one is not automatically better.">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">Plain<span>ly</span></a>
+    <nav class="site-nav">
+      <a href="../index.html">Home</a>
+      <a href="../start-here.html">Start here</a>
+      <a href="index.html">Concepts</a>
+      <a href="../model-facts.html">Model facts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="kicker">Concept · Foundational</p>
+  <h1>Context windows</h1>
+  <p class="standfirst">
+    If you only learn one piece of machinery, learn this one. Most of the
+    mysterious ways these tools fail are this, wearing a disguise.
+  </p>
+
+  <p class="stamp">
+    Last verified <b>11 August 2026</b> &nbsp;·&nbsp; Concept pages age slowly;
+    the figures they reference live on <a href="../model-facts.html">Model facts</a>
+  </p>
+
+  <div class="prose">
+
+    <h2>It's a desk, not a memory</h2>
+    <p>
+      The instinct is to imagine the model remembering your conversation the way a
+      person would: things happen, they go into memory, memory is consulted later.
+      That's the wrong picture, and almost every confusing behaviour follows from
+      the wrong picture.
+    </p>
+    <p>
+      A better one: the model has a <strong>desk</strong>. Everything it can take
+      into account has to be physically on that desk, laid out flat, at the moment
+      it answers. Not filed nearby. Not retrievable on request. On the desk. The
+      context window is the size of the desk.
+    </p>
+    <p>
+      Here is the part that surprises people. The model has no memory of your
+      previous messages at all. Each time you hit send, the entire conversation
+      up to that point is re-sent, from scratch, and laid out on the desk again.
+      The model reads the whole thing fresh, answers, and then forgets it
+      completely. The continuity you experience is an illusion maintained by the
+      software around the model, which keeps a transcript and re-sends it every
+      single turn.
+    </p>
+
+    <div class="note">
+      <p class="note-title">The one-sentence version</p>
+      <p>
+        A conversation with an AI is not a conversation. It is a series of
+        independent readings of a document that keeps getting longer, and the
+        context window is how long that document is allowed to get.
+      </p>
+    </div>
+
+    <h2>So why does it "forget"?</h2>
+    <p>
+      Because the desk fills up. Once the transcript grows past the window, something
+      has to come off the desk to make room. Products handle this in different ways:
+      some silently drop the oldest messages, some compress earlier parts into a
+      summary, some warn you, and some just start behaving worse without saying
+      anything.
+    </p>
+    <p>
+      That's why the classic failure looks the way it does. You have a long,
+      productive session. You established an important constraint near the
+      beginning. Forty messages later the model violates it, and when you point
+      this out it apologises and agrees, sincerely, because you have just put the
+      constraint back on the desk. It never forgot in the human sense. The
+      instruction had simply been carried off the far edge.
+    </p>
+
+    <h3>Output shares the desk too</h3>
+    <p>
+      Input and output come out of the same budget. A long document you paste in
+      does not just cost you space, it eats into the room available for the reply.
+      This is why asking for an exhaustive analysis of an enormous file can produce
+      an answer that stops mid-sentence. There's a separate, smaller cap on how
+      long a single reply can be as well, which is the <em>max output</em> column
+      on <a href="../model-facts.html">Model facts</a>.
+    </p>
+
+    <h2>How big is it, in real terms?</h2>
+    <p>
+      Windows are measured in tokens, which are chunks of text a bit shorter than
+      a word. To make that concrete: Anthropic gives a one-million-token window as
+      roughly <strong>555,000 words</strong>, or about 2.5 million characters.
+      That's genuinely enormous, somewhere in the region of five or six long
+      novels.
+    </p>
+    <p>
+      Current windows sit between a couple of hundred thousand tokens and a
+      million, and that range keeps moving, which is exactly why the numbers live
+      on <a href="../model-facts.html">their own dated page</a> rather than in this
+      paragraph.
+    </p>
+
+    <h2>Why bigger is not automatically better</h2>
+    <p>
+      A million-token window sounds like it makes this whole concern obsolete. It
+      doesn't, for three reasons.
+    </p>
+
+    <h3>1. You pay for the whole desk, every turn</h3>
+    <p>
+      Since the entire transcript is re-sent on every message, cost scales with
+      conversation length in a way people find counter-intuitive. Message fifty in
+      a long session costs far more than message one, because you're paying to
+      re-read everything each time. A large window is permission to spend a lot of
+      money quickly, and the single biggest lever against this is caching, which
+      is why it's on the concept list.
+    </p>
+
+    <h3>2. Attention thins out as it stretches</h3>
+    <p>
+      Having something in the window is not the same as the model weighing it
+      properly. There is a well-documented tendency for material buried in the
+      middle of a very long context to get less effective attention than material
+      at the beginning or the end. Filling a huge window to the brim and assuming
+      everything in it carries equal force is a mistake. Relevance beats volume:
+      ten pages of the right document reliably outperforms three hundred pages
+      containing it.
+    </p>
+
+    <h3>3. Long contexts are slower</h3>
+    <p>
+      More to read means more time before the first word comes back. On a long
+      session this becomes noticeable, and on anything interactive it matters.
+    </p>
+
+    <h2>What to actually do about it</h2>
+
+    <p><strong>Start a new conversation more often than feels natural.</strong>
+    People treat a long thread as accumulated value. Frequently it's accumulated
+    noise that is costing you money and diluting attention. When you change tasks,
+    start fresh and paste in just the conclusions that still matter.</p>
+
+    <p><strong>Put the important thing near the end.</strong> If you have one
+    critical constraint and a pile of background, the constraint goes last, closest
+    to the question. Recency is doing real work here.</p>
+
+    <p><strong>Paste the actual material.</strong> Describing a document from
+    memory and asking the model to work from your description is strictly worse
+    than putting the document on the desk. This is the highest-return habit change
+    for most people, and it is entirely a context-window insight.</p>
+
+    <p><strong>Re-state constraints in long sessions.</strong> Not because the
+    model is being difficult, but because you're managing a desk. Restating is
+    cheap; a violated constraint discovered late is not.</p>
+
+    <p><strong>Treat "it forgot" as diagnostic.</strong> When a long session starts
+    producing worse work, contradicting earlier decisions, or losing the plot,
+    that's your signal, and the fix is almost never a better prompt. It's a fresh
+    session with the relevant context carried over deliberately.</p>
+
+    <div class="gap">
+      <p class="note-title">Where this page stops</p>
+      <p>
+        Two things deliberately left out because they deserve their own pages:
+        exactly what a token is and how the billing works, and how retrieval
+        systems get around the window entirely by fetching only relevant excerpts
+        on demand. Both are on the <a href="index.html">concepts list</a>.
+      </p>
+    </div>
+
+    <h2>Sources</h2>
+    <p class="table-note">
+      The 555,000-word figure for a one-million-token window is Anthropic's own,
+      from its
+      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+      fetched 11 August 2026. The degradation of attention over long contexts is a
+      widely reproduced research finding, and a specific citation should be added
+      here before this page loses its provisional status.
+    </p>
+
+    <p class="next">
+      Next → <a href="index.html">All concepts</a> ·
+      Numbers → <a href="../model-facts.html">Model facts</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      Concept pages avoid hardcoded figures so they stay correct as models change.
+    </p>
+    <p>
+      <a href="../index.html">Home</a> ·
+      <a href="../start-here.html">Start here</a> ·
+      <a href="index.html">Concepts</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

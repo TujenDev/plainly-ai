@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hallucination — Plainly</title>
+<meta name="description" content="Why AI models invent facts confidently, why it is not a bug awaiting a patch, and the handful of habits that actually reduce it.">
+<link rel="stylesheet" href="../style.css">
+<link rel="canonical" href="https://plainlyai.org/concepts/hallucination.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/concepts/hallucination.html">
+<meta property="og:title" content="Hallucination — Plainly">
+<meta property="og:description" content="Why AI models invent facts confidently, why it is not a bug awaiting a patch, and the handful of habits that actually reduce it.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hallucination — Plainly">
+<meta name="twitter:description" content="Why AI models invent facts confidently, why it is not a bug awaiting a patch, and the handful of habits that actually reduce it.">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">Plain<span>ly</span></a>
+    <nav class="site-nav">
+      <a href="../index.html">Home</a>
+      <a href="../start-here.html">Start here</a>
+      <a href="index.html">Concepts</a>
+      <a href="../model-facts.html">Model facts</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="kicker">Concept · Foundational</p>
+  <h1>Hallucination</h1>
+  <p class="standfirst">
+    When a model states something false with total confidence. Not a defect that
+    a future version will patch out, but a direct consequence of how the thing
+    works at all.
+  </p>
+
+  <p class="stamp">Last verified <b>11 August 2026</b></p>
+
+  <div class="prose">
+
+    <h2>It isn't lying, and it isn't malfunctioning</h2>
+    <p>
+      Both of those framings mislead. Lying requires knowing the truth and choosing
+      otherwise. Malfunctioning implies a working state it has fallen away from.
+      Neither applies.
+    </p>
+    <p>
+      A language model produces text by repeatedly answering one question: given
+      everything so far, what plausibly comes next? That is the whole mechanism.
+      There is no separate stage where a draft gets checked against a store of
+      facts, because there is no store of facts to check it against. What the model
+      has is a vast statistical sense of how language about the world tends to go.
+    </p>
+    <p>
+      Most of the time, plausible and true coincide. The most plausible completion
+      of "the capital of France is" is "Paris" precisely because that is true and
+      the truth is written down everywhere. The mechanism gets accuracy for free,
+      as a side effect of pursuing plausibility.
+    </p>
+    <p>
+      But when the truth is obscure, absent, or contested, plausibility keeps
+      working perfectly well without it. Asked for the title of a paper that
+      doesn't exist, the model does exactly what it always does and produces a
+      title that <em>reads</em> like a real one. Nothing has gone wrong internally.
+      The same process that produced "Paris" produced the fake paper. That is the
+      uncomfortable part: fluency and accuracy come out of one process, so you
+      cannot have one without risking the other.
+    </p>
+
+    <div class="note">
+      <p class="note-title">The one-sentence version</p>
+      <p>
+        The model is not trying to tell you the truth and occasionally failing. It
+        is trying to produce convincing text, and the truth is usually the most
+        convincing thing available.
+      </p>
+    </div>
+
+    <h2>"Confabulation" is the better word</h2>
+    <p>
+      Hallucination is the term that stuck, but it's a poor metaphor: hallucinating
+      means perceiving something that isn't there, and the model isn't perceiving
+      anything. Clinicians have a more precise word for fluently and confidently
+      filling a gap without any awareness that you're filling it, and that word is
+      <strong>confabulation</strong>. It describes this behaviour far better.
+    </p>
+    <p>
+      Worth knowing, partly because it's more accurate and partly because it
+      predicts the behaviour better. Confabulation is not random noise. It is
+      coherent, contextually appropriate, and delivered with the same manner as
+      everything else. That's exactly what makes it hard to catch.
+    </p>
+
+    <h2>Why it sounds so certain</h2>
+    <p>
+      The tone is the trap. A model's confident register is not evidence of
+      internal confidence, because the register is just more generated text. It
+      writes "the study found" the same way whether the study exists or not, since
+      that's how sentences about studies are phrased.
+    </p>
+    <p>
+      There is genuine uncertainty in the machinery, but by default very little of
+      it surfaces in the prose. Nothing forces a model to write "I'm about 60% sure
+      of this," and quite a lot of its training rewards sounding helpful and
+      fluent. So you get a uniform confident voice across a very wide range of
+      actual reliability, which is the single most dangerous property of these
+      systems for anyone using them for real work.
+    </p>
+
+    <h2>Where it happens most</h2>
+    <p>
+      This is the practical part, because the risk is not evenly spread. Raise your
+      guard sharply on:
+    </p>
+    <ul>
+      <li><strong>Specific numbers.</strong> Statistics, prices, dates, measurements, scores. A plausible-looking number is trivially easy to generate and almost impossible to spot as fake.</li>
+      <li><strong>Citations, URLs and quotes.</strong> The worst category by far. These have highly regular formats, so a fabricated one looks structurally perfect. Invented papers with real-sounding authors in real journals are a classic, and dead or wrong URLs are routine.</li>
+      <li><strong>Obscure topics.</strong> The less written about something is, the thinner the statistical signal, and the more the model is effectively improvising in the right style.</li>
+      <li><strong>Anything recent.</strong> Past the training cutoff the model has nothing, but it will often answer anyway rather than decline. There's a subtlety here: vendors distinguish a <em>training data cutoff</em> from a <em>reliable knowledge cutoff</em>, the latter being earlier. Events near the boundary are in there thinly, which is arguably worse than absent, because thin coverage produces confident half-knowledge.</li>
+      <li><strong>Precise details about your own material.</strong> Ask which page a clause appears on and you may get a page number invented to satisfy the question.</li>
+    </ul>
+
+    <h2>The pressure problem</h2>
+    <p>
+      Here is a failure mode most people trip over without noticing. If you push
+      back on a correct answer, a model will frequently abandon it.
+    </p>
+    <p>
+      Ask "are you sure? I thought it was 2019," and you have not requested a
+      verification. You have supplied a strong hint about what completion you'd
+      find plausible, and plausible-continuation is the only game being played.
+      Agreement is often the most plausible next move. The model will apologise,
+      adopt your date, and sound just as confident as before.
+    </p>
+    <p>
+      So "are you sure?" is close to useless as a checking tool, and worse than
+      useless if you telegraph the answer you expect. If you must probe, keep it
+      neutral and ask for the basis: <em>what is that based on?</em> A real source
+      can be checked. A fabricated one usually falls apart when you go looking for it.
+    </p>
+
+    <h2>What actually reduces it</h2>
+
+    <p><strong>Supply the source material.</strong> The single most effective
+    habit, by a distance. A model asked to summarise a document you have pasted in
+    is doing a fundamentally more reliable task than one asked to recall the
+    document from training. Move the work from recall to reading. This is the same
+    insight as → <a href="context-windows.html">Context windows</a>, and it's why
+    the two pages keep pointing at each other.</p>
+
+    <p><strong>Ask for quotes, not summaries, when accuracy is critical.</strong>
+    "Quote the sentence that says this" is checkable in seconds. "Summarise what it
+    says about this" is not.</p>
+
+    <p><strong>Give it a search tool, or use a product that has one.</strong> A
+    model that can look things up and cite what it found is meaningfully more
+    reliable on anything factual or recent. Still verify the citations, because a
+    real search result can be attached to a claim it doesn't support.</p>
+
+    <p><strong>Explicitly permit not knowing.</strong> Adding "if you're not
+    confident, say so" or "say 'I don't know' rather than guessing" genuinely
+    helps, because it makes admitting ignorance a plausible completion rather than
+    an unhelpful-seeming one.</p>
+
+    <p><strong>Ask it to work in the open.</strong> Requesting reasoning before
+    the answer, rather than an answer alone, surfaces more of the path and gives
+    you something to inspect.</p>
+
+    <h3>What doesn't work</h3>
+    <ul>
+      <li><strong>Telling it not to hallucinate.</strong> "Do not make anything up" is a reasonable thing to write and does almost nothing, because the model has no reliable internal flag for which of its output is invented. If it could tell, this page wouldn't need to exist.</li>
+      <li><strong>Asking "are you sure?"</strong> See above. It measures agreeableness, not accuracy.</li>
+      <li><strong>Asking it to grade its own confidence.</strong> The number you get back is itself generated text, and treating it as a real probability is a category error.</li>
+      <li><strong>Assuming a newer or more expensive model has solved it.</strong> Better models confabulate less and hide it better, which does not straightforwardly make them safer to trust unverified.</li>
+    </ul>
+
+    <h2>The honest bottom line</h2>
+    <p>
+      This is reducible but not currently eliminable, and any tool promising
+      otherwise is overselling. The workable posture is not distrust, which wastes
+      the tool, but calibrated verification: match your checking to the cost of
+      being wrong.
+    </p>
+    <p>
+      Brainstorming, drafting, explaining, restructuring something you'll read
+      anyway: use it freely, errors are cheap and you'll catch them. Anything
+      load-bearing where a wrong specific has consequences: verify the specifics
+      against a real source before it leaves your hands. Names, numbers, dates,
+      citations and quotes are the five things to check every time, because they
+      are simultaneously the most likely to be invented and the most damaging when
+      they are.
+    </p>
+
+    <div class="gap">
+      <p class="note-title">Where this page stops</p>
+      <p>
+        Two follow-ons planned. <strong>Training cutoff</strong> covers the
+        knowledge boundary properly, including why models frequently misreport
+        their own. <strong>RAG and retrieval</strong> covers the main engineering
+        answer to this problem: fetching real source text at question time so the
+        model reads rather than recalls.
+      </p>
+    </div>
+
+    <h2>Sources</h2>
+    <p class="table-note">
+      The distinction between a <em>training data cutoff</em> and an earlier
+      <em>reliable knowledge cutoff</em> is drawn from Anthropic's
+      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+      fetched 11 August 2026, which publishes both dates separately for each model.
+      The mechanism described here is uncontroversial and widely documented, but
+      this page currently cites no specific research paper, and should before it
+      loses its provisional status. No hallucination-rate figures are quoted
+      because rates vary enormously by model, task and measurement method, and a
+      single number would be more misleading than no number.
+    </p>
+
+    <p class="next">
+      Next → <a href="context-windows.html">Context windows</a> ·
+      <a href="tokens.html">Tokens</a> ·
+      All → <a href="index.html">Concepts</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      This page quotes no hallucination-rate statistics on purpose.
+    </p>
+    <p>
+      <a href="../index.html">Home</a> ·
+      <a href="../start-here.html">Start here</a> ·
+      <a href="index.html">Concepts</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

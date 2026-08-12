@@ -40,10 +40,13 @@ produces when it doesn't know.
 ```
 public/                 the deployable site — nothing outside this ships
   index.html            home, three level tracks
-  start-here.html        placement, with verified resources per track
-  model-facts.html       the single dated table of figures
-  concepts/              the explainers
-  robots.txt             open to all crawlers, on purpose (see below)
+  start-here.html       placement, with verified resources per track
+  model-facts.html      the single dated table of figures
+  concepts/             the explainers
+  404.html              custom not-found page
+  robots.txt            open to all crawlers, on purpose (see below)
+  sitemap.xml           all nine pages
+  _headers              security headers and cache policy
 README.md               this file
 ```
 
@@ -51,10 +54,15 @@ Static HTML and one stylesheet. No build step, no framework, no JavaScript. It
 loads fast, it will still work in a decade, and there's nothing to keep updated
 but the words.
 
-Run it locally with any static server:
+URLs are extensionless (`/concepts/tokens`, not `/concepts/tokens.html`) because
+that is how Cloudflare Pages serves the files — it redirects the `.html` form to
+the clean one. Links, canonicals and the sitemap all use the clean form so no
+internal link takes a redirect hop.
+
+Run it locally the way it is actually served:
 
 ```bash
-cd public && python -m http.server 8733
+npx wrangler pages dev public
 ```
 
 ## On crawlers

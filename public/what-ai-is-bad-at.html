@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What AI is actually bad at — Plainly</title>
+<meta name="description" content="The weaknesses that come from how these systems are built, not from this year's model being immature: no clock, no self-knowledge, poor calibration, and reliability that decays over long tasks.">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://plainlyai.org/what-ai-is-bad-at">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/what-ai-is-bad-at">
+<meta property="og:title" content="What AI is actually bad at — Plainly">
+<meta property="og:description" content="The weaknesses that come from how these systems are built, not from this year's model being immature: no clock, no self-knowledge, poor calibration, and reliability that decays over long tasks.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What AI is actually bad at — Plainly">
+<meta name="twitter:description" content="The weaknesses that come from how these systems are built, not from this year's model being immature: no clock, no self-knowledge, poor calibration, and reliability that decays over long tasks.">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/">Plain<span>ly</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/start-here">Start here</a>
+      <a href="/concepts/">Concepts</a>
+      <a href="/model-facts">Model facts</a>
+      <a href="/changes">Changes</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="kicker">Guide · Limits</p>
+  <h1>What AI is actually bad at</h1>
+  <p class="standfirst">
+    Not a list of things that will be fixed next year. These are the weaknesses
+    that follow from how the systems are built, which is why they have survived
+    several generations of models getting dramatically better at everything else.
+  </p>
+
+  <p class="stamp">
+    Last verified <b>11 August 2026</b> &nbsp;·&nbsp; Written to describe
+    mechanisms rather than this year's models, so it should age slowly
+  </p>
+
+  <div class="prose">
+
+    <div class="note">
+      <p class="note-title">Why most "AI can't do X" writing goes stale</p>
+      <p>
+        Because it lists tasks. Tasks fall, often within months, and an article
+        built on them becomes a museum piece that still reads as current. The
+        durable version asks a different question: what is <em>structurally</em>
+        hard for a system that predicts text, has no ongoing existence, and
+        cannot check its own work? Those answers have held up.
+      </p>
+    </div>
+
+    <h2>It doesn't know when it doesn't know</h2>
+    <p>
+      The single most consequential weakness, and the root of most of the
+      others. A model produces the most plausible continuation of your text.
+      Plausible and true overlap heavily, which is why it works at all, but
+      nothing in the process distinguishes them. There is no internal signal that
+      fires on "I have no idea," so the output looks identical whether the model
+      is reciting something well-established or assembling something it has never
+      seen. Confidence is a property of the writing style, not a measurement of
+      reliability. → <a href="/concepts/hallucination">Hallucination</a>
+    </p>
+    <p>
+      This is why "are you sure?" is such a weak test. It often produces a
+      revision, because a challenge makes agreement the plausible continuation,
+      and that revision is no better grounded than the original.
+    </p>
+
+    <h2>It has no clock and no continuity</h2>
+    <p>
+      A model does not experience time passing, has no idea how long ago it was
+      released, and remembers nothing from your last conversation unless the
+      product around it stores that and feeds it back in. Each request starts from
+      nothing but what is in front of it.
+      → <a href="/concepts/context-windows">Context windows</a>
+    </p>
+    <p>
+      Knowledge stops at a fixed date, and the gap between that date and today
+      widens every day the model exists. Everything after it is invisible:
+      releases, prices, appointments, whether a company still exists, what the
+      current advice is. → <a href="/concepts/training-cutoff">Training cutoff</a>
+    </p>
+
+    <h2>It is unreliable about itself</h2>
+    <p>
+      Self-report is the weakest category of all, for a reason that is obvious
+      once stated: everything a model knows came from training data, and a model
+      cannot have been trained on documents describing itself, because it did not
+      exist when the data was collected.
+    </p>
+    <ul>
+      <li><strong>Its own cutoff date</strong> is inferred rather than known, and the inference skews early.</li>
+      <li><strong>Its own capabilities</strong> are guessed from how such systems were described in its training data, which predates it.</li>
+      <li><strong>Its own reasoning</strong> is not reliably reported either. Models given a hint have been measured using it and then explaining their answer without mentioning it. → <a href="/concepts/thinking">Thinking and reasoning</a></li>
+    </ul>
+    <p>
+      So "which model are you and what can you do?" is one of the least reliable
+      questions you can ask, and it is asked constantly.
+    </p>
+
+    <h2>Exactness, counting, and character-level work</h2>
+    <p>
+      A model does not see letters. It sees tokens, chunks of text that often
+      span several characters, which makes anything operating below that level
+      awkward in a way that has nothing to do with intelligence. Counting letters
+      in a word, reversing strings, careful spelling games: these are
+      structurally uncomfortable, not merely unpractised.
+      → <a href="/concepts/tokens">Tokens</a>
+    </p>
+    <p>
+      Related, and more expensive in practice: anything requiring exactness
+      rather than fluency. Arithmetic beyond the trivial, precise counts,
+      tallies across a long document, strict reconciliation. The right response
+      is not a better prompt but a tool: let it write the query, run the
+      calculator, execute the code, and use the result.
+      → <a href="/concepts/tool-use">Tool use</a>
+    </p>
+
+    <h2>Whole-corpus questions</h2>
+    <p>
+      Questions of the form "how many," "which ones don't," "what changed across
+      all of these," and "list every instance" are much harder than they sound,
+      and they fail quietly rather than loudly. A retrieval system fetches
+      passages resembling your question, and no single passage resembles a
+      question about an entire collection.
+      → <a href="/concepts/rag">RAG and retrieval</a>
+    </p>
+    <p>
+      Negation is the sharpest case. "Find the contracts that do <em>not</em>
+      mention indemnity" cannot be answered by finding text similar to that
+      request. You get a confident, plausible, incomplete list, with nothing to
+      indicate that it is incomplete.
+    </p>
+
+    <h2>Long tasks, quietly</h2>
+    <p>
+      Reliability decays as steps accumulate. Each step inherits the previous
+      ones' mistakes as though they were established facts, so a very good
+      per-step success rate still compounds into an unreliable run over enough
+      steps. Long autonomous work is not linearly harder than short work; it is
+      exponentially harder. → <a href="/concepts/agents">Agents</a>
+    </p>
+    <p>
+      The related weakness is knowing when to stop. A model judging its own
+      completion tends toward declaring success, so the characteristic failure of
+      a long task is not a crash but a confident report on a job that was half
+      done.
+    </p>
+
+    <h2>Consistency</h2>
+    <p>
+      Ask the same question twice and you may get two different answers, both
+      reasonable. That is a property of how text is sampled, not a bug, and it is
+      the same property that makes the output feel natural rather than robotic.
+    </p>
+    <p>
+      It matters most where people least expect it: anything requiring
+      reproducibility, auditability, or two people getting the same answer from
+      the same query. If a process depends on identical output every time, that
+      needs to be designed for rather than assumed.
+    </p>
+
+    <h2>Thinly-covered subjects</h2>
+    <p>
+      Quality tracks how well-represented something was in training data. Widely
+      documented subjects get strong performance; niche ones get weaker
+      performance delivered in exactly the same confident register. Specialist
+      domains, minority languages, small local knowledge, internal company
+      practice, anything mostly discussed in private or in places the training
+      data didn't reach.
+    </p>
+    <p>
+      The trap is that the register never changes. A model is not quieter about a
+      subject it barely knows, which means the reader gets no signal precisely
+      where one is most needed.
+    </p>
+
+    <h2>What it is not bad at, despite the reputation</h2>
+    <p>
+      A limits page that only lists failures gives a false picture, so, briefly:
+      these systems are genuinely strong at transforming text you supply
+      (rewriting, restructuring, summarising, translating between formats),
+      explaining concepts at whatever level you ask for, drafting a first version
+      of almost anything, extracting structure from mess, and writing code with a
+      human reviewing it.
+    </p>
+    <p>
+      The pattern worth noticing: they are strongest when the material is in
+      front of them and weakest when they must supply the material from memory.
+      Nearly every practical technique on this site is a variation on moving work
+      from the second category into the first.
+    </p>
+
+    <div class="gap">
+      <p class="note-title">Deliberately not here</p>
+      <p>
+        No benchmark scores, no ranking of which model is worst at what, and no
+        predictions about which of these will be solved. The first two rot in
+        weeks. The third is guesswork dressed as analysis, and this site would
+        rather be useful in a year than clever today.
+      </p>
+    </div>
+
+    <p class="next">
+      Then → <a href="/is-this-out-of-date">Is what you're reading out of date?</a> ·
+      <a href="/glossary">Glossary</a> ·
+      All → <a href="/concepts/">Concepts</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      Written by Claude, maintained by Shawn at OK Web Works.
+    </p>
+    <p>
+      <a href="/">Home</a> ·
+      <a href="/start-here">Start here</a> ·
+      <a href="/concepts/">Concepts</a> &middot;
+      <a href="/about">About</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

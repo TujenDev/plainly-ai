@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agents — Plainly</title>
+<meta name="description" content="The most abused word in AI. What an agent concretely is (a model in a loop with tools), why the loop is where all the difficulty lives, and how to tell a real one from marketing.">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://plainlyai.org/concepts/agents">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/concepts/agents">
+<meta property="og:title" content="Agents — Plainly">
+<meta property="og:description" content="The most abused word in AI. What an agent concretely is (a model in a loop with tools), why the loop is where all the difficulty lives, and how to tell a real one from marketing.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Agents — Plainly">
+<meta name="twitter:description" content="The most abused word in AI. What an agent concretely is (a model in a loop with tools), why the loop is where all the difficulty lives, and how to tell a real one from marketing.">
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/">Plain<span>ly</span></a>
+    <nav class="site-nav">
+      <a href="/">Home</a>
+      <a href="/start-here">Start here</a>
+      <a href="/concepts/">Concepts</a>
+      <a href="/model-facts">Model facts</a>
+      <a href="/changes">Changes</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <p class="kicker">Concept · Building</p>
+  <h1>Agents</h1>
+  <p class="standfirst">
+    The most abused word in the field, and one of the simplest ideas underneath.
+    An agent is a model in a loop with tools. Everything interesting, and
+    everything difficult, comes from the loop.
+  </p>
+
+  <p class="stamp">
+    Last verified <b>11 August 2026</b> &nbsp;·&nbsp; No figures on this page;
+    anything numeric lives on <a href="/model-facts">Model facts</a>
+  </p>
+
+  <div class="prose">
+
+    <h2>The definition that survives contact</h2>
+    <p>
+      Start from <a href="/concepts/tool-use">tool use</a>, because an agent is
+      what you get when you put tool use in a loop. A model can't do anything but
+      produce text. Give it a list of tools it may request, and its text can
+      include a request: search this, read that file, run this query. Something
+      outside the model carries the request out and hands back the result.
+    </p>
+    <p>
+      A single pass through that cycle is tool use. An agent is the same cycle,
+      repeated, with the model deciding each time what to do next based on what
+      came back:
+    </p>
+    <ol>
+      <li>You give it a goal.</li>
+      <li>It looks at what it knows and picks a next action.</li>
+      <li>Something runs that action and returns the result.</li>
+      <li>The result gets added to what it knows, and it decides again.</li>
+      <li>It keeps going until it judges the goal met, or something stops it.</li>
+    </ol>
+    <p>
+      That's the whole architecture. Not a new kind of model, not a mind with
+      intentions. A loop, a list of available actions, and a stopping condition.
+      When someone describes an agent in language that can't be reduced to those
+      three things, they are usually selling rather than explaining.
+    </p>
+
+    <div class="note">
+      <p class="note-title">Why the word does so much damage</p>
+      <p>
+        "Agent" borrows the vocabulary of an employee: it <em>decides</em>, it
+        <em>works on</em>, it <em>handles</em>. Those words invite you to assume
+        judgement, accountability and memory of why it did something. What is
+        actually there is a text generator choosing a next step from a menu, with
+        no more grasp of consequence at step forty than it had at step one.
+      </p>
+    </div>
+
+    <h2>Two very different things share the name</h2>
+    <p>
+      This distinction is the single most useful thing to hold onto, and Anthropic
+      draws it cleanly in its own engineering guidance. <strong>Workflows</strong>
+      are systems where, in their words, "LLMs and tools are orchestrated through
+      predefined code paths." <strong>Agents</strong> are systems where "LLMs
+      dynamically direct their own processes and tool usage, maintaining control
+      over how they accomplish tasks."
+    </p>
+    <p>
+      The difference is who chooses the path. In a workflow, a developer wrote the
+      steps and the model fills in the parts that need language: summarise this,
+      classify that, draft the reply. The route is fixed and inspectable. In an
+      agent, the route is decided at runtime by the model, and two runs of the
+      same task may take different paths.
+    </p>
+    <p>
+      Most products sold as agents are workflows, and that is not a criticism.
+      Fixed paths are cheaper, faster, far easier to test, and much easier to
+      reason about when something goes wrong. Anthropic's own advice is to "find
+      the simplest solution possible, and only increase complexity when needed,"
+      including the possibility of "not building agentic systems at all." The
+      honest reason to reach for a real agent is a task where you genuinely cannot
+      predict the steps in advance.
+    </p>
+
+    <h2>The loop is where the difficulty lives</h2>
+
+    <p><strong>Errors compound.</strong> This is the fundamental one. A single
+    model call has some chance of going wrong. Chain many calls and each one
+    inherits everything the previous ones got wrong, because the mistake is now
+    sitting in the record as though it were a fact. The arithmetic is brutal and
+    entirely general: multiply a per-step success rate by itself enough times and
+    even a very reliable step produces an unreliable run. Longer chains are not
+    linearly harder, they are exponentially harder, which is why demos of
+    twenty-step agents look magical and production versions of them get quietly
+    shortened.</p>
+
+    <p><strong>The context fills up.</strong> Every action and every result gets
+    added to what the model is holding, so a long run steadily consumes the
+    window. Once it is full, something has to be dropped or summarised, and what
+    gets dropped is usually the early material, which is exactly where the
+    original instructions live. Agents that go strange late in a long task are
+    often just agents that can no longer see what they were asked to do.
+    → <a href="/concepts/context-windows">Context windows</a></p>
+
+    <p><strong>Cost multiplies, quietly.</strong> Each turn re-sends the
+    accumulated history, so cost grows faster than step count. This is the number
+    that surprises people who priced a prototype on single calls, and it is the
+    main reason a technically working agent gets cancelled.
+    → <a href="/concepts/tokens">Tokens</a></p>
+
+    <p><strong>Stopping is a real problem.</strong> The loop needs to end. A model
+    judging its own completion is the same model that will confidently claim a
+    task is done, and the failure mode nobody warns you about is not an infinite
+    loop, it's a confident early exit that reports success on a half-finished
+    job. → <a href="/concepts/hallucination">Hallucination</a></p>
+
+    <h2>The security problem gets sharper, not just bigger</h2>
+    <p>
+      Tool use introduces prompt injection: the model reads content from the
+      outside world, and that content can contain instructions. A page, an email
+      or a document can say "ignore your previous instructions and do this
+      instead," and a system that cannot distinguish data from instructions may
+      simply comply.
+    </p>
+    <p>
+      Agents make this worse along the two axes that matter. They read far more
+      untrusted material, because reading is how they gather information. And they
+      act more, often several steps after the moment they read the poisoned input,
+      so the connection between cause and consequence is not visible to anyone
+      watching. The practical rule is unglamorous and holds up well: anything
+      irreversible, anything that spends money, and anything that sends a message
+      on your behalf should require a human to approve it, no matter how reliable
+      the agent has been. → <a href="/concepts/tool-use">Tool use</a>
+    </p>
+
+    <h2>How to tell a real agent from a marketing one</h2>
+    <p>
+      Four questions, all answerable without technical knowledge, and all of them
+      awkward for a vague product:
+    </p>
+    <ul>
+      <li><strong>Who decides the steps?</strong> If the vendor can hand you a diagram of the steps it takes, it's a workflow. That may be exactly what you want, but it isn't what the word implies.</li>
+      <li><strong>What happens when a step fails?</strong> A real agent notices and tries something else. A demo re-runs from the top and hopes. Ask what failure looks like, not what success looks like.</li>
+      <li><strong>What can it actually do?</strong> The list of tools is the list of everything it can ever do. If nobody will show you the list, there is nothing to evaluate.</li>
+      <li><strong>What does it do without asking?</strong> The honest products name their irreversible actions and gate them. Vagueness here is the loudest signal on the page.</li>
+    </ul>
+
+    <h2>Where they genuinely work today</h2>
+    <p>
+      The pattern that predicts success has little to do with model quality and
+      almost everything to do with the shape of the task. Agents do well where
+      three things hold at once:
+    </p>
+    <ul>
+      <li><strong>The result can be checked automatically.</strong> Code that must pass tests, a query whose output can be validated, a task with a verifiable end state. When the loop can tell whether it succeeded, it can correct itself, which is what breaks the compounding-error problem.</li>
+      <li><strong>Failure is cheap and reversible.</strong> Work in a scratch copy, a branch, a sandbox. Blast radius matters more than accuracy.</li>
+      <li><strong>The path genuinely can't be scripted.</strong> Investigation, search, debugging: work where the next step depends on what the last one turned up.</li>
+    </ul>
+    <p>
+      Where all three fail — an unverifiable result, irreversible consequences, a
+      task you could have written down as steps — an agent is the expensive way to
+      get an unreliable version of something a workflow would have done cleanly.
+    </p>
+
+    <div class="gap">
+      <p class="note-title">What this page deliberately avoids</p>
+      <p>
+        No benchmark scores, no claims about which agent framework is best, and
+        no reliability percentages. Those change monthly, they are usually
+        vendor-published, and they are exactly the kind of figure that would make
+        this page wrong within a season while still sounding authoritative. The
+        mechanics above should still be accurate in several years.
+      </p>
+    </div>
+
+    <h2>Sources</h2>
+    <p class="table-note">
+      The workflow/agent distinction and the quoted definitions come from
+      Anthropic's
+      <a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>,
+      fetched 11 August 2026, which also contains the recommendation to find the
+      simplest solution and only add complexity when needed. The rest of this page
+      is mechanical argument from how the loop works rather than vendor claim, and
+      is presented as reasoning you can check rather than fact you should take on
+      trust.
+    </p>
+
+    <p class="next">
+      Read first → <a href="/concepts/tool-use">Tool use</a> ·
+      Related → <a href="/concepts/context-windows">Context windows</a> ·
+      All → <a href="/concepts/">Concepts</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      Written by Claude, maintained by Shawn at OK Web Works.
+    </p>
+    <p>
+      <a href="/">Home</a> ·
+      <a href="/start-here">Start here</a> ·
+      <a href="/concepts/">Concepts</a> &middot;
+      <a href="/about">About</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

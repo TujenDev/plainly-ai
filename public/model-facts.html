@@ -43,8 +43,9 @@
   </p>
 
   <p class="stamp">
-    Last verified <b>11 August 2026</b> against each vendor's own documentation.
-    Anything not verified is flagged in orange below.
+    Last verified <b>11 August 2026</b> against each vendor's own documentation,
+    including a re-check of the Anthropic rows that produced one correction,
+    noted below. Anything not verified is flagged in orange.
   </p>
 
   <div class="prose">
@@ -102,8 +103,8 @@
           <td><code>claude-sonnet-5</code></td>
           <td class="num">1M</td>
           <td class="num">128k</td>
-          <td class="num">$2 *</td>
-          <td class="num">$10 *</td>
+          <td class="num">$2</td>
+          <td class="num">$10</td>
           <td>Jan 2026</td>
           <td>Jan 2026</td>
         </tr>
@@ -122,13 +123,19 @@
   </div>
 
   <p class="table-note">
-    <strong>* Sonnet 5 is on an introductory price.</strong> The $2 / $10 rate is
-    promotional and the standard rate is $3 / $15. Anyone budgeting off the
-    current figure should check whether the promotion has ended before relying on
-    it. This is a good example of why undated pricing pages are dangerous.<br>
-    Source: <a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic models overview</a>,
-    fetched 11 August 2026. Batch processing and prompt caching change these
-    numbers substantially and are covered on Anthropic's pricing page.<br>
+    <strong>Correction, 11 August 2026.</strong> This page previously flagged
+    Sonnet 5's $2 / $10 rate as introductory, said the standard rate was
+    $3 / $15, and told you to check whether the promotion had ended before
+    relying on it. On re-checking, that is no longer true. Anthropic's pricing
+    documentation now states that the $2 / $10 pricing, "announced at launch as
+    introductory pricing through August 31, 2026, is now the standard price,"
+    and that "the previously scheduled increase to $3 / $15 per million
+    input/output tokens on September 1, 2026 will not occur." The warning has
+    been removed and the asterisks with it.<br>
+    Sources: <a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic models overview</a>
+    and <a href="https://platform.claude.com/docs/en/about-claude/pricing">pricing documentation</a>,
+    both fetched 11 August 2026. Batch processing and prompt caching change these
+    numbers substantially and are documented on that pricing page.<br>
     <strong>Two cutoff columns:</strong> the <em>reliable</em> date is how far the
     model's knowledge is dependable; the <em>training</em> date is the outer edge
     of its data. The months between are thin, half-known territory — note Haiku's
@@ -256,7 +263,7 @@
       Rough guide to how much you should trust a figure of a given age:
     </p>
     <ul>
-      <li><strong>Prices:</strong> can change with no notice, and introductory rates expire. Treat anything over three months old as unreliable.</li>
+      <li><strong>Prices:</strong> can change with no notice. Introductory rates expire, or quietly become permanent, and an old page will not tell you which happened. Treat anything over three months old as unreliable.</li>
       <li><strong>Model names and IDs:</strong> new models land every few months and old ones get retired. An ID from a year-old tutorial may simply error.</li>
       <li><strong>Context windows and output limits:</strong> slower moving, and generally only go up.</li>
       <li><strong>Concepts:</strong> stable for years. What a token is has not changed. This is why the explainers on this site avoid numbers and link here instead.</li>

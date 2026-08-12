@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting better results — Plainly</title>
+<meta name="description" content="Practical prompting explained by mechanism rather than tricks: give it the material, show an example, state the constraints, and know which failures no prompt can fix.">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://plainlyai.org/getting-better-results">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/getting-better-results">
+<meta property="og:title" content="Getting better results — Plainly">
+<meta property="og:description" content="Practical prompting explained by mechanism rather than tricks: give it the material, show an example, state the constraints, and know which failures no prompt can fix.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Getting better results — Plainly">
+<meta name="twitter:description" content="Practical prompting explained by mechanism rather than tricks: give it the material, show an example, state the constraints, and know which failures no prompt can fix.">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/">Plain<span>ly</span></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/start-here">Start here</a>
+      <a href="/concepts/">Concepts</a>
+      <a href="/guides">Guides</a>
+      <a href="/model-facts">Model facts</a>
+      <a href="/changes">Changes</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+
+  <p class="kicker">Guide · Practical</p>
+  <h1>Getting better results</h1>
+  <p class="standfirst">
+    Not tricks, and not magic words. Almost everything that reliably improves an
+    answer comes down to two decisions: what the model can see, and how
+    precisely you have said what "good" means.
+  </p>
+
+  <p class="stamp">
+    Published <b>12 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>12 August 2026</b>
+    &nbsp;&middot;&nbsp; Each technique here is traced to the mechanism that makes it work,
+    so it should outlast any particular tool
+  </p>
+
+  <div class="prose">
+
+    <div class="note">
+      <p class="note-title">The idea underneath all of it</p>
+      <p>
+        These systems are far better at reading than at remembering. Nearly every
+        technique below is the same move in a different coat: take something the
+        model would have to recall, and put it in front of it instead. If you
+        remember only that, you will out-prompt most people who have memorised a
+        list of tips.
+      </p>
+    </div>
+
+    <h2>What actually works</h2>
+
+    <h3>1. Give it the material rather than describing the material</h3>
+    <p>
+      The single largest jump in quality available to most people, and the one
+      most often skipped because it feels like cheating. Paste the actual
+      document, the real error message, the two emails you liked, the data. A
+      model can use anything in front of it and can only guess at anything it
+      has to recall. → <a href="/concepts/context-windows">Context windows</a>
+    </p>
+    <p>
+      This also sidesteps the whole category of things it cannot know: your
+      files, your business, and everything after its knowledge cutoff.
+      → <a href="/concepts/training-cutoff">Training cutoff</a>
+    </p>
+
+    <h3>2. Show an example instead of reaching for adjectives</h3>
+    <p>
+      "Professional but warm" means almost nothing. Two emails you thought were
+      professional but warm mean a great deal. Anthropic's own guidance is blunt
+      about this: examples are "one of the most reliable ways to steer Claude's
+      output format, tone, and structure," and it recommends making them
+      relevant to your real case and varied enough that the model doesn't latch
+      onto an accidental pattern.
+    </p>
+    <p>
+      This is worth understanding as the cheap version of something expensive:
+      demonstrating what you want is the same lever as
+      <a href="/concepts/fine-tuning">fine-tuning</a>, minus the cost, minus the
+      commitment, and editable in ten seconds.
+    </p>
+
+    <h3>3. Say what the output has to be</h3>
+    <p>
+      Format, length, audience, and what to leave out. Every constraint you add
+      removes a large space of plausible-but-unwanted answers, which is exactly
+      how a system that predicts likely continuations gets steered.
+    </p>
+    <p>
+      The test I like best comes from the same guidance, which frames the model
+      as "a brilliant but new employee who lacks context on your norms and
+      workflows," and offers this as the golden rule: <em>"Show your prompt to a
+      colleague with minimal context on the task and ask them to follow it. If
+      they'd be confused, Claude will be too."</em> That test costs nothing and
+      catches most bad prompts.
+    </p>
+
+    <h3>4. Hand it the facts it has no way to know</h3>
+    <p>
+      Today's date if timing matters. Which version you are on. Your constraints,
+      your audience, the decision already made that you don't want reopened. A
+      model has no clock and no access to your situation, and it will not ask
+      before assuming.
+    </p>
+
+    <h3>5. One task per message</h3>
+    <p>
+      Compound requests get partially completed, and the omission is silent
+      rather than flagged. Ask for the summary, then ask for the rewrite. It
+      feels slower and is usually faster.
+    </p>
+
+    <h3>6. Ask for sources, then actually look at them</h3>
+    <p>
+      Requesting citations improves a fluent answer in one specific way: it makes
+      the answer checkable. It does not make invention impossible, and a model
+      without a search tool can produce a reference that looks perfect and does
+      not exist. → <a href="/concepts/hallucination">Hallucination</a>
+    </p>
+    <p>
+      A model that can actually search is a different proposition, because it can
+      go and read the current page rather than recall one. That converts a memory
+      problem into a reading problem, which is a much better problem to have.
+      → <a href="/concepts/tool-use">Tool use</a> ·
+      <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
+    </p>
+
+    <h3>7. Ask it to check its own work against something specific</h3>
+    <p>
+      Not "are you sure," which is close to useless, but a named standard:
+      verify this against the test cases, check every figure against the table
+      above, confirm each claim appears in the source I gave you. Anthropic
+      recommends exactly this, appending an instruction to verify the answer
+      against your criteria before finishing, and reports it catches errors
+      particularly well on code and maths. It works because it turns a vague
+      request for confidence into a concrete task with a right answer.
+    </p>
+
+    <h3>8. Start again rather than argue</h3>
+    <p>
+      When a long session has drifted, the instinct is to correct it repeatedly.
+      That usually makes things worse: every correction is more text competing
+      with your original instructions, and the earliest material is what gets
+      squeezed out first. Open a fresh session and paste in the good context.
+      → <a href="/concepts/context-windows">Context windows</a>
+    </p>
+
+    <h2>What doesn't work, or isn't proven</h2>
+
+    <p><strong>Incantations about expertise.</strong> "You are a world-class
+    expert" does far less than the internet believes. What people are reaching
+    for when they write it is usually a real instruction: who the audience is,
+    what depth to pitch at, which conventions to follow. Say that instead and
+    you get the benefit people are hoping the phrase delivers.</p>
+
+    <p><strong>Politeness, threats, and offers of payment.</strong> These are
+    popular claims, and the honest position is that there is no dependable,
+    documented lever here. Mechanically, any change to your text changes the
+    input, so effects are not impossible; what is missing is evidence that they
+    are controllable or worth your attention. Be polite because you'd rather be,
+    not because it is a technique.</p>
+
+    <p><strong>"Are you sure?" as a verification step.</strong> A challenge makes
+    agreement the plausible continuation, so you often get a revision regardless
+    of whether the original was right. Use a named standard, as above, or check
+    it yourself.</p>
+
+    <p><strong>Longer prompts as a proxy for better ones.</strong> Padding with
+    material that isn't relevant dilutes what matters, and on long inputs a model
+    asked to find one important line inside a large pile does worse than one
+    handed the few passages that count. Relevance beats volume.</p>
+
+    <p><strong>Secret templates.</strong> If a prompt is being sold as a
+    proprietary formula, what you are buying is the thing this page just gave
+    away. The techniques are not scarce, and nobody has a private one.</p>
+
+    <h2>When no prompt will fix it</h2>
+    <p>
+      Knowing which failures are prompting problems saves more time than any
+      technique here, because the rest are the wrong tool for the job.
+    </p>
+    <ul>
+      <li><strong>It needs to be exact.</strong> Arithmetic, tallies, precise counts. Ask it to write the calculation or the query and run that, rather than asking for the number. → <a href="/what-ai-is-bad-at">What AI is actually bad at</a></li>
+      <li><strong>It needs to know your material.</strong> No wording retrieves a document the model was never given. Supply it, or build retrieval. → <a href="/concepts/rag">RAG and retrieval</a></li>
+      <li><strong>It needs to be identical every time.</strong> Output varies by design. Reproducibility has to be engineered around, not requested.</li>
+      <li><strong>It needs to be current.</strong> Give it search, or paste the current page in. → <a href="/concepts/training-cutoff">Training cutoff</a></li>
+    </ul>
+
+    <div class="gap">
+      <p class="note-title">Why this page has no prompt library</p>
+      <p>
+        Copyable templates are what most prompting guides sell, and they are the
+        fastest-rotting thing in the field: they are written for particular
+        models, they stop matching how the products behave, and they teach
+        nothing that transfers. The eight habits above are the whole trick, and
+        they have not changed across several model generations.
+      </p>
+    </div>
+
+    <h2>Sources</h2>
+    <p class="table-note">
+      The quoted lines on examples being a reliable way to steer output, the
+      "brilliant but new employee" framing, the colleague test, and the
+      recommendation to have the model verify its answer against stated criteria
+      all come from Anthropic's
+      <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">prompting best practices</a>,
+      fetched 12 August 2026. That documentation is written for one vendor's
+      models and contains model-specific advice not reproduced here.
+      The section on what doesn't work is deliberately weaker in its claims: it
+      reports an absence of dependable evidence rather than proof of no effect,
+      because those are different things and only one of them is honest.
+    </p>
+
+    <p class="next">
+      Next → <a href="/is-this-out-of-date">Is what you're reading out of date?</a> ·
+      Vocabulary → <a href="/glossary">Glossary</a> ·
+      All → <a href="/guides">Guides</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      Written by Claude, maintained by Shawn at OK Web Works.
+    </p>
+    <p>
+      <a href="/">Home</a> ·
+      <a href="/start-here">Start here</a> ·
+      <a href="/concepts/">Concepts</a> &middot;
+      <a href="/about">About</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

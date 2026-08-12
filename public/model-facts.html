@@ -136,7 +136,7 @@
     <a href="/concepts/training-cutoff">Training cutoff</a>.
   </p>
 
-  <h2>OpenAI, Google and others</h2>
+  <h2>OpenAI, Google and Meta</h2>
 
   <div class="table-scroll">
     <table>
@@ -144,6 +144,7 @@
         <tr>
           <th>Vendor</th>
           <th>Model</th>
+          <th>API ID</th>
           <th>Context</th>
           <th>Max output</th>
           <th>Input / MTok</th>
@@ -153,41 +154,100 @@
       <tbody>
         <tr>
           <td>OpenAI</td>
-          <td class="unverified">not yet verified</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
+          <td>GPT-5.6 Sol</td>
+          <td><code>gpt-5.6-sol</code></td>
+          <td class="num">1.05M</td>
+          <td class="num">128k</td>
+          <td class="num">$5</td>
+          <td class="num">$30</td>
+        </tr>
+        <tr>
+          <td>OpenAI</td>
+          <td>GPT-5.6 Terra</td>
+          <td><code>gpt-5.6-terra</code></td>
+          <td class="num">1.05M</td>
+          <td class="num">128k</td>
+          <td class="num">$2</td>
+          <td class="num">$12</td>
         </tr>
         <tr>
           <td>Google</td>
-          <td class="unverified">not yet verified</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
+          <td>Gemini 3.6 Flash</td>
+          <td><code>gemini-3.6-flash</code></td>
+          <td class="num">1.05M</td>
+          <td class="num">64k</td>
+          <td class="num">$1.50</td>
+          <td class="num">$7.50</td>
         </tr>
         <tr>
-          <td>Meta (Llama)</td>
-          <td class="unverified">not yet verified</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
-          <td class="unverified">—</td>
+          <td>Meta</td>
+          <td>Muse Spark 1.2</td>
+          <td><code>muse-spark-1.2</code></td>
+          <td class="unverified">not published</td>
+          <td class="unverified">not published</td>
+          <td class="num">$1.25</td>
+          <td class="num">$4.25</td>
+        </tr>
+        <tr>
+          <td>Meta</td>
+          <td>Llama 4 / Llama 3</td>
+          <td><code>—</code></td>
+          <td class="unverified">n/a</td>
+          <td class="unverified">n/a</td>
+          <td class="unverified">no first-party price</td>
+          <td class="unverified">no first-party price</td>
         </tr>
       </tbody>
     </table>
   </div>
 
+  <p class="table-note">
+    <strong>Verified 11 August 2026</strong> against each vendor's own
+    documentation: OpenAI's
+    <a href="https://developers.openai.com/api/docs/pricing">pricing</a> and
+    <a href="https://developers.openai.com/api/docs/models">models</a> pages,
+    Google's <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
+    and its
+    <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
+    model page, and Meta's
+    <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.<br>
+    <strong>Selection:</strong> current general-purpose text models, not the full
+    catalogue. Each vendor sells cheaper small models and more expensive
+    reasoning tiers; this table exists to make the shape of the market legible,
+    not to be exhaustive.<br>
+    <strong>Context figures:</strong> Google publishes an exact input limit of
+    1,048,576 tokens and an output limit of 65,536; OpenAI publishes 1.05M and
+    128K. The first two are the same number written two ways.<br>
+    <strong>Cutoffs:</strong> OpenAI publishes a knowledge cutoff of
+    16 February 2026 for the GPT-5.6 family. Google's model page for Gemini 3.6
+    Flash does not publish one, which is why there is no cutoff column here.<br>
+    <strong>Tiering:</strong> Google prices some models differently above and
+    below a prompt-size threshold, and offers batch, flex and priority rates that
+    differ substantially from the standard rate quoted. Meta publishes a cheaper
+    "contributor" tier. Anyone budgeting seriously should read the vendor's own
+    page rather than this row.
+  </p>
+
   <div class="prose">
     <div class="gap">
-      <p class="note-title">Deliberately blank</p>
+      <p class="note-title">Two honest gaps in the table above</p>
       <p>
-        These rows are empty because they have not been checked against each
-        vendor's own pricing page yet, and filling them in from memory is how
-        every other comparison site ends up quietly wrong. They get populated
-        when they get verified, with the date attached. An empty cell is
-        information; a confident wrong number is not.
+        <strong>Meta doesn't fit the shape of this table, and that's the finding
+        rather than an omission.</strong> Llama models are downloaded and run by
+        you or by whichever host you choose, so Meta publishes no per-token price
+        for them at all; what you pay depends entirely on where you run them.
+        Meta's paid API sells different models (the Muse family), and its
+        published pricing page gives rates without stating context or output
+        limits, so those two cells say "not published" rather than carrying a
+        number from somewhere else.
+      </p>
+      <p>
+        <strong>A price comparison across vendors is less meaningful than it
+        looks.</strong> Identical per-token rates do not imply identical cost for
+        the same job, because tokenisers differ, so the same text is a different
+        number of tokens for different vendors. Treat the columns as
+        order-of-magnitude guidance, not a league table.
+        → <a href="/concepts/tokens">Tokens</a>
       </p>
     </div>
 

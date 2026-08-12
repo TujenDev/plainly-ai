@@ -92,6 +92,41 @@
 
     <h2>The log</h2>
 
+    <h3>11 August 2026 — the blank vendor rows on Model facts are filled</h3>
+    <p>
+      <a href="/model-facts">Model facts</a> carried empty OpenAI, Google and
+      Meta rows from launch, flagged as unverified rather than guessed. Those are
+      now checked against each vendor's own documentation, with every source
+      linked and dated on the page.
+    </p>
+    <p>
+      Two things came out of the check that were worth more than the numbers:
+    </p>
+    <ul>
+      <li>
+        <strong>Meta doesn't fit the table, and that is the finding.</strong>
+        Llama models are downloaded and run wherever you choose, so Meta
+        publishes no per-token price for them; cost depends entirely on the host.
+        Meta's paid API sells different models, and its pricing page states rates
+        without publishing context or output limits, so those cells now read
+        "not published" rather than borrowing a figure from a third party.
+      </li>
+      <li>
+        <strong>Cross-vendor price comparison is weaker than it looks.</strong>
+        Identical per-token rates don't mean identical cost for the same job,
+        because tokenisers differ and the same text is a different number of
+        tokens for each vendor. The table now says so, rather than inviting the
+        comparison it can't support.
+      </li>
+    </ul>
+    <p>
+      Also recorded: OpenAI publishes a knowledge cutoff for its current family,
+      while the Google model page checked does not, which is why that table has
+      no cutoff column. Google's tiered, batch, flex and priority rates and
+      Meta's contributor tier are noted but not reproduced, with a pointer to
+      read the vendor page before budgeting.
+    </p>
+
     <h3>11 August 2026 — Thinking and reasoning, and the roadmap closes</h3>
     <p>
       <a href="/concepts/thinking">Thinking and reasoning</a> is live. It

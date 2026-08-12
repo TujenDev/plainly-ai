@@ -92,6 +92,32 @@
 
     <h2>The log</h2>
 
+    <h3>11 August 2026 — two more concept pages: Fine-tuning and Prompt caching</h3>
+    <p>
+      <a href="/concepts/fine-tuning">Fine-tuning</a> argues the distinction the
+      previous two pages kept deferring: it changes how a model behaves, not
+      what it knows. Facts trained in this way cannot be cited, cannot be
+      corrected without retraining, and carry a standing upgrade cost, since a
+      tuned model is frozen against a base model that will be superseded. Use
+      cases and the "prompt engineering may be all you need" line are quoted from
+      OpenAI's own documentation, along with the observation that knowledge
+      acquisition is absent from its list of benefits.
+    </p>
+    <p>
+      <a href="/concepts/prompt-caching">Prompt caching</a> covers the cost lever
+      that rarely makes it into tutorials, and the accident that quietly ruins
+      it: putting something that changes every request inside the section you
+      meant to reuse, so the system writes a cache entry every time and never
+      reads one. That failure produces no error and no visible defect, only a
+      bill. Mechanics quoted and cited from Anthropic's documentation; the rates,
+      lifetimes and minimum sizes deliberately left out, because they are
+      model-specific and change.
+    </p>
+    <p>
+      That closes the original concept roadmap except for Thinking and reasoning.
+      Nine live.
+    </p>
+
     <h3>11 August 2026 — new concept page: RAG and retrieval</h3>
     <p>
       <a href="/concepts/rag">RAG and retrieval</a> is live, the seventh concept

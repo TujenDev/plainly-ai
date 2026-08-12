@@ -136,8 +136,11 @@
     <p><strong>Cost multiplies, quietly.</strong> Each turn re-sends the
     accumulated history, so cost grows faster than step count. This is the number
     that surprises people who priced a prototype on single calls, and it is the
-    main reason a technically working agent gets cancelled.
-    → <a href="/concepts/tokens">Tokens</a></p>
+    main reason a technically working agent gets cancelled. It is also the single
+    biggest thing you can do something about, since the unchanging part of that
+    preamble can be cached.
+    → <a href="/concepts/tokens">Tokens</a> ·
+    <a href="/concepts/prompt-caching">Prompt caching</a></p>
 
     <p><strong>Stopping is a real problem.</strong> The loop needs to end. A model
     judging its own completion is the same model that will confidently claim a

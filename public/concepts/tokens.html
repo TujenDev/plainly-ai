@@ -162,7 +162,7 @@
       together. → <a href="/concepts/context-windows">Context windows</a>
     </p>
 
-    <h3>It makes some content quietly expensive</h3>
+    <h3>It makes some content far more expensive than it looks</h3>
     <p>
       Because compression depends on how ordinary the text is, cost per page varies
       more than people expect.
@@ -196,12 +196,14 @@
     <div class="gap">
       <p class="note-title">Where this page stops</p>
       <p>
-        The single largest lever on token cost for anyone building is prompt
-        caching, which can change the economics of a repeated prompt by an order
-        of magnitude. That deserves its own page and has one planned. The other
-        obvious follow-on is why models are bad at counting letters in a word,
-        which is downstream of tokenisation and is a good demonstration that these
-        limitations have mundane mechanical causes.
+        The single largest lever on token cost for anyone building is
+        <a href="/concepts/prompt-caching">prompt caching</a>, which can change
+        the economics of a repeated prompt substantially and now has its own
+        page. The other follow-on, why models are bad at counting letters in a
+        word, is downstream of tokenisation and is covered in
+        <a href="/what-ai-is-bad-at">what AI is actually bad at</a>, where it
+        serves as the clearest case of a limitation with a mundane mechanical
+        cause rather than a mysterious one.
       </p>
     </div>
 

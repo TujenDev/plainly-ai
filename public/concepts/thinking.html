@@ -132,13 +132,13 @@
         Changing your thinking configuration between requests invalidates prompt
         caching, because the configuration is rendered into the prompt itself and
         caching requires an identical prefix. Tuning a thinking budget up and
-        down across a conversation quietly destroys your cache hits and can cost
-        more than the thinking does.
+        down across a conversation destroys your cache hits without any sign
+        that it has, and can cost more than the thinking does.
         → <a href="/concepts/prompt-caching">Prompt caching</a>
       </p>
     </div>
 
-    <h2>The part almost nobody mentions</h2>
+    <h2>Why reading the reasoning doesn't verify the answer</h2>
     <p>
       Visible reasoning invites a reasonable assumption: that you are watching
       the process that produced the answer, and can therefore check the answer by
@@ -188,13 +188,14 @@
     </p>
 
     <div class="gap">
-      <p class="note-title">What this page deliberately avoids</p>
+      <p class="note-title">The fastest-moving surface in the subject</p>
       <p>
-        No token budgets, no benchmark comparisons, no list of which models
-        support which thinking mode, and no claim about which reasons better.
-        That is the fastest-moving surface in this whole subject, and the
-        mechanics above will outlive every specific setting mentioned in the
-        vendor docs today.
+        Which models support which thinking mode, what the settings are called,
+        what a sensible budget looks like, which one reasons better: all of that
+        is changing between model generations as this is written, so none of it
+        is stated above. The mechanics will outlive every specific setting in
+        today's vendor documentation, which is the only reason this page can be
+        useful next year.
       </p>
     </div>
 

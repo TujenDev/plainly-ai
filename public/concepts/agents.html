@@ -122,8 +122,8 @@
     entirely general: multiply a per-step success rate by itself enough times and
     even a very reliable step produces an unreliable run. Longer chains are not
     linearly harder, they are exponentially harder, which is why demos of
-    twenty-step agents look magical and production versions of them get quietly
-    shortened.</p>
+    twenty-step agents look magical and production versions of them get shorter
+    after launch.</p>
 
     <p><strong>The context fills up.</strong> Every action and every result gets
     added to what the model is holding, so a long run steadily consumes the
@@ -133,7 +133,7 @@
     often just agents that can no longer see what they were asked to do.
     → <a href="/concepts/context-windows">Context windows</a></p>
 
-    <p><strong>Cost multiplies, quietly.</strong> Each turn re-sends the
+    <p><strong>Cost multiplies, and not linearly.</strong> Each turn re-sends the
     accumulated history, so cost grows faster than step count. This is the number
     that surprises people who priced a prototype on single calls, and it is the
     main reason a technically working agent gets cancelled. It is also the single
@@ -179,7 +179,7 @@
       <li><strong>What does it do without asking?</strong> The honest products name their irreversible actions and gate them. Vagueness here is the loudest signal on the page.</li>
     </ul>
 
-    <h2>Where they genuinely work today</h2>
+    <h2>Where they work today</h2>
     <p>
       The pattern that predicts success has little to do with model quality and
       almost everything to do with the shape of the task. Agents do well where
@@ -188,7 +188,7 @@
     <ul>
       <li><strong>The result can be checked automatically.</strong> Code that must pass tests, a query whose output can be validated, a task with a verifiable end state. When the loop can tell whether it succeeded, it can correct itself, which is what breaks the compounding-error problem.</li>
       <li><strong>Failure is cheap and reversible.</strong> Work in a scratch copy, a branch, a sandbox. Blast radius matters more than accuracy.</li>
-      <li><strong>The path genuinely can't be scripted.</strong> Investigation, search, debugging: work where the next step depends on what the last one turned up.</li>
+      <li><strong>The path can't be written down in advance.</strong> Investigation, search, debugging: work where the next step depends on what the last one turned up.</li>
     </ul>
     <p>
       Where all three fail — an unverifiable result, irreversible consequences, a
@@ -197,13 +197,13 @@
     </p>
 
     <div class="gap">
-      <p class="note-title">What this page deliberately avoids</p>
+      <p class="note-title">Why there are no numbers here</p>
       <p>
-        No benchmark scores, no claims about which agent framework is best, and
-        no reliability percentages. Those change monthly, they are usually
-        vendor-published, and they are exactly the kind of figure that would make
-        this page wrong within a season while still sounding authoritative. The
-        mechanics above should still be accurate in several years.
+        You will not find benchmark scores, framework rankings or reliability
+        percentages on this page. They change monthly, most are published by
+        someone selling something, and a page carrying them would be wrong within
+        a season without looking any different. The mechanics above should hold
+        up for years, which is the trade being made.
       </p>
     </div>
 

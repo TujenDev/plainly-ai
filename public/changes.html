@@ -19,20 +19,22 @@
 </head>
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
+
 <header class="site-head">
   <div class="wrap">
     <a class="wordmark" href="/">Plain<span>ly</span></a>
-    <nav class="site-nav">
-      <a href="/">Home</a>
+    <nav class="site-nav" aria-label="Main">
       <a href="/start-here">Start here</a>
       <a href="/concepts/">Concepts</a>
+      <a href="/guides">Guides</a>
       <a href="/model-facts">Model facts</a>
       <a href="/changes" aria-current="page">Changes</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="main">
 
   <p class="kicker">The maintenance log</p>
   <h1>Changes</h1>
@@ -110,6 +112,30 @@
     </ul>
 
     <h2>The log</h2>
+
+    <h3>12 August 2026 — a Guides section, and an accessibility pass</h3>
+    <p>
+      Three pages had quietly become unreachable except from the homepage and
+      the footer: the out-of-date guide, the limits page and the glossary. They
+      now have a home at <a href="/guides">Guides</a>, which is in the
+      navigation. "Home" came out of the nav to make room, since the wordmark in
+      the corner already does that job.
+    </p>
+    <p>
+      The accessibility work matters more than it sounds. This site is plain
+      HTML with one stylesheet and no JavaScript, which makes it nearly free to
+      get right, and there was no excuse for the gaps:
+    </p>
+    <ul>
+      <li><strong>The date stamps failed contrast requirements.</strong> The grey used for them, and for table notes, sat at about 3.8:1 against the page in light mode, below the 4.5:1 minimum for text that size. It is now around 5:1. The stamp is the most load-bearing element on the site, and it was the hardest thing on it to read.</li>
+      <li><strong>Keyboard users can now skip the navigation</strong> and land straight on the content, and every focused link shows a visible outline.</li>
+      <li><strong>The wide tables on Model facts can be scrolled from the keyboard</strong> and announce themselves to screen readers, rather than being a mouse-only region.</li>
+      <li><strong>Motion is disabled</strong> for anyone whose system asks for reduced motion.</li>
+    </ul>
+    <p>
+      A reference site that is awkward to read is failing the people most likely
+      to be looking something up in a hurry.
+    </p>
 
     <h3>12 August 2026 — every page now carries two dates</h3>
     <p>

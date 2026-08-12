@@ -8,7 +8,9 @@
   --paper-sunk: #f4f4f0;
   --ink: #1a2029;
   --ink-soft: #4a5560;
-  --ink-faint: #78838d;
+  /* Darkened from #78838d, which sat at 3.8:1 on --paper and failed WCAG AA
+     for the date stamps and table notes. This is ~5:1. */
+  --ink-faint: #656f79;
   --rule: #e2e4df;
   --accent: #0b6e63;
   --accent-soft: #e6f2f0;
@@ -41,6 +43,48 @@
 * { box-sizing: border-box; }
 
 html { -webkit-text-size-adjust: 100%; }
+
+/* ---------- Accessibility ---------- */
+
+/* Visible only once focused, so keyboard users can jump the nav. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 4px 0;
+  z-index: 10;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Anchored terms and headings shouldn't land flush against the viewport edge. */
+:target,
+[id] {
+  scroll-margin-top: 1.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .track:hover { transform: none; }
+}
 
 body {
   margin: 0;
@@ -281,6 +325,13 @@ li { margin-bottom: 0.5rem; }
   margin: 1.5rem 0 0.75rem;
   border: 1px solid var(--rule);
   border-radius: 6px;
+  /* Focusable so the table can be scrolled from the keyboard. */
+  scrollbar-width: thin;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 table {

@@ -113,6 +113,145 @@
 
     <h2>The log</h2>
 
+    <h3>12 August 2026 — the tracks now lead somewhere</h3>
+    <p>
+      <a href="/start-here">Start here</a> sorts you into one of three tracks and
+      then, until today, sent two of them off the site. The Curious track told
+      readers to "learn the three failure modes: confident wrongness, silent
+      staleness, and losing the thread" and linked none of them, while this site
+      has a page on each. The Builder track said "tool use, then retrieval, then
+      agents, in that order" and linked none of those either, though all three
+      were written and sitting one click away.
+    </p>
+    <p>
+      That is a worse problem than a missing page, because nothing about it looks
+      broken. Every link on the page worked. The pages existed. They simply never
+      met, and a reader following the site's own advice would have gone looking
+      for material that was already here. Both tracks now link to the concept
+      pages they name, at the step where they name them, and the Curious track
+      points at the limits page and the glossary that were written for exactly
+      that reader.
+    </p>
+    <p>
+      <a href="/concepts/">Concepts</a> was a flat list of ten, which quietly
+      implied that prompt caching and hallucination are equally relevant to
+      someone who has never called an API. They are not. The ten are now grouped
+      as <strong>Foundational</strong> (six) and <strong>Building</strong> (four),
+      using the labels each page already carried at the top of itself &mdash; the
+      distinction was recorded in the pages and shown nowhere. The Building group
+      says plainly that a reader who wants to use AI well rather than build with
+      it can stop at the six.
+    </p>
+    <p>
+      Also removed: two counts of other people's course catalogues ("12 courses",
+      "103 short courses, 13 full, 10 certificates"). They were accurate on
+      11 August and they are the fastest-rotting numbers this site had, sitting on
+      a page reviewed quarterly, and knowing the size of a catalogue has never
+      helped anyone choose a course. No verification dates moved for any of this:
+      nothing here was a fact re-checked, only pages finally pointed at each other.
+    </p>
+
+    <h3>12 August 2026 — correction: a citation that didn't lead to the claim</h3>
+    <p>
+      <strong>What this page used to say.</strong>
+      <a href="/concepts/tokens">Tokens</a> stated that using OpenAI's
+      <code>tiktoken</code> library undercounts Claude tokens by 15–20%, and
+      attributed the figure to Anthropic's models overview and token counting
+      documentation.
+    </p>
+    <p>
+      <strong>What's true.</strong> The figure is real and it is Anthropic's. It
+      is not on either of those pages. Both were re-read on 12 August 2026 and
+      neither mentions <code>tiktoken</code>, third-party tokenisers, or any
+      undercounting percentage. The number is published in Anthropic's token
+      counting guidance for developers, which is now what the page cites and links
+      to.
+    </p>
+    <p>
+      This is the worst kind of error this site can make, and worth being plain
+      about why. A wrong number is a wrong number. A right number behind a
+      citation that doesn't contain it is a trap: a reader who does the
+      sixty-second check <a href="/is-this-out-of-date">this site teaches</a> will
+      follow the link, fail to find the claim, and correctly conclude the figure
+      was invented. On a site whose entire product is checkable sourcing, an
+      uncheckable citation does more damage than an uncited assertion would have.
+    </p>
+
+    <h3>12 August 2026 — three corrections from re-reading the vendor pages</h3>
+    <p>
+      Verification dates moved on <a href="/concepts/tokens">Tokens</a>,
+      <a href="/model-facts">Model facts</a> and
+      <a href="/getting-better-results">Getting better results</a>, because the
+      sources were actually re-read rather than the pages reworded.
+    </p>
+    <ul>
+      <li><strong>The headline claim on Tokens was too broad.</strong> It said the familiar "one token ≈ 4 characters, ≈ 0.75 words" rule is "now materially wrong for current models." Anthropic's own model table still gives 0.75 words per token for Claude Haiku 4.5 — a current model, listed on Model facts — and for the previous generation of million-token models. The rule changed with a tokeniser, introduced at Claude Opus 4.7, not with time. The page now says that, which is a narrower claim and a more useful one: the ratio is a property of a model version, and one vendor's documentation correctly carries both sets of numbers at once.</li>
+      <li><strong>Model facts told you the wrong vendor does threshold pricing.</strong> The note said Google prices some models differently above and below a prompt-size threshold. OpenAI does it too, and steeply: GPT-5.6 Sol is $10 input / $45 output above the threshold against the $5 / $30 in the table, and GPT-5.6 Terra is $4 / $18 against $2 / $12. The table quoted only the short-context rate with no asterisk, so anyone budgeting a long-context job from it would have been out by roughly double on input.</li>
+      <li><strong>Getting better results dropped a caveat from a quote.</strong> It recommended asking a model to verify its own answer against named criteria, which the source does recommend. The same paragraph of that source names an exception — Claude Opus 5 verifies its own work unprompted, and the instruction carried over from older models costs tokens and latency for nothing. Trimming a caveat to make advice land cleaner is precisely what this site accuses other people of.</li>
+    </ul>
+    <p>
+      One smaller fix in the same pass: the Model facts column headed "API ID"
+      showed <code>claude-haiku-4-5</code>, which Anthropic documents as the
+      alias. The API ID is <code>claude-haiku-4-5-20251001</code>. Both work; the
+      column claimed to show one specific thing and showed the other.
+    </p>
+    <p>
+      Worth recording what did <em>not</em> change. Every other figure on Model
+      facts was re-checked against the vendor's own page and still holds,
+      including the Claude Sonnet 5 rate of $2 / $10 that
+      <a href="#sonnet-correction">the 11 August correction</a> below established
+      — it is listed with no introductory marker and no end date, so that
+      correction stands.
+    </p>
+
+    <h3>12 August 2026 — five stale claims, four of them created by this site's own edits</h3>
+    <p>
+      A review of every page found statements that had been true when written and
+      were no longer true a day later. All of them describe the site itself,
+      which is the failure mode this site is least entitled to have.
+    </p>
+    <ul>
+      <li><strong>The 404 page was describing a site that no longer exists.</strong> It said five concept pages were live, with more coming, when ten are live and the queue was deliberately abolished. Its section list predated the Guides reorganisation, so it omitted Guides, Getting better results and About while listing three pages that had moved inside Guides. Its meta description still used the wording corrected on the page body below.</li>
+      <li><strong>About described the vendor rows on Model facts as empty.</strong> They were filled the day before. The disclosure it supported is still needed, since the coverage really is uneven, so it now names the actual asymmetry: two cutoff columns Anthropic's table has and the other one doesn't, and Google represented by a fast-tier model rather than its flagship.</li>
+      <li><strong>Tool use said the Agents page was planned</strong>, twelve lines above a box linking to it. The editing pass logged below caught the box and missed the sentence.</li>
+      <li><strong>The out-of-date guide promised four habits and listed five.</strong> The fifth was added when the two-dates change landed; the count wasn't. That page's stamp notes it carries no figures on purpose, which made the one number on it the only thing that could be wrong, and it was.</li>
+      <li><strong>The sitemap told crawlers that none of the 12 August work happened</strong>, carrying 11 August against every page edited since.</li>
+    </ul>
+    <p>
+      The pattern is worth naming, because it isn't the pattern this site was
+      built to catch. None of these were facts about AI that rotted; they were
+      cross-references that broke the moment something else changed. Nothing
+      about them looks like a claim that needs re-checking, which is exactly why
+      they survived a pass that was looking for stale figures. Verification dates
+      did not move: no sources were re-read, and rewording proves nothing.
+    </p>
+
+    <h3>12 August 2026 — the corrections this site asked for had nowhere to go</h3>
+    <p>
+      Four pages invited readers to report anything wrong or stale, and this one
+      called corrections the most important kind of entry in the log. None of
+      them said where to send one. There was no address, no form and no link
+      anywhere on the site — an invitation with no door attached.
+    </p>
+    <p>
+      That is a worse failure than any single wrong figure, because the entire
+      argument for trusting a self-maintained reference is that someone outside
+      it can push back. Without a channel, this log was a record of the site
+      auditing itself, which is exactly the kind of unfalsifiable freshness
+      claim <a href="/is-this-out-of-date">the method page</a> teaches people to
+      distrust.
+    </p>
+    <p>
+      Every page footer now carries a
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a
+      problem</a> link, and the corrections notes here and on
+      <a href="/about">About</a> name it directly. It goes to the public issue
+      tracker rather than a private inbox, so a report is visible whether or not
+      it gets acted on. The site still has no contact form, no services page and
+      no call to action; being reachable about the facts is a different thing
+      from being sold to.
+    </p>
+
     <h3>12 August 2026 — Getting better results</h3>
     <p>
       <a href="/getting-better-results">Getting better results</a> fills the
@@ -207,7 +346,7 @@
       precisely because nothing about them looks like a fact.
     </p>
 
-    <h3>11 August 2026 — correction: the Sonnet 5 price warning was wrong</h3>
+    <h3 id="sonnet-correction">11 August 2026 — correction: the Sonnet 5 price warning was wrong</h3>
     <p>
       <strong>What this page used to say.</strong>
       <a href="/model-facts">Model facts</a> carried an asterisk on Claude
@@ -486,6 +625,13 @@
         especially welcome, most of all if you can point at a primary source. The
         correction gets made and it gets logged on this page with what it replaced.
       </p>
+      <p>
+        Report one in
+        <a href="https://github.com/TujenDev/plainly-ai/issues">the issue tracker</a>.
+        It is public on purpose. A correction log kept by the same person who
+        writes the pages is only worth as much as the record of what was
+        reported, and that record shouldn't live where it can be quietly edited.
+      </p>
     </div>
 
     <p class="next">
@@ -507,7 +653,8 @@
       <a href="/">Home</a> ·
       <a href="/start-here">Start here</a> ·
       <a href="/concepts/">Concepts</a> &middot;
-      <a href="/about">About</a>
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
     </p>
   </div>
 </footer>

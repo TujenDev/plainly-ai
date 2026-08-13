@@ -44,7 +44,7 @@
   </p>
 
   <p class="stamp">
-    Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>11 August 2026</b> &nbsp;·&nbsp; Figures referenced here live on
+    Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>12 August 2026</b> &nbsp;·&nbsp; Figures referenced here live on
     <a href="/model-facts">Model facts</a>
   </p>
 
@@ -77,7 +77,7 @@
       <li><strong>Code and structured text.</strong> Brackets, indentation and symbols carry meaning and need to survive the process.</li>
     </ul>
 
-    <h2>The rule of thumb everyone repeats is out of date</h2>
+    <h2>The rule of thumb everyone repeats is attached to a tokeniser</h2>
     <p>
       You will find, in a great many places, the claim that one token is about
       four characters, or about three quarters of a word. That number entered
@@ -85,8 +85,9 @@
       it has been copied forward ever since without being rechecked.
     </p>
     <p>
-      It is now materially wrong for current models. Anthropic describes a
-      one-million-token context window as approximately <strong>555,000
+      It is wrong for the newest models and still right for others, which is the
+      more interesting fact. Anthropic describes the one-million-token context
+      window on its current flagship models as approximately <strong>555,000
       words</strong> and approximately <strong>2.5 million characters</strong>.
       Work backwards from the vendor's own figures and you get:
     </p>
@@ -124,7 +125,7 @@
       Derived by division from Anthropic's stated approximations (1M tokens ≈ 555k
       words ≈ 2.5M characters) on its
       <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
-      fetched 11 August 2026. These are approximations of approximations: treat
+      fetched 12 August 2026. These are approximations of approximations: treat
       them as an order of magnitude, not a calculator.
     </p>
 
@@ -133,7 +134,21 @@
       you can be out by something like forty per cent on token count, and
       therefore on cost. Anthropic states directly that its newer tokeniser
       produces roughly <strong>30% more tokens for the same text</strong> than the
-      generation before it.
+      generation before it, and dates the change precisely: models from Claude
+      Opus 4.7 onward use it, everything earlier does not.
+    </p>
+    <p>
+      Which is why the folklore is not simply dead. On the same page, the older
+      one-million-token models are described as approximately 750,000 words and
+      3.4 million characters, and Claude Haiku 4.5 &mdash; a current model, on
+      this site's own <a href="/model-facts">Model facts</a> table &mdash; as
+      approximately 150,000 words and 680,000 characters for its 200,000-token
+      window. Both work out to <strong>0.75 words per token</strong> &mdash; the
+      memorised figure exactly &mdash; and about 3.4 characters, nearer the
+      folklore's four than the 2.5 above. The old ratio is not dead; it is
+      accurate on models people are using today. One vendor's documentation
+      supports both sets of numbers, in different rows of the same table, and it
+      is right to.
     </p>
 
     <div class="note">
@@ -188,8 +203,8 @@
     <p>
       <strong>Don't use another vendor's tokeniser.</strong> The popular
       <code>tiktoken</code> library is OpenAI's, and it is simply the wrong tool
-      for Claude. Anthropic's own documentation puts the error at
-      <strong>15–20% undercounting on typical English text</strong>, and worse on
+      for Claude. Anthropic's published guidance for its own developers puts the
+      error at <strong>15–20% undercounting on typical text</strong>, and worse on
       code or non-English input. This is a common enough mistake to be worth
       naming: cross-vendor token estimates are not approximately right, they are
       systematically wrong in one direction.
@@ -211,14 +226,29 @@
 
     <h2>Sources</h2>
     <p class="table-note">
-      Word, character and token approximations, the 30% tokeniser increase, and
-      the <code>tiktoken</code> undercounting range are all Anthropic's own
-      figures, from its
-      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>
-      and token counting documentation, fetched 11 August 2026. Ratios in the
-      comparison table above are arithmetic on those published figures rather than
-      independent measurements, and are labelled as such. Equivalent figures for
-      other vendors have not been verified and are deliberately not stated here.
+      Word, character and token approximations come from Anthropic's
+      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+      where they appear as tooltips on each model's context window. The 30%
+      tokeniser increase, and the fact that it begins with Claude Opus 4.7, come
+      from its
+      <a href="https://platform.claude.com/docs/en/build-with-claude/token-counting">token counting documentation</a>.
+      Both fetched 12 August 2026.
+    </p>
+    <p class="table-note">
+      The <code>tiktoken</code> undercounting range is Anthropic's figure but is
+      <strong>not</strong> on either page above, which is where this page cited it
+      until 12 August 2026. It is published in Anthropic's
+      <a href="https://github.com/anthropics/skills/blob/main/skills/claude-api/shared/token-counting.md">token counting guidance for developers</a>:
+      "It undercounts Claude tokens by ~15–20% on typical text, and by much more
+      on code or non-English input." A citation you cannot follow to the claim is
+      worse than no citation at all, so the correction is logged on
+      <a href="/changes">the changes page</a> rather than quietly fixed.
+    </p>
+    <p class="table-note">
+      Ratios in the comparison table above are arithmetic on the published figures
+      rather than independent measurements, and are labelled as such. Equivalent
+      figures for other vendors have not been verified and are deliberately not
+      stated here.
     </p>
 
     <p class="next">
@@ -240,7 +270,8 @@
       <a href="/">Home</a> ·
       <a href="/start-here">Start here</a> ·
       <a href="/concepts/">Concepts</a> &middot;
-      <a href="/about">About</a>
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
     </p>
   </div>
 </footer>

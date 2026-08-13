@@ -84,9 +84,22 @@
     <h3>What to do, in order</h3>
     <ol>
       <li><strong>Use one, deliberately, for a week.</strong> Pick one real task you do often and do it with an assistant instead. Reading about this is much less useful than ten minutes of contact.</li>
-      <li><strong>Learn the three failure modes.</strong> Confident wrongness, silent staleness, and losing the thread in long conversations. Knowing these three makes you dramatically harder to mislead.</li>
+      <li><strong>Learn the three failure modes.</strong> Knowing these three makes you dramatically harder to mislead, and there is a page here on each:
+        <ul>
+          <li>Confident wrongness → <a href="/concepts/hallucination">Hallucination</a></li>
+          <li>Silent staleness → <a href="/concepts/training-cutoff">Training cutoff</a></li>
+          <li>Losing the thread in long conversations → <a href="/concepts/context-windows">Context windows</a></li>
+        </ul>
+      </li>
       <li><strong>Then, one structured course.</strong> Not before the above. Courses land much better once you have something to attach them to.</li>
     </ol>
+    <p>
+      Two more written for exactly this track, whenever you want them:
+      <a href="/what-ai-is-bad-at">What AI is actually bad at</a>, which is the
+      long version of the three failure modes above, and the
+      <a href="/glossary">glossary</a> for the words people use as though you
+      already know them.
+    </p>
   </div>
 
   <ul class="resources">
@@ -148,7 +161,7 @@
     <ol>
       <li><strong>Understand context.</strong> Nearly every mysterious failure in long sessions traces back to how context works. This is the highest-leverage concept on the whole site. → <a href="/concepts/context-windows">Context windows</a></li>
       <li><strong>Learn to give reference material, not just instructions.</strong> The single biggest quality jump for most people is pasting in the actual document, example, or data instead of describing it.</li>
-      <li><strong>Learn what the model cannot know.</strong> Training cutoffs, no access to your files unless you give it them, no memory between sessions unless the product adds it. Most “the AI lied to me” stories are one of these three.</li>
+      <li><strong>Learn what the model cannot know.</strong> Training cutoffs, no access to your files unless you give it them, no memory between sessions unless the product adds it. Most “the AI lied to me” stories are one of these three. → <a href="/concepts/training-cutoff">Training cutoff</a>, and <a href="/concepts/hallucination">Hallucination</a> for what happens when it fills the gap anyway</li>
       <li><strong>Then, and only then, tooling.</strong> Which assistant, which integrations, which automations.</li>
     </ol>
   </div>
@@ -157,7 +170,6 @@
     <li>
       <span class="res-name"><a href="https://huggingface.co/learn">Hugging Face Learn</a></span>
       <span class="tag paid">Price not stated</span>
-      <span class="res-meta">12 courses as of 11 Aug 2026</span>
       <p>
         Hands-on and openly accessible. Sits neatly between conceptual and
         technical: you will touch code, but it explains itself as it goes. For this
@@ -171,7 +183,6 @@
     <li>
       <span class="res-name"><a href="https://www.deeplearning.ai/courses/">DeepLearning.AI</a></span>
       <span class="tag paid">Mixed: verify per course</span>
-      <span class="res-meta">103 short courses, 13 full, 10 certificates</span>
       <p>
         Short, focused, and taught by people who build the things; Andrew Ng teaches
         several himself. The closest thing to a well-sequenced curriculum at this
@@ -203,10 +214,17 @@
     <h3>The order that saves you time</h3>
     <ol>
       <li><strong>Make one raw API call by hand.</strong> Before any framework. Understand the request and response shape yourself, or you will be debugging an abstraction over a thing you don't know.</li>
-      <li><strong>Read the pricing model before you build.</strong> Cost scales with tokens, output costs multiples of input, and caching changes the maths enormously. → <a href="/model-facts">Model facts</a></li>
-      <li><strong>Tool use, then retrieval, then agents.</strong> In that order. Agents are the interesting part and the last part; most people attempt them third and get lost.</li>
+      <li><strong>Read the pricing model before you build.</strong> Cost scales with <a href="/concepts/tokens">tokens</a>, output costs multiples of input, and <a href="/concepts/prompt-caching">caching</a> changes the maths enormously. → <a href="/model-facts">Model facts</a></li>
+      <li><strong>Tool use, then retrieval, then agents.</strong> In that order. Agents are the interesting part and the last part; most people attempt them third and get lost. → <a href="/concepts/tool-use">Tool use</a>, then <a href="/concepts/rag">RAG and retrieval</a>, then <a href="/concepts/agents">Agents</a></li>
       <li><strong>Assume it will fail and design for it.</strong> Rate limits, refusals, truncated output, malformed responses. This is the actual difference between a demo and a product.</li>
     </ol>
+    <p>
+      One more, further out than most people expect:
+      <a href="/concepts/fine-tuning">fine-tuning</a> is where builders often
+      reach first and should reach last, because it teaches a model how to behave
+      rather than what is true. If the problem is "it doesn't know about my
+      business," the answer is almost always retrieval.
+    </p>
 
     <div class="note">
       <p class="note-title">Skip the framework, at first</p>
@@ -249,7 +267,8 @@
 
   <div class="prose">
     <p class="next">
-      Concepts you'll need either way → <a href="/concepts/">Concepts</a>
+The concepts this track assumes → <a href="/concepts/#building">Building</a>,
+      and the six underneath them → <a href="/concepts/#foundational">Foundational</a>
     </p>
   </div>
 
@@ -266,7 +285,8 @@
       <a href="/concepts/">Concepts</a> ·
       <a href="/model-facts">Model facts</a> ·
       <a href="/changes">Changes</a> &middot;
-      <a href="/about">About</a>
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
     </p>
   </div>
 </footer>

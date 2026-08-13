@@ -47,17 +47,18 @@
   <p class="stamp">Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>11 August 2026</b></p>
 
   <div class="prose">
-    <h2>Live</h2>
+    <h2 id="foundational">Foundational</h2>
+    <p>
+      The six that explain why these systems behave the way they do. If you use
+      AI and something it did has ever puzzled you, the explanation is almost
+      certainly on one of these pages. No coding required for any of them.
+    </p>
   </div>
 
   <ul class="concept-list">
     <li><a href="/concepts/context-windows">
       <span class="res-name">Context windows</span>
       <p>Why a model seems to forget things mid-conversation, and why a bigger window is not automatically better.</p>
-    </a></li>
-    <li><a href="/concepts/tokens">
-      <span class="res-name">Tokens</span>
-      <p>The unit you're billed in. Not words, not characters, and the rule of thumb everyone repeats is out of date.</p>
     </a></li>
     <li><a href="/concepts/hallucination">
       <span class="res-name">Hallucination</span>
@@ -67,10 +68,31 @@
       <span class="res-name">Training cutoff</span>
       <p>The date the model's knowledge stops. There are actually two dates, and the model doesn't know its own.</p>
     </a></li>
+    <li><a href="/concepts/tokens">
+      <span class="res-name">Tokens</span>
+      <p>The unit you're billed in. Not words, not characters, and the rule of thumb everyone repeats is right on some models and wrong on others.</p>
+    </a></li>
+    <li><a href="/concepts/thinking">
+      <span class="res-name">Thinking and reasoning</span>
+      <p>What's happening when a model "thinks before answering", when it's worth paying for, and why the visible reasoning isn't a confession.</p>
+    </a></li>
     <li><a href="/concepts/tool-use">
       <span class="res-name">Tool use</span>
       <p>How a model that only produces text ends up searching the web and editing your files — and the risk that comes with it.</p>
     </a></li>
+  </ul>
+
+  <div class="prose">
+    <h2 id="building">Building</h2>
+    <p>
+      The four that only start to matter once you are putting a model inside
+      something. They assume the foundational pages above, and they are not worth
+      your time otherwise &mdash; a reader who wants to use AI well rather than
+      build with it can stop at the six.
+    </p>
+  </div>
+
+  <ul class="concept-list">
     <li><a href="/concepts/agents">
       <span class="res-name">Agents</span>
       <p>The most abused word in the field. A model in a loop with tools, and why the loop is where all the difficulty lives.</p>
@@ -79,17 +101,13 @@
       <span class="res-name">RAG and retrieval</span>
       <p>Answering questions about documents the model never saw. Mostly a search problem, which is why most of it fails at the search.</p>
     </a></li>
-    <li><a href="/concepts/fine-tuning">
-      <span class="res-name">Fine-tuning</span>
-      <p>Teaches a model how to behave, not what is true. Why it is rarely the answer to "it doesn't know about my business".</p>
-    </a></li>
     <li><a href="/concepts/prompt-caching">
       <span class="res-name">Prompt caching</span>
       <p>The largest cost lever most builders have, and the easiest one to break with a single careless line.</p>
     </a></li>
-    <li><a href="/concepts/thinking">
-      <span class="res-name">Thinking and reasoning</span>
-      <p>What's happening when a model "thinks before answering", when it's worth paying for, and why the visible reasoning isn't a confession.</p>
+    <li><a href="/concepts/fine-tuning">
+      <span class="res-name">Fine-tuning</span>
+      <p>Teaches a model how to behave, not what is true. Why it is rarely the answer to "it doesn't know about my business".</p>
     </a></li>
   </ul>
 
@@ -105,7 +123,8 @@
     </p>
     <p>
       Something that should be here and isn't? That counts as a gap worth
-      reporting, same as a wrong fact.
+      <a href="https://github.com/TujenDev/plainly-ai/issues">reporting</a>, same
+      as a wrong fact.
     </p>
   </div>
 
@@ -130,7 +149,8 @@
       <a href="/start-here">Start here</a> ·
       <a href="/model-facts">Model facts</a> ·
       <a href="/changes">Changes</a> &middot;
-      <a href="/about">About</a>
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
     </p>
   </div>
 </footer>

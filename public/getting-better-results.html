@@ -150,6 +150,17 @@
       particularly well on code and maths. It works because it turns a vague
       request for confidence into a concrete task with a right answer.
     </p>
+    <p>
+      The same guidance names an exception in the same breath, and it is the kind
+      of caveat this site exists to not drop. Of Claude Opus 5 it says: "it
+      verifies its own work well without explicit instruction, and verification
+      instructions carried over from prompts tuned for earlier models can cause
+      over-verification, adding tokens and latency." So the technique is sound,
+      and on one current model it is dead weight you are paying for. That is the
+      general shape of the thing: advice tested on one model can invert on its
+      successor, and the only way to know is to check the model you are actually
+      using against advice that says which model it was written for.
+    </p>
 
     <h3>8. Start again rather than argue</h3>
     <p>
@@ -216,8 +227,8 @@
     <p class="table-note">
       The quoted lines on examples being a reliable way to steer output, the
       "brilliant but new employee" framing, the colleague test, and the
-      recommendation to have the model verify its answer against stated criteria
-      all come from Anthropic's
+      recommendation to have the model verify its answer against stated criteria,
+      and the Claude Opus 5 exception to it, all come from Anthropic's
       <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">prompting best practices</a>,
       fetched 12 August 2026. That documentation is written for one vendor's
       models and contains model-specific advice not reproduced here.
@@ -246,7 +257,8 @@
       <a href="/">Home</a> ·
       <a href="/start-here">Start here</a> ·
       <a href="/concepts/">Concepts</a> &middot;
-      <a href="/about">About</a>
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
     </p>
   </div>
 </footer>

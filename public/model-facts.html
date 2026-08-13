@@ -45,9 +45,10 @@
   </p>
 
   <p class="stamp">
-    Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>11 August 2026</b> against each vendor's own documentation,
-    including a re-check of the Anthropic rows that produced one correction,
-    noted below. Anything not verified is flagged in orange.
+    Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>12 August 2026</b> against each vendor's own documentation,
+    across two passes that produced three corrections, all logged on
+    <a href="/changes">the changes page</a>. Anything not verified is flagged in
+    orange.
   </p>
 
   <div class="prose">
@@ -112,7 +113,7 @@
         </tr>
         <tr>
           <td>Claude Haiku 4.5</td>
-          <td><code>claude-haiku-4-5</code></td>
+          <td><code>claude-haiku-4-5-20251001</code></td>
           <td class="num">200k</td>
           <td class="num">64k</td>
           <td class="num">$1</td>
@@ -224,17 +225,27 @@
     catalogue. Each vendor sells cheaper small models and more expensive
     reasoning tiers; this table exists to make the shape of the market legible,
     not to be exhaustive.<br>
+    <strong>API IDs:</strong> the string in that column is the one Anthropic
+    documents as the API ID. For Claude Haiku 4.5 that is the dated
+    <code>claude-haiku-4-5-20251001</code>; the shorter
+    <code>claude-haiku-4-5</code> is documented as an alias and also works. From
+    the 4.6 generation onward the two are identical, so Haiku is the only row
+    where the distinction shows.<br>
     <strong>Context figures:</strong> Google publishes an exact input limit of
     1,048,576 tokens and an output limit of 65,536; OpenAI publishes 1.05M and
     128K. The first two are the same number written two ways.<br>
     <strong>Cutoffs:</strong> OpenAI publishes a knowledge cutoff of
     16 February 2026 for the GPT-5.6 family. Google's model page for Gemini 3.6
     Flash does not publish one, which is why there is no cutoff column here.<br>
-    <strong>Tiering:</strong> Google prices some models differently above and
-    below a prompt-size threshold, and offers batch, flex and priority rates that
-    differ substantially from the standard rate quoted. Meta publishes a cheaper
-    "contributor" tier. Anyone budgeting seriously should read the vendor's own
-    page rather than this row.
+    <strong>Tiering:</strong> <strong>The OpenAI prices above are the
+    short-context rates, and long-context work costs more.</strong> OpenAI's
+    pricing page lists GPT-5.6 Sol at $10 input / $45 output above its context
+    threshold, against the $5 / $30 quoted here, and GPT-5.6 Terra at $4 / $18
+    against $2 / $12 &mdash; roughly double on input. Google prices some models
+    the same way, above and below a prompt-size threshold, and offers batch, flex
+    and priority rates that differ substantially from the standard rate quoted.
+    Meta publishes a cheaper "contributor" tier. Nobody should budget a
+    long-context job from this table; read the vendor's own page.
   </p>
 
   <div class="prose">
@@ -288,7 +299,8 @@
       <a href="/">Home</a> ·
       <a href="/start-here">Start here</a> ·
       <a href="/concepts/">Concepts</a> &middot;
-      <a href="/about">About</a>
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
     </p>
   </div>
 </footer>

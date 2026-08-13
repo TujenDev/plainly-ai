@@ -50,6 +50,12 @@
   </url>
 
   <url>
+    <loc>https://plainlyai.org/sources</loc>
+    <lastmod>2026-08-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://plainlyai.org/changes</loc>
     <lastmod>2026-08-12</lastmod>
     <priority>0.7</priority>

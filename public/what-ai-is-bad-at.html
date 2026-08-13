@@ -150,8 +150,10 @@
       Reliability decays as steps accumulate. Each step inherits the previous
       ones' mistakes as though they were established facts, so a very good
       per-step success rate still compounds into an unreliable run over enough
-      steps. Long autonomous work is not linearly harder than short work; it is
-      exponentially harder. → <a href="/concepts/agents">Agents</a>
+      steps. The arithmetic is worth doing yourself, because it is the entire
+      argument: a 99% chance of getting each step right is a 90% chance of getting
+      ten steps right, 60% over fifty, and 37% over a hundred. Nothing about the
+      model got worse. The steps multiplied. → <a href="/concepts/agents">Agents</a>
     </p>
     <p>
       The related weakness is knowing when to stop. A model judging its own
@@ -213,6 +215,24 @@
         rather be useful in a year than clever today.
       </p>
     </div>
+
+    <h2>Sources</h2>
+    <p class="table-note">
+      This page describes mechanisms rather than quoting figures, so most of it is
+      cited by the concept page it points at. Two claims here are empirical and
+      belong to somebody, so they are named. That models given a hint can use it
+      and then explain the answer without mentioning it comes from Anthropic's
+      <a href="https://www.anthropic.com/research/reasoning-models-dont-say-think">Reasoning models don't always say what they think</a>,
+      also cited on <a href="/concepts/thinking">Thinking and reasoning</a>. The
+      compounding arithmetic above is just arithmetic: 0.99 raised to the power of
+      the number of steps, which you can check on any calculator and which is why
+      no citation is offered for it.
+    </p>
+    <p class="table-note">
+      Added 12 August 2026. This page shipped without a sources block while every
+      other page here had one, which is the sort of inconsistency that is easy to
+      miss precisely because nothing on the page looks wrong.
+    </p>
 
     <p class="next">
       Then → <a href="/is-this-out-of-date">Is what you're reading out of date?</a> ·

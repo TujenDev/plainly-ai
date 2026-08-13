@@ -112,10 +112,18 @@
     <h2>How big is it, in real terms?</h2>
     <p>
       Windows are measured in tokens, which are chunks of text a bit shorter than
-      a word. To make that concrete: Anthropic gives a one-million-token window as
-      roughly <strong>555,000 words</strong>, or about 2.5 million characters.
-      That's genuinely enormous, somewhere in the region of five or six long
-      novels.
+      a word. To make that concrete: Anthropic gives a one-million-token window on
+      its current flagship models as roughly <strong>555,000 words</strong>, or
+      about 2.5 million characters. That's genuinely enormous, somewhere in the
+      region of five or six long novels.
+    </p>
+    <p>
+      Note the qualifier, because it is the whole lesson of
+      <a href="/concepts/tokens">Tokens</a> in one line: the same
+      one-million-token window on the previous generation of models is given as
+      roughly 750,000 words. Same window, same vendor, same page &mdash; different
+      tokeniser. A window's size in tokens is a fact about the product; its size
+      in words is a fact about the tokeniser, and it changes underneath you.
     </p>
     <p>
       Current windows sit between a couple of hundred thousand tokens and a
@@ -195,12 +203,18 @@
 
     <h2>Sources</h2>
     <p class="table-note">
-      The 555,000-word figure for a one-million-token window is Anthropic's own,
-      from its
+      The 555,000-word figure for a one-million-token window, and the 750,000-word
+      figure for the previous generation, are both Anthropic's own, from its
       <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
-      fetched 11 August 2026. The degradation of attention over long contexts is a
-      widely reproduced research finding, and a specific citation should be added
-      here before this page loses its provisional status.
+      where they appear as tooltips on each model's context window. Fetched
+      12 August 2026.
+    </p>
+    <p class="table-note">
+      <strong>A gap, stated rather than papered over:</strong> the degradation of
+      attention over long contexts is a widely reproduced research finding, and
+      this page cites no specific paper for it. It is described here as an
+      established pattern because it is one, but you should treat it as weaker
+      than the figures above, which you can check in one click.
     </p>
 
     <p class="next">

@@ -88,15 +88,32 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
 
 ## What not to do
 
-- **Do not deploy without asking Shawn**, even when the credentials are sitting right
-  there. This check runs on his machine, where `npx wrangler pages deploy public
-  --project-name plainlyai --branch main` would work unattended. Publishing a correction
-  to a live site is his call, and a scheduled job that pushes to the public web while
-  nobody is watching is not a thing this project wants. Prepare everything, commit it, and
-  say plainly that it is ready to deploy.
+- **Do not deploy, even though the credentials on this machine would let you.** This check
+  runs unattended on a schedule, where `npx wrangler pages deploy public --project-name
+  plainlyai --branch main` would work with nobody watching. Prepare everything, commit it,
+  and stop there.
+
+  This rule is prose, and prose is the weakest kind of rule — which this project of all
+  projects should admit. There is no technical lock behind it: a deny rule on the deploy
+  command would work, but it would also block the deploys Shawn does want, and nothing in
+  the settings can tell a scheduled run from a session with him sitting there. So the rule
+  is backed by an audit trail instead, which is the same move this site makes everywhere
+  else: if you cannot prevent a thing, make it visible after the fact.
+
+  **Two things make it visible.** First, the log entry you write on `changes.html` must
+  say, in the entry itself, whether the change is live or only prepared. Second,
+  `npx wrangler pages deployment list --project-name plainlyai` prints every deployment
+  with a timestamp and the commit it came from. Anyone, including Shawn a month later, can
+  line that list up against the dates in the log and see whether a check deployed itself.
+  A run that deploys and does not say so is caught by the second; a run that claims a
+  correction is live when it is not is caught by the first.
+
 - **Note the promise is only kept once it is live.** A verified change sitting in an
-  unpushed commit does not keep it. If Shawn is not around, say so in the report rather
-  than deploying to close the loop.
+  unpushed commit does not keep it, and neither does one pushed to GitHub — this is a
+  direct-upload Pages project, so a push does not deploy. If Shawn is not around, say so
+  in the report and say it in the log entry too, rather than deploying to close the loop.
+  "Corrected, not yet published" is an honest public state. Silently leaving readers on a
+  wrong figure while the fix sits on disk is not.
 - Do not add affiliate links, ads, a newsletter, or a comparison table. All are refused on
   the record, for reasons, in the site's planning notes.
 - Do not add hard figures to any page other than Model facts.

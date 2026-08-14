@@ -1,8 +1,14 @@
 # The monthly Model facts check
 
 This is the procedure for the re-verification that [plainlyai.org/changes](https://plainlyai.org/changes)
-promises publicly, with a date attached. It runs on the 11th of each month. A scheduled
-cloud agent follows this file; a human can follow it just as well.
+promises publicly, with a date attached. It runs on the 11th of each month, as a scheduled
+task on Shawn's own machine. A human can follow it just as well.
+
+It deliberately does **not** run in a cloud sandbox. That was tried on 14 August 2026 and
+the sandbox's egress proxy blocked `developers.openai.com`, `ai.google.dev` and
+`dev.meta.ai` outright, by WebFetch and by raw curl alike, while allowing Anthropic's
+docs. A check that can only reach one vendor of four cannot honestly be logged as this
+check having run.
 
 The promise on `/changes` reads, in effect: if the due date passes and nothing appears in
 the log, the site has broken its own promise and you should discount it accordingly. This
@@ -82,9 +88,15 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
 
 ## What not to do
 
-- **Do not deploy.** There are no Cloudflare credentials in the scheduled environment, and
-  publishing is Shawn's call. He deploys from his machine with
-  `npx wrangler pages deploy public --project-name plainlyai --branch main`.
+- **Do not deploy without asking Shawn**, even when the credentials are sitting right
+  there. This check runs on his machine, where `npx wrangler pages deploy public
+  --project-name plainlyai --branch main` would work unattended. Publishing a correction
+  to a live site is his call, and a scheduled job that pushes to the public web while
+  nobody is watching is not a thing this project wants. Prepare everything, commit it, and
+  say plainly that it is ready to deploy.
+- **Note the promise is only kept once it is live.** A verified change sitting in an
+  unpushed commit does not keep it. If Shawn is not around, say so in the report rather
+  than deploying to close the loop.
 - Do not add affiliate links, ads, a newsletter, or a comparison table. All are refused on
   the record, for reasons, in the site's planning notes.
 - Do not add hard figures to any page other than Model facts.

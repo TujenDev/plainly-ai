@@ -121,6 +121,22 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
 Em dashes are allowed on this project, unlike Shawn's other work. Match the surrounding
 prose, which is plain, specific, and unhurried.
 
+## Before you finish, run the structural check
+
+```
+python check.py
+```
+
+From the project root. It takes a second, exits non-zero on failure, and covers
+the things that break silently: links that stopped resolving, heading permalinks
+that broke, duplicated ids, pages that became reachable only from the nav, and
+nav drift across the 23 pages. It checks structure, never truth, so it is no
+substitute for anything above.
+
+Section permalinks matter here: **do not change an existing heading id.** They are
+generated once and then frozen, and `/changes` states publicly that a section's
+link will not change. Reword a heading if it helps; leave its id alone.
+
 ## Deliverable
 
 Leave the changes committed on a branch and open a pull request if the environment permits

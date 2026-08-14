@@ -54,8 +54,37 @@
     figures, so they age at the speed of the language rather than the market
   </p>
 
-  <ul class="resources">
+  <nav class="az-index" aria-label="Jump to a letter">
+    <a href="#letter-a">A</a>
+    <a href="#letter-b">B</a>
+    <a href="#letter-c">C</a>
+    <a href="#letter-d">D</a>
+    <a href="#letter-e">E</a>
+    <a href="#letter-f">F</a>
+    <a href="#letter-g">G</a>
+    <a href="#letter-h">H</a>
+    <a href="#letter-i">I</a>
+    <a href="#letter-j">J</a>
+    <span aria-hidden="true">K</span>
+    <a href="#letter-l">L</a>
+    <a href="#letter-m">M</a>
+    <span aria-hidden="true">N</span>
+    <a href="#letter-o">O</a>
+    <a href="#letter-p">P</a>
+    <a href="#letter-q">Q</a>
+    <a href="#letter-r">R</a>
+    <a href="#letter-s">S</a>
+    <a href="#letter-t">T</a>
+    <span aria-hidden="true">U</span>
+    <a href="#letter-v">V</a>
+    <span aria-hidden="true">W</span>
+    <span aria-hidden="true">X</span>
+    <span aria-hidden="true">Y</span>
+    <span aria-hidden="true">Z</span>
+  </nav>
 
+  <h2 class="az-letter" id="letter-a">A</h2>
+  <ul class="resources">
     <li id="agent">
       <span class="res-name">Agent</span>
       <p>
@@ -85,7 +114,10 @@
         around it.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-b">B</h2>
+  <ul class="resources">
     <li id="batch">
       <span class="res-name">Batch processing</span>
       <p>
@@ -105,7 +137,10 @@
         benchmark rather than your particular job.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-c">C</h2>
+  <ul class="resources">
     <li id="chain-of-thought">
       <span class="res-name">Chain of thought</span>
       <p>
@@ -126,6 +161,40 @@
       </p>
     </li>
 
+    <li id="compaction">
+      <span class="res-name">Compaction</span>
+      <p>
+        Summarising a long conversation so it fits back inside the context
+        window: the earlier turns are replaced by a shorter account of them and
+        work carries on. Cheaper than starting again, and lossy in a way that is
+        easy to miss, because what got dropped leaves no gap behind.
+        → <a href="/concepts/context-windows">Context windows</a>
+      </p>
+    </li>
+
+    <li id="context-engineering">
+      <span class="res-name">Context engineering</span>
+      <p>
+        Deciding what goes into the context window on each request, and in what
+        order: instructions, retrieved passages, tool results, and how much of
+        the conversation to keep. The broader successor to "prompt engineering",
+        which named only the part you type.
+        → <a href="/concepts/context-windows">Context windows</a>
+      </p>
+    </li>
+
+    <li id="context-rot">
+      <span class="res-name">Context rot</span>
+      <p>
+        The gradual decline of a long session as its window fills with earlier
+        turns, abandoned attempts and tool output. The useful material is still
+        in there, competing with everything else, and quality falls off without
+        anything visibly breaking. The usual fix is a fresh session, not a
+        better prompt.
+        → <a href="/concepts/context-windows">Context windows</a>
+      </p>
+    </li>
+
     <li id="context-window">
       <span class="res-name">Context window</span>
       <p>
@@ -135,7 +204,10 @@
         → <a href="/concepts/context-windows">Context windows</a>
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-d">D</h2>
+  <ul class="resources">
     <li id="distillation">
       <span class="res-name">Distillation</span>
       <p>
@@ -144,7 +216,10 @@
         cheap fast models come to exist.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-e">E</h2>
+  <ul class="resources">
     <li id="embedding">
       <span class="res-name">Embedding</span>
       <p>
@@ -155,6 +230,22 @@
       </p>
     </li>
 
+    <li id="evals">
+      <span class="res-name">Evals (evaluations)</span>
+      <p>
+        Tests that measure whether a model, or something built on one, actually
+        does the job: a fixed set of cases, run again after every change, scored
+        the same way each time. The difference between "it worked when I tried
+        it" and knowing it works. Public benchmarks are the visible kind; the
+        ones that decide whether your own system is any good are almost always
+        written by you.
+        → <a href="/what-ai-is-bad-at">What AI is actually bad at</a>
+      </p>
+    </li>
+  </ul>
+
+  <h2 class="az-letter" id="letter-f">F</h2>
+  <ul class="resources">
     <li id="fine-tuning">
       <span class="res-name">Fine-tuning</span>
       <p>
@@ -163,7 +254,10 @@
         facts. → <a href="/concepts/fine-tuning">Fine-tuning</a>
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-g">G</h2>
+  <ul class="resources">
     <li id="grounding">
       <span class="res-name">Grounding</span>
       <p>
@@ -182,7 +276,10 @@
         more dependable precisely because it is separate.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-h">H</h2>
+  <ul class="resources">
     <li id="hallucination">
       <span class="res-name">Hallucination</span>
       <p>
@@ -192,7 +289,10 @@
         → <a href="/concepts/hallucination">Hallucination</a>
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-i">I</h2>
+  <ul class="resources">
     <li id="inference">
       <span class="res-name">Inference</span>
       <p>
@@ -201,7 +301,10 @@
         happened once, long before you arrived.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-j">J</h2>
+  <ul class="resources">
     <li id="jailbreak">
       <span class="res-name">Jailbreak</span>
       <p>
@@ -210,7 +313,10 @@
         the model reads, and the user is the victim rather than the instigator.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-l">L</h2>
+  <ul class="resources">
     <li id="latency">
       <span class="res-name">Latency</span>
       <p>
@@ -230,7 +336,10 @@
         this.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-m">M</h2>
+  <ul class="resources">
     <li id="mcp">
       <span class="res-name">MCP (Model Context Protocol)</span>
       <p>
@@ -249,7 +358,10 @@
         generating them are different capabilities.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-o">O</h2>
+  <ul class="resources">
     <li id="open-weights">
       <span class="res-name">Open weights</span>
       <p>
@@ -259,7 +371,10 @@
         since you pay whoever runs it rather than the model's maker.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-p">P</h2>
+  <ul class="resources">
     <li id="parameters">
       <span class="res-name">Parameters (weights)</span>
       <p>
@@ -318,7 +433,10 @@
         world and act. → <a href="/concepts/tool-use">Tool use</a>
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-q">Q</h2>
+  <ul class="resources">
     <li id="quantisation">
       <span class="res-name">Quantisation</span>
       <p>
@@ -327,7 +445,10 @@
         running open-weight models yourself.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-r">R</h2>
+  <ul class="resources">
     <li id="rag">
       <span class="res-name">RAG (retrieval-augmented generation)</span>
       <p>
@@ -355,7 +476,10 @@
         → <a href="/concepts/thinking">Thinking and reasoning</a>
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-s">S</h2>
+  <ul class="resources">
     <li id="system-prompt">
       <span class="res-name">System prompt</span>
       <p>
@@ -364,7 +488,10 @@
         other text can argue with it.
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-t">T</h2>
+  <ul class="resources">
     <li id="temperature">
       <span class="res-name">Temperature (sampling)</span>
       <p>
@@ -412,7 +539,10 @@
         → <a href="/concepts/training-cutoff">Training cutoff</a>
       </p>
     </li>
+  </ul>
 
+  <h2 class="az-letter" id="letter-v">V</h2>
+  <ul class="resources">
     <li id="vector-database">
       <span class="res-name">Vector database</span>
       <p>
@@ -422,7 +552,6 @@
         → <a href="/concepts/rag">RAG and retrieval</a>
       </p>
     </li>
-
   </ul>
 
   <div class="prose">

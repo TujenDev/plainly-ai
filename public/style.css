@@ -378,6 +378,56 @@ td.num { font-variant-numeric: tabular-nums; }
   margin: 0 0 2rem;
 }
 
+/* ---------- Glossary A-Z ---------- */
+
+/* The 42 terms each carry an id so they can be linked directly. Without this
+   bar nothing on the page surfaced them, and there was no way through it but
+   scrolling. Letters with no terms are shown greyed rather than omitted, so
+   the row stays a stable shape, and hidden from screen readers because a
+   non-link letter is not something to announce. */
+.az-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 1.75rem 0 2.5rem;
+  padding: 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+
+.az-index a,
+.az-index span {
+  min-width: 2rem;
+  padding: 0.3rem 0.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.az-index a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.az-index a:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.az-index span { color: var(--ink-faint); }
+
+.az-letter {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.35rem;
+  margin: 2.5rem 0 0;
+  scroll-margin-top: 1.5rem;
+}
+
 /* ---------- Resource lists ---------- */
 
 .resources { list-style: none; padding: 0; }

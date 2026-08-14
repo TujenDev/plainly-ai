@@ -4,6 +4,7 @@
 # CONTENT-PLAN.md contains candid strategy and business assessment.
 CONTENT-PLAN.md
 REVIEW-*.md
+X-POSTS-DRAFT.md
 
 # Local wrangler dev state (created by `wrangler pages dev public`)
 .wrangler/

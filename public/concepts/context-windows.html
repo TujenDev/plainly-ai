@@ -49,7 +49,7 @@
   </p>
 
   <p class="stamp">
-    Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>11 August 2026</b> &nbsp;·&nbsp; Concept pages age slowly;
+    Published <b>11 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>14 August 2026</b> &nbsp;·&nbsp; Concept pages age slowly;
     the figures they reference live on <a href="/model-facts">Model facts</a>
   </p>
 
@@ -156,12 +156,33 @@
     <h3>2. Attention thins out as it stretches</h3>
     <p>
       Having something in the window is not the same as the model weighing it
-      properly. There is a well-documented tendency for material buried in the
-      middle of a very long context to get less effective attention than material
-      at the beginning or the end. Filling a huge window to the brim and assuming
-      everything in it carries equal force is a mistake. Relevance beats volume:
-      ten pages of the right document reliably outperforms three hundred pages
-      containing it.
+      properly. Two separate findings sit behind that, and they are worth keeping
+      apart, because one is about <em>where</em> material sits and the other is
+      about <em>how much</em> of it there is.
+    </p>
+    <p>
+      <strong>Position matters.</strong> The paper that named this measured
+      accuracy as the same relevant passage was moved through the context, and
+      found performance highest when it sat at the beginning or the end and
+      markedly worse when it sat in the middle. The shape is a U, which is not
+      what anyone expects from a system advertised as reading everything you give
+      it.
+    </p>
+    <p>
+      <strong>Length matters too, and it survives better measurement.</strong>
+      That first result is from 2023 and the models it tested are long retired, so
+      on its own it would be exactly the kind of finding this site warns you about.
+      What keeps it alive is that later benchmarks, built specifically to remove
+      the shortcut of matching words between the question and the answer, still
+      find accuracy falling substantially as the context grows, on models sold on
+      the strength of their enormous windows. Making the retrieval require a small
+      inferential step rather than a keyword match is enough to expose it.
+    </p>
+    <p>
+      The practical reading is unchanged and now better supported. Filling a huge
+      window to the brim and assuming everything in it carries equal force is a
+      mistake. Relevance beats volume: ten pages of the right document reliably
+      outperforms three hundred pages containing it.
     </p>
 
     <h3>3. Long contexts are slower</h3>
@@ -211,15 +232,34 @@
       The 555,000-word figure for a one-million-token window, and the 750,000-word
       figure for the previous generation, are both Anthropic's own, from its
       <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
-      where they appear as tooltips on each model's context window. Fetched
-      12 August 2026.
+      where they appear as tooltips on each model's context window. Re-read
+      14 August 2026.
     </p>
     <p class="table-note">
-      <strong>A gap, stated rather than papered over:</strong> the degradation of
-      attention over long contexts is a widely reproduced research finding, and
-      this page cites no specific paper for it. It is described here as an
-      established pattern because it is one, but you should treat it as weaker
-      than the figures above, which you can check in one click.
+      The position effect comes from
+      <a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language
+      Models Use Long Contexts</a> (Liu, Lin, Hewitt, Paranjape, Bevilacqua,
+      Petroni and Liang, first posted July 2023, published in <i>Transactions of
+      the Association for Computational Linguistics</i>), which tested
+      multi-document question answering and key-value retrieval and reports that
+      performance "is often highest when relevant information occurs at the
+      beginning or end of the input context, and significantly degrades when
+      models must access relevant information in the middle of long contexts,
+      even for explicitly long-context models."
+    </p>
+    <p class="table-note">
+      That the problem persists on newer models comes from
+      <a href="https://arxiv.org/abs/2502.05167">NoLiMa: Long-Context Evaluation
+      Beyond Literal Matching</a> (Modarressi, Deilamsalehy, Dernoncourt, Bui,
+      Rossi, Yoon and Schütze, February 2025, ICML 2025), which rebuilds the
+      standard needle-in-a-haystack test so that the question and the buried
+      answer share almost no wording, forcing the model to infer the link rather
+      than pattern-match it. Under that condition performance falls sharply as
+      the context lengthens, including on models with very large advertised
+      windows. Its per-model figures are deliberately not reproduced here: they
+      are measurements of specific 2025 models, and this page keeps
+      <a href="/model-facts">figures on one page</a> for exactly that reason.
+      Both papers read 14 August 2026.
     </p>
 
     <p class="next">

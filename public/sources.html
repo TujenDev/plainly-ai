@@ -50,7 +50,7 @@
   </p>
 
   <p class="stamp">
-    Published <b>12 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>12 August 2026</b>
+    Published <b>12 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>14 August 2026</b>
     &nbsp;&middot;&nbsp; Every URL below was requested on that date and returned a
     working page
   </p>
@@ -75,9 +75,10 @@
       It also makes the maintenance honest. The re-checking commitment on
       <a href="/changes">the changes page</a> is easy to state and hard to verify
       from outside. What it actually amounts to is re-reading the documents below
-      and seeing which pages move. There are sixteen of them, eleven of which
-      carry figures. That is a real afternoon, not an impossible one, and now you
-      can hold the site to it rather than take its word.
+      and seeing which pages move. There are twenty of them: eleven vendor
+      documents carrying figures, five explaining a mechanism, and four research
+      papers. That is a real afternoon, not an impossible one, and now you can
+      hold the site to it rather than take its word.
     </p>
   </div>
 
@@ -222,22 +223,54 @@
     </table>
   </div>
 
-  <div class="prose">
-    <div class="gap">
-      <p class="note-title">One of these is aging, and it is worth saying so</p>
-      <p>
-        The extended thinking document describes the mode that is being
-        superseded. On Anthropic's own current model table, extended thinking
-        reads "No" for its three newest models and "Yes" only for the oldest one
-        listed, with adaptive thinking the other way round.
-        <a href="/concepts/thinking">Thinking and reasoning</a> already describes
-        the newer pattern correctly in its prose, so nothing on that page is
-        wrong. But it is cited to the document for the older mode, and that is a
-        citation that should move rather than a fact that should change. It has
-        not moved yet, because moving it means reading the replacement properly
-        first.
-      </p>
-    </div>
+  <h2>Research papers</h2>
+
+  <p class="prose">
+    Peer-reviewed and preprint work, cited where this site describes a finding
+    that came out of the literature rather than out of a vendor's documentation.
+    These are the slowest-moving sources here and the only ones nobody is selling
+    anything with. Where a paper reports per-model measurements, those numbers
+    stay in the paper: this site's pages describe the finding and leave the
+    figures where they can be checked in context.
+  </p>
+
+  <div class="table-scroll" tabindex="0" role="region" aria-label="Research paper sources, with dependent pages and dates. Scrolls horizontally">
+    <table>
+      <thead>
+        <tr>
+          <th>Paper</th>
+          <th>Cited for</th>
+          <th>Pages that depend on it</th>
+          <th>Last read</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language Models Use Long Contexts</a> (Liu et al., 2023; TACL)</td>
+          <td>Accuracy being highest at the start and end of a context and worst in the middle</td>
+          <td><a href="/concepts/context-windows">Context windows</a></td>
+          <td>14 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2502.05167">NoLiMa: Long-Context Evaluation Beyond Literal Matching</a> (Modarressi et al., 2025; ICML)</td>
+          <td>That long-context degradation persists on current models once keyword-matching shortcuts are removed</td>
+          <td><a href="/concepts/context-windows">Context windows</a></td>
+          <td>14 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must Hallucinate</a> (Kalai and Vempala, 2023; STOC 2024)</td>
+          <td>The statistical lower bound on invention, and its link to facts appearing once in training</td>
+          <td><a href="/concepts/hallucination">Hallucination</a></td>
+          <td>14 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://arxiv.org/abs/2509.04664">Why Language Models Hallucinate</a> (Kalai, Nachum, Vempala and Zhang, 2025)</td>
+          <td>Invention as binary-classification error, and benchmark scoring rewarding a guess over an admission of uncertainty</td>
+          <td><a href="/concepts/hallucination">Hallucination</a></td>
+          <td>14 Aug 2026</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <h2>Learning resources</h2>
@@ -298,17 +331,15 @@
     </p>
 
     <div class="note">
-      <p class="note-title">What isn't here</p>
+      <p class="note-title">The gap this page used to admit to</p>
       <p>
-        Research papers. Two pages on this site describe findings that are
-        established in the literature without citing a specific paper, and both
-        say so on the page rather than hiding it:
-        <a href="/concepts/context-windows">Context windows</a> on attention
-        degrading over long contexts, and
-        <a href="/concepts/hallucination">Hallucination</a> on the mechanism
-        itself. Those are real gaps. Filling them properly means reading the
-        papers rather than citing whatever comes up first, so they stay flagged
-        until that happens.
+        Until 14 August 2026 there were no research papers here at all, and two
+        pages said on themselves that they described findings from the literature
+        without citing any of it. That is now filled: four papers, read rather
+        than harvested from a search result, and both pages rewritten where the
+        reading changed what could honestly be claimed. It took one afternoon,
+        which is worth knowing, because the reason this genre cites nothing is
+        never that it is hard.
       </p>
     </div>
 

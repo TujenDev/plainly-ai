@@ -13,7 +13,12 @@
 <meta property="og:url" content="https://plainlyai.org/is-this-out-of-date">
 <meta property="og:title" content="Is what you're reading about AI out of date? — Plainly">
 <meta property="og:description" content="How to tell whether an article, tutorial or answer about AI has gone stale: the tells, a sixty-second check against primary sources, and which claims rot fastest.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://plainlyai.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plainly. AI, explained by level. Nothing to sell you. Beside it, a rubber stamp reading Last verified with the date field left blank.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://plainlyai.org/og-image.png">
 <meta name="twitter:title" content="Is what you're reading about AI out of date? — Plainly">
 <meta name="twitter:description" content="How to tell whether an article, tutorial or answer about AI has gone stale: the tells, a sixty-second check against primary sources, and which claims rot fastest.">
 </head>
@@ -201,10 +206,12 @@
     <p>
       A model without a search tool has no way to know what changed after its
       training data ended. Worse, it cannot reliably tell you where that boundary
-      falls: for the model to know its own cutoff, that date would have had to be
-      documented before the model was trained, which it obviously wasn't. Asked
-      anyway, it will infer and answer with the same steady confidence it applies
-      to everything else.
+      falls: for the model to know its own cutoff from training, that date would
+      have had to be documented before the model was trained, and its own release
+      was still in the future then. A vendor can hand it the date afterwards, and
+      some do, but that is a relayed answer rather than something the model knows.
+      Without one, it will infer and answer with the same steady confidence it
+      applies to everything else.
       → <a href="/concepts/hallucination">Hallucination</a>
     </p>
     <p>

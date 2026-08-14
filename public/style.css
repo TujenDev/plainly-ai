@@ -452,11 +452,6 @@ td.num { font-variant-numeric: tabular-nums; }
 
 .concept-list p { margin: 0; font-size: 0.94rem; }
 
-.soon {
-  border: 1px dashed var(--rule) !important;
-  opacity: 0.62;
-}
-
 /* ---------- Footer ---------- */
 
 .site-foot {

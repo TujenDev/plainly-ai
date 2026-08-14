@@ -13,7 +13,12 @@
 <meta property="og:url" content="https://plainlyai.org/what-ai-is-bad-at">
 <meta property="og:title" content="What AI is actually bad at — Plainly">
 <meta property="og:description" content="The weaknesses that come from how these systems are built, not from this year's model being immature: no clock, no self-knowledge, poor calibration, and reliability that decays over long tasks.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://plainlyai.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plainly. AI, explained by level. Nothing to sell you. Beside it, a rubber stamp reading Last verified with the date field left blank.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://plainlyai.org/og-image.png">
 <meta name="twitter:title" content="What AI is actually bad at — Plainly">
 <meta name="twitter:description" content="The weaknesses that come from how these systems are built, not from this year's model being immature: no clock, no self-knowledge, poor calibration, and reliability that decays over long tasks.">
 </head>
@@ -96,10 +101,16 @@
 
     <h2>It is unreliable about itself</h2>
     <p>
-      Self-report is the weakest category of all, for a reason that is obvious
-      once stated: everything a model knows came from training data, and a model
-      cannot have been trained on documents describing itself, because it did not
-      exist when the data was collected.
+      Self-report is the weakest category of all, and the reason is structural.
+      The bulk of what a model knows came from material collected before it
+      existed, so most of what it can say about itself is assembled from
+      descriptions of earlier systems. Some information about a model does reach
+      it afterwards, through later stages of training and through the standing
+      instructions a product wraps around it, which is why an assistant reliably
+      knows its own name and version. That is a patch over a gap rather than a
+      fix for it, and it does not make self-report a form of observation: nothing
+      gives a model access to its own training run, or to how it actually
+      behaves, in the way it has access to text.
     </p>
     <ul>
       <li><strong>Its own cutoff date</strong> is inferred rather than known, and the inference skews early.</li>

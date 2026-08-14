@@ -13,7 +13,12 @@
 <meta property="og:url" content="https://plainlyai.org/concepts/training-cutoff">
 <meta property="og:title" content="Training cutoff — Plainly">
 <meta property="og:description" content="The date an AI model&#x27;s knowledge stops, why there are actually two such dates, and why models are unreliable about reporting their own.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://plainlyai.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plainly. AI, explained by level. Nothing to sell you. Beside it, a rubber stamp reading Last verified with the date field left blank.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://plainlyai.org/og-image.png">
 <meta name="twitter:title" content="Training cutoff — Plainly">
 <meta name="twitter:description" content="The date an AI model&#x27;s knowledge stops, why there are actually two such dates, and why models are unreliable about reporting their own.">
 </head>
@@ -106,10 +111,14 @@
       This one surprises people, and it's the reason you can't simply ask.
     </p>
     <p>
-      Everything a model knows, it knows from training data. So for a model to know
-      its own cutoff date, that date would have to have been well documented in text
-      that existed <em>before</em> the model was trained. Which it obviously wasn't.
-      At training time, the model's own release was still in the future.
+      Almost everything a model knows, it knows from training data. So for a model
+      to know its own cutoff date the way it knows a historical one, that date would
+      have to have been well covered in text that existed <em>before</em> the model
+      was trained, and at training time its own release was still in the future. A
+      vendor can tell a model its cutoff afterwards, by fine-tuning it in or by
+      putting it in the instructions a product sends with every message, and some
+      do. But that is the vendor's answer being relayed, not the model's knowledge
+      of itself, and it is only as current as whoever wrote it.
     </p>
     <p>
       So when you ask a model when its knowledge ends, it is not consulting a

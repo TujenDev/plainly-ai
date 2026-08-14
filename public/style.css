@@ -214,6 +214,42 @@ li { margin-bottom: 0.5rem; }
   margin: 0 0 0.6rem;
 }
 
+/* ---------- Section permalinks ---------- */
+
+/* Every section heading carries one, so a reader can link to the paragraph
+   rather than the page. No JavaScript and no copy button: the site runs
+   script-src 'none' and that is worth more than saving one keystroke.
+   Clicking puts the anchor in the address bar, which is the copyable thing.
+
+   Note for future passes: these ids are generated from the heading text once
+   and then never regenerated. Reword a heading freely, but do not change its
+   id afterwards, because by then it may be the target of a link from
+   somewhere this site cannot see. */
+
+.anchor {
+  margin-left: 0.4rem;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 0.78em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+h2:hover > .anchor,
+h3:hover > .anchor,
+.anchor:hover,
+.anchor:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+}
+
+/* Hover does not exist on touch, so show them faintly rather than never. */
+@media (hover: none) {
+  .anchor { opacity: 0.45; }
+}
+
 /* ---------- Verification stamp ---------- */
 /* The load-bearing element of this whole site. Every page carries one. */
 

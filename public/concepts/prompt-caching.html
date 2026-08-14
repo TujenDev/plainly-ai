@@ -57,7 +57,7 @@
 
   <div class="prose">
 
-    <h2>The problem it solves</h2>
+    <h2 id="the-problem-it-solves">The problem it solves<a class="anchor" href="#the-problem-it-solves" aria-label="Permalink to The problem it solves">#</a></h2>
     <p>
       A model has no memory between calls, so everything it needs must be sent
       every time. In any real application that means the same large preamble goes
@@ -79,7 +79,7 @@
       anything else.
     </p>
 
-    <h2>How it works, and the one rule that matters</h2>
+    <h2 id="how-it-works-and-the-one-rule-that-matters">How it works, and the one rule that matters<a class="anchor" href="#how-it-works-and-the-one-rule-that-matters" aria-label="Permalink to How it works, and the one rule that matters">#</a></h2>
     <p>
       Caching is <strong>prefix-based</strong>. It matches from the very start of
       your prompt forward, and Anthropic's documentation is explicit that a hit
@@ -112,7 +112,7 @@
       </p>
     </div>
 
-    <h2>Where the wins actually are</h2>
+    <h2 id="where-the-wins-actually-are">Where the wins actually are<a class="anchor" href="#where-the-wins-actually-are" aria-label="Permalink to Where the wins actually are">#</a></h2>
     <p>
       The pattern to look for is a large unchanging preamble followed by a small
       changing part, repeated many times.
@@ -129,7 +129,7 @@
       prefix to reuse, and no amount of configuration invents one.
     </p>
 
-    <h2>What it is not</h2>
+    <h2 id="what-it-is-not">What it is not<a class="anchor" href="#what-it-is-not" aria-label="Permalink to What it is not">#</a></h2>
     <p>
       Three misunderstandings worth heading off, because all three lead somewhere
       expensive.
@@ -154,7 +154,7 @@
       own storage, not in a cache you do not control.
     </p>
 
-    <h2>How to tell whether it's working</h2>
+    <h2 id="how-to-tell-whether-it-s-working">How to tell whether it's working<a class="anchor" href="#how-to-tell-whether-it-s-working" aria-label="Permalink to How to tell whether it's working">#</a></h2>
     <p>
       Do not assume, and do not infer it from the bill at the end of the month.
       Providers report per-call whether tokens were written to the cache or read
@@ -175,7 +175,7 @@
       </p>
     </div>
 
-    <h2>Sources</h2>
+    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
     <p class="table-note">
       The prefix-matching behaviour, the requirement for "100% identical prompt
       segments", the instruction to place static content at the beginning, and

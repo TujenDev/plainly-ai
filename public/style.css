@@ -242,6 +242,10 @@ li { margin-bottom: 0.5rem; }
 .track {
   display: flex;
   flex-direction: column;
+  /* The grid stretches each li, but the card inside is only as tall as its own
+     text, so the shortest track got a shorter box. Same fix as .concept-list a
+     below: fill the li, and the track-you footers line up as a bonus. */
+  height: 100%;
   border: 1px solid var(--rule);
   border-radius: 6px;
   padding: 1.35rem;

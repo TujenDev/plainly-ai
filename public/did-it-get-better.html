@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to tell if it actually got better — Plainly</title>
+<meta name="description" content="Changing a prompt and reading one output tells you almost nothing. What an eval actually is, why more cases beats better grading, and the version that works if you're not building anything.">
+<link rel="stylesheet" href="/style.css">
+<link rel="canonical" href="https://plainlyai.org/did-it-get-better">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Plainly">
+<meta property="og:url" content="https://plainlyai.org/did-it-get-better">
+<meta property="og:title" content="How to tell if it actually got better — Plainly">
+<meta property="og:description" content="Changing a prompt and reading one output tells you almost nothing. What an eval actually is, why more cases beats better grading, and the version that works if you're not building anything.">
+<meta property="og:image" content="https://plainlyai.org/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Plainly. AI, explained by level. Nothing to sell you. Beside it, a rubber stamp reading Last verified with the date field left blank.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://plainlyai.org/og-image.png">
+<meta name="twitter:title" content="How to tell if it actually got better — Plainly">
+<meta name="twitter:description" content="Changing a prompt and reading one output tells you almost nothing. What an eval actually is, why more cases beats better grading, and the version that works if you're not building anything.">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="/">Plain<span>ly</span></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/start-here">Start here</a>
+      <a href="/concepts/">Concepts</a>
+      <a href="/model-facts">Model facts</a>
+      <a href="/changes">Changes</a>
+      <a href="/about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+
+  <p class="kicker">Guide &middot; Measuring a change</p>
+  <h1>How to tell if it actually got better</h1>
+  <p class="standfirst">
+    You reword a prompt, run it once, read what comes back, and it seems better.
+    That is not a result. The fix has a name &mdash; evals &mdash; and the version
+    worth having is smaller and duller than the word makes it sound.
+  </p>
+
+  <p class="stamp">
+    Published <b>25 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>25 August 2026</b> &nbsp;·&nbsp; One outside
+    source, read that day. No figures on this page
+  </p>
+
+  <div class="prose">
+
+    <h2 id="why-it-seemed-better-isn-t-a-result">Why "it seemed better" isn't a result<a class="anchor" href="#why-it-seemed-better-isn-t-a-result" aria-label="Permalink to Why it seemed better isn't a result">#</a></h2>
+    <p>
+      There is a page here on <a href="/getting-better-results">getting better
+      results</a>, and it is a list of things to change. This is the page about
+      how you would know that changing them worked, which is a separate job and
+      the one almost nobody does.
+    </p>
+    <p>
+      The loop most people run: something comes back badly, you rewrite the
+      prompt, you run it again, the new answer reads better, you keep the change.
+      Three things are wrong with that, and they compound.
+    </p>
+    <p>
+      <strong>One run is not a sample.</strong> Ask the same question twice and
+      you get two different answers, which is exactly the property that makes
+      <a href="/check-an-answer#ask-it-twice-in-a-fresh-session">asking twice</a>
+      a useful check on a claim. Here that same variation is what ruins your
+      evidence. The second answer might be better because the prompt is better,
+      or because this run happened to go well.
+    </p>
+    <p>
+      <strong>You chose the case, and you chose it badly.</strong> The input you
+      re-ran is the one that just failed, which is the least representative input
+      you own. A change that fixes it can quietly damage the ordinary cases you
+      did not re-run, and nothing will tell you: a prompt change is not local, and
+      an instruction added to stop one annoying behaviour applies to every output,
+      including all the ones that were already fine.
+    </p>
+    <p>
+      <strong>You are grading with the brain that wrote the change.</strong>
+      Sixty seconds after deciding a rewrite should help, you read the output
+      looking for evidence that it did, and fluent text is very accommodating.
+      The register does not move with the quality.
+      &rarr; <a href="/check-an-answer#confidence-tells-you-nothing-here">Confidence tells you nothing</a>
+    </p>
+
+    <h2 id="write-down-what-good-looks-like-first">Write down what good looks like first<a class="anchor" href="#write-down-what-good-looks-like-first" aria-label="Permalink to Write down what good looks like first">#</a></h2>
+    <p>
+      Before you run anything, write the standard down. Anthropic's guidance on
+      building evaluations puts this first and is blunt about the difference
+      between a criterion and a wish: a target has to be specific enough to name
+      the behaviour and measurable enough that two people scoring the same output
+      reach the same verdict. Wanting the answers to be good is not a standard.
+      Wanting every answer to name the source document it came from is.
+    </p>
+    <p>
+      Write it before you look at output, not after. A standard written afterwards
+      describes the output you happen to have, and will be met by definition.
+    </p>
+    <p>
+      Most real standards have several dimensions at once &mdash; accuracy, tone,
+      length, how it handles an input it cannot answer, what it costs, how long it
+      takes &mdash; and the useful part of writing them down is being forced to say
+      which ones you would trade. A change that makes answers more accurate and
+      twice as long is not obviously an improvement, and if length was never
+      written down as something you cared about, you will find out that it was
+      from somebody else.
+    </p>
+
+    <h2 id="cases-you-didn-t-choose-to-flatter-it">Cases you didn't choose to flatter it<a class="anchor" href="#cases-you-didn-t-choose-to-flatter-it" aria-label="Permalink to Cases you didn't choose to flatter it">#</a></h2>
+    <p>
+      An eval is a fixed set of inputs, run again after every change, scored the
+      same way each time. The fixed part is what makes two runs comparable, so the
+      set is the thing to get right.
+    </p>
+    <p>
+      <strong>Take them from work that already happened.</strong> Invented test
+      cases come out of the same head that wrote the prompt, and they share its
+      assumptions about what the input will look like. Real inputs are messier in
+      the specific ways that break things.
+    </p>
+    <p>
+      <strong>Include the awkward ones on purpose.</strong> The empty input. The
+      one that is far too long. The one that is genuinely ambiguous, where two
+      competent people would disagree about the right answer. The one where
+      somebody is trying it on. The guidance above lists these as the cases to
+      remember rather than the cases to avoid, and they are where the difference
+      between two prompts actually shows up.
+    </p>
+    <p>
+      <strong>Hold some back.</strong> If you adjust the prompt against every case
+      you have, what you learn at the end is how the prompt performs on those
+      cases, which is not the question you asked. Keep a portion sealed and score
+      against it only when you think you are done. That is the oldest idea in this
+      corner of the field &mdash; a held-out test set &mdash; and it is routinely
+      skipped by people who would never skip it anywhere else.
+    </p>
+
+    <h2 id="more-cases-beats-better-grading">More cases beats better grading<a class="anchor" href="#more-cases-beats-better-grading" aria-label="Permalink to More cases beats better grading">#</a></h2>
+    <p>
+      This is the piece of advice most worth carrying away, because it is the one
+      that runs against instinct. Anthropic's design principles for evals say to
+      "prioritize volume over quality": a larger set of cases with rough automatic
+      scoring beats a small set graded carefully by hand.
+    </p>
+    <p>
+      The reason is that careful grading is what caps the number of cases, and the
+      number of cases is what decides whether a difference you observed is real.
+      A dozen hand-scored cases produce a precise measurement of something too
+      small to see past luck. Scoring that is somewhat crude but costs nothing to
+      repeat lets the set be big enough to have an opinion.
+    </p>
+    <p>
+      There is a second reason, about people rather than statistics. A check that
+      requires judgement gets run once, when you are enthusiastic. A check that
+      runs itself gets run every time, including the time you were sure the change
+      was too small to matter. Running it every time is the entire point.
+    </p>
+
+    <h2 id="grade-it-the-cheapest-way-that-works">Grade it the cheapest way that works<a class="anchor" href="#grade-it-the-cheapest-way-that-works" aria-label="Permalink to Grade it the cheapest way that works">#</a></h2>
+    <p>
+      The same guidance ranks the three ways of scoring, and the ranking is by
+      speed and reliability rather than by sophistication. Code first, because it
+      is fastest and gives the same verdict every time. People second, and it says
+      to avoid grading by hand where you can &mdash; not because people score
+      badly, but because they are slow and expensive, which in practice means the
+      grading stops happening. A model third, with a condition attached that the
+      next section is about.
+    </p>
+    <p>
+      If you are not writing code, the first tier still applies, and it is worth
+      translating. A code-based check is any check with exactly one right answer
+      that anybody would score identically. Does the answer contain the client's
+      name. Is it under two hundred words. Did it come back as valid JSON. Does
+      every link in it resolve. Did it refuse the thing it was supposed to refuse.
+      These feel too crude to be worth writing down, and between them they catch
+      most of the ways a prompt change quietly makes things worse.
+    </p>
+    <p>
+      Spend the judgement on what genuinely cannot be reduced to a rule, which is
+      usually much less of the standard than it first appears.
+    </p>
+
+    <h2 id="a-model-grading-itself-is-an-instrument">A model grading itself is an instrument you haven't calibrated<a class="anchor" href="#a-model-grading-itself-is-an-instrument" aria-label="Permalink to A model grading itself is an instrument you haven't calibrated">#</a></h2>
+    <p>
+      Having a model score the output is fast, scales, and handles the judgement
+      calls a rule cannot. The guidance recommends it, and attaches a condition
+      that is easy to read past: establish that the grading is reliable before you
+      scale it up. That condition is not a footnote, it is the whole technique.
+    </p>
+    <p>
+      A grader is a measuring instrument, and you calibrate an instrument against
+      a known standard before you trust what it reads. So score a batch by hand
+      yourself, have the model score the same batch, and look at where the two
+      disagree. If they disagree often, the number you are about to track for the
+      next month is a measurement of the grader.
+    </p>
+    <p>
+      Three things the guidance is specific about, all of which make the grader
+      more repeatable: give it a detailed rubric, specific enough that a stated
+      rule decides the verdict rather than an impression; make it emit something
+      constrained, a verdict or a point on a fixed scale, because prose cannot be
+      tallied and comparing two piles of prose is the problem you were escaping;
+      and let it reason first and then discard the reasoning, which improves the
+      score without inviting you to read it as an explanation.
+      &rarr; <a href="/concepts/thinking">Thinking and reasoning</a>
+    </p>
+
+    <div class="note">
+      <p class="note-title">The blind spot a grader inherits</p>
+      <p>
+        A model grading a model agrees with it about anything they are both wrong
+        about, and the agreement looks like a passing score. It can catch an
+        answer that contradicts itself, ignores the instructions, or claims
+        something the supplied documents do not support. It cannot catch an answer
+        that is coherent, well-supported by the material it was handed, and false
+        about the world, because nothing in that loop is checking the world.
+        &rarr; <a href="/check-an-answer#its-own-check-is-not-your-check">Its own check is not your check</a>
+      </p>
+    </div>
+
+    <h2 id="if-you-re-not-building-anything">If you're not building anything<a class="anchor" href="#if-you-re-not-building-anything" aria-label="Permalink to If you're not building anything">#</a></h2>
+    <p>
+      Everything above comes from documentation written for people building
+      software on top of a model, and it is worth saying so rather than borrowing
+      the authority quietly. The tooling in that document does not transfer to
+      someone using an assistant at work. The discipline does, and it fits in a
+      spreadsheet.
+    </p>
+    <p>
+      The minimum honest version: one document, your prompt at the top, ten real
+      inputs underneath, and a column for the output each one produced. Paste each
+      input into a fresh session and keep what comes back. Change the prompt.
+      Do it again, into the second column. Then read the two columns against each
+      other, rather than reading the new one against your memory of the old one.
+    </p>
+    <p>
+      The fresh session matters for the same reason it does when you are checking
+      a claim: a conversation that has already seen the earlier answer is not an
+      independent run of anything.
+      &rarr; <a href="/concepts/context-windows">Context windows</a>
+    </p>
+    <p>
+      That is an afternoon at most, and it is inelegant, and it answers the
+      question. An impression does not.
+    </p>
+
+    <h2 id="when-it-isn-t-worth-it">When it isn't worth it<a class="anchor" href="#when-it-isn-t-worth-it" aria-label="Permalink to When it isn't worth it">#</a></h2>
+    <p>
+      The threshold is repetition, not importance. If you are going to run a
+      prompt three times and then never again, read the output, judge it, and get
+      on with your day: building a test set costs more than the errors it would
+      catch, which is the same trade as
+      <a href="/check-an-answer#where-to-stop">knowing where to stop checking</a>.
+    </p>
+    <p>
+      If the prompt runs every day, sits inside something other people use, or
+      produces output that reaches somebody before you see it, you already need
+      this. The only open question is whether you find the regression in your own
+      cases or in theirs.
+    </p>
+    <p>
+      Between those, there is a cheap middle that is worth more than its
+      reputation: keep five real inputs in a file and re-run them whenever you
+      change something. That is not evals in any serious sense. It is also the
+      difference between noticing a change broke something and not noticing.
+    </p>
+    <p>
+      One last argument for owning a set of cases, and it is the reason this page
+      exists on this site rather than a different one. A vendor's claim that a new
+      model is better, a colleague's claim that a new prompt is better, and this
+      site's claim about anything are all the same kind of claim: unverifiable
+      until you have something specific to run it against. Your own cases are how
+      you stop taking any of it on trust.
+    </p>
+
+    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+    <p>
+      One outside document, read on 25 August 2026 and listed on
+      <a href="/sources">Sources</a> with the pages that depend on it:
+      Anthropic's <a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests">Define
+      success criteria and build evaluations</a>. It is cited here for the shape
+      of a success criterion, the three eval design principles including the
+      volume-over-quality one quoted above, the ordering of code, human and model
+      grading, and the tips for grading with a model.
+    </p>
+    <p>
+      What that document contains and this page deliberately does not: worked code,
+      named metrics from machine learning, and example targets expressed as
+      numbers. Those belong to the context they were written in, where they can be
+      read with their assumptions attached. Nothing on this page is a figure, a
+      model name, or a benchmark score, so there is nothing here to go stale in
+      the way <a href="/model-facts">Model facts</a> does &mdash; only the argument,
+      which is checkable by trying it.
+    </p>
+
+    <p class="next">
+      Related &rarr; <a href="/getting-better-results">Getting better results</a> &middot;
+      <a href="/check-an-answer">How to check an AI's answer</a> &middot;
+      <a href="/glossary#evals">Evals, in a sentence</a> &middot;
+      <a href="/guides">All guides</a>
+    </p>
+
+  </div>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>
+      <strong>Plainly.</strong> Independent, no sponsors, no affiliate links.
+      If something here is out of date or wrong, that's a bug, and it's worth reporting.
+    </p>
+    <p>
+      <a href="/">Home</a> &middot;
+      <a href="/start-here">Start here</a> &middot;
+      <a href="/concepts/">Concepts</a> &middot;
+      <a href="/about">About</a> &middot;
+      <a href="https://github.com/TujenDev/plainly-ai/issues">Report a problem</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

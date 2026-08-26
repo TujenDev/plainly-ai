@@ -51,6 +51,7 @@ public/                 the deployable site — nothing outside this ships
 README.md               this file
 check.py                the structural check, run after any page changes
 feed.py                 regenerates public/feed.xml from the log
+prices.py               diffs Model facts against the seven vendor pages, daily
 ```
 
 Static HTML and one stylesheet. No framework and no JavaScript: it loads fast,

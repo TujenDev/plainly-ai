@@ -102,7 +102,10 @@
         <strong>Model facts, monthly. Next due 11 September 2026.</strong>
         Prices, model IDs and limits, checked against each vendor's own
         documentation. The fastest-rotting page on the site by a wide margin, and
-        the only thing here checked on a clock.
+        the only thing here checked on a clock. Since 26 August a script also
+        diffs every figure on that page against all seven vendor pages daily, so
+        a change that used to sit undetected for up to a month now surfaces in a
+        day. It only reports; nothing on this site is updated automatically.
       </li>
       <li>
         <strong>The concept pages and the guides, quarterly. Next due
@@ -136,6 +139,47 @@
     </ul>
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+    <h3 id="26-august-2026-a-daily-watcher-on-the">26 August 2026 — a daily watcher on the price table<a class="anchor" href="#26-august-2026-a-daily-watcher-on-the" aria-label="Permalink to 26 August 2026 — a daily watcher on the price table">#</a></h3>
+    <p>
+      The check logged below found a price that had moved, and the more useful
+      finding was how long it had been wrong: up to twelve days, because the
+      table is checked once a month. Monthly checking means a page about money can
+      be wrong for a month, which is a poor answer from a site whose whole claim
+      is that it is maintained. There is now a script that fetches all seven
+      vendor pages and diffs every figure against what the table says. Run daily,
+      the window becomes a day.
+    </p>
+    <p>
+      It reports and never edits. That is a deliberate limit rather than a missing
+      feature: deciding what to do about a change is judgement, and this site's
+      own procedure has said since 14 August that a new model on a vendor page is
+      not automatically a new row. A script that quietly rewrote the table would
+      also be a script that could quietly rewrite it wrongly, at three in the
+      morning, with nobody reading.
+    </p>
+    <p>
+      The rule it is actually built around is the second one: it fails loudly and
+      never quietly. If a figure cannot be found because a vendor restructured a
+      page, or a URL moved, or the fetch failed, it says so and exits with an
+      error. It must never report "unchanged" when what happened is that it could
+      not look. A watcher that goes blind and keeps saying everything is fine is a
+      false freshness signal, which is the exact thing this site tells readers to
+      distrust. Both behaviours were tested by breaking them on purpose: a figure
+      was altered to confirm it is caught, and a source URL was pointed at nothing
+      to confirm the run fails rather than passes.
+    </p>
+    <p>
+      What it cannot do is worth stating publicly, because otherwise this entry
+      would be claiming more than it should. It compares figures the table already
+      carries. It cannot notice a model that ought to be added, a pricing tier
+      that did not exist last month, a cell that should stop reading "not
+      published", or a caveat still present in the same words that has stopped
+      meaning what it did. All of those have happened here at least once. The
+      monthly read by a person stays exactly as it was, still due 11 September. A
+      clean run from the watcher means nothing moved underneath the table, not
+      that the table is right.
+    </p>
 
     <h3 id="26-august-2026-the-monthly-check-run">26 August 2026 — the monthly check, run early, and OpenAI has cut a price<a class="anchor" href="#26-august-2026-the-monthly-check-run" aria-label="Permalink to 26 August 2026 — the monthly check, run early, and OpenAI has cut a price">#</a></h3>
     <p>

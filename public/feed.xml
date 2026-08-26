@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>a daily watcher on the price table</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#26-august-2026-a-daily-watcher-on-the"/>
+    <id>https://plainlyai.org/changes#26-august-2026-a-daily-watcher-on-the</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <summary type="text">The check logged below found a price that had moved, and the more useful finding was how long it had been wrong: up to twelve days, because the table is checked once a month. Monthly checking means a page about money can be wrong for a month, which is a poor answer from a site whose whole claim is that it is maintained. There is now a script that fetches all seven vendor pages and diffs every figure against what the table says. Run daily, the window becomes a day.</summary>
+  </entry>
+  <entry>
     <title>the monthly check, run early, and OpenAI has cut a price</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#26-august-2026-the-monthly-check-run"/>
     <id>https://plainlyai.org/changes#26-august-2026-the-monthly-check-run</id>

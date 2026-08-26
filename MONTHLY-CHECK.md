@@ -121,6 +121,28 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
 Em dashes are allowed on this project, unlike Shawn's other work. Match the surrounding
 prose, which is plain, specific, and unhurried.
 
+## The daily watcher, and what it does not do
+
+`prices.py` fetches all seven sources below and diffs them against what
+`public/model-facts.html` claims. Run it daily:
+
+```
+python prices.py
+```
+
+It exists because of what this check found on 26 August 2026: GPT-5.6 Sol had
+moved from $5/$30 to $4/$20 while the table said otherwise, and the table had been
+correct on 14 August. Checking monthly means being wrong for up to a month. The
+watcher makes that a day. It prints and never edits, and it reports UNVERIFIED and
+exits non-zero rather than reporting "unchanged" when it could not read a figure.
+
+**It does not replace this check, and the difference matters.** The watcher can
+only compare figures the table already carries. It cannot notice a model that
+should be added, a pricing tier that did not exist last month, a cell that ought
+to stop saying "not published", or a caveat whose wording is still present but no
+longer means what it did. Those need somebody reading the page. A green run from
+`prices.py` means nothing has moved under the table, not that the table is right.
+
 ## Before you finish, regenerate the feed and run the structural check
 
 ```

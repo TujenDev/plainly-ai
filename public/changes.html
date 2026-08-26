@@ -6,6 +6,7 @@
 <title>Changes — Plainly</title>
 <meta name="description" content="Every correction, addition and re-check made to this site, dated. The maintenance promise, made checkable instead of asserted.">
 <link rel="stylesheet" href="/style.css">
+<link rel="alternate" type="application/atom+xml" title="Plainly — the maintenance log" href="/feed.xml">
 <link rel="canonical" href="https://plainlyai.org/changes">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:type" content="website">
@@ -51,7 +52,8 @@
 
   <p class="stamp">
     Last updated <b>25 August 2026</b> &nbsp;·&nbsp; Every page also carries its own
-    pair of dates at the top
+    pair of dates at the top &nbsp;·&nbsp; <a href="/feed.xml">Atom feed</a> of
+    everything below
   </p>
 
   <div class="prose">
@@ -130,6 +132,45 @@
     </ul>
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+    <h3 id="25-august-2026-the-log-gets-a-feed">25 August 2026 — the log gets a feed<a class="anchor" href="#25-august-2026-the-log-gets-a-feed" aria-label="Permalink to 25 August 2026 — the log gets a feed">#</a></h3>
+    <p>
+      There is now an <a href="/feed.xml">Atom feed</a> of this page, so a
+      correction can reach you without you remembering to come back and look. It
+      is linked in the head of every page here, which is how feed readers find
+      one, and it carries all thirty-two entries in the log with their dates and
+      their permalinks.
+    </p>
+    <p>
+      This is the only subscribable thing this site will offer, and it is worth
+      saying what it is not. It is not AI news, which is covered by thousands of
+      people with staff and which this site would do badly and then abandon. It
+      is not a newsletter, which is
+      <a href="/about">refused on the record</a> along with ads and affiliate
+      links. What arrives is: a page you may have read has been corrected, or
+      re-checked, or was wrong. Nobody else in this subject publishes a
+      corrections feed, largely because publishing one requires issuing
+      corrections.
+    </p>
+    <p>
+      It is generated rather than written. A small script reads the log and
+      rewrites the feed from it, so an entry cannot exist in one and not the
+      other, and the structural check now fails if the two have drifted apart.
+      That mattered enough to build properly: a feed is a promise that a
+      correction will reach the people who subscribed, and the ordinary way that
+      promise breaks is not malice but a month where the log moved and the feed
+      was forgotten. A rule in the procedure would have been the weaker fix. The
+      check is the stronger one, and it was tested by breaking the feed on purpose
+      and confirming it failed.
+    </p>
+    <p>
+      One claim on the site had to change to stay true. The README said the site
+      has no build step, and now one file is generated, so it now says what is
+      actually the case: every page still ships as the committed HTML a reader
+      receives, and the single derived file is the feed. Fourth self-referential
+      correction in two days, and the first one caught before it was published
+      rather than after.
+    </p>
 
     <h3 id="25-august-2026-new-page-how-to-tell-if-it">25 August 2026 — new page: How to tell if it actually got better<a class="anchor" href="#25-august-2026-new-page-how-to-tell-if-it" aria-label="Permalink to 25 August 2026 — new page: How to tell if it actually got better">#</a></h3>
     <p>

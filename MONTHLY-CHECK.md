@@ -121,17 +121,24 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
 Em dashes are allowed on this project, unlike Shawn's other work. Match the surrounding
 prose, which is plain, specific, and unhurried.
 
-## Before you finish, run the structural check
+## Before you finish, regenerate the feed and run the structural check
 
 ```
-python check.py
+python feed.py && python check.py
 ```
 
-From the project root. It takes a second, exits non-zero on failure, and covers
-the things that break silently: links that stopped resolving, heading permalinks
-that broke, duplicated ids, pages that became reachable only from the nav, and
-nav drift across the 23 pages. It checks structure, never truth, so it is no
+From the project root. `feed.py` rewrites `public/feed.xml` from the log you just
+added to; it is derived and never edited by hand. `check.py` takes a second,
+exits non-zero on failure, and covers the things that break silently: links that
+stopped resolving, heading permalinks that broke, duplicated ids, pages that
+became reachable only from the nav, nav drift across the pages, and a feed that
+no longer matches the log. It checks structure, never truth, so it is no
 substitute for anything above.
+
+The feed matters for the same reason the log does. Someone subscribed to it is
+relying on a correction reaching them, so a month where the log moves and the
+feed does not is a promise quietly broken for the readers who took the site up
+on it. That is why the check fails on it rather than warning.
 
 Section permalinks matter here: **do not change an existing heading id.** They are
 generated once and then frozen, and `/changes` states publicly that a section's

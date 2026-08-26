@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Plainly — the maintenance log</title>
+  <subtitle>Every correction, addition and re-check on plainlyai.org, dated. Corrections to this site, not AI news.</subtitle>
+  <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
+  <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
+  <id>https://plainlyai.org/changes</id>
+  <updated>2026-08-25T00:00:00Z</updated>
+  <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
+  <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>the log gets a feed</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#25-august-2026-the-log-gets-a-feed"/>
+    <id>https://plainlyai.org/changes#25-august-2026-the-log-gets-a-feed</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <summary type="text">There is now an Atom feed of this page, so a correction can reach you without you remembering to come back and look. It is linked in the head of every page here, which is how feed readers find one, and it carries all thirty-two entries in the log with their dates and their permalinks.</summary>
+  </entry>
+  <entry>
+    <title>new page: How to tell if it actually got better</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#25-august-2026-new-page-how-to-tell-if-it"/>
+    <id>https://plainlyai.org/changes#25-august-2026-new-page-how-to-tell-if-it</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <summary type="text">How to tell if it actually got better closes a gap this site created for itself on 14 August. The glossary gained an entry for evals that day, described as the conspicuous absence because it names the discipline the whole site argues for — checking output against a standard instead of trusting that it looked right. Then no page taught it. The site told readers to change their prompts and offered no way to find out whether the change helped.</summary>
+  </entry>
+  <entry>
+    <title>correction: the homepage was claiming a complete list</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#25-august-2026-correction-the-homepage"/>
+    <id>https://plainlyai.org/changes#25-august-2026-correction-the-homepage</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <summary type="text">The homepage offered three pages under the tracks and called them "the ones worth having read". That was accurate on 14 August, when three was all there was. Two guides have landed since, so the sentence had quietly become a claim that two pages on this site are not worth reading — which is not what it was written to mean and not something anyone here believes.</summary>
+  </entry>
+  <entry>
+    <title>correction: the dependency count was one short</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#25-august-2026-correction-the-dependency"/>
+    <id>https://plainlyai.org/changes#25-august-2026-correction-the-dependency</id>
+    <updated>2026-08-25T00:00:00Z</updated>
+    <summary type="text">Sources said it listed twenty documents: eleven carrying figures, five explaining a mechanism, four research papers. The tables underneath held twenty-one, and the mechanism section held six. The count was wrong from 14 August, when the four papers were added in the same pass that added a sixth mechanism document, and the sentence was updated for the papers and not for the other one.</summary>
+  </entry>
+  <entry>
+    <title>new page: How to check an AI's answer</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-new-page-how-to-check-an-ai"/>
+    <id>https://plainlyai.org/changes#14-august-2026-new-page-how-to-check-an-ai</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">How to check an AI's answer is the companion to Is what you're reading out of date? and exists because those are not the same job. A published page stands still: it has a date, a byline, and other readers who might have caught the error before you arrived. An answer written for you has none of that, and the error in it was shaped to your question, which is exactly what makes it read like the work of someone who understood the problem.</summary>
+  </entry>
+  <entry>
+    <title>saying plainly who this site is not for</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-saying-who-this-site-is-not-for"/>
+    <id>https://plainlyai.org/changes#14-august-2026-saying-who-this-site-is-not-for</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">Start here now opens by saying that this is a reference rather than a course, that nothing here finishes, and that a reader who wants a linear beginner's course they can get to the end of should go and use one, because several exist and some are cheap.</summary>
+  </entry>
+  <entry>
+    <title>every section now has its own link</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-every-section-has-its-own-link"/>
+    <id>https://plainlyai.org/changes#14-august-2026-every-section-has-its-own-link</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">Hover any heading on a concept page, a reference page or an entry in this log and a # appears beside it. Clicking it puts that section's address in the address bar. 122 sections across 16 pages now have one.</summary>
+  </entry>
+  <entry>
+    <title>the homepage was sending people to the wrong places</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-the-homepage-was-sending-people"/>
+    <id>https://plainlyai.org/changes#14-august-2026-the-homepage-was-sending-people</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">The homepage opened well and then argued with itself. After the three tracks it spent 326 words re-explaining how the site works, listed all ten concept pages, and only then, in a comma-separated line at the very bottom, mentioned Getting better results — the one page written for the track the same homepage calls "where most people are, and least served." The page a reader most likely wanted was the last thing offered, behind an essay about the site's own principles.</summary>
+  </entry>
+  <entry>
+    <title>correction: the Gemini prices here were the future ones</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-correction-the-gemini-prices"/>
+    <id>https://plainlyai.org/changes#14-august-2026-correction-the-gemini-prices</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">Model facts listed Gemini 3.6 Flash at $1.50 input / $7.50 output per million tokens. The current price is $0.75 and $3.75. Google's pricing page gives those rates "through December 31, 2026", with the higher pair "starting January 1, 2027". This site had printed the price that takes effect next year as though it applied today, so anyone budgeting a Gemini Flash job from this table would have doubled their estimate. It was wrong from 11 August, when that row was first filled, until today.</summary>
+  </entry>
+  <entry>
+    <title>the glossary becomes navigable, and gains four terms</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-the-glossary-becomes-navigable"/>
+    <id>https://plainlyai.org/changes#14-august-2026-the-glossary-becomes-navigable</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">Glossary had 38 terms, each with an anchor built so it could be linked directly, and nothing on the page that surfaced them. One heading, no index, no way through it but scrolling. The anchors existed to be used and the page hid them. It now opens with an A–Z index, and the terms are grouped under letter headings, so a specific word is two clicks away rather than a scroll and a squint. Letters with no terms are shown greyed rather than dropped, so the row keeps a stable shape.</summary>
+  </entry>
+  <entry>
+    <title>the two research gaps are closed</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-the-two-research-gaps-are-closed"/>
+    <id>https://plainlyai.org/changes#14-august-2026-the-two-research-gaps-are-closed</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">Sources has said since the day it was built that two pages describe findings from the research literature while citing none of it, and that the gap would stay flagged until someone read the papers rather than cited whatever a search turned up. Four papers were read today, and both pages changed as a result. Sources now has a Research papers section, and the count of documents this site depends on goes from sixteen to twenty.</summary>
+  </entry>
+  <entry>
+    <title>corrections: two overstatements, and dates on the promises</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-corrections-two-overstatements"/>
+    <id>https://plainlyai.org/changes#14-august-2026-corrections-two-overstatements</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">A mechanism was stated as an impossibility. What AI is actually bad at said a model "cannot have been trained on documents describing itself, because it did not exist when the data was collected," and Training cutoff said much the same more briefly. The conclusion is right and the mechanism was not: information about a model does reach it after the fact, through later stages of training and through the standing instructions a product sends with every message, which is why an assistant reliably knows its own name. Both passages now say that, and explain why a relayed answer still isn't self-knowledge. This was the site committing its own documented failure — a confident register on thin coverage — on the page that names it.</summary>
+  </entry>
+  <entry>
+    <title>re-check: a source that rotted by standing still</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#14-august-2026-re-check-a-source-that-rotted-by"/>
+    <id>https://plainlyai.org/changes#14-august-2026-re-check-a-source-that-rotted-by</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <summary type="text">Thinking and reasoning cited the vendor's extended thinking documentation. That document is still published and still correct. It was the wrong citation anyway, which is the case Sources was built to catch and did: extended thinking has become one mode among several rather than the way thinking works, so a page that describes it accurately had stopped describing the subject.</summary>
+  </entry>
+  <entry>
+    <title>new page: Sources</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-new-page-sources"/>
+    <id>https://plainlyai.org/changes#12-august-2026-new-page-sources</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Sources lists every outside document this site depends on: what each one is cited for, which pages fall over if it changes, and when it was last actually read. Sixteen documents, plus the six learning resources on Start here.</summary>
+  </entry>
+  <entry>
+    <title>the tracks now lead somewhere</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-the-tracks-now-lead-somewhere"/>
+    <id>https://plainlyai.org/changes#12-august-2026-the-tracks-now-lead-somewhere</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Start here sorts you into one of three tracks and then, until today, sent two of them off the site. The Curious track told readers to "learn the three failure modes: confident wrongness, silent staleness, and losing the thread" and linked none of them, while this site has a page on each. The Builder track said "tool use, then retrieval, then agents, in that order" and linked none of those either, though all three were written and sitting one click away.</summary>
+  </entry>
+  <entry>
+    <title>correction: a citation that didn't lead to the claim</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-correction-a-citation-that-didn"/>
+    <id>https://plainlyai.org/changes#12-august-2026-correction-a-citation-that-didn</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">What this page used to say. Tokens stated that using OpenAI's tiktoken library undercounts Claude tokens by 15–20%, and attributed the figure to Anthropic's models overview and token counting documentation.</summary>
+  </entry>
+  <entry>
+    <title>three corrections from re-reading the vendor pages</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-three-corrections-from-re"/>
+    <id>https://plainlyai.org/changes#12-august-2026-three-corrections-from-re</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Verification dates moved on Tokens, Model facts and Getting better results, because the sources were actually re-read rather than the pages reworded.</summary>
+  </entry>
+  <entry>
+    <title>five stale claims, four of them created by this site's own edits</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-five-stale-claims-four-of-them"/>
+    <id>https://plainlyai.org/changes#12-august-2026-five-stale-claims-four-of-them</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">A review of every page found statements that had been true when written and were no longer true a day later. All of them describe the site itself, which is the failure mode this site is least entitled to have.</summary>
+  </entry>
+  <entry>
+    <title>the corrections this site asked for had nowhere to go</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-the-corrections-this-site-asked"/>
+    <id>https://plainlyai.org/changes#12-august-2026-the-corrections-this-site-asked</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Four pages invited readers to report anything wrong or stale, and this one called corrections the most important kind of entry in the log. None of them said where to send one. There was no address, no form and no link anywhere on the site — an invitation with no door attached.</summary>
+  </entry>
+  <entry>
+    <title>Getting better results</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-getting-better-results"/>
+    <id>https://plainlyai.org/changes#12-august-2026-getting-better-results</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Getting better results fills the hole this site had been carrying since launch. The homepage claims the practical middle is where most people are and where the internet serves them worst, and until now that group got a reading list.</summary>
+  </entry>
+  <entry>
+    <title>a Guides section, and an accessibility pass</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-a-guides-section-and-an"/>
+    <id>https://plainlyai.org/changes#12-august-2026-a-guides-section-and-an</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Three pages had quietly become unreachable except from the homepage and the footer: the out-of-date guide, the limits page and the glossary. They now have a home at Guides, which is in the navigation — Guides was taken back out of the navigation on 14 August, once all three were reachable from the homepage directly. See the entry above. "Home" came out of the nav to make room, since the wordmark in the corner already does that job.</summary>
+  </entry>
+  <entry>
+    <title>every page now carries two dates</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-every-page-now-carries-two-dates"/>
+    <id>https://plainlyai.org/changes#12-august-2026-every-page-now-carries-two-dates</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Pages used to show a single last verified date. On a site where everything was written at once, that date did no work: it was also the day the page was written, so it proved nothing except that the site existed. A single date cannot tell you whether a page was published last week or re-read last week, and those are very different claims.</summary>
+  </entry>
+  <entry>
+    <title>an editing pass, and an admission</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#12-august-2026-an-editing-pass-and-an-admission"/>
+    <id>https://plainlyai.org/changes#12-august-2026-an-editing-pass-and-an-admission</id>
+    <updated>2026-08-12T00:00:00Z</updated>
+    <summary type="text">Every page on this site was written in a single sitting, and it showed. Read three of them in a row and the formula surfaced: five pages closed with a box titled "Where this page stops," four more with one titled "What this page deliberately avoids," and several opened with "The one-sentence version." One metaphor appeared on three separate pages. That is what mass-produced writing feels like from the inside, and it is a fair thing to hold against a site that criticises content farms.</summary>
+  </entry>
+  <entry>
+    <title>correction: the Sonnet 5 price warning was wrong</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#sonnet-correction"/>
+    <id>https://plainlyai.org/changes#sonnet-correction</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">What this page used to say. Model facts carried an asterisk on Claude Sonnet 5's $2 / $10 rate, describing it as introductory, giving $3 / $15 as the standard rate, and telling readers to check whether the promotion had ended before budgeting off it. It was presented as the site's worked example of why undated pricing pages are dangerous.</summary>
+  </entry>
+  <entry>
+    <title>two reference pages: the limits, and the vocabulary</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-two-reference-pages-the-limits"/>
+    <id>https://plainlyai.org/changes#11-august-2026-two-reference-pages-the-limits</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">What AI is actually bad at covers the weaknesses that follow from how these systems are built rather than from this year's models being immature: no reliable sense of its own ignorance, no clock or continuity, unreliable self-report, trouble with exactness and character-level work, whole-corpus questions that fail quietly, reliability decaying over long tasks, inconsistency between identical requests, and thin coverage delivered in the same confident register as thorough coverage. It deliberately lists no tasks, because task lists are what make this genre of writing stale within months. It also says what these systems are genuinely good at, since a limits page that only lists failures gives a false picture.</summary>
+  </entry>
+  <entry>
+    <title>the blank vendor rows on Model facts are filled</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-the-blank-vendor-rows-on-model"/>
+    <id>https://plainlyai.org/changes#11-august-2026-the-blank-vendor-rows-on-model</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Model facts carried empty OpenAI, Google and Meta rows from launch, flagged as unverified rather than guessed. Those are now checked against each vendor's own documentation, with every source linked and dated on the page.</summary>
+  </entry>
+  <entry>
+    <title>Thinking and reasoning, and the roadmap closes</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-thinking-and-reasoning-and-the"/>
+    <id>https://plainlyai.org/changes#11-august-2026-thinking-and-reasoning-and-the</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Thinking and reasoning is live. It explains the mechanism without the mystique (the model writes out working, then answers with that working in front of it), separates the problems where it genuinely helps from the ones where it only produces a longer route to a guess, and covers a cost trap that catches people: changing your thinking settings mid-conversation invalidates prompt caching.</summary>
+  </entry>
+  <entry>
+    <title>two more concept pages: Fine-tuning and Prompt caching</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-two-more-concept-pages-fine"/>
+    <id>https://plainlyai.org/changes#11-august-2026-two-more-concept-pages-fine</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Fine-tuning argues the distinction the previous two pages kept deferring: it changes how a model behaves, not what it knows. Facts trained in this way cannot be cited, cannot be corrected without retraining, and carry a standing upgrade cost, since a tuned model is frozen against a base model that will be superseded. Use cases and the "prompt engineering may be all you need" line are quoted from OpenAI's own documentation, along with the observation that knowledge acquisition is absent from its list of benefits.</summary>
+  </entry>
+  <entry>
+    <title>new concept page: RAG and retrieval</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-new-concept-page-rag-and"/>
+    <id>https://plainlyai.org/changes#11-august-2026-new-concept-page-rag-and</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">RAG and retrieval is live, the seventh concept page. Its argument: retrieval is mostly a search problem, which is why most of it fails at the search rather than at the model, and the single most useful habit is to test the retrieval step separately from the answer. Also covers the case for skipping the machinery entirely and simply pasting your documents in, which is now the right first move for small collections. Chunk-context and hybrid-search points are quoted and cited from Anthropic's engineering write-up.</summary>
+  </entry>
+  <entry>
+    <title>new concept page: Agents</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-new-concept-page-agents"/>
+    <id>https://plainlyai.org/changes#11-august-2026-new-concept-page-agents</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Agents is live, the sixth concept page and the first written after launch. It takes the position that an agent is a model in a loop with tools, that the loop is where every hard problem lives, and that the workflow/agent distinction is the useful one to hold onto. Definitions are quoted from Anthropic's own engineering guidance and cited on the page.</summary>
+  </entry>
+  <entry>
+    <title>three pages added, including this one</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-three-pages-added-including-this"/>
+    <id>https://plainlyai.org/changes#11-august-2026-three-pages-added-including-this</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Added the same evening as launch, and all three are about making the site's claims checkable rather than adding more surface to maintain:</summary>
+  </entry>
+  <entry>
+    <title>the site went live</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#11-august-2026-the-site-went-live"/>
+    <id>https://plainlyai.org/changes#11-august-2026-the-site-went-live</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Published at plainlyai.org with nine pages: a home page, a placement guide, five concept explainers and the model facts table. Everything dated on the day it was written.</summary>
+  </entry>
+  <entry>
+    <title>the plumbing</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#same-day-the-plumbing"/>
+    <id>https://plainlyai.org/changes#same-day-the-plumbing</id>
+    <updated>2026-08-11T00:00:00Z</updated>
+    <summary type="text">Not content, but it affects what you get served: clean URLs throughout, a real not-found page instead of a blank one, and a strict content security policy. The site ships no JavaScript at all, so the tightest possible policy costs nothing. Nothing here tracks you, because there is nothing here to track you with.</summary>
+  </entry>
+</feed>

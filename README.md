@@ -47,12 +47,21 @@ public/                 the deployable site — nothing outside this ships
   robots.txt            open to all crawlers, on purpose (see below)
   sitemap.xml           all nine pages
   _headers              security headers and cache policy
+  feed.xml              Atom feed of the maintenance log, generated
 README.md               this file
+check.py                the structural check, run after any page changes
+feed.py                 regenerates public/feed.xml from the log
 ```
 
-Static HTML and one stylesheet. No build step, no framework, no JavaScript. It
-loads fast, it will still work in a decade, and there's nothing to keep updated
-but the words.
+Static HTML and one stylesheet. No framework and no JavaScript: it loads fast,
+it will still work in a decade, and there's nothing to keep updated but the
+words.
+
+There is no build step in the sense that matters — every page is committed as
+the HTML that ships, and editing one is editing the file the reader gets. The
+one generated file is `feed.xml`, which `feed.py` derives from the log on
+`changes.html` so the two cannot drift apart. `check.py` fails if it has, which
+is what makes the generation safe to rely on.
 
 URLs are extensionless (`/concepts/tokens`, not `/concepts/tokens.html`) because
 that is how Cloudflare Pages serves the files — it redirects the `.html` form to

@@ -107,7 +107,38 @@ for name in pages:
     if "content" not in inbound.get(name, set()):
         note("content-orphan", f"{name} reachable only from nav/footer")
 
-# 6. the nav is identical everywhere. It is hand-edited across 23 files.
+# 6. the feed still matches the log. feed.py derives one from the other, so the
+#    only way they diverge is a log entry added without regenerating. This is
+#    the check that makes that a build failure instead of a silent lie.
+feed_path = ROOT / "feed.xml"
+if not feed_path.exists():
+    note("missing feed", "public/feed.xml — run python feed.py")
+else:
+    import xml.etree.ElementTree as ET
+    NS = {"a": "http://www.w3.org/2005/Atom"}
+    try:
+        feed = ET.parse(feed_path).getroot()
+    except ET.ParseError as e:
+        note("unparseable feed", str(e))
+        feed = None
+    if feed is not None:
+        fids = [e.findtext("a:id", "", NS).partition("#")[2]
+                for e in feed.findall("a:entry", NS)]
+        log = src["changes"].split('<h2 id="the-log">', 1)
+        lids = re.findall(r'<h3 id="([^"]+)">', log[1]) if len(log) == 2 else []
+        if not lids:
+            note("feed", "could not find the log on changes.html")
+        elif fids != lids:
+            missing = [i for i in lids if i not in fids]
+            extra = [i for i in fids if i not in lids]
+            detail = f"{len(lids)} log entries, {len(fids)} feed entries"
+            if missing:
+                detail += f"; not in the feed: {', '.join(missing[:3])}"
+            if extra:
+                detail += f"; not in the log: {', '.join(extra[:3])}"
+            note("stale feed", detail + " — run python feed.py")
+
+# 7. the nav is identical everywhere. It is hand-edited across 23 files.
 navs = Counter()
 for name, s in src.items():
     m = re.search(r'<nav class="site-nav".*?</nav>', s, re.S)

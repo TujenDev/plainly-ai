@@ -61,8 +61,8 @@
     <p>
       There is a page here on <a href="/getting-better-results">getting better
       results</a>, and it is a list of things to change. This is the page about
-      how you would know that changing them worked, which is a separate job and
-      the one almost nobody does.
+      how you would know that changing them worked, which is a separate job, and the
+      one people skip.
     </p>
     <p>
       The loop most people run: something comes back badly, you rewrite the
@@ -107,10 +107,10 @@
       describes the output you happen to have, and will be met by definition.
     </p>
     <p>
-      Most real standards have several dimensions at once &mdash; accuracy, tone,
-      length, how it handles an input it cannot answer, what it costs, how long it
-      takes &mdash; and the useful part of writing them down is being forced to say
-      which ones you would trade. A change that makes answers more accurate and
+      Most real standards have several dimensions at once: accuracy, tone, length,
+      how it handles an input it cannot answer, what it costs, how long it takes.
+      The useful part of writing them down is being forced to say which ones you
+      would trade. A change that makes answers more accurate and
       twice as long is not obviously an improvement, and if length was never
       written down as something you cared about, you will find out that it was
       from somebody else.
@@ -141,14 +141,14 @@
       you have, what you learn at the end is how the prompt performs on those
       cases, which is not the question you asked. Keep a portion sealed and score
       against it only when you think you are done. That is the oldest idea in this
-      corner of the field &mdash; a held-out test set &mdash; and it is routinely
+      corner of the field, a held-out test set, and it is routinely
       skipped by people who would never skip it anywhere else.
     </p>
 
     <h2 id="more-cases-beats-better-grading">More cases beats better grading<a class="anchor" href="#more-cases-beats-better-grading" aria-label="Permalink to More cases beats better grading">#</a></h2>
     <p>
-      This is the piece of advice most worth carrying away, because it is the one
-      that runs against instinct. Anthropic's design principles for evals say to
+      This is the piece of advice most worth carrying away, because it runs against
+      instinct. Anthropic's design principles for evals say to
       "prioritize volume over quality": a larger set of cases with rough automatic
       scoring beats a small set graded carefully by hand.
     </p>
@@ -171,9 +171,9 @@
       The same guidance ranks the three ways of scoring, and the ranking is by
       speed and reliability rather than by sophistication. Code first, because it
       is fastest and gives the same verdict every time. People second, and it says
-      to avoid grading by hand where you can &mdash; not because people score
-      badly, but because they are slow and expensive, which in practice means the
-      grading stops happening. A model third, with a condition attached that the
+      to avoid grading by hand where you can, not because people score badly but
+      because they are slow and expensive, which in practice means the grading
+      stops happening. A model third, with a condition attached that the
       next section is about.
     </p>
     <p>
@@ -218,13 +218,14 @@
     <div class="note">
       <p class="note-title">The blind spot a grader inherits</p>
       <p>
-        A model grading a model agrees with it about anything they are both wrong
-        about, and the agreement looks like a passing score. It can catch an
-        answer that contradicts itself, ignores the instructions, or claims
-        something the supplied documents do not support. It cannot catch an answer
-        that is coherent, well-supported by the material it was handed, and false
-        about the world, because nothing in that loop is checking the world.
-        &rarr; <a href="/check-an-answer#its-own-check-is-not-your-check">Its own check is not your check</a>
+        What a self-check can and cannot reach is set out on
+        <a href="/check-an-answer#its-own-check-is-not-your-check">How to check an
+        AI's answer</a>, and is not repeated here. What belongs to measuring
+        rather than to checking is the consequence: a grader that shares the blind
+        spots of the thing it grades does not register them as failures. It agrees.
+        So the shared mistake arrives as a passing score, the metric moves the way
+        you hoped, and the one number you are now watching has quietly become a
+        measure of how alike the two of them are.
       </p>
     </div>
 
@@ -299,8 +300,8 @@
       numbers. Those belong to the context they were written in, where they can be
       read with their assumptions attached. Nothing on this page is a figure, a
       model name, or a benchmark score, so there is nothing here to go stale in
-      the way <a href="/model-facts">Model facts</a> does &mdash; only the argument,
-      which is checkable by trying it.
+      the way <a href="/model-facts">Model facts</a> does. What is here is the
+      argument, and the argument is checkable by trying it.
     </p>
 
     <p class="next">

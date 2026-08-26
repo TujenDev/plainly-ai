@@ -87,8 +87,8 @@
       <p>
         Read the stop reason on every response and branch on it. It costs a few
         lines, and it converts a class of silent corruption into a condition you
-        can see, log and handle. Almost nothing else you can add to a working
-        integration pays back as well.
+        can see, log and handle. Very little else you can bolt on afterwards pays
+        back as well.
       </p>
     </div>
 
@@ -102,7 +102,7 @@
     <p>
       This is benign for prose, where a reader sees the sentence stop. It is
       vicious for structure. Ask for JSON, get cut off two thirds of the way
-      through, and what you hold is a string that is not JSON — no closing brace,
+      through, and what you hold is a string that is not JSON: no closing brace,
       possibly a half-written key. The parse failure then surfaces somewhere else
       entirely, in a function that has no idea a length limit exists, and reads
       like a bug in your parser.
@@ -126,9 +126,9 @@
       What makes this a reliability problem rather than a policy one is that it
       is input-dependent and rare. It will not happen in your testing, because
       your test inputs are ones you chose. It happens later, to a user, on
-      material you never anticipated, and the failure it produces downstream —
-      an empty field, a nonsensical record, a document that says the wrong thing
-      — has no obvious connection to its cause.
+      material you never anticipated. The failure it produces downstream,
+      an empty field or a nonsensical record or a document that says the wrong
+      thing, has no obvious connection to its cause.
     </p>
 
     <h2 id="rate-limits-don-t-reset-the-way-you">Rate limits don't reset the way you think<a class="anchor" href="#rate-limits-don-t-reset-the-way-you" aria-label="Permalink to Rate limits don't reset the way you think">#</a></h2>
@@ -153,8 +153,7 @@
       limit, what remains, and when it will be replenished, so you can slow down
       before you start failing rather than after. And when you are refused,
       there is a header telling you how long to wait, with the documentation
-      noting plainly that earlier retries will fail — so honour it rather than
-      guessing.
+      noting that earlier retries will fail. Honour it rather than guessing.
     </p>
 
     <div class="note">
@@ -163,7 +162,7 @@
         Not every rate-limit response is a "wait and try again". A request
         rejected because an organisation hit a spend cap comes back with the same
         status and no retry-after header, and it will keep failing until access
-        resumes — no amount of backoff helps. A client that treats every 429 as
+        resumes. No amount of backoff helps. A client that treats every 429 as
         temporary will retry that one until somebody notices. The distinguishing
         signal is the missing header.
       </p>
@@ -171,9 +170,9 @@
 
     <h2 id="know-what-is-already-retrying">Know what is already retrying<a class="anchor" href="#know-what-is-already-retrying" aria-label="Permalink to Know what is already retrying">#</a></h2>
     <p>
-      The official SDKs already retry transient failures — connection errors,
-      rate limits, server errors — with exponential backoff, and already honour
-      the retry-after header. This is on by default and configurable.
+      The official SDKs already retry transient failures, including connection
+      errors, rate limits and server errors, with exponential backoff, and they
+      already honour the retry-after header. This is on by default and configurable.
     </p>
     <p>
       So the retry loop you are about to write sits on top of one that exists. The
@@ -236,17 +235,18 @@
 
     <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
     <p>
-      Three vendor documents, all read on 26 August 2026 and listed on
-      <a href="/sources">Sources</a> with the pages that depend on them:
-      Anthropic's <a href="https://platform.claude.com/docs/en/api/errors">API
-      errors</a> for the error taxonomy, the SDKs' built-in retry behaviour and
-      the fact that a streaming error can follow a successful status;
+      Three vendor documents, all read on 26 August 2026. Each appears on
+      <a href="/sources">Sources</a> against the pages that fall over if it
+      changes. Anthropic's
+      <a href="https://platform.claude.com/docs/en/api/errors">API errors</a>
+      backs the error taxonomy, the retry behaviour already built into the SDKs,
+      and the fact that a streaming error can follow a successful status.
       <a href="https://platform.claude.com/docs/en/api/rate-limits">Rate
-      limits</a> for the token bucket, enforcement over shorter intervals than
-      quoted, the response headers and the spend-cap refusal that carries no
-      retry-after; and the
+      limits</a> backs the token bucket, enforcement over shorter intervals than
+      quoted, the response headers, and the spend-cap refusal that carries no
+      retry-after. The
       <a href="https://platform.claude.com/docs/en/api/messages">Messages API</a>
-      reference for the stop reason values.
+      reference backs the stop reason values.
     </p>
     <p>
       This page describes one vendor's API because that is the documentation that
@@ -254,7 +254,7 @@
       mechanisms generalise better than the details: every provider has an output
       ceiling, a way of recording why generation stopped, and a rate limiter whose
       behaviour is worth reading rather than assuming. Nothing here is a figure,
-      a limit or a tier, so there is nothing on this page to go stale — the
+      a limit or a tier, so there is nothing on this page to go stale. The
       numbers live on <a href="/model-facts">Model facts</a> and on the vendor's
       own pages, where they are dated.
     </p>

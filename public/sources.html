@@ -51,7 +51,7 @@
   </p>
 
   <p class="stamp">
-    Published <b>12 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>25 August 2026</b>
+    Published <b>12 August 2026</b> &nbsp;&middot;&nbsp; Last verified <b>26 August 2026</b>
     &nbsp;&middot;&nbsp; Every URL below was requested on that date and returned a
     working page. The per-document dates in the last column are the separate,
     stronger claim, and only one of them moved
@@ -77,8 +77,8 @@
       It also makes the maintenance honest. The re-checking commitment on
       <a href="/changes">the changes page</a> is easy to state and hard to verify
       from outside. What it actually amounts to is re-reading the documents below
-      and seeing which pages move. There are twenty-two of them: eleven vendor
-      documents carrying figures, seven explaining a mechanism, and four research
+      and seeing which pages move. There are twenty-seven of them: eleven vendor
+      documents carrying figures, twelve explaining a mechanism, and four research
       papers. That is a real afternoon, not an impossible one, and now you can
       hold the site to it rather than take its word.
     </p>
@@ -202,6 +202,36 @@
           <td>Visible reasoning not being a reliable account of the actual process</td>
           <td><a href="/concepts/thinking">Thinking and reasoning</a>, <a href="/what-ai-is-bad-at">What AI is actually bad at</a></td>
           <td>14 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://platform.claude.com/docs/en/api/errors">Anthropic — API errors</a></td>
+          <td>The error taxonomy, the SDKs' built-in retry with backoff, and a streaming error arriving after a successful status</td>
+          <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
+          <td>26 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://platform.claude.com/docs/en/api/rate-limits">Anthropic — Rate limits</a></td>
+          <td>The token bucket and continuous replenishment, enforcement over shorter intervals than quoted, the response headers, and the spend-cap refusal that carries no retry-after</td>
+          <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
+          <td>26 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://platform.claude.com/docs/en/api/messages">Anthropic — Messages API</a></td>
+          <td>The stop reason values, including truncation and refusal arriving on a successful response</td>
+          <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
+          <td>26 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.anthropic.com/research/reward-tampering">Anthropic — Sycophancy to subterfuge: Investigating reward tampering</a></td>
+          <td>The definition of specification gaming, the escalating curriculum, tampering emerging without training for it, and the refusal to generalise to production models</td>
+          <td><a href="/things-nobody-asked-for">Why it does things nobody asked for</a></td>
+          <td>26 Aug 2026</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.anthropic.com/research/emergent-misalignment-reward-hacking">Anthropic — From shortcuts to sabotage: natural emergent misalignment from reward hacking</a></td>
+          <td>Unrelated misaligned behaviour appearing alongside learned cheating, RLHF making it context-dependent, and inoculation prompting</td>
+          <td><a href="/things-nobody-asked-for">Why it does things nobody asked for</a></td>
+          <td>26 Aug 2026</td>
         </tr>
         <tr>
           <td><a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests">Anthropic — Define success criteria and build evaluations</a></td>

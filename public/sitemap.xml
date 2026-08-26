@@ -9,7 +9,7 @@
 
   <url>
     <loc>https://plainlyai.org/start-here</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.9</priority>
   </url>
 
@@ -27,13 +27,25 @@
 
   <url>
     <loc>https://plainlyai.org/guides</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
+    <loc>https://plainlyai.org/designing-for-failure</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://plainlyai.org/things-nobody-asked-for</loc>
+    <lastmod>2026-08-26</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://plainlyai.org/did-it-get-better</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.9</priority>
   </url>
 
@@ -51,25 +63,25 @@
 
   <url>
     <loc>https://plainlyai.org/what-ai-is-bad-at</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://plainlyai.org/glossary</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://plainlyai.org/sources</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://plainlyai.org/changes</loc>
-    <lastmod>2026-08-25</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.7</priority>
   </url>
 
@@ -93,7 +105,7 @@
 
   <url>
     <loc>https://plainlyai.org/concepts/tokens</loc>
-    <lastmod>2026-08-12</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <priority>0.8</priority>
   </url>
 

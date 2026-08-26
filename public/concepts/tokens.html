@@ -196,6 +196,30 @@
       <li><strong>Considerably more expensive:</strong> languages that were less represented in the tokeniser's training. The same meaning can cost noticeably more tokens in some languages than in English, which is a real and under-discussed fairness problem in how these systems are priced.</li>
     </ul>
 
+    <h3>A conversation costs more than the sum of its turns</h3>
+    <p>
+      These systems have no memory between requests, so a chat application resends
+      the entire conversation every time you send a message. Your tenth message
+      pays to read the first nine again. The cost of a conversation therefore grows
+      with roughly the square of its length rather than in step with it: doubling
+      the number of turns quadruples the input you are billed for, near enough,
+      which is why a long session gets expensive faster than anyone expects.
+    </p>
+    <p>
+      The same arithmetic governs an agent, and more harshly, because each step
+      resends the whole accumulated trace of what it has done so far. A long
+      agent run spends most of its input budget re-reading its own history rather
+      than on the task. → <a href="/concepts/agents">Agents</a>
+    </p>
+    <p>
+      Two things blunt it. Caching a repeated prefix means you are charged a
+      reduced rate for the part that has not changed, which is exactly the shape
+      this problem has. → <a href="/concepts/prompt-caching">Prompt caching</a>
+      And the older parts of a conversation can be summarised or dropped rather
+      than resent in full, which costs some fidelity and is usually the right
+      trade. → <a href="/concepts/context-windows">Context windows</a>
+    </p>
+
     <h2 id="don-t-try-to-count-them-yourself">Don't try to count them yourself<a class="anchor" href="#don-t-try-to-count-them-yourself" aria-label="Permalink to Don't try to count them yourself">#</a></h2>
     <p>
       Two specific traps.

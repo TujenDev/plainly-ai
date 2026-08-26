@@ -5,9 +5,30 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-08-25T00:00:00Z</updated>
+  <updated>2026-08-26T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>new page: Designing for the ways it fails</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#26-august-2026-new-page-designing-for"/>
+    <id>https://plainlyai.org/changes#26-august-2026-new-page-designing-for</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <summary type="text">The Builder track on Start here has four steps. Three linked somewhere. The fourth — assume it will fail and design for it, naming rate limits, refusals, truncated output and malformed responses — linked nowhere, because there was no page to link to. That is the same finding as 12 August, when two tracks were found naming pages they never pointed at; the difference is that this time the page genuinely did not exist. It does now, and the step points at it.</summary>
+  </entry>
+  <entry>
+    <title>new page: Why it does things nobody asked for</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#26-august-2026-new-page-why-it-does"/>
+    <id>https://plainlyai.org/changes#26-august-2026-new-page-why-it-does</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <summary type="text">Why it does things nobody asked for began as a request for a page about AI systems escaping their sandboxes during tests, and is deliberately not that page. An incident list is the fastest-rotting thing this site could publish after prices, and unlike prices it only grows; worse, the genre is mostly misreported, so collecting the stories under that heading would have meant a confident register over thin secondary coverage, on the site that names that failure. What the page does instead is explain the mechanism, which does not rot, and then teach the reading skill, which is the part that survives the next headline.</summary>
+  </entry>
+  <entry>
+    <title>Tokens gains the cost shape it was missing</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#26-august-2026-tokens-gains-the-cost"/>
+    <id>https://plainlyai.org/changes#26-august-2026-tokens-gains-the-cost</id>
+    <updated>2026-08-26T00:00:00Z</updated>
+    <summary type="text">Tokens explained that you are billed per token and that output costs more than input, and stopped there. It never said why a long conversation gets expensive out of proportion to its length: these systems hold nothing between requests, so every message resends the whole conversation, and the tenth message pays to read the first nine again. Cost grows with roughly the square of the length. Doubling the turns quadruples the input you are billed for.</summary>
+  </entry>
   <entry>
     <title>the log gets a feed</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#25-august-2026-the-log-gets-a-feed"/>

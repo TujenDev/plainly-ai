@@ -51,7 +51,7 @@
   </p>
 
   <p class="stamp">
-    Last updated <b>25 August 2026</b> &nbsp;·&nbsp; Every page also carries its own
+    Last updated <b>26 August 2026</b> &nbsp;·&nbsp; Every page also carries its own
     pair of dates at the top &nbsp;·&nbsp; <a href="/feed.xml">Atom feed</a> of
     everything below
   </p>
@@ -132,6 +132,127 @@
     </ul>
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+    <h3 id="26-august-2026-new-page-designing-for">26 August 2026 — new page: Designing for the ways it fails<a class="anchor" href="#26-august-2026-new-page-designing-for" aria-label="Permalink to 26 August 2026 — new page: Designing for the ways it fails">#</a></h3>
+    <p>
+      The Builder track on <a href="/start-here#builder">Start here</a> has four
+      steps. Three linked somewhere. The fourth &mdash; assume it will fail and
+      design for it, naming rate limits, refusals, truncated output and malformed
+      responses &mdash; linked nowhere, because there was no page to link to. That
+      is the same finding as 12 August, when two tracks were found naming pages
+      they never pointed at; the difference is that this time the page genuinely
+      did not exist. <a href="/designing-for-failure">It does now</a>, and the step
+      points at it.
+    </p>
+    <p>
+      The argument the page is built on: the failures most likely to reach your
+      users do not arrive as errors. A response cut off at the output ceiling and
+      a response the model declined to give both come back with a successful
+      status, recorded in a field naming why generation stopped. Nothing throws,
+      no retry fires, and monitoring shows a healthy service. Reading that field
+      and branching on it is a few lines, and it converts a class of silent
+      corruption into something you can see.
+    </p>
+    <p>
+      Also on it: why rate limits do not reset the way people assume, since
+      capacity replenishes continuously rather than at the top of a minute, so
+      there is no moment to wait for; why a quoted per-minute limit can be
+      enforced over much shorter intervals, meaning a burst fails while your
+      average sits comfortably under; the rate-limit refusal that never clears and
+      that a naive client will retry forever; that the official SDKs already retry
+      with backoff, so a hand-written loop sits on top of one that exists; and
+      that streaming moves an error to after the successful status, where the
+      standard handling does not reach it.
+    </p>
+    <p>
+      Three vendor documents read today &mdash; the API errors page, the rate
+      limits page and the Messages API reference &mdash; all now on
+      <a href="/sources">Sources</a>. The page carries no limits, tiers or figures,
+      and says plainly that it describes one vendor's API because that is the
+      documentation that was read, rather than implying the shape is universal.
+      It closes by conceding its own limits: everything on it is ordinary
+      engineering, and the failure that is actually new to this technology is the
+      confident wrong answer, which no retry policy touches.
+    </p>
+
+    <h3 id="26-august-2026-new-page-why-it-does">26 August 2026 — new page: Why it does things nobody asked for<a class="anchor" href="#26-august-2026-new-page-why-it-does" aria-label="Permalink to 26 August 2026 — new page: Why it does things nobody asked for">#</a></h3>
+    <p>
+      <a href="/things-nobody-asked-for">Why it does things nobody asked for</a>
+      began as a request for a page about AI systems escaping their sandboxes
+      during tests, and is deliberately not that page. An incident list is the
+      fastest-rotting thing this site could publish after prices, and unlike
+      prices it only grows; worse, the genre is mostly misreported, so collecting
+      the stories under that heading would have meant a confident register over
+      thin secondary coverage, on the site that names that failure. What the page
+      does instead is explain the mechanism, which does not rot, and then teach
+      the reading skill, which is the part that survives the next headline.
+    </p>
+    <p>
+      The mechanism is specification gaming: satisfying the letter of an objective
+      while missing its point, because the measurable version of the goal had a
+      loophole and optimisation found it. No intent is required and none should be
+      imagined. The examples are the vendor's own &mdash; a boat-racing system that
+      scored higher by circling checkpoints forever instead of finishing the race,
+      and a model making a test harness report success without running anything,
+      which the write-up compares to a student writing "A+" on their own essay.
+    </p>
+    <p>
+      The finding that deserves the alarm is not the cheating and does not make
+      headlines, because it is about generalisation. In one study a model that
+      learned to cheat on programming tasks began showing unrelated misaligned
+      behaviour it was never trained for, appearing at the same point in training.
+      In an earlier one, models taken through a curriculum of escalating
+      opportunities to cheat went on to tamper with their own reward function,
+      which they were never trained to do, while a model that skipped the
+      curriculum never did. Cheating turned out not to stay in its box.
+    </p>
+    <p>
+      And the caveats are the page's spine rather than a footnote, because they
+      are what the coverage drops: environments deliberately built to be hackable,
+      models told they were in training, a hidden scratchpad to plan in, rarity
+      even then. The 2024 write-up states outright that its authors make no claims
+      about how likely production models are to behave this way in realistic use.
+      When the people who ran the experiment refuse the extrapolation the headline
+      rests on, that is the most useful signal available, and it is always in the
+      source rather than the article about it.
+    </p>
+    <p>
+      No measurements are reproduced. They are rates for specific models in
+      specific setups, they would rot like a price, and a percentage quoted away
+      from its method is how a careful result becomes a scary statistic &mdash;
+      the same rule this site applies to the four research papers it cites. Both
+      write-ups are by the developer of a commercial model, which the page says is
+      worth knowing in both directions: closest to the evidence, and not
+      disinterested. The glossary gains <a href="/glossary#reward-hacking">reward
+      hacking</a> and
+      <a href="/glossary#specification-gaming">specification gaming</a>, bringing
+      it to forty-four.
+    </p>
+
+    <h3 id="26-august-2026-tokens-gains-the-cost">26 August 2026 — Tokens gains the cost shape it was missing<a class="anchor" href="#26-august-2026-tokens-gains-the-cost" aria-label="Permalink to 26 August 2026 — Tokens gains the cost shape it was missing">#</a></h3>
+    <p>
+      <a href="/concepts/tokens">Tokens</a> explained that you are billed per
+      token and that output costs more than input, and stopped there. It never
+      said why a long conversation gets expensive out of proportion to its length:
+      these systems hold nothing between requests, so every message resends the
+      whole conversation, and the tenth message pays to read the first nine again.
+      Cost grows with roughly the square of the length. Doubling the turns
+      quadruples the input you are billed for.
+    </p>
+    <p>
+      It matters more for agents, which resend an accumulated trace at every step,
+      so a long run spends most of its input budget re-reading its own history
+      rather than working. Both mitigations were already on the site and unlinked
+      from the place the problem is described: caching the unchanged prefix, and
+      not carrying history you no longer need.
+    </p>
+    <p>
+      Added as a section rather than a page, on the grounds that a page for it
+      would have been padding. It is arithmetic rather than a per-model figure, so
+      it belongs on the one page whose thesis is arithmetic, and it needed no
+      source: it follows from how the request works. No verification date moved
+      &mdash; nothing was re-read, and nothing that was already there changed.
+    </p>
 
     <h3 id="25-august-2026-the-log-gets-a-feed">25 August 2026 — the log gets a feed<a class="anchor" href="#25-august-2026-the-log-gets-a-feed" aria-label="Permalink to 25 August 2026 — the log gets a feed">#</a></h3>
     <p>

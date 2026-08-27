@@ -13,7 +13,7 @@
 # costs more than the missed run. A connectivity probe comes first, and an
 # offline run is logged and skipped rather than announced.
 
-REPO="/Users/varga/Desktop/Projects/plainly-ai"
+REPO="/Users/varga/Developer/plainly-ai"
 LOG="$HOME/Library/Logs/plainlyai-pricewatch.log"
 PYTHON="/usr/bin/python3"
 

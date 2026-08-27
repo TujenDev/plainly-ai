@@ -8,11 +8,11 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/sh</string>
-    <string>/Users/varga/Desktop/Projects/plainly-ai/pricewatch.sh</string>
+    <string>/Users/varga/Developer/plainly-ai/pricewatch.sh</string>
   </array>
 
   <key>WorkingDirectory</key>
-  <string>/Users/varga/Desktop/Projects/plainly-ai</string>
+  <string>/Users/varga/Developer/plainly-ai</string>
 
   <!-- 09:15 daily. launchd runs a missed calendar job once after wake, which
        cron does not, so a closed laptop delays the check rather than skipping

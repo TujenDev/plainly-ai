@@ -52,6 +52,8 @@ README.md               this file
 check.py                the structural check, run after any page changes
 feed.py                 regenerates public/feed.xml from the log
 prices.py               diffs Model facts against the seven vendor pages, daily
+pricewatch.sh           what the schedule runs: prices.py, logged, notify on trouble
+com.plainlyai.pricewatch.plist   the launchd agent, installed by hand (see below)
 ```
 
 Static HTML and one stylesheet. No framework and no JavaScript: it loads fast,
@@ -73,6 +75,32 @@ Run it locally the way it is actually served:
 
 ```bash
 npx wrangler pages dev public
+```
+
+## The daily price check
+
+`prices.py` is only useful if it actually runs daily. On macOS that is a launchd
+agent, installed by hand rather than by anything in this repo:
+
+```bash
+cp com.plainlyai.pricewatch.plist ~/Library/LaunchAgents/
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.plainlyai.pricewatch.plist
+launchctl kickstart -k gui/$(id -u)/com.plainlyai.pricewatch   # run it once now
+```
+
+It runs at 09:15. launchd runs a missed calendar job once after wake, which cron
+does not, so a closed laptop delays the check rather than skipping it.
+
+Runs append to `~/Library/Logs/plainlyai-pricewatch.log`. A run that is not clean
+also raises a notification, because a scheduled check whose output only reaches a
+log file nobody opens is the quiet failure the script was written to prevent. A
+run with no network is logged as skipped and does not notify: a watcher that
+cries wolf gets dismissed, which costs more than the missed run.
+
+To stop it:
+
+```bash
+launchctl bootout gui/$(id -u)/com.plainlyai.pricewatch
 ```
 
 ## On crawlers

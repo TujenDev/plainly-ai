@@ -88,14 +88,27 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.plainlyai.pricewatch
 launchctl kickstart -k gui/$(id -u)/com.plainlyai.pricewatch   # run it once now
 ```
 
-It runs at 09:15. launchd runs a missed calendar job once after wake, which cron
-does not, so a closed laptop delays the check rather than skipping it.
+It runs at 09:15, and it catches up. launchd re-runs a calendar job missed while
+the machine was asleep, which cron does not — but it drops one missed while the
+machine was powered *off*, without a trace anywhere. That is not a hypothetical:
+the machine was shut down over 09:15 on 27 August 2026 and the day's check simply
+never happened, while the site went on promising a daily one.
+
+So the agent also ticks hourly, and `pricewatch.sh` decides whether the day's run
+is owed — it records the date of the last real run and exits in milliseconds when
+that date is today. The effect is at most one check a day: at 09:15 if the
+machine is up then, and at the first opportunity afterwards if it wasn't. A run
+that finds days missing since the last one says so in the log and notifies,
+because healing the gap quietly would leave the log agreeing with a promise the
+site hadn't actually kept. `PRICEWATCH_FORCE=1` skips the time-of-day guard, so
+the whole path can be exercised now rather than tomorrow morning.
 
 Runs append to `~/Library/Logs/plainlyai-pricewatch.log`. A run that is not clean
 also raises a notification, because a scheduled check whose output only reaches a
 log file nobody opens is the quiet failure the script was written to prevent. A
 run with no network is logged as skipped and does not notify: a watcher that
-cries wolf gets dismissed, which costs more than the missed run.
+cries wolf gets dismissed, which costs more than the missed run. It leaves the
+day's run owed, so the next tick tries again, and logs the skip only once a day.
 
 To stop it:
 

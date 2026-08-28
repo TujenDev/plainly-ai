@@ -14,14 +14,24 @@
   <key>WorkingDirectory</key>
   <string>/Users/varga/Developer/plainly-ai</string>
 
-  <!-- 09:15 daily. launchd runs a missed calendar job once after wake, which
-       cron does not, so a closed laptop delays the check rather than skipping
-       it. -->
+  <!-- 09:15 daily. launchd re-runs a calendar job missed while the machine was
+       asleep, which cron does not, so a closed laptop delays the check. It does
+       NOT re-run one missed while the machine was powered off: that run is
+       dropped silently, as happened on 27 August 2026. -->
   <key>StartCalendarInterval</key>
   <dict>
     <key>Hour</key><integer>9</integer>
     <key>Minute</key><integer>15</integer>
   </dict>
+
+  <!-- Which is what the hourly tick is for. It is not a second schedule; every
+       tick asks pricewatch.sh whether the day's run is still owed and almost
+       always exits within milliseconds because it isn't. It exists so a day the
+       machine was off at 09:15 is checked when the machine comes back, instead
+       of being skipped by a watcher that reports nothing when it does not
+       run. -->
+  <key>StartInterval</key>
+  <integer>3600</integer>
 
   <!-- Off at load, so installing this does not fire it immediately. Kick the
        first run by hand with: launchctl kickstart -k gui/$(id -u)/com.plainlyai.pricewatch -->

@@ -43,9 +43,14 @@ public/                 the deployable site — nothing outside this ships
   start-here.html       placement, with verified resources per track
   model-facts.html      the single dated table of figures
   concepts/             the explainers
+  guides.html           index of the guides; the guides themselves are the
+                        remaining *.html at this level
+  glossary.html         the defined terms
+  sources.html          every primary source the site cites
+  changes.html          the maintenance log, the source the feed is built from
   404.html              custom not-found page
   robots.txt            open to all crawlers, on purpose (see below)
-  sitemap.xml           all nine pages
+  sitemap.xml           every page but 404, checked against the files by check.py
   _headers              security headers and cache policy
   feed.xml              Atom feed of the maintenance log, generated
 README.md               this file

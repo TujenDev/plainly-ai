@@ -140,6 +140,35 @@
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+    <h3 id="28-august-2026-the-structural-check">28 August 2026 &mdash; the structural check now enforces the rules<a class="anchor" href="#28-august-2026-the-structural-check" aria-label="Permalink to 28 August 2026 — the structural check now enforces the rules">#</a></h3>
+    <p>
+      The structural check resolved every link, every heading permalink and every
+      id on the site, and enforced not one of the four rules this site says it
+      runs on. A page could lose its last-verified stamp &mdash; the element the
+      whole premise rests on &mdash; and the check printed clean. So could a page
+      that lost its navigation, its language attribute, or its skip link. Each of
+      those was confirmed by removing it and watching nothing happen.
+    </p>
+    <p>
+      One of them was worse than a miss. The check that finds pages nobody links
+      to reads links out of each page's <code>main</code> element, so a page that
+      lost that element contributed no links at all &mdash; which meant losing it
+      went unnoticed <em>and</em> quietly weakened the orphan check for every page
+      it pointed at. A check that gets less useful as the site breaks is worse
+      than a check that fails, because it fails in the direction of reassurance.
+    </p>
+    <p>
+      Every page must now carry a stamp, one <code>h1</code>, the shared
+      navigation, a skip link, a language attribute, and a canonical URL matching
+      the address it is actually served at, with <code>og:url</code> agreeing with
+      it. The sitemap is compared against the files on disk in both directions, so
+      a page missing from it is a finding rather than a page that silently stops
+      being indexed. All twenty-seven pages passed on the first run, which is the
+      point of writing it this way: it goes green today and only ever speaks up
+      about a regression. Ten deliberate breakages confirmed it speaks up about
+      each one. Committed, not yet published.
+    </p>
+
     <h3 id="28-august-2026-the-watcher-could-report">28 August 2026 &mdash; the watcher could report success while blind<a class="anchor" href="#28-august-2026-the-watcher-could-report" aria-label="Permalink to 28 August 2026 — the watcher could report success while blind">#</a></h3>
     <p>
       The entry below this one, from 26 August, says of the price watcher that it

@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>the structural check now enforces the rules</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#28-august-2026-the-structural-check"/>
+    <id>https://plainlyai.org/changes#28-august-2026-the-structural-check</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <summary type="text">The structural check resolved every link, every heading permalink and every id on the site, and enforced not one of the four rules this site says it runs on. A page could lose its last-verified stamp — the element the whole premise rests on — and the check printed clean. So could a page that lost its navigation, its language attribute, or its skip link. Each of those was confirmed by removing it and watching nothing happen.</summary>
+  </entry>
+  <entry>
     <title>the watcher could report success while blind</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#28-august-2026-the-watcher-could-report"/>
     <id>https://plainlyai.org/changes#28-august-2026-the-watcher-could-report</id>

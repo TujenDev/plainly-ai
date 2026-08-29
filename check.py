@@ -12,13 +12,21 @@ monthly check in MONTHLY-CHECK.md. What it catches is the rot this site keeps
 generating for itself: a link that stopped resolving, a page that became
 unreachable, an id that got duplicated, a heading permalink that broke.
 
+It also checks that every page still carries what every page here is supposed to
+carry — a last-verified stamp, a canonical matching the URL it is served at, one
+h1, the shared nav, a skip link, an entry in the sitemap. Those are the rules the
+README states, and until 28 August 2026 nothing enforced any of them: a page
+could lose its stamp or its nav entirely and this script still printed clean.
+
 Exits non-zero if anything fails, so it can gate a deploy later if that is ever
 wanted.
 """
 import re, sys, pathlib
+import xml.etree.ElementTree as ET
 from collections import defaultdict, Counter
 
 ROOT = pathlib.Path(__file__).parent / "public"
+SITE = "https://plainlyai.org"
 problems = []
 
 
@@ -114,7 +122,6 @@ feed_path = ROOT / "feed.xml"
 if not feed_path.exists():
     note("missing feed", "public/feed.xml — run python feed.py")
 else:
-    import xml.etree.ElementTree as ET
     NS = {"a": "http://www.w3.org/2005/Atom"}
     try:
         feed = ET.parse(feed_path).getroot()
@@ -148,14 +155,88 @@ else:
                 detail += f"; not in the log: {', '.join(extra[:3])}"
             note("stale feed", detail + " — run python feed.py")
 
-# 7. the nav is identical everywhere. It is hand-edited across 23 files.
-navs = Counter()
+# 7. the nav is identical everywhere, and every page has one. It is hand-edited
+#    across every page. Counting variants could not see a page that lost its nav
+#    altogether: a page with no nav was simply not counted, so len(navs) stayed 1
+#    and the check passed. It degraded as pages lost navs, which is backwards.
+navs = defaultdict(list)
 for name, s in src.items():
     m = re.search(r'<nav class="site-nav".*?</nav>', s, re.S)
-    if m:
-        navs[re.sub(r'\s+', ' ', re.sub(r' aria-current="page"', '', m.group(0)))] += 1
+    if not m:
+        note("no site nav", name)
+        continue
+    navs[re.sub(r'\s+', ' ', re.sub(r' aria-current="page"', '', m.group(0)))].append(name)
 if len(navs) > 1:
-    note("nav drift", f"{len(navs)} different navs across pages")
+    majority = max(navs.values(), key=len)
+    for names in navs.values():
+        if names is not majority:
+            note("nav drift", f"{', '.join(sorted(names))} "
+                              f"differs from the nav on the other {len(majority)} pages")
+
+
+# 8. the invariants every page carries. These are the site's own rules, and
+#    nothing checked them: a page could lose its last-verified stamp, its skip
+#    link, its lang attribute or its <main> and this still printed clean.
+#    <main> is the worst of those, because check 5 reads content links out of it
+#    — a page without one contributes no inbound links, so removing it does not
+#    just go unnoticed, it weakens the orphan check for every page it links to.
+def canonical_url(name):
+    """The URL Cloudflare Pages serves this page at. Directory indexes keep
+    their trailing slash; /concepts/ and /concepts are not the same canonical."""
+    if name == "index":
+        return f"{SITE}/"
+    return f"{SITE}/{name}/" if pages[name].name == "index.html" else f"{SITE}/{name}"
+
+
+for name, s in src.items():
+    if "<html lang=" not in s:
+        note("no lang attribute", name)
+    if s.count("<main") != 1:
+        note("main", f"{name} has {s.count('<main')} <main> elements, expected 1")
+    if 'class="skip-link"' not in s:
+        note("no skip link", name)
+    h1s = len(re.findall(r"<h1[ >]", s))
+    if h1s != 1:
+        note("h1", f"{name} has {h1s} <h1> elements, expected 1")
+    if name == "404":
+        continue                      # deliberately carries no dates and no canonical
+    if 'class="stamp"' not in s:
+        note("no last-verified stamp", name)
+    canon = re.search(r'<link rel="canonical" href="([^"]+)"', s)
+    if not canon:
+        note("no canonical", name)
+    elif canon.group(1) != canonical_url(name):
+        note("wrong canonical", f"{name} -> {canon.group(1)}, "
+                                f"expected {canonical_url(name)}")
+    og = re.search(r'<meta property="og:url" content="([^"]+)"', s)
+    if not og:
+        note("no og:url", name)
+    elif canon and og.group(1) != canon.group(1):
+        note("og:url != canonical", f"{name} -> {og.group(1)}")
+
+
+# 9. the sitemap lists every page and nothing else. It is hand-edited, and a
+#    page missing from it is a page search engines stop indexing, with no
+#    symptom anywhere on the site. This drifts quietly: the README described the
+#    sitemap as covering "all nine pages" long after it covered twenty-six.
+sitemap_path = ROOT / "sitemap.xml"
+if not sitemap_path.exists():
+    note("missing sitemap", "public/sitemap.xml")
+else:
+    SM = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    try:
+        urls = ET.parse(sitemap_path).getroot().findall("s:url", SM)
+    except ET.ParseError as e:
+        note("unparseable sitemap", str(e))
+        urls = []
+    listed = {u.findtext("s:loc", "", SM).replace(f"{SITE}/", "").rstrip("/") or "index"
+              for u in urls}
+    expected = {n for n in pages if n != "404"}
+    for n in sorted(expected - listed):
+        note("missing from sitemap", n)
+    for n in sorted(listed - expected):
+        note("sitemap lists a page that does not exist", n)
+
 
 print(f"{len(pages)} pages, {links} links, {anchors} anchors")
 if problems:

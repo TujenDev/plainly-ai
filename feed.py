@@ -22,10 +22,18 @@ MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
 
 # <h3 id="..">25 August 2026 — title<a class="anchor" ..></a></h3> then paragraphs
+#
+# `id` is matched wherever it sits in the tag, not only as the first attribute.
+# The strict form silently skipped any entry headed `<h3 class=".." id="..">`,
+# and check.py used the same strict pattern to verify this file's output — so
+# the two agreed with each other while both missed the entry, and the feed
+# shipped short with the structural check reporting clean.
 ENTRY = re.compile(
-    r'<h3 id="([^"]+)">(.*?)<a class="anchor".*?</h3>(.*?)(?=<h3 id=|<p class="next">|</div>)',
+    r'<h3\b[^>]*\bid="([^"]+)"[^>]*>(.*?)<a class="anchor".*?</h3>'
+    r'(.*?)(?=<h3\b|<p class="next">|</div>)',
     re.S,
 )
+H3 = re.compile(r"<h3\b")
 FIRST_P = re.compile(r"<p>(.*?)</p>", re.S)
 
 
@@ -71,6 +79,15 @@ def entries():
             "title": title or heading,
             "summary": text(first.group(1)) if first else "",
         })
+    # Every <h3> in the log is an entry. If one didn't parse, it is missing its
+    # id or its anchor link, and writing a feed that is quietly one entry short
+    # is worse than not writing one: a subscriber never learns of a correction.
+    headings = len(H3.findall(log[1]))
+    if headings != len(out):
+        raise SystemExit(
+            f"feed.py: {headings} log headings but {len(out)} parsed — an entry is "
+            f"missing its id or its anchor link. Refusing to write a short feed."
+        )
     return out
 
 

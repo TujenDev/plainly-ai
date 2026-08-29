@@ -5,9 +5,16 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-08-26T00:00:00Z</updated>
+  <updated>2026-08-28T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>the watcher could report success while blind</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#28-august-2026-the-watcher-could-report"/>
+    <id>https://plainlyai.org/changes#28-august-2026-the-watcher-could-report</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <summary type="text">The entry below this one, from 26 August, says of the price watcher that it fails loudly and never quietly, and it names the two ways that was tested: a figure was altered to confirm a change is caught, and a source URL was pointed at nothing to confirm the run fails rather than passes. Both tests still pass. Neither of them touched the shape of the table itself, and the shape of the table is where the script was broken.</summary>
+  </entry>
   <entry>
     <title>a daily watcher on the price table</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#26-august-2026-a-daily-watcher-on-the"/>

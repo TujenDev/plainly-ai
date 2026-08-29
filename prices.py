@@ -56,11 +56,27 @@ SRC = {
 }
 
 findings = []          # (verdict, subject, detail)
+covered = set()        # claim keys a probe actually compared against a vendor
 OK, CHANGED, UNVERIFIED = "unchanged", "CHANGED", "UNVERIFIED"
+
+# Bump deliberately when a model is added to or removed from Model facts. A row
+# count that drifts on its own means the table changed shape under the parser.
+EXPECTED_ROWS = 9
 
 
 def note(verdict, subject, detail=""):
     findings.append((verdict, subject, detail))
+
+
+def cover(model):
+    """Record that a probe actually looked at this row.
+
+    Rule 2 says a figure that could not be checked must not pass as unchanged.
+    A row can go unchecked without any probe noticing — a vendor renamed on the
+    page, a `next()` that found the wrong row — so main() asserts that every row
+    parsed out of the table reached a probe, rather than trusting that it did.
+    """
+    covered.add(model)
 
 
 def fetch(key):
@@ -85,37 +101,81 @@ def tokens(s):
     m = re.match(r"([\d.]+)\s*([MmKk])?", s)
     if not m:
         return None
-    n = float(m.group(1))
+    try:
+        n = float(m.group(1))
+    except ValueError:                 # '1.2.3' matches the pattern, isn't a number
+        return None
     suffix = (m.group(2) or "").lower()
     return int(n * {"m": 1_000_000, "k": 1_000, "": 1}[suffix])
 
 
+# The table is hand-edited, so the parser must not assume its own shape holds.
+# `<tr>` written `<tr class="...">`, or a cell promoted from <td> to <th> for
+# accessibility, used to drop the row — and the lookahead that ended a row at
+# the next literal `<tr>` swallowed the following row with it. Two models could
+# go unwatched from one attribute, while the run still printed that Model facts
+# matched every vendor page. Match the tags properly instead.
+TBODY = re.compile(r"<tbody\b[^>]*>(.*?)</tbody>", re.S)
+ROW = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.S)
+CELL = re.compile(r"<t[dh]\b[^>]*>(.*?)</t[dh]>", re.S)
+
+
 def claims():
-    """Read what model-facts.html asserts. Derived, never duplicated."""
+    """Read what model-facts.html asserts. Derived, never duplicated.
+
+    Every row inside a <tbody> must parse into a known shape. One that does not
+    is reported UNVERIFIED, never skipped: an unparsed row is a row this script
+    stopped watching, and reporting that as "unchanged" is the false freshness
+    signal the site tells readers to distrust.
+    """
     s = (ROOT / "model-facts.html").read_text(encoding="utf-8")
     rows = {}
-    for tr in re.findall(r"<tr>(.*?)(?=<tr>|</tbody>)", s, re.S):
-        cells = [re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", c)).strip()
-                 for c in re.findall(r"<td[^>]*>(.*?)</td>", tr, re.S)]
-        if len(cells) == 8 and cells[0].startswith("Claude"):
-            rows[cells[0]] = dict(zip(
-                ("model", "api_id", "context", "max_output", "input", "output",
-                 "reliable_cutoff", "training_cutoff"), cells))
-        elif len(cells) == 7:
-            rows[cells[1]] = dict(zip(
-                ("vendor", "model", "api_id", "context", "max_output", "input",
-                 "output"), cells))
+    seen = 0
+    for body in TBODY.findall(s):
+        for tr in ROW.findall(body):
+            seen += 1
+            cells = [re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", c)).strip()
+                     for c in CELL.findall(tr)]
+            if len(cells) == 8 and cells[0].startswith("Claude"):
+                rows[cells[0]] = dict(zip(
+                    ("model", "api_id", "context", "max_output", "input", "output",
+                     "reliable_cutoff", "training_cutoff"), cells))
+            elif len(cells) == 7:
+                rows[cells[1]] = dict(zip(
+                    ("vendor", "model", "api_id", "context", "max_output", "input",
+                     "output"), cells))
+            else:
+                note(UNVERIFIED, "model-facts.html",
+                     f"a table row did not parse ({len(cells)} cells): "
+                     f"{' | '.join(cells)[:70]!r}")
+    if seen != EXPECTED_ROWS:
+        note(UNVERIFIED, "model-facts.html",
+             f"{seen} table rows found, expected {EXPECTED_ROWS} — if a model was "
+             f"added or removed, bump EXPECTED_ROWS in prices.py")
     return rows
 
 
 # ---------------------------------------------------------------- comparing
 
 def cmp_money(subject, claimed, live):
+    """Prices are compared exactly. A cell that isn't a price is unverified.
+
+    The site's fourth rule is that a figure it could not verify is left visibly
+    blank or worded rather than filled in — 'no first-party price' is already in
+    the table. That is a statement, not a number, and float() raises on it. This
+    used to take the whole run down with an uncaught traceback, skipping every
+    probe after it, the moment the site did the honest thing.
+    """
     if live is None:
         return note(UNVERIFIED, subject, "figure not found on the vendor page")
     c = claimed.replace("$", "").strip()
     l = str(live).replace("$", "").strip()
-    if abs(float(c) - float(l)) < 0.0001:
+    try:
+        cf, lf = float(c), float(l)
+    except ValueError:
+        return note(UNVERIFIED, subject,
+                    f"not a comparable figure: {claimed!r} against {live!r}")
+    if abs(cf - lf) < 0.0001:
         note(OK, subject, f"${c}")
     else:
         note(CHANGED, subject, f"${c} -> ${l}")
@@ -185,6 +245,7 @@ def anthropic(C):
         for model, claim in C.items():
             if not model.startswith("Claude"):
                 continue
+            cover(model)
             if model not in idx:
                 note(UNVERIFIED, f"{model}", "model no longer on the vendor's table")
                 continue
@@ -215,6 +276,7 @@ def openai(C):
         for model, claim in C.items():
             if claim.get("vendor") != "OpenAI":
                 continue
+            cover(model)
             api = claim["api_id"]
             m = re.search(re.escape(api) + r"\b(.{0,320}?)Tools", txt, re.S)
             if not m:
@@ -249,9 +311,11 @@ def openai(C):
 
 
 def google(C):
-    claim = next((c for c in C.values() if c.get("vendor") == "Google"), None)
+    key, claim = next(((k, c) for k, c in C.items() if c.get("vendor") == "Google"),
+                      (None, None))
     if claim is None:
         return note(UNVERIFIED, "Google row", "no Google row on Model facts")
+    cover(key)
     txt = fetch("google_pricing")
     if txt is not None:
         i = txt.find("Gemini 3.6 Flash")
@@ -279,17 +343,24 @@ def google(C):
 
 
 def meta(C):
-    claim = next((c for c in C.values()
-                  if c.get("vendor") == "Meta" and "$" in c.get("input", "")), None)
+    key, claim = next(((k, c) for k, c in C.items()
+                       if c.get("vendor") == "Meta" and "$" in c.get("input", "")),
+                      (None, None))
     txt = fetch("meta_pricing")
     if txt is None or claim is None:
         return note(UNVERIFIED, "Meta row", "page not fetched or no priced Meta row")
+    cover(key)
     std = txt.split("### Contributor tier")[0]
     cmp_money("Muse Spark input", claim["input"],
               (re.search(r"\|\s*Input\s*\|\s*\$([\d.]+)", std) or [None, None])[1])
     cmp_money("Muse Spark output", claim["output"],
               (re.search(r"\|\s*Output\s*\|\s*\$([\d.]+)", std) or [None, None])[1])
     phrase("Meta contributor tier", txt, "Contributor tier", "the cheaper tier the notes mention")
+    # The unpriced Meta rows are the subject of the probe below: the table's
+    # claim about them is that no first-party price exists, and that is checked.
+    for k, c in C.items():
+        if c.get("vendor") == "Meta" and "$" not in c.get("input", ""):
+            cover(k)
     if re.search(r"llama[^\n]{0,80}\$[\d.]", txt, re.I):
         note(CHANGED, "Llama first-party price",
              "Meta now appears to publish one; the table says it does not")
@@ -305,7 +376,15 @@ def main():
     for probe in (anthropic, openai, google, meta):
         probe(C)
 
-    width = max(len(s) for _, s, _ in findings)
+    # Every row the table asserts must have reached a probe. Without this, a row
+    # that no probe happened to select produces no finding at all — neither
+    # changed nor unverified — and the run ends by reporting that Model facts
+    # matches every vendor page, having never looked at it.
+    for model in C:
+        if model not in covered:
+            note(UNVERIFIED, model, "row is on Model facts but no probe compared it")
+
+    width = max((len(s) for _, s, _ in findings), default=0)
     changed = [f for f in findings if f[0] == CHANGED]
     unver = [f for f in findings if f[0] == UNVERIFIED]
     for verdict, subject, detail in findings:

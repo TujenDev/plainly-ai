@@ -125,7 +125,17 @@ else:
         fids = [e.findtext("a:id", "", NS).partition("#")[2]
                 for e in feed.findall("a:entry", NS)]
         log = src["changes"].split('<h2 id="the-log">', 1)
-        lids = re.findall(r'<h3 id="([^"]+)">', log[1]) if len(log) == 2 else []
+        # Match id wherever it sits in the tag. This check and feed.py used to
+        # share a pattern that required id to come first, so a heading written
+        # with any other attribute order was invisible to both: feed.py skipped
+        # the entry and this check confirmed the short feed was correct. Two
+        # checks that fail together are one check.
+        lids = re.findall(r'<h3\b[^>]*\bid="([^"]+)"', log[1]) if len(log) == 2 else []
+        if len(log) == 2:
+            headings = len(re.findall(r"<h3\b", log[1]))
+            if headings != len(lids):
+                note("log", f"{headings} entry headings but {len(lids)} carry an id "
+                            "— feed.py cannot link the ones without")
         if not lids:
             note("feed", "could not find the log on changes.html")
         elif fids != lids:

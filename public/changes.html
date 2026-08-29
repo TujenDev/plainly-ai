@@ -51,7 +51,7 @@
   </p>
 
   <p class="stamp">
-    Last updated <b>26 August 2026</b> &nbsp;·&nbsp; Every page also carries its own
+    Last updated <b>28 August 2026</b> &nbsp;·&nbsp; Every page also carries its own
     pair of dates at the top &nbsp;·&nbsp; <a href="/feed.xml">Atom feed</a> of
     everything below
   </p>
@@ -139,6 +139,69 @@
     </ul>
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+    <h3 id="28-august-2026-the-watcher-could-report">28 August 2026 &mdash; the watcher could report success while blind<a class="anchor" href="#28-august-2026-the-watcher-could-report" aria-label="Permalink to 28 August 2026 — the watcher could report success while blind">#</a></h3>
+    <p>
+      The entry below this one, from 26 August, says of the price watcher that it
+      fails loudly and never quietly, and it names the two ways that was tested: a
+      figure was altered to confirm a change is caught, and a source URL was
+      pointed at nothing to confirm the run fails rather than passes. Both tests
+      still pass. Neither of them touched the shape of the table itself, and the
+      shape of the table is where the script was broken.
+    </p>
+    <p>
+      The watcher reads Model facts by finding rows and recognising them by how
+      many cells they hold. A row it could not recognise was discarded without a
+      record &mdash; not reported, not counted, simply gone &mdash; and a row that no
+      probe happened to select produced no result either. Neither case is a change,
+      and neither is a failure to verify, so a run could end by printing that Model
+      facts matches every vendor page while having quietly stopped watching part of
+      it. Promoting one cell from <code>td</code> to <code>th</code> was enough to
+      do it, which is exactly the edit someone makes to improve a table for screen
+      readers.
+    </p>
+    <p>
+      Two other checks had the same shape of fault. <code>feed.py</code> builds the
+      feed from this log and <code>check.py</code> confirms the feed still matches
+      the log, which is the arrangement described on 25 August and the only reason a
+      generated feed is safe to rely on. Both found entries with the same pattern,
+      and that pattern required the id to be the first attribute in the heading. An
+      entry written any other way was invisible to both at once: the feed shipped
+      without it and the check agreed the short feed was correct. Two checks that
+      fail together are one check.
+    </p>
+    <p>
+      The third is smaller and worse. This site's fourth rule is that a figure it
+      could not verify is left visibly blank rather than filled in, and the table
+      already carries cells reading &ldquo;no first-party price&rdquo;. The price
+      comparison turned its input into a number with nothing to catch a cell that
+      is not one, so the first time a priced figure was honestly marked
+      unverifiable, the run would have stopped there and skipped every check after
+      it. The rule and the tool disagreed, and the tool would have won.
+    </p>
+    <p>
+      All three are fixed. Rows are matched as markup rather than by counting on a
+      pattern; a row that does not parse is reported instead of dropped; the number
+      of rows is asserted, so one going missing is itself a finding; and every row
+      must now be claimed by a probe that actually compared it, because parsing a
+      row and checking a row are not the same thing. <code>feed.py</code> refuses to
+      write a feed shorter than the log, and <code>check.py</code> counts the
+      headings itself rather than sharing the pattern it is supposed to be checking.
+      Each fix was tested the way the 26 August ones were, by breaking the page on
+      purpose and confirming the tools complain.
+    </p>
+    <p>
+      What this still does not do is worth stating, since the entry it corrects made
+      its promise a little too broadly. The watcher now knows that every row reached
+      a probe. It does not know that the probe compared the right figure, or that
+      the vendor page it read was the page it should have read. And none of these
+      faults were visible to the tools themselves: finding them meant reading each
+      script against the claims it makes, which is something a person has to decide
+      to do and no schedule enforces. No figure on Model facts was wrong as a result
+      of any of this &mdash; the first run after the fix checked 52 figures against all
+      seven vendor pages and found nothing had moved. The changes are committed and
+      not yet published.
+    </p>
 
     <h3 id="26-august-2026-a-daily-watcher-on-the">26 August 2026 — a daily watcher on the price table<a class="anchor" href="#26-august-2026-a-daily-watcher-on-the" aria-label="Permalink to 26 August 2026 — a daily watcher on the price table">#</a></h3>
     <p>

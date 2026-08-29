@@ -350,6 +350,32 @@ else:
                                     f"it — remove it from RULE2_ALLOWED")
 
 
+# 12. every guide is reachable from the home page's own content.
+#     This is not a style rule, it is the condition a decision rests on. Guides
+#     was taken out of the nav on 14 August "once all three were reachable from
+#     the homepage directly". Two guides were added on 26 August and not linked
+#     there, so the reason quietly stopped being true and the nav stayed as it
+#     was on the strength of it. Nothing noticed for three days.
+#
+#     The list is read from the Guides page rather than written here, so adding
+#     a guide adds it to this check automatically. If this ever fails, the
+#     honest options are to link the guide from the home page or to put Guides
+#     back in the nav — not to delete the check.
+guide_list = re.search(r'<ul class="concept-list">(.*?)</ul>', src.get("guides", ""), re.S)
+if not guide_list:
+    note("guides", "could not read the guide list from guides.html")
+else:
+    listed = [h.strip("/") for h in re.findall(r'href="(/[^"#]+)"', guide_list.group(1))]
+    home = re.search(r"<main.*?</main>", src["index"], re.S)
+    home = home.group(0) if home else ""
+    if not listed:
+        note("guides", "the guide list on guides.html is empty")
+    for g in listed:
+        if not re.search(r'href="/' + re.escape(g) + r'["#]', home):
+            note("unreachable guide", f"{g} is listed on Guides but not linked from the "
+                                      f"home page, which is why Guides is not in the nav")
+
+
 print(f"{len(pages)} pages, {links} links, {anchors} anchors")
 if problems:
     print(f"\n{len(problems)} problem(s):")

@@ -686,3 +686,53 @@ figure.diagram figcaption {
 }
 
 .table-notes details.cost > summary { color: var(--flag); }
+
+/* ---------- Print ---------- */
+
+/* Model facts is the page most likely to be printed or saved as a PDF, and it
+   was the page print broke worst: `white-space: nowrap` forces the table to
+   1161px, `.table-scroll` clips rather than reflows, and an A4 page gives it
+   about 630px. Four of eight columns went over the edge — including both price
+   columns — with nothing on the paper to say anything was missing. The one
+   load-bearing line here is `white-space: normal`; the rest is tidying. */
+
+@media print {
+  :root { --paper: #fff; --paper-sunk: #fff; --ink: #000; --ink-soft: #222; --ink-faint: #333; --rule: #999; }
+
+  body { background: #fff; color: #000; font-size: 11pt; }
+
+  /* Navigation is dead on paper. The permalink marks are noise. */
+  .site-nav, .skip-link, .anchor, .az-index { display: none; }
+
+  /* Let the table reflow instead of scrolling inside a box that paper has not got. */
+  .table-scroll { overflow: visible; border: none; }
+  th, td { white-space: normal; }
+  table { font-size: 8.5pt; }
+  thead { display: table-header-group; }   /* repeat headings across pages */
+  tr, figure, .note, .gap { page-break-inside: avoid; }
+
+  /* A folded note prints as a heading with nothing under it, and on paper the
+     reader cannot click, so folded is the same as deleted — unacceptable for the
+     corrections, which this site's whole claim rests on staying visible.
+
+     Overriding display on the children does not work: a closed <details> hides
+     its content through a shadow slot that no light-DOM selector reaches. That
+     was tried and printed seven empty headings. `::details-content` is the
+     pseudo-element that does reach it. It is recent, so a browser without it
+     still prints the notes folded; the tiering warning is marked open in the
+     markup precisely so the one that costs money never depends on this. */
+  details > summary { list-style: none; font-weight: 600; }
+  details::details-content { content-visibility: visible !important; }
+
+  /* A link the reader cannot follow should at least say where it went. */
+  .prose a[href^="http"]::after,
+  .table-notes a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    word-break: break-all;
+    color: #333;
+  }
+
+  figure.diagram { break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; }
+}

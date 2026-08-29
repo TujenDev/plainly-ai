@@ -157,6 +157,47 @@
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+    <h3 id="29-august-2026-the-page-with-the">29 August 2026 &mdash; the page with the prices on it did not print the prices<a class="anchor" href="#29-august-2026-the-page-with-the" aria-label="Permalink to 29 August 2026 — the page with the prices on it did not print the prices">#</a></h3>
+    <p>
+      There were no print styles at all. On screen the
+      <a href="/model-facts">Model facts</a> table scrolls sideways inside its own
+      box, which is the right answer for a phone. Paper has no sideways. Printed or
+      saved as a PDF on A4, the table ran off the edge and took four of its eight
+      columns with it &mdash; including both price columns &mdash; with nothing on
+      the page to say anything was missing. The one page on this site that exists
+      to carry prices printed without them, and had done since it was written.
+    </p>
+    <p>
+      The fix is one load-bearing line, that table cells may wrap on paper, plus
+      tidying: no navigation, no permalink marks, headings repeated across pages,
+      and an external link printing the address it points at, since a reader
+      holding paper cannot follow it otherwise. This was checked by actually
+      printing the page to a PDF and looking at it, rather than by reasoning about
+      the stylesheet. Two earlier attempts to check it another way both gave
+      confident wrong answers.
+    </p>
+    <p>
+      That test caught a second problem, made yesterday. The eight notes under the
+      table were folded up into disclosures, and a folded disclosure prints as a
+      heading with nothing underneath it &mdash; so seven of the eight notes,
+      including both corrections, printed as empty titles. On paper a reader cannot
+      click, which makes folded the same as deleted, and this site does not get to
+      hide its corrections. The obvious fix, telling the contents to display
+      anyway, does not work: a closed disclosure hides its content somewhere a
+      stylesheet cannot ordinarily reach. There is a newer selector that can, and
+      it is now used, so this is fixed in current browsers and not in older ones.
+      The warning about long-context pricing is deliberately not folded in the
+      first place, which is why the one note that costs money never depended on
+      any of this.
+    </p>
+    <p>
+      Separately, fourteen page descriptions were long enough to be cut off
+      mid-sentence in search results, and each was written in four places at once
+      &mdash; the description itself, two social-preview copies and the structured
+      data &mdash; so all four moved together. They are shorter now, with the part
+      that distinguishes the page moved to the front. Committed, not yet published.
+    </p>
+
     <h3 id="29-august-2026-eight-words-nine">29 August 2026 &mdash; eight words defined, nine sentences rewritten, one paragraph folded up<a class="anchor" href="#29-august-2026-eight-words-nine" aria-label="Permalink to 29 August 2026 — eight words defined, nine sentences rewritten, one paragraph folded up">#</a></h3>
     <p>
       A pass for the reader this site claims to be written for. Eight terms were

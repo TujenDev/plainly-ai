@@ -96,7 +96,7 @@
     <a href="#letter-t">T</a>
     <span aria-hidden="true">U</span>
     <a href="#letter-v">V</a>
-    <span aria-hidden="true">W</span>
+    <a href="#letter-w">W</a>
     <span aria-hidden="true">X</span>
     <span aria-hidden="true">Y</span>
     <span aria-hidden="true">Z</span>
@@ -137,6 +137,16 @@
 
   <h2 class="az-letter" id="letter-b">B</h2>
   <ul class="resources">
+    <li id="attention">
+      <span class="res-name">Attention</span>
+      <p>
+        The mechanism that decides how much each part of the material in front of
+        the model influences the answer. It is why being inside the context
+        window is not the same as being weighed properly: material in the middle
+        of a long stretch tends to get less of it.
+        &rarr; <a href="/concepts/context-windows">Context windows</a>
+      </p>
+    </li>
     <li id="batch">
       <span class="res-name">Batch processing</span>
       <p>
@@ -160,6 +170,16 @@
 
   <h2 class="az-letter" id="letter-c">C</h2>
   <ul class="resources">
+    <li id="calibration">
+      <span class="res-name">Calibration</span>
+      <p>
+        Whether a model's confidence matches how often it turns out to be right. A
+        well-calibrated model saying something is probably true is right about as
+        often as &ldquo;probably&rdquo; implies &mdash; which is also why some
+        invention is unavoidable rather than a defect to be fixed.
+        &rarr; <a href="/concepts/hallucination">Hallucination</a>
+      </p>
+    </li>
     <li id="chain-of-thought">
       <span class="res-name">Chain of thought</span>
       <p>
@@ -191,6 +211,16 @@
       </p>
     </li>
 
+    <li id="confabulation">
+      <span class="res-name">Confabulation</span>
+      <p>
+        A more accurate name for what is usually called hallucination: a fluent,
+        confident account of something that did not happen, produced without any
+        awareness of the gap. Borrowed from neurology, where it describes the same
+        behaviour in people.
+        &rarr; <a href="/concepts/hallucination">Hallucination</a>
+      </p>
+    </li>
     <li id="context-engineering">
       <span class="res-name">Context engineering</span>
       <p>
@@ -227,6 +257,16 @@
 
   <h2 class="az-letter" id="letter-d">D</h2>
   <ul class="resources">
+    <li id="corpus">
+      <span class="res-name">Corpus</span>
+      <p>
+        A whole body of text: everything a model was trained on, or the entire
+        collection you want searched. Questions about a corpus &mdash; what do all
+        of these documents say? &mdash; are a different and much harder job than
+        questions about one passage.
+        &rarr; <a href="/what-ai-is-bad-at">What AI is actually bad at</a>
+      </p>
+    </li>
     <li id="distillation">
       <span class="res-name">Distillation</span>
       <p>
@@ -443,6 +483,16 @@
       </p>
     </li>
 
+    <li id="prompt-engineering">
+      <span class="res-name">Prompt engineering</span>
+      <p>
+        The older name for writing inputs that get better results. Largely
+        superseded by context engineering, which covers the same work plus
+        everything else that goes into the window; the older term survives mainly
+        in job titles and course names.
+        &rarr; <a href="/getting-better-results">Getting better results</a>
+      </p>
+    </li>
     <li id="prompt-injection">
       <span class="res-name">Prompt injection</span>
       <p>
@@ -510,6 +560,16 @@
 
   <h2 class="az-letter" id="letter-s">S</h2>
   <ul class="resources">
+    <li id="semantic-search">
+      <span class="res-name">Semantic search</span>
+      <p>
+        Finding material by meaning rather than by matching words, using embeddings
+        to measure how close two pieces of text are. It can find a passage about
+        cancelling an order when you searched for refund policy, which keyword
+        search would miss.
+        &rarr; <a href="/concepts/rag">RAG and retrieval</a>
+      </p>
+    </li>
     <li id="specification-gaming">
       <span class="res-name">Specification gaming</span>
       <p>
@@ -521,6 +581,16 @@
       </p>
     </li>
 
+    <li id="streaming">
+      <span class="res-name">Streaming</span>
+      <p>
+        Sending a reply back piece by piece as it is produced rather than waiting
+        for all of it. It makes a response feel faster without being faster, and it
+        means a failure can arrive halfway through something that has already
+        started appearing.
+        &rarr; <a href="/designing-for-failure">Designing for the ways it fails</a>
+      </p>
+    </li>
     <li id="system-prompt">
       <span class="res-name">System prompt</span>
       <p>
@@ -591,6 +661,20 @@
         given one, which is how semantic search is done at scale. Often more
         infrastructure than a small collection needs.
         → <a href="/concepts/rag">RAG and retrieval</a>
+      </p>
+    </li>
+  </ul>
+
+  <h2 class="az-letter" id="letter-w">W</h2>
+  <ul class="resources">
+    <li id="workflow">
+      <span class="res-name">Workflow</span>
+      <p>
+        A sequence of model calls along a path someone decided in advance. The
+        distinction that matters: an agent chooses its own next step, a workflow
+        follows yours. Most things sold as agents are workflows, which is usually
+        the better engineering decision.
+        &rarr; <a href="/concepts/agents">Agents</a>
       </p>
     </li>
   </ul>

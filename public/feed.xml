@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>eight words defined, nine sentences rewritten, one paragraph folded up</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-eight-words-nine"/>
+    <id>https://plainlyai.org/changes#29-august-2026-eight-words-nine</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">A pass for the reader this site claims to be written for. Eight terms were being used on these pages and defined nowhere: attention, calibration, confabulation, corpus, prompt engineering, semantic search, streaming and workflow. They are in the glossary now. The worst of them was attention, which was the heading of a section on Context windows — the page this site calls its highest-leverage one — and appeared nowhere else on the site, defined or otherwise. Two of the others carried whole arguments: hallucination's case for why some invention is unavoidable turns on a model being well calibrated, and the site recommends confabulation as the better word without ever saying what it means.</summary>
+  </entry>
+  <entry>
     <title>three corrections, and the rule that should have caught one of them</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-three-corrections-and"/>
     <id>https://plainlyai.org/changes#29-august-2026-three-corrections-and</id>

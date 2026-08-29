@@ -109,8 +109,9 @@
       <p>
         <strong>Context window</strong> is how much the model can hold in mind at
         once, input and output together. <strong>Max output</strong> is the ceiling
-        on a single reply. <strong>Price</strong> is per million tokens, quoted
-        separately for what you send (input) and what you get back (output) —
+        on a single reply. <strong>Price</strong> is per million tokens —
+        which is what <em>MTok</em> means in the column headings — quoted
+        separately for what you send (input) and what you get back (output);
         output almost always costs several times more.
       </p>
     </div>
@@ -265,66 +266,116 @@
 
   <p class="table-note">
     <strong>Every source behind this table is listed, dated, on
-    <a href="/sources">Sources</a>.</strong><br>
-    <strong>Correction, 26 August 2026: OpenAI cut the price of GPT-5.6 Sol,
-    and this table was a fortnight behind.</strong> Sol was listed at $5 input /
-    $30 output. OpenAI's pricing page and its models page both now give
-    <strong>$4 and $20</strong>, and the long-context tier has moved with it, from
-    $10 / $45 to $8 / $30. Those figures were correct when this table was last
-    verified on 14 August, when the log records OpenAI as re-read and unchanged, so
-    the most likely account is a cut somewhere in the twelve days between. This
-    page cannot prove that from the outside: a vendor's current page shows today's
-    price and not the date it changed, so a cut on the 20th and a misreading on
-    the 14th look identical from here. Either way, anyone who budgeted a Sol job
-    from this table in that window over-estimated by a quarter on input and half
-    on output. Erring expensive is the better
-    direction to be wrong in, and it is still being wrong. GPT-5.6 Terra was
-    checked in the same pass and has not moved.<br>
-    <strong>Correction, 14 August 2026: the Gemini 3.6 Flash prices here were
-    wrong, and wrong in the expensive direction to trust.</strong> This table
-    said $1.50 input / $7.50 output. Google's pricing page gives $0.75 and $3.75
-    "through December 31, 2026", with $1.50 and $7.50 "starting January 1, 2027".
-    The figures printed here were the <em>future</em> price, so anyone budgeting a
-    Gemini Flash job from this table between 11 and 14 August would have doubled
-    their estimate. The cells now carry the current rate, and the date the rate
-    changes is stated rather than left as a footnote nobody reads: <strong>these
-    Gemini figures expire on 1 January 2027.</strong> Google also publishes batch
-    and flex rates at half the standard price, and a priority rate well above it.<br>
-    <strong>Verified 26 August 2026</strong> against each vendor's own
-    documentation: OpenAI's
-    <a href="https://developers.openai.com/api/docs/pricing">pricing</a> and
-    <a href="https://developers.openai.com/api/docs/models">models</a> pages,
-    Google's <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
-    and its
-    <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
-    model page, and Meta's
-    <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.<br>
-    <strong>Selection:</strong> current general-purpose text models, not the full
-    catalogue. Each vendor sells cheaper small models and more expensive
-    reasoning tiers; this table exists to make the shape of the market legible,
-    not to be exhaustive.<br>
-    <strong>API IDs:</strong> the string in that column is the one Anthropic
-    documents as the API ID. For Claude Haiku 4.5 that is the dated
-    <code>claude-haiku-4-5-20251001</code>; the shorter
-    <code>claude-haiku-4-5</code> is documented as an alias and also works. From
-    the 4.6 generation onward the two are identical, so Haiku is the only row
-    where the distinction shows.<br>
-    <strong>Context figures:</strong> Google publishes an exact input limit of
-    1,048,576 tokens and an output limit of 65,536; OpenAI publishes 1.05M and
-    128K. The first two are the same number written two ways.<br>
-    <strong>Cutoffs:</strong> OpenAI publishes a knowledge cutoff of
-    16 February 2026 for the GPT-5.6 family. Google's model page for Gemini 3.6
-    Flash does not publish one, which is why there is no cutoff column here.<br>
-    <strong>Tiering:</strong> <strong>The OpenAI prices above are the
-    short-context rates, and long-context work costs more.</strong> OpenAI's
-    pricing page lists GPT-5.6 Sol at $8 input / $30 output above its context
-    threshold, against the $4 / $20 quoted here, and GPT-5.6 Terra at $4 / $18
-    against $2 / $12: double on input in both cases. Google prices some models
-    the same way, above and below a prompt-size threshold, and offers batch, flex
-    and priority rates that differ substantially from the standard rate quoted.
-    Meta publishes a cheaper "contributor" tier. Nobody should budget a
-    long-context job from this table; read the vendor's own page.
+    <a href="/sources">Sources</a>.</strong> What was corrected and when, and the
+    decisions behind what is and is not in the table, are below. They are folded
+    because there are eight of them. The one that costs money is not.
   </p>
+
+  <div class="table-notes">
+
+    <details class="cost" open>
+      <summary>Tiering: the prices above are short-context rates, and long-context work costs more</summary>
+      <p>
+        OpenAI's pricing page lists GPT-5.6 Sol at $8 input / $30 output above its
+        context threshold, against the $4 / $20 quoted here, and GPT-5.6 Terra at
+        $4 / $18 against $2 / $12: double on input in both cases. Google prices
+        some models the same way, above and below a prompt-size threshold, and
+        offers batch, flex and priority rates that differ substantially from the
+        standard rate quoted. Meta publishes a cheaper &ldquo;contributor&rdquo;
+        tier. Nobody should budget a long-context job from this table; read the
+        vendor's own page.
+      </p>
+    </details>
+
+    <details>
+      <summary>Correction, 26 August 2026 &mdash; OpenAI cut the price of GPT-5.6 Sol, and this table was a fortnight behind</summary>
+      <p>
+        Sol was listed at $5 input / $30 output. OpenAI's pricing page and its
+        models page both now give <strong>$4 and $20</strong>, and the
+        long-context tier has moved with it, from $10 / $45 to $8 / $30. Those
+        figures were correct when this table was last verified on 14 August, when
+        the log records OpenAI as re-read and unchanged, so the most likely
+        account is a cut somewhere in the twelve days between. This page cannot
+        prove that from the outside: a vendor's current page shows today's price
+        and not the date it changed, so a cut on the 20th and a misreading on the
+        14th look identical from here. Either way, anyone who budgeted a Sol job
+        from this table in that window over-estimated by a quarter on input and
+        half on output. Erring expensive is the better direction to be wrong in,
+        and it is still being wrong. GPT-5.6 Terra was checked in the same pass
+        and has not moved.
+      </p>
+    </details>
+
+    <details>
+      <summary>Correction, 14 August 2026 &mdash; the Gemini 3.6 Flash prices here were wrong, in the expensive direction to trust</summary>
+      <p>
+        This table said $1.50 input / $7.50 output. Google's pricing page gives
+        $0.75 and $3.75 &ldquo;through December 31, 2026&rdquo;, with $1.50 and
+        $7.50 &ldquo;starting January 1, 2027&rdquo;. The figures printed here
+        were the <em>future</em> price, so anyone budgeting a Gemini Flash job
+        from this table between 11 and 14 August would have doubled their
+        estimate. The cells now carry the current rate, and the date the rate
+        changes is stated rather than left as a footnote nobody reads:
+        <strong>these Gemini figures expire on 1 January 2027.</strong> Google
+        also publishes batch and flex rates at half the standard price, and a
+        priority rate well above it.
+      </p>
+    </details>
+
+    <details>
+      <summary>Verified 26 August 2026, against each vendor's own documentation</summary>
+      <p>
+        OpenAI's <a href="https://developers.openai.com/api/docs/pricing">pricing</a>
+        and <a href="https://developers.openai.com/api/docs/models">models</a>
+        pages, Google's
+        <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
+        and its
+        <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
+        model page, and Meta's
+        <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.
+      </p>
+    </details>
+
+    <details>
+      <summary>Selection: current general-purpose text models, not the full catalogue</summary>
+      <p>
+        Each vendor sells cheaper small models and more expensive reasoning
+        tiers; this table exists to make the shape of the market legible, not to
+        be exhaustive.
+      </p>
+    </details>
+
+    <details>
+      <summary>API IDs: which string each row carries, and the one alias worth knowing</summary>
+      <p>
+        The string in that column is the one Anthropic documents as the API ID.
+        For Claude Haiku 4.5 that is the dated
+        <code>claude-haiku-4-5-20251001</code>; the shorter
+        <code>claude-haiku-4-5</code> is documented as an alias and also works.
+        From the 4.6 generation onward the two are identical, so Haiku is the only
+        row where the distinction shows.
+      </p>
+    </details>
+
+    <details>
+      <summary>Context figures: why two vendors' numbers look different and are not</summary>
+      <p>
+        Google publishes an exact input limit of 1,048,576 tokens and an output
+        limit of 65,536; OpenAI publishes 1.05M and 128K. The first two are the
+        same number written two ways.
+      </p>
+    </details>
+
+    <details>
+      <summary>Cutoffs: who publishes one, and why a column is missing</summary>
+      <p>
+        OpenAI publishes a knowledge cutoff of 16 February 2026 for the GPT-5.6
+        family. Google's model page for Gemini 3.6 Flash does not publish one,
+        which is why there is no cutoff column here.
+      </p>
+    </details>
+
+  </div>
 
   <div class="prose">
     <div class="gap">

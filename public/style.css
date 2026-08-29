@@ -640,3 +640,49 @@ figure.diagram figcaption {
 @media (prefers-reduced-motion: reduce) {
   figure.diagram svg * { transition: none; }
 }
+
+/* ---------- Folded notes under the table ---------- */
+
+/* Eight separate topics were one 608-word paragraph, so a reader who needed one
+   of them had to scan all eight — and the note that actually costs money, that
+   the prices are short-context rates, sat at word 590. Native disclosure, so it
+   needs no JavaScript and the text stays in the markup for anything reading the
+   page. Two rules: a correction keeps its date and its headline in the summary,
+   so the fact that a correction exists is visible while it is folded shut, and
+   the tiering warning is not folded at all. */
+
+.table-notes { margin: 1.5rem 0 0; }
+
+.table-notes details {
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
+}
+
+.table-notes details:last-of-type { border-bottom: 1px solid var(--rule); }
+
+.table-notes summary {
+  cursor: pointer;
+  padding: 0.7rem 0.1rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.table-notes summary:hover { color: var(--accent); }
+
+.table-notes summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.table-notes details[open] > summary { color: var(--ink); }
+
+.table-notes details > p {
+  margin: 0.2rem 0 1rem;
+  padding-left: 0.1rem;
+  max-width: var(--measure);
+}
+
+.table-notes details.cost > summary { color: var(--flag); }

@@ -185,8 +185,8 @@
         Not every rate-limit response is a "wait and try again". A request
         rejected because an organisation hit a spend cap comes back with the same
         status and no retry-after header, and it will keep failing until access
-        resumes. No amount of backoff helps. A client that treats every 429 as
-        temporary will retry that one until somebody notices. The distinguishing
+        resumes. No amount of backoff helps. A client that treats every rate-limit
+        refusal as temporary will retry that one until somebody notices. The distinguishing
         signal is the missing header.
       </p>
     </div>

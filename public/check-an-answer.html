@@ -63,239 +63,257 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Guide &middot; Checking an output</p>
-  <h1>How to check an AI's answer</h1>
-  <p class="standfirst">
-    A published page can be audited. It has a date, an author, and other readers
-    who might have caught the error first. An answer written for you has none of
-    those, and you are the entire review process.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-14"><b>14 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-14"><b>14 August 2026</b></time> &nbsp;·&nbsp; One outside
-    source, read that day. No figures on this page
-  </p>
-
-  <div class="prose">
-
-    <h2 id="why-an-answer-is-harder-to-check-than-an">Why an answer is harder to check than an article<a class="anchor" href="#why-an-answer-is-harder-to-check-than-an" aria-label="Permalink to Why an answer is harder to check than an article">#</a></h2>
-    <p>
-      There is a companion to this page about
-      <a href="/is-this-out-of-date">whether the thing you are reading is out of
-      date</a>. That job is easier than this one, and it is worth being clear
-      about why, because the difference decides the method.
-    </p>
-    <p>
-      A published page sits still. It carries a date you can find, a name you can
-      weigh, and an audience. If it is wrong there is at least a chance somebody
-      already noticed: a correction, an angry comment, a better page ranking above
-      it. None of that machinery exists around an answer generated for you. No
-      date, no byline, no other readers, no comments, no corrections log.
-    </p>
-    <p>
-      Then there is the part that does the real damage. A wrong article is wrong
-      for everyone in the same way, which is precisely what gives somebody the
-      opportunity to catch it. A wrong answer is wrong for you alone. It was
-      shaped to your question, uses your vocabulary, and addresses your actual
-      situation, which is exactly what makes it read like the work of someone who
-      understood the problem. That fit is not evidence of anything. Fitting the
-      question is the thing these systems are best at, and it is independent of
-      whether the content is true.
-    </p>
-    <p>
-      You also cannot re-read it in the way you can re-read a page. Ask again and
-      you get a different answer, which turns out to be useful, and is the basis
-      of one of the better checks below.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Guide &middot; Checking an output</p>
+    <h1>How to check an AI's answer</h1>
+    <p class="standfirst">
+      A published page can be audited. It has a date, an author, and other readers
+      who might have caught the error first. An answer written for you has none of
+      those, and you are the entire review process.
     </p>
 
-    <h2 id="confidence-tells-you-nothing-here">Confidence tells you nothing here<a class="anchor" href="#confidence-tells-you-nothing-here" aria-label="Permalink to Confidence tells you nothing here">#</a></h2>
-    <p>
-      Most people read confidence for competence, and with other people that is a
-      reasonable heuristic. Someone who is unsure hedges, slows down, adds
-      qualifiers, says the bit about not being certain. Those signals are largely
-      involuntary and largely honest.
-    </p>
-    <p>
-      They do not survive the trip. A model's register does not move with its
-      certainty. The same level, fluent, well-organised prose arrives whether the
-      claim underneath was stated in ten thousand documents or assembled just now
-      from the shape of your question. So the reading skill you have spent your
-      life developing is not merely weakened here, it points the wrong way: the
-      invented passage is often the most fluent thing on the page, because there
-      was no awkward source material constraining how it came out.
-      &rarr; <a href="/concepts/hallucination">Hallucination</a>
+    <p class="stamp">
+      Published <time datetime="2026-08-14"><b>14 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-14"><b>14 August 2026</b></time> &nbsp;·&nbsp; One outside
+      source, read that day. No figures on this page
     </p>
 
-    <h2 id="check-what-carries-weight-not-everything">Check what carries weight, not everything<a class="anchor" href="#check-what-carries-weight-not-everything" aria-label="Permalink to Check what carries weight, not everything">#</a></h2>
-    <p>
-      Verifying every sentence costs more than not using the tool at all, so any
-      honest method has to start by throwing most of it away. The useful question
-      is not "is this true" but <strong>"what happens if this is false"</strong>.
-    </p>
-    <p>
-      Worth checking: anything you will act on, spend money against, put in front
-      of somebody else, or repeat later as a fact. Anything that will be
-      embarrassing to have wrong in six months, when you will have long forgotten
-      where you got it.
-    </p>
-    <p>
-      Not worth checking: the reasoning, the structure, the phrasing, the summary
-      of something you already know. Those are the parts these systems are
-      reliably good at, and they are also the parts you can evaluate yourself
-      while reading, without leaving the page.
-    </p>
+    <div class="prose">
 
-    <h2 id="the-failures-worth-knowing-by-name">The failures worth knowing by name<a class="anchor" href="#the-failures-worth-knowing-by-name" aria-label="Permalink to The failures worth knowing by name">#</a></h2>
-    <p>
-      Different kinds of claim fail in different ways, and knowing which failure
-      to expect is most of the work.
-    </p>
-    <p>
-      <strong>A reference that exists is not a reference that supports.</strong>
-      There are two separate failures here and people only check for the first. A
-      citation can be invented outright, which a search reveals in seconds. Or the
-      citation can be entirely real, correctly formatted, genuinely on the
-      subject, and simply not contain the claim attached to it. The second is more
-      common once a model can search, harder to catch, and worse, because
-      everything about it survives a cursory check. Open the source and find the
-      sentence.
-    </p>
-    <p>
-      <strong>Numbers deserve a prior question: could it have known?</strong>
-      Before asking whether a figure is right, ask whether it was ever knowable.
-      Prices, limits, model names and anything else that changes after a training
-      cutoff cannot be recalled correctly except by luck, and a model with no
-      search tool has no way to notice that it is guessing.
-      &rarr; <a href="/concepts/training-cutoff">Training cutoff</a>
-    </p>
-    <p>
-      <strong>Identifiers look correct right up until they do not work.</strong>
-      Model IDs, API endpoints, function names, package names, configuration keys.
-      These are generated by the same machinery that generates prose, so they come
-      out plausible, well-formed, and consistent with the naming conventions of
-      the thing they are meant to belong to. They fail later, somewhere else, for
-      reasons that look unrelated to the answer that produced them.
-    </p>
-    <p>
-      <strong>Quotes are paraphrases until proven otherwise.</strong> A fluent
-      restatement presented between quotation marks is a standard failure. If you
-      are going to reproduce a quotation anywhere it matters, search for the exact
-      string rather than the gist.
-    </p>
-    <p>
-      <strong>Negative claims are the hardest of all.</strong> "There is no way to
-      do this", "no library supports that", "the documentation does not mention
-      it". Absence is not the kind of thing that can be reliably recalled, and it
-      cannot be confirmed by finding something. Treat a confident negative as the
-      least reliable sentence in any answer.
-      &rarr; <a href="/what-ai-is-bad-at">What AI is actually bad at</a>
-    </p>
+      <section aria-labelledby="why-an-answer-is-harder-to-check-than-an">
+        <h2 id="why-an-answer-is-harder-to-check-than-an">Why an answer is harder to check than an article<a class="anchor" href="#why-an-answer-is-harder-to-check-than-an" aria-label="Permalink to Why an answer is harder to check than an article">#</a></h2>
+        <p>
+          There is a companion to this page about
+          <a href="/is-this-out-of-date">whether the thing you are reading is out of
+          date</a>. That job is easier than this one, and it is worth being clear
+          about why, because the difference decides the method.
+        </p>
+        <p>
+          A published page sits still. It carries a date you can find, a name you can
+          weigh, and an audience. If it is wrong there is at least a chance somebody
+          already noticed: a correction, an angry comment, a better page ranking above
+          it. None of that machinery exists around an answer generated for you. No
+          date, no byline, no other readers, no comments, no corrections log.
+        </p>
+        <p>
+          Then there is the part that does the real damage. A wrong article is wrong
+          for everyone in the same way, which is precisely what gives somebody the
+          opportunity to catch it. A wrong answer is wrong for you alone. It was
+          shaped to your question, uses your vocabulary, and addresses your actual
+          situation, which is exactly what makes it read like the work of someone who
+          understood the problem. That fit is not evidence of anything. Fitting the
+          question is the thing these systems are best at, and it is independent of
+          whether the content is true.
+        </p>
+        <p>
+          You also cannot re-read it in the way you can re-read a page. Ask again and
+          you get a different answer, which turns out to be useful, and is the basis
+          of one of the better checks below.
+        </p>
+      </section>
 
-    <h2 id="ask-it-twice-in-a-fresh-session">Ask it twice, in a fresh session<a class="anchor" href="#ask-it-twice-in-a-fresh-session" aria-label="Permalink to Ask it twice, in a fresh session">#</a></h2>
-    <p>
-      The cheapest check available, and the one almost nobody does. Open a new
-      conversation, ask the same question, and compare. Anthropic's own guidance
-      for developers lists this under <em>Best-of-N verification</em>: "Run Claude
-      through the same prompt multiple times and compare the outputs.
-      Inconsistencies across outputs could indicate hallucinations."
-    </p>
-    <p>
-      It works because of the difference between recalling and assembling. A fact
-      the model genuinely has tends to come back the same way each time. A detail
-      that was constructed to fit your question tends to be constructed slightly
-      differently on the second pass: a different figure, a different author, a
-      different function name. Watch the specifics rather than the overall shape,
-      since the shape will match either way.
-    </p>
-    <p>
-      It has to be a fresh session. Asking again in the same conversation shows
-      the model its previous answer, and consistency with itself is exactly what
-      you were trying to test around.
-      &rarr; <a href="/concepts/context-windows">Context windows</a>
-    </p>
+      <section aria-labelledby="confidence-tells-you-nothing-here">
+        <h2 id="confidence-tells-you-nothing-here">Confidence tells you nothing here<a class="anchor" href="#confidence-tells-you-nothing-here" aria-label="Permalink to Confidence tells you nothing here">#</a></h2>
+        <p>
+          Most people read confidence for competence, and with other people that is a
+          reasonable heuristic. Someone who is unsure hedges, slows down, adds
+          qualifiers, says the bit about not being certain. Those signals are largely
+          involuntary and largely honest.
+        </p>
+        <p>
+          They do not survive the trip. A model's register does not move with its
+          certainty. The same level, fluent, well-organised prose arrives whether the
+          claim underneath was stated in ten thousand documents or assembled just now
+          from the shape of your question. So the reading skill you have spent your
+          life developing is not merely weakened here, it points the wrong way: the
+          invented passage is often the most fluent thing on the page, because there
+          was no awkward source material constraining how it came out.
+          &rarr; <a href="/concepts/hallucination">Hallucination</a>
+        </p>
+      </section>
 
-    <div class="note">
-      <p class="note-title">What a second answer actually proves</p>
-      <p>
-        Only that the claim is unstable, which is a strong signal it was invented.
-        The reverse does not hold: an answer that comes back identical twice can
-        still be wrong, and consistently so, because a mistake absorbed from its
-        training data is held just as steadily as a fact. Disagreement is
-        evidence. Agreement is not.
+      <section aria-labelledby="check-what-carries-weight-not-everything">
+        <h2 id="check-what-carries-weight-not-everything">Check what carries weight, not everything<a class="anchor" href="#check-what-carries-weight-not-everything" aria-label="Permalink to Check what carries weight, not everything">#</a></h2>
+        <p>
+          Verifying every sentence costs more than not using the tool at all, so any
+          honest method has to start by throwing most of it away. The useful question
+          is not "is this true" but <strong>"what happens if this is false"</strong>.
+        </p>
+        <p>
+          Worth checking: anything you will act on, spend money against, put in front
+          of somebody else, or repeat later as a fact. Anything that will be
+          embarrassing to have wrong in six months, when you will have long forgotten
+          where you got it.
+        </p>
+        <p>
+          Not worth checking: the reasoning, the structure, the phrasing, the summary
+          of something you already know. Those are the parts these systems are
+          reliably good at, and they are also the parts you can evaluate yourself
+          while reading, without leaving the page.
+        </p>
+      </section>
+
+      <section aria-labelledby="the-failures-worth-knowing-by-name">
+        <h2 id="the-failures-worth-knowing-by-name">The failures worth knowing by name<a class="anchor" href="#the-failures-worth-knowing-by-name" aria-label="Permalink to The failures worth knowing by name">#</a></h2>
+        <p>
+          Different kinds of claim fail in different ways, and knowing which failure
+          to expect is most of the work.
+        </p>
+        <p>
+          <strong>A reference that exists is not a reference that supports.</strong>
+          There are two separate failures here and people only check for the first. A
+          citation can be invented outright, which a search reveals in seconds. Or the
+          citation can be entirely real, correctly formatted, genuinely on the
+          subject, and simply not contain the claim attached to it. The second is more
+          common once a model can search, harder to catch, and worse, because
+          everything about it survives a cursory check. Open the source and find the
+          sentence.
+        </p>
+        <p>
+          <strong>Numbers deserve a prior question: could it have known?</strong>
+          Before asking whether a figure is right, ask whether it was ever knowable.
+          Prices, limits, model names and anything else that changes after a training
+          cutoff cannot be recalled correctly except by luck, and a model with no
+          search tool has no way to notice that it is guessing.
+          &rarr; <a href="/concepts/training-cutoff">Training cutoff</a>
+        </p>
+        <p>
+          <strong>Identifiers look correct right up until they do not work.</strong>
+          Model IDs, API endpoints, function names, package names, configuration keys.
+          These are generated by the same machinery that generates prose, so they come
+          out plausible, well-formed, and consistent with the naming conventions of
+          the thing they are meant to belong to. They fail later, somewhere else, for
+          reasons that look unrelated to the answer that produced them.
+        </p>
+        <p>
+          <strong>Quotes are paraphrases until proven otherwise.</strong> A fluent
+          restatement presented between quotation marks is a standard failure. If you
+          are going to reproduce a quotation anywhere it matters, search for the exact
+          string rather than the gist.
+        </p>
+        <p>
+          <strong>Negative claims are the hardest of all.</strong> "There is no way to
+          do this", "no library supports that", "the documentation does not mention
+          it". Absence is not the kind of thing that can be reliably recalled, and it
+          cannot be confirmed by finding something. Treat a confident negative as the
+          least reliable sentence in any answer.
+          &rarr; <a href="/what-ai-is-bad-at">What AI is actually bad at</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="ask-it-twice-in-a-fresh-session">
+        <h2 id="ask-it-twice-in-a-fresh-session">Ask it twice, in a fresh session<a class="anchor" href="#ask-it-twice-in-a-fresh-session" aria-label="Permalink to Ask it twice, in a fresh session">#</a></h2>
+        <p>
+          The cheapest check available, and the one almost nobody does. Open a new
+          conversation, ask the same question, and compare. Anthropic's own guidance
+          for developers lists this under <em>Best-of-N verification</em>: "Run Claude
+          through the same prompt multiple times and compare the outputs.
+          Inconsistencies across outputs could indicate hallucinations."
+        </p>
+        <p>
+          It works because of the difference between recalling and assembling. A fact
+          the model genuinely has tends to come back the same way each time. A detail
+          that was constructed to fit your question tends to be constructed slightly
+          differently on the second pass: a different figure, a different author, a
+          different function name. Watch the specifics rather than the overall shape,
+          since the shape will match either way.
+        </p>
+        <p>
+          It has to be a fresh session. Asking again in the same conversation shows
+          the model its previous answer, and consistency with itself is exactly what
+          you were trying to test around.
+          &rarr; <a href="/concepts/context-windows">Context windows</a>
+        </p>
+
+        <div class="note">
+          <p class="note-title">What a second answer actually proves</p>
+          <p>
+            Only that the claim is unstable, which is a strong signal it was invented.
+            The reverse does not hold: an answer that comes back identical twice can
+            still be wrong, and consistently so, because a mistake absorbed from its
+            training data is held just as steadily as a fact. Disagreement is
+            evidence. Agreement is not.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="its-own-check-is-not-your-check">
+        <h2 id="its-own-check-is-not-your-check">Its own check is not your check<a class="anchor" href="#its-own-check-is-not-your-check" aria-label="Permalink to Its own check is not your check">#</a></h2>
+        <p>
+          Asking a model to verify its own answer is genuinely worth doing, and
+          <a href="/getting-better-results">Getting better results</a> covers how to
+          ask so that it works: a named standard rather than "are you sure". What it
+          cannot do is stand in for you.
+        </p>
+        <p>
+          A self-check compares the answer against the material in front of it: the
+          documents you supplied, the instructions you gave, its own earlier sentences.
+          That catches internal inconsistency, arithmetic that does not add up, and
+          claims with no support in a provided source, all of which are worth catching.
+          It cannot catch a claim that is coherent, well-supported by the text it was
+          given, and false about the world. Nothing in the loop is checking the world.
+        </p>
+        <p>
+          The same Anthropic guidance says so plainly, having just recommended the
+          techniques: they "don't eliminate them entirely. Always validate critical
+          information, especially for high-stakes decisions." Worth noting that page is
+          written for developers building systems, not for people using an assistant.
+          The techniques transfer; the responsibility does not move.
+        </p>
+      </section>
+
+      <section aria-labelledby="where-to-stop">
+        <h2 id="where-to-stop">Where to stop<a class="anchor" href="#where-to-stop" aria-label="Permalink to Where to stop">#</a></h2>
+        <p>
+          There is a point where checking an answer costs more than producing it
+          yourself would have. Reaching it is not a failure of method, it is
+          information: for that particular task, this was the wrong tool, and the
+          right response is to stop rather than to check harder.
+        </p>
+        <p>
+          Which suggests a way of choosing tasks in the first place.
+          <strong>These systems are most useful where verification is cheapest.</strong>
+          Code you can run, a fact with a primary source one search away, a draft you
+          can read and judge in a minute: the check is quick, so a wrong answer costs
+          you almost nothing. They are most dangerous in the mirror image, where you
+          cannot easily tell a right answer from a plausible one and confirming it
+          would take an afternoon. That is not a list of forbidden subjects, and it
+          shifts as the tools change. It is a question to ask before you start, rather
+          than after you have already relied on the answer.
+        </p>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p>
+          One outside document, read on 14 August 2026 and listed on
+          <a href="/sources">Sources</a> with the pages that depend on it: Anthropic's
+          <a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations">Reduce
+          hallucinations</a>. Both quotations above are from it &mdash; the description
+          of Best-of-N verification, and the caveat that these techniques reduce the
+          problem rather than remove it.
+        </p>
+        <p>
+          It is written for people building on an API, and this page is not. What is
+          taken from it is the shape of the technique and the size of its claim, not
+          the worked examples or the model-specific settings around them. Nothing on
+          this page is a figure, a model name or a score, so there is nothing here to
+          go stale the way <a href="/model-facts">Model facts</a> does.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Related &rarr; <a href="/is-this-out-of-date">Is what you're reading out of date?</a> &middot;
+        <a href="/concepts/hallucination">Hallucination</a> &middot;
+        <a href="/getting-better-results">Getting better results</a> &middot;
+        <a href="/did-it-get-better">How to tell if it actually got better</a> &middot;
+        <a href="/sources">Sources</a>
       </p>
+
     </div>
-
-    <h2 id="its-own-check-is-not-your-check">Its own check is not your check<a class="anchor" href="#its-own-check-is-not-your-check" aria-label="Permalink to Its own check is not your check">#</a></h2>
-    <p>
-      Asking a model to verify its own answer is genuinely worth doing, and
-      <a href="/getting-better-results">Getting better results</a> covers how to
-      ask so that it works: a named standard rather than "are you sure". What it
-      cannot do is stand in for you.
-    </p>
-    <p>
-      A self-check compares the answer against the material in front of it: the
-      documents you supplied, the instructions you gave, its own earlier sentences.
-      That catches internal inconsistency, arithmetic that does not add up, and
-      claims with no support in a provided source, all of which are worth catching.
-      It cannot catch a claim that is coherent, well-supported by the text it was
-      given, and false about the world. Nothing in the loop is checking the world.
-    </p>
-    <p>
-      The same Anthropic guidance says so plainly, having just recommended the
-      techniques: they "don't eliminate them entirely. Always validate critical
-      information, especially for high-stakes decisions." Worth noting that page is
-      written for developers building systems, not for people using an assistant.
-      The techniques transfer; the responsibility does not move.
-    </p>
-
-    <h2 id="where-to-stop">Where to stop<a class="anchor" href="#where-to-stop" aria-label="Permalink to Where to stop">#</a></h2>
-    <p>
-      There is a point where checking an answer costs more than producing it
-      yourself would have. Reaching it is not a failure of method, it is
-      information: for that particular task, this was the wrong tool, and the
-      right response is to stop rather than to check harder.
-    </p>
-    <p>
-      Which suggests a way of choosing tasks in the first place.
-      <strong>These systems are most useful where verification is cheapest.</strong>
-      Code you can run, a fact with a primary source one search away, a draft you
-      can read and judge in a minute: the check is quick, so a wrong answer costs
-      you almost nothing. They are most dangerous in the mirror image, where you
-      cannot easily tell a right answer from a plausible one and confirming it
-      would take an afternoon. That is not a list of forbidden subjects, and it
-      shifts as the tools change. It is a question to ask before you start, rather
-      than after you have already relied on the answer.
-    </p>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p>
-      One outside document, read on 14 August 2026 and listed on
-      <a href="/sources">Sources</a> with the pages that depend on it: Anthropic's
-      <a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations">Reduce
-      hallucinations</a>. Both quotations above are from it &mdash; the description
-      of Best-of-N verification, and the caveat that these techniques reduce the
-      problem rather than remove it.
-    </p>
-    <p>
-      It is written for people building on an API, and this page is not. What is
-      taken from it is the shape of the technique and the size of its claim, not
-      the worked examples or the model-specific settings around them. Nothing on
-      this page is a figure, a model name or a score, so there is nothing here to
-      go stale the way <a href="/model-facts">Model facts</a> does.
-    </p>
-
-    <p class="next">
-      Related &rarr; <a href="/is-this-out-of-date">Is what you're reading out of date?</a> &middot;
-      <a href="/concepts/hallucination">Hallucination</a> &middot;
-      <a href="/getting-better-results">Getting better results</a> &middot;
-      <a href="/did-it-get-better">How to tell if it actually got better</a> &middot;
-      <a href="/sources">Sources</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

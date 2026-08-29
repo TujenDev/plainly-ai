@@ -63,234 +63,252 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Guide &middot; Building</p>
-  <h1>Designing for the ways it fails</h1>
-  <p class="standfirst">
-    <a href="/start-here#builder">Start here</a> tells builders to assume it will
-    fail and design for it, and then does not say how. This is the page it should
-    have linked to. The short version: the failures that hurt most do not arrive
-    as errors.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-26"><b>26 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-26"><b>26 August 2026</b></time> &nbsp;·&nbsp; Three
-    outside sources, read that day. No figures on this page
-  </p>
-
-  <div class="prose">
-
-    <h2 id="the-failures-that-arrive-as-success">The failures that arrive as success<a class="anchor" href="#the-failures-that-arrive-as-success" aria-label="Permalink to The failures that arrive as success">#</a></h2>
-    <p>
-      Most people write the error handling they know how to write: catch the
-      exception, retry the request, log the status code. That machinery is worth
-      having, and it will not catch the two failures most likely to reach your
-      users.
-    </p>
-    <p>
-      A response from the Messages API carries a field saying why generation
-      stopped. Anthropic documents seven values for it, and only one of them is
-      the ordinary case where the model finished what it was saying. Among the
-      others: the response was cut off because it hit the output ceiling; the
-      context window was exceeded; a long-running turn was paused and can be
-      continued by handing the response back; and the model declined, which is
-      recorded there rather than raised as an error.
-    </p>
-    <p>
-      Every one of those arrives with a successful HTTP status. Your client does
-      not throw. Your retry logic does not fire. Your monitoring shows a healthy
-      service. <strong>The status code tells you the request succeeded, not that
-      the answer is whole</strong>, and code that checks only the status is
-      blind to the entire category.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Guide &middot; Building</p>
+    <h1>Designing for the ways it fails</h1>
+    <p class="standfirst">
+      <a href="/start-here#builder">Start here</a> tells builders to assume it will
+      fail and design for it, and then does not say how. This is the page it should
+      have linked to. The short version: the failures that hurt most do not arrive
+      as errors.
     </p>
 
-    <div class="note">
-      <p class="note-title">The first thing to add to a working integration</p>
-      <p>
-        Read the stop reason on every response and branch on it. It costs a few
-        lines, and it converts a class of silent corruption into a condition you
-        can see, log and handle. Very little else you can bolt on afterwards pays
-        back as well.
+    <p class="stamp">
+      Published <time datetime="2026-08-26"><b>26 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-26"><b>26 August 2026</b></time> &nbsp;·&nbsp; Three
+      outside sources, read that day. No figures on this page
+    </p>
+
+    <div class="prose">
+
+      <section aria-labelledby="the-failures-that-arrive-as-success">
+        <h2 id="the-failures-that-arrive-as-success">The failures that arrive as success<a class="anchor" href="#the-failures-that-arrive-as-success" aria-label="Permalink to The failures that arrive as success">#</a></h2>
+        <p>
+          Most people write the error handling they know how to write: catch the
+          exception, retry the request, log the status code. That machinery is worth
+          having, and it will not catch the two failures most likely to reach your
+          users.
+        </p>
+        <p>
+          A response from the Messages API carries a field saying why generation
+          stopped. Anthropic documents seven values for it, and only one of them is
+          the ordinary case where the model finished what it was saying. Among the
+          others: the response was cut off because it hit the output ceiling; the
+          context window was exceeded; a long-running turn was paused and can be
+          continued by handing the response back; and the model declined, which is
+          recorded there rather than raised as an error.
+        </p>
+        <p>
+          Every one of those arrives with a successful HTTP status. Your client does
+          not throw. Your retry logic does not fire. Your monitoring shows a healthy
+          service. <strong>The status code tells you the request succeeded, not that
+          the answer is whole</strong>, and code that checks only the status is
+          blind to the entire category.
+        </p>
+
+        <div class="note">
+          <p class="note-title">The first thing to add to a working integration</p>
+          <p>
+            Read the stop reason on every response and branch on it. It costs a few
+            lines, and it converts a class of silent corruption into a condition you
+            can see, log and handle. Very little else you can bolt on afterwards pays
+            back as well.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="truncation-is-a-budget-not-an-error">
+        <h2 id="truncation-is-a-budget-not-an-error">Truncation is a budget, not an error<a class="anchor" href="#truncation-is-a-budget-not-an-error" aria-label="Permalink to Truncation is a budget, not an error">#</a></h2>
+        <p>
+          You set a ceiling on output length with every request. When generation
+          reaches it, the model stops mid-sentence and the response comes back marked
+          as having hit the limit. Nothing is wrong from the API's point of view: it
+          did exactly what you asked, and you asked for at most this many tokens.
+        </p>
+        <p>
+          This is benign for prose, where a reader sees the sentence stop. It is
+          vicious for structure. Ask for JSON, get cut off two thirds of the way
+          through, and what you hold is a string that is not JSON: no closing brace,
+          possibly a half-written key. The parse failure then surfaces somewhere else
+          entirely, in a function that has no idea a length limit exists, and reads
+          like a bug in your parser.
+        </p>
+        <p>
+          Two ceilings apply, and confusing them wastes an afternoon: the limit you
+          set, and the model's own maximum, which you cannot exceed by asking. Both
+          produce the same stop reason. The figures for the second live on
+          <a href="/model-facts">Model facts</a> and differ per model.
+          &rarr; <a href="/concepts/context-windows">Context windows</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="a-refusal-is-a-response-not-an-except">
+        <h2 id="a-refusal-is-a-response-not-an-except">A refusal is a response, not an exception<a class="anchor" href="#a-refusal-is-a-response-not-an-except" aria-label="Permalink to A refusal is a response, not an exception">#</a></h2>
+        <p>
+          A model can decline, and the vendor documents a distinct stop reason for
+          the case where classifiers intervene mid-stream. Your code asked for a
+          summary and received text that is not a summary, delivered successfully, in
+          the same shape a summary would have arrived in.
+        </p>
+        <p>
+          What makes this a reliability problem rather than a policy one is that it
+          is input-dependent and rare. It will not happen in your testing, because
+          your test inputs are ones you chose. It happens later, to a user, on
+          material you never anticipated. The failure it produces downstream,
+          an empty field or a nonsensical record or a document that says the wrong
+          thing, has no obvious connection to its cause.
+        </p>
+      </section>
+
+      <section aria-labelledby="rate-limits-don-t-reset-the-way-you">
+        <h2 id="rate-limits-don-t-reset-the-way-you">Rate limits don't reset the way you think<a class="anchor" href="#rate-limits-don-t-reset-the-way-you" aria-label="Permalink to Rate limits don't reset the way you think">#</a></h2>
+        <p>
+          The intuition is a meter that empties at the top of each minute. That is not
+          how it works. Anthropic documents a token bucket: capacity is continuously
+          replenished up to your ceiling rather than reset at fixed intervals. So
+          there is no moment to wait for. Capacity comes back gradually, and a client
+          that sleeps until the minute rolls over is both waiting too long and then
+          firing everything at once.
+        </p>
+        <p>
+          Which leads to the trap that catches people who did the arithmetic. Limits
+          can be enforced over shorter intervals than the one they are quoted in: the
+          documentation gives the example of a per-minute request limit enforced as
+          roughly one request per second, so a burst can fail while your average
+          usage sits comfortably underneath. Being under the limit on paper is not
+          the same as being under it in the moment.
+        </p>
+        <p>
+          Two practical consequences. Every response carries headers reporting the
+          limit, what remains, and when it will be replenished, so you can slow down
+          before you start failing rather than after. And when you are refused,
+          there is a header telling you how long to wait, with the documentation
+          noting that earlier retries will fail. Honour it rather than guessing.
+        </p>
+
+        <div class="note">
+          <p class="note-title">The refusal that never clears</p>
+          <p>
+            Not every rate-limit response is a "wait and try again". A request
+            rejected because an organisation hit a spend cap comes back with the same
+            status and no retry-after header, and it will keep failing until access
+            resumes. No amount of backoff helps. A client that treats every rate-limit
+            refusal as temporary will retry that one until somebody notices. The distinguishing
+            signal is the missing header.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="know-what-is-already-retrying">
+        <h2 id="know-what-is-already-retrying">Know what is already retrying<a class="anchor" href="#know-what-is-already-retrying" aria-label="Permalink to Know what is already retrying">#</a></h2>
+        <p>
+          The official SDKs already retry transient failures, including connection
+          errors, rate limits and server errors, with exponential backoff, and they
+          already honour the retry-after header. This is on by default and configurable.
+        </p>
+        <p>
+          So the retry loop you are about to write sits on top of one that exists. The
+          two multiply: your handful of attempts, each of which is quietly several.
+          One slow outage becomes a long stall, and under load a fleet of clients all
+          backing off and returning together produces exactly the synchronised burst
+          the previous section warns about. Find out what your client library does
+          before adding a layer to it, and configure the existing behaviour in
+          preference to wrapping it.
+        </p>
+        <p>
+          There is also a subtler point about retrying anything here. These systems
+          are not deterministic, so a retry of an identical request can succeed where
+          the first attempt failed. That is useful, and it is also why a genuine bug
+          in this kind of system so often presents as flakiness: something that works
+          four times in five looks like infrastructure trouble and may be a prompt
+          that is wrong one time in five.
+          &rarr; <a href="/did-it-get-better">How to tell if it actually got better</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="streaming-breaks-the-error-model">
+        <h2 id="streaming-breaks-the-error-model">Streaming breaks the error model<a class="anchor" href="#streaming-breaks-the-error-model" aria-label="Permalink to Streaming breaks the error model">#</a></h2>
+        <p>
+          Streaming is the right choice for anything long enough that a user would
+          otherwise stare at nothing, and it moves the goalposts on error handling.
+          The vendor's documentation says it directly: when you stream, an error can
+          occur after the API has already returned a successful status, and handling
+          it does not follow the standard mechanisms.
+        </p>
+        <p>
+          The response began. Headers are sent. Your code has committed to a success
+          path and may already have shown the user the first half of an answer. The
+          failure arrives as an event in the stream, which means it is only a failure
+          if you are reading the events, and the partial output on screen is now your
+          problem to withdraw or complete.
+        </p>
+      </section>
+
+      <section aria-labelledby="the-failure-none-of-this-catches">
+        <h2 id="the-failure-none-of-this-catches">The failure none of this catches<a class="anchor" href="#the-failure-none-of-this-catches" aria-label="Permalink to The failure none of this catches">#</a></h2>
+        <p>
+          Everything above is about a response being incomplete, refused, delayed or
+          malformed. All of it is detectable in code, which is what makes it worth
+          the trouble.
+        </p>
+        <p>
+          The failure that costs the most is the one where every signal reads clean.
+          Successful status, natural stop reason, well-formed JSON, every field
+          populated, and the content is wrong. No status code describes that, no retry
+          fixes it, and no amount of the engineering on this page will surface it.
+          That is what the rest of this site is about: knowing which claims are worth
+          checking, and having a fixed set of cases you re-run so a change that
+          quietly breaks something gets caught by you rather than by a user.
+          &rarr; <a href="/check-an-answer">How to check an AI's answer</a>
+        </p>
+        <p>
+          Which is the honest summary of designing for failure here. The infrastructure
+          failures are ordinary engineering, and this page is mostly a list of the
+          places where the shape of them is unusual. The failure that is genuinely new
+          is the confident wrong answer, and it needs a different discipline, not a
+          better retry policy.
+        </p>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p>
+          Three vendor documents, all read on 26 August 2026. Each appears on
+          <a href="/sources">Sources</a> against the pages that fall over if it
+          changes. Anthropic's
+          <a href="https://platform.claude.com/docs/en/api/errors">API errors</a>
+          backs the error taxonomy, the retry behaviour already built into the SDKs,
+          and the fact that a streaming error can follow a successful status.
+          <a href="https://platform.claude.com/docs/en/api/rate-limits">Rate
+          limits</a> backs the token bucket, enforcement over shorter intervals than
+          quoted, the response headers, and the spend-cap refusal that carries no
+          retry-after. The
+          <a href="https://platform.claude.com/docs/en/api/messages">Messages API</a>
+          reference backs the stop reason values.
+        </p>
+        <p>
+          This page describes one vendor's API because that is the documentation that
+          was read, and it says so rather than implying the shape is universal. The
+          mechanisms generalise better than the details: every provider has an output
+          ceiling, a way of recording why generation stopped, and a rate limiter whose
+          behaviour is worth reading rather than assuming. Nothing here is a figure,
+          a limit or a tier, so there is nothing on this page to go stale. The
+          numbers live on <a href="/model-facts">Model facts</a> and on the vendor's
+          own pages, where they are dated.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Related &rarr; <a href="/concepts/tool-use">Tool use</a> &middot;
+        <a href="/concepts/agents">Agents</a> &middot;
+        <a href="/did-it-get-better">How to tell if it actually got better</a> &middot;
+        <a href="/guides">All guides</a>
       </p>
+
     </div>
-
-    <h2 id="truncation-is-a-budget-not-an-error">Truncation is a budget, not an error<a class="anchor" href="#truncation-is-a-budget-not-an-error" aria-label="Permalink to Truncation is a budget, not an error">#</a></h2>
-    <p>
-      You set a ceiling on output length with every request. When generation
-      reaches it, the model stops mid-sentence and the response comes back marked
-      as having hit the limit. Nothing is wrong from the API's point of view: it
-      did exactly what you asked, and you asked for at most this many tokens.
-    </p>
-    <p>
-      This is benign for prose, where a reader sees the sentence stop. It is
-      vicious for structure. Ask for JSON, get cut off two thirds of the way
-      through, and what you hold is a string that is not JSON: no closing brace,
-      possibly a half-written key. The parse failure then surfaces somewhere else
-      entirely, in a function that has no idea a length limit exists, and reads
-      like a bug in your parser.
-    </p>
-    <p>
-      Two ceilings apply, and confusing them wastes an afternoon: the limit you
-      set, and the model's own maximum, which you cannot exceed by asking. Both
-      produce the same stop reason. The figures for the second live on
-      <a href="/model-facts">Model facts</a> and differ per model.
-      &rarr; <a href="/concepts/context-windows">Context windows</a>
-    </p>
-
-    <h2 id="a-refusal-is-a-response-not-an-except">A refusal is a response, not an exception<a class="anchor" href="#a-refusal-is-a-response-not-an-except" aria-label="Permalink to A refusal is a response, not an exception">#</a></h2>
-    <p>
-      A model can decline, and the vendor documents a distinct stop reason for
-      the case where classifiers intervene mid-stream. Your code asked for a
-      summary and received text that is not a summary, delivered successfully, in
-      the same shape a summary would have arrived in.
-    </p>
-    <p>
-      What makes this a reliability problem rather than a policy one is that it
-      is input-dependent and rare. It will not happen in your testing, because
-      your test inputs are ones you chose. It happens later, to a user, on
-      material you never anticipated. The failure it produces downstream,
-      an empty field or a nonsensical record or a document that says the wrong
-      thing, has no obvious connection to its cause.
-    </p>
-
-    <h2 id="rate-limits-don-t-reset-the-way-you">Rate limits don't reset the way you think<a class="anchor" href="#rate-limits-don-t-reset-the-way-you" aria-label="Permalink to Rate limits don't reset the way you think">#</a></h2>
-    <p>
-      The intuition is a meter that empties at the top of each minute. That is not
-      how it works. Anthropic documents a token bucket: capacity is continuously
-      replenished up to your ceiling rather than reset at fixed intervals. So
-      there is no moment to wait for. Capacity comes back gradually, and a client
-      that sleeps until the minute rolls over is both waiting too long and then
-      firing everything at once.
-    </p>
-    <p>
-      Which leads to the trap that catches people who did the arithmetic. Limits
-      can be enforced over shorter intervals than the one they are quoted in: the
-      documentation gives the example of a per-minute request limit enforced as
-      roughly one request per second, so a burst can fail while your average
-      usage sits comfortably underneath. Being under the limit on paper is not
-      the same as being under it in the moment.
-    </p>
-    <p>
-      Two practical consequences. Every response carries headers reporting the
-      limit, what remains, and when it will be replenished, so you can slow down
-      before you start failing rather than after. And when you are refused,
-      there is a header telling you how long to wait, with the documentation
-      noting that earlier retries will fail. Honour it rather than guessing.
-    </p>
-
-    <div class="note">
-      <p class="note-title">The refusal that never clears</p>
-      <p>
-        Not every rate-limit response is a "wait and try again". A request
-        rejected because an organisation hit a spend cap comes back with the same
-        status and no retry-after header, and it will keep failing until access
-        resumes. No amount of backoff helps. A client that treats every rate-limit
-        refusal as temporary will retry that one until somebody notices. The distinguishing
-        signal is the missing header.
-      </p>
-    </div>
-
-    <h2 id="know-what-is-already-retrying">Know what is already retrying<a class="anchor" href="#know-what-is-already-retrying" aria-label="Permalink to Know what is already retrying">#</a></h2>
-    <p>
-      The official SDKs already retry transient failures, including connection
-      errors, rate limits and server errors, with exponential backoff, and they
-      already honour the retry-after header. This is on by default and configurable.
-    </p>
-    <p>
-      So the retry loop you are about to write sits on top of one that exists. The
-      two multiply: your handful of attempts, each of which is quietly several.
-      One slow outage becomes a long stall, and under load a fleet of clients all
-      backing off and returning together produces exactly the synchronised burst
-      the previous section warns about. Find out what your client library does
-      before adding a layer to it, and configure the existing behaviour in
-      preference to wrapping it.
-    </p>
-    <p>
-      There is also a subtler point about retrying anything here. These systems
-      are not deterministic, so a retry of an identical request can succeed where
-      the first attempt failed. That is useful, and it is also why a genuine bug
-      in this kind of system so often presents as flakiness: something that works
-      four times in five looks like infrastructure trouble and may be a prompt
-      that is wrong one time in five.
-      &rarr; <a href="/did-it-get-better">How to tell if it actually got better</a>
-    </p>
-
-    <h2 id="streaming-breaks-the-error-model">Streaming breaks the error model<a class="anchor" href="#streaming-breaks-the-error-model" aria-label="Permalink to Streaming breaks the error model">#</a></h2>
-    <p>
-      Streaming is the right choice for anything long enough that a user would
-      otherwise stare at nothing, and it moves the goalposts on error handling.
-      The vendor's documentation says it directly: when you stream, an error can
-      occur after the API has already returned a successful status, and handling
-      it does not follow the standard mechanisms.
-    </p>
-    <p>
-      The response began. Headers are sent. Your code has committed to a success
-      path and may already have shown the user the first half of an answer. The
-      failure arrives as an event in the stream, which means it is only a failure
-      if you are reading the events, and the partial output on screen is now your
-      problem to withdraw or complete.
-    </p>
-
-    <h2 id="the-failure-none-of-this-catches">The failure none of this catches<a class="anchor" href="#the-failure-none-of-this-catches" aria-label="Permalink to The failure none of this catches">#</a></h2>
-    <p>
-      Everything above is about a response being incomplete, refused, delayed or
-      malformed. All of it is detectable in code, which is what makes it worth
-      the trouble.
-    </p>
-    <p>
-      The failure that costs the most is the one where every signal reads clean.
-      Successful status, natural stop reason, well-formed JSON, every field
-      populated, and the content is wrong. No status code describes that, no retry
-      fixes it, and no amount of the engineering on this page will surface it.
-      That is what the rest of this site is about: knowing which claims are worth
-      checking, and having a fixed set of cases you re-run so a change that
-      quietly breaks something gets caught by you rather than by a user.
-      &rarr; <a href="/check-an-answer">How to check an AI's answer</a>
-    </p>
-    <p>
-      Which is the honest summary of designing for failure here. The infrastructure
-      failures are ordinary engineering, and this page is mostly a list of the
-      places where the shape of them is unusual. The failure that is genuinely new
-      is the confident wrong answer, and it needs a different discipline, not a
-      better retry policy.
-    </p>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p>
-      Three vendor documents, all read on 26 August 2026. Each appears on
-      <a href="/sources">Sources</a> against the pages that fall over if it
-      changes. Anthropic's
-      <a href="https://platform.claude.com/docs/en/api/errors">API errors</a>
-      backs the error taxonomy, the retry behaviour already built into the SDKs,
-      and the fact that a streaming error can follow a successful status.
-      <a href="https://platform.claude.com/docs/en/api/rate-limits">Rate
-      limits</a> backs the token bucket, enforcement over shorter intervals than
-      quoted, the response headers, and the spend-cap refusal that carries no
-      retry-after. The
-      <a href="https://platform.claude.com/docs/en/api/messages">Messages API</a>
-      reference backs the stop reason values.
-    </p>
-    <p>
-      This page describes one vendor's API because that is the documentation that
-      was read, and it says so rather than implying the shape is universal. The
-      mechanisms generalise better than the details: every provider has an output
-      ceiling, a way of recording why generation stopped, and a rate limiter whose
-      behaviour is worth reading rather than assuming. Nothing here is a figure,
-      a limit or a tier, so there is nothing on this page to go stale. The
-      numbers live on <a href="/model-facts">Model facts</a> and on the vendor's
-      own pages, where they are dated.
-    </p>
-
-    <p class="next">
-      Related &rarr; <a href="/concepts/tool-use">Tool use</a> &middot;
-      <a href="/concepts/agents">Agents</a> &middot;
-      <a href="/did-it-get-better">How to tell if it actually got better</a> &middot;
-      <a href="/guides">All guides</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

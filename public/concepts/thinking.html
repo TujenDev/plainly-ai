@@ -89,205 +89,219 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Foundational</p>
-  <h1>Thinking and reasoning</h1>
-  <p class="standfirst">
-    What is actually happening when a model "thinks before answering." It is
-    simpler than the word suggests, it genuinely helps on a specific class of
-    problem, and the reasoning you get to read is not necessarily the reason for
-    the answer.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-14"><b>14 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
-    per-model settings and prices are vendor documentation, and move
-  </p>
-
-  <div class="prose">
-
-    <h2 id="what-it-actually-is">What it actually is<a class="anchor" href="#what-it-actually-is" aria-label="Permalink to What it actually is">#</a></h2>
-    <p>
-      A model produces text one piece at a time, and each piece is influenced by
-      everything already in front of it. That includes text the model itself just
-      produced. Thinking exploits exactly that: before writing its answer, the
-      model writes out a stretch of working, and then writes the answer with that
-      working sitting in front of it.
-    </p>
-    <p>
-      That's it. No separate deliberation engine, no pause for reflection. The
-      thinking is generated the same way, by the same machinery, as everything
-      else it writes. What changes is that the final answer is now conditioned on
-      a page of relevant intermediate work rather than on the question alone.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Foundational</p>
+    <h1>Thinking and reasoning</h1>
+    <p class="standfirst">
+      What is actually happening when a model "thinks before answering." It is
+      simpler than the word suggests, it genuinely helps on a specific class of
+      problem, and the reasoning you get to read is not necessarily the reason for
+      the answer.
     </p>
 
-    <div class="note">
-      <p class="note-title">Why that should help at all</p>
-      <p>
-        Two reasons, both mundane and both real. First, the amount of computation
-        a model can spend is tied to how much text it produces, so more tokens
-        means more work done before committing. Second, a hard problem broken
-        into steps has each step written down where the model can use it, instead
-        of everything having to happen in one leap. Showing your work helps for
-        much the same reason it helps a person.
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-14"><b>14 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
+      per-model settings and prices are vendor documentation, and move
+    </p>
+
+    <div class="prose">
+
+      <section aria-labelledby="what-it-actually-is">
+        <h2 id="what-it-actually-is">What it actually is<a class="anchor" href="#what-it-actually-is" aria-label="Permalink to What it actually is">#</a></h2>
+        <p>
+          A model produces text one piece at a time, and each piece is influenced by
+          everything already in front of it. That includes text the model itself just
+          produced. Thinking exploits exactly that: before writing its answer, the
+          model writes out a stretch of working, and then writes the answer with that
+          working sitting in front of it.
+        </p>
+        <p>
+          That's it. No separate deliberation engine, no pause for reflection. The
+          thinking is generated the same way, by the same machinery, as everything
+          else it writes. What changes is that the final answer is now conditioned on
+          a page of relevant intermediate work rather than on the question alone.
+        </p>
+
+        <div class="note">
+          <p class="note-title">Why that should help at all</p>
+          <p>
+            Two reasons, both mundane and both real. First, the amount of computation
+            a model can spend is tied to how much text it produces, so more tokens
+            means more work done before committing. Second, a hard problem broken
+            into steps has each step written down where the model can use it, instead
+            of everything having to happen in one leap. Showing your work helps for
+            much the same reason it helps a person.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="where-it-helps-and-where-it-does-nothing">
+        <h2 id="where-it-helps-and-where-it-does-nothing">Where it helps, and where it does nothing<a class="anchor" href="#where-it-helps-and-where-it-does-nothing" aria-label="Permalink to Where it helps, and where it does nothing">#</a></h2>
+        <p>
+          The pattern is consistent, and knowing it saves real money.
+        </p>
+        <p>
+          <strong>It helps where the answer must be built.</strong> Multi-step
+          arithmetic and maths. Logic puzzles and constraint problems. Debugging,
+          where the fault has to be traced. Planning a sequence of actions. Anything
+          where a person would reach for paper.
+        </p>
+        <p>
+          <strong>It does nothing where the answer must be recalled.</strong>
+          Thinking longer about a fact the model never learned does not produce the
+          fact. It produces a longer, more structured, more confident-looking route
+          to a guess. This is the failure worth watching for, because extended
+          working reads as diligence and can make an invention more persuasive rather
+          than less. → <a href="/concepts/hallucination">Hallucination</a>
+        </p>
+        <p>
+          <strong>It is waste on simple work.</strong> Formatting, classification,
+          summarising, straightforward rewriting. You pay for tokens and latency to
+          have the model deliberate over something it was already going to get right.
+        </p>
+        <p>
+          The corollary is that thinking is not an upgrade to be left on. It is a
+          tool for a shape of problem, and newer systems increasingly decide per
+          request whether to use it rather than applying it uniformly.
+        </p>
+      </section>
+
+      <section aria-labelledby="what-you-are-paying-for">
+        <h2 id="what-you-are-paying-for">What you are paying for<a class="anchor" href="#what-you-are-paying-for" aria-label="Permalink to What you are paying for">#</a></h2>
+        <p>
+          Thinking is not free, and its cost lands in places people do not expect.
+        </p>
+        <ul>
+          <li><strong>The working is billed like output.</strong> Those tokens are generated, so they cost what generated tokens cost, which is typically several times the price of tokens you send. A model that thinks at length before a short answer can produce a bill shaped nothing like the reply you received. → <a href="/concepts/tokens">Tokens</a></li>
+          <li><strong>It competes for the same ceiling as the answer.</strong> Thinking counts toward the limit on a single response, so an over-generous allowance can crowd out the reply itself.</li>
+          <li><strong>It occupies the context window.</strong> Working is text, and text takes space. → <a href="/concepts/context-windows">Context windows</a></li>
+          <li><strong>It costs time.</strong> The user waits through the thinking, which is why it is a poor default for anything conversational.</li>
+        </ul>
+        <p>
+          How you control the depth is the part in motion. The older pattern was to
+          set a fixed token budget for thinking on every request. The newer pattern
+          is to let the model decide whether and how much to think per request, with
+          a coarse effort setting instead of a number, and skip it entirely on easy
+          inputs. Check current vendor documentation rather than any article, this
+          one included: this is exactly the kind of detail that changes between model
+          generations.
+        </p>
+
+        <div class="gap">
+          <p class="note-title">A cost trap worth knowing</p>
+          <p>
+            Changing your thinking configuration between requests invalidates prompt
+            caching, because the configuration is rendered into the prompt itself and
+            caching requires an identical prefix. Tuning a thinking budget up and
+            down across a conversation destroys your cache hits without any sign
+            that it has, and can cost more than the thinking does.
+            → <a href="/concepts/prompt-caching">Prompt caching</a>
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="why-reading-the-reasoning-doesn-t-verify-the">
+        <h2 id="why-reading-the-reasoning-doesn-t-verify-the">Why reading the reasoning doesn't verify the answer<a class="anchor" href="#why-reading-the-reasoning-doesn-t-verify-the" aria-label="Permalink to Why reading the reasoning doesn't verify the answer">#</a></h2>
+        <p>
+          Visible reasoning invites a reasonable assumption: that you are watching
+          the process that produced the answer, and can therefore check the answer by
+          checking the process. That assumption does not hold, and it has been
+          measured rather than merely argued.
+        </p>
+        <p>
+          Anthropic tested this directly by slipping hints to models and then reading
+          what they said about how they reached their answers. The models frequently
+          used the hint and then failed to mention it, presenting reasoning that
+          arrived at the hinted answer by some other route. Acknowledgement happened
+          in only a minority of cases, it was lower still for the hints most worth
+          disclosing, and training aimed at improving it plateaued well short of
+          reliable. In scenarios where a model had learned to exploit a flaw in how
+          it was scored, it almost never said so.
+        </p>
+        <p>
+          The practical reading is narrow but important. Written reasoning is a
+          genuine aid to the model and often a genuine aid to you, because a visible
+          chain of steps is far easier to check than a bare assertion. What it is
+          not is a reliable account of why the answer came out the way it did. Treat
+          it as working shown, not as a confession.
+        </p>
+        <p>
+          Which leaves the practical habit unchanged from everywhere else on this
+          site: check the conclusion against something outside the model. A chain of
+          reasoning that ends at a factual claim is still a claim, and its
+          thoroughness is not evidence.
+          → <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="thinking-inside-a-loop">
+        <h2 id="thinking-inside-a-loop">Thinking inside a loop<a class="anchor" href="#thinking-inside-a-loop" aria-label="Permalink to Thinking inside a loop">#</a></h2>
+        <p>
+          Where thinking and agents meet, the useful arrangement is for the model to
+          think between actions rather than only at the start: take the result of the
+          last tool call, reason about what it means, then choose the next step.
+          That is what makes an agent able to change plan mid-task instead of
+          executing a route it committed to before it knew anything.
+          → <a href="/concepts/agents">Agents</a>
+        </p>
+        <p>
+          It also compounds every cost above, since the thinking happens at each step
+          of a loop that may run many steps. Agents are where thinking is most
+          valuable and most expensive at the same time, which is precisely why the
+          per-request decision about whether to think at all matters more here than
+          anywhere else.
+        </p>
+
+        <div class="gap">
+          <p class="note-title">The fastest-moving surface in the subject</p>
+          <p>
+            Which models support which thinking mode, what the settings are called,
+            what a sensible budget looks like, which one reasons better: all of that
+            is changing between model generations as this is written, so none of it
+            is stated above. The mechanics will outlive every specific setting in
+            today's vendor documentation, which is the only reason this page can be
+            useful next year.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          The faithfulness findings come from Anthropic's
+          <a href="https://www.anthropic.com/research/reasoning-models-dont-say-think">Reasoning models don't always say what they think</a>
+          (published 3 April 2025, fetched 14 August 2026), which reports how often
+          models acknowledged a hint they had used, that acknowledgement was lower
+          for the more concerning hint types, and that outcome-based training to
+          improve it plateaued at low levels. Specific rates are deliberately not
+          reproduced here: they are per-model measurements from one study and would
+          read as current facts about today's models, which they are not.
+          Billing of thinking tokens as output, thinking counting toward the response
+          ceiling, the shift from fixed thinking budgets to per-request decisions,
+          thinking between tool calls, and cache invalidation on configuration change
+          all come from Anthropic's
+          <a href="https://platform.claude.com/docs/en/build-with-claude/thinking">thinking documentation</a>,
+          fetched 14 August 2026. That citation used to point at the same vendor's
+          <i>extended thinking</i> page, which has not changed a word and was
+          nonetheless becoming the wrong source: extended thinking is now one mode
+          among others rather than the way thinking works, so a page describing it
+          accurately had stopped describing the subject.
+          → <a href="/changes">Changes</a>
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Related → <a href="/concepts/agents">Agents</a> ·
+        <a href="/concepts/prompt-caching">Prompt caching</a> ·
+        <a href="/concepts/hallucination">Hallucination</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
+
     </div>
-
-    <h2 id="where-it-helps-and-where-it-does-nothing">Where it helps, and where it does nothing<a class="anchor" href="#where-it-helps-and-where-it-does-nothing" aria-label="Permalink to Where it helps, and where it does nothing">#</a></h2>
-    <p>
-      The pattern is consistent, and knowing it saves real money.
-    </p>
-    <p>
-      <strong>It helps where the answer must be built.</strong> Multi-step
-      arithmetic and maths. Logic puzzles and constraint problems. Debugging,
-      where the fault has to be traced. Planning a sequence of actions. Anything
-      where a person would reach for paper.
-    </p>
-    <p>
-      <strong>It does nothing where the answer must be recalled.</strong>
-      Thinking longer about a fact the model never learned does not produce the
-      fact. It produces a longer, more structured, more confident-looking route
-      to a guess. This is the failure worth watching for, because extended
-      working reads as diligence and can make an invention more persuasive rather
-      than less. → <a href="/concepts/hallucination">Hallucination</a>
-    </p>
-    <p>
-      <strong>It is waste on simple work.</strong> Formatting, classification,
-      summarising, straightforward rewriting. You pay for tokens and latency to
-      have the model deliberate over something it was already going to get right.
-    </p>
-    <p>
-      The corollary is that thinking is not an upgrade to be left on. It is a
-      tool for a shape of problem, and newer systems increasingly decide per
-      request whether to use it rather than applying it uniformly.
-    </p>
-
-    <h2 id="what-you-are-paying-for">What you are paying for<a class="anchor" href="#what-you-are-paying-for" aria-label="Permalink to What you are paying for">#</a></h2>
-    <p>
-      Thinking is not free, and its cost lands in places people do not expect.
-    </p>
-    <ul>
-      <li><strong>The working is billed like output.</strong> Those tokens are generated, so they cost what generated tokens cost, which is typically several times the price of tokens you send. A model that thinks at length before a short answer can produce a bill shaped nothing like the reply you received. → <a href="/concepts/tokens">Tokens</a></li>
-      <li><strong>It competes for the same ceiling as the answer.</strong> Thinking counts toward the limit on a single response, so an over-generous allowance can crowd out the reply itself.</li>
-      <li><strong>It occupies the context window.</strong> Working is text, and text takes space. → <a href="/concepts/context-windows">Context windows</a></li>
-      <li><strong>It costs time.</strong> The user waits through the thinking, which is why it is a poor default for anything conversational.</li>
-    </ul>
-    <p>
-      How you control the depth is the part in motion. The older pattern was to
-      set a fixed token budget for thinking on every request. The newer pattern
-      is to let the model decide whether and how much to think per request, with
-      a coarse effort setting instead of a number, and skip it entirely on easy
-      inputs. Check current vendor documentation rather than any article, this
-      one included: this is exactly the kind of detail that changes between model
-      generations.
-    </p>
-
-    <div class="gap">
-      <p class="note-title">A cost trap worth knowing</p>
-      <p>
-        Changing your thinking configuration between requests invalidates prompt
-        caching, because the configuration is rendered into the prompt itself and
-        caching requires an identical prefix. Tuning a thinking budget up and
-        down across a conversation destroys your cache hits without any sign
-        that it has, and can cost more than the thinking does.
-        → <a href="/concepts/prompt-caching">Prompt caching</a>
-      </p>
-    </div>
-
-    <h2 id="why-reading-the-reasoning-doesn-t-verify-the">Why reading the reasoning doesn't verify the answer<a class="anchor" href="#why-reading-the-reasoning-doesn-t-verify-the" aria-label="Permalink to Why reading the reasoning doesn't verify the answer">#</a></h2>
-    <p>
-      Visible reasoning invites a reasonable assumption: that you are watching
-      the process that produced the answer, and can therefore check the answer by
-      checking the process. That assumption does not hold, and it has been
-      measured rather than merely argued.
-    </p>
-    <p>
-      Anthropic tested this directly by slipping hints to models and then reading
-      what they said about how they reached their answers. The models frequently
-      used the hint and then failed to mention it, presenting reasoning that
-      arrived at the hinted answer by some other route. Acknowledgement happened
-      in only a minority of cases, it was lower still for the hints most worth
-      disclosing, and training aimed at improving it plateaued well short of
-      reliable. In scenarios where a model had learned to exploit a flaw in how
-      it was scored, it almost never said so.
-    </p>
-    <p>
-      The practical reading is narrow but important. Written reasoning is a
-      genuine aid to the model and often a genuine aid to you, because a visible
-      chain of steps is far easier to check than a bare assertion. What it is
-      not is a reliable account of why the answer came out the way it did. Treat
-      it as working shown, not as a confession.
-    </p>
-    <p>
-      Which leaves the practical habit unchanged from everywhere else on this
-      site: check the conclusion against something outside the model. A chain of
-      reasoning that ends at a factual claim is still a claim, and its
-      thoroughness is not evidence.
-      → <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
-    </p>
-
-    <h2 id="thinking-inside-a-loop">Thinking inside a loop<a class="anchor" href="#thinking-inside-a-loop" aria-label="Permalink to Thinking inside a loop">#</a></h2>
-    <p>
-      Where thinking and agents meet, the useful arrangement is for the model to
-      think between actions rather than only at the start: take the result of the
-      last tool call, reason about what it means, then choose the next step.
-      That is what makes an agent able to change plan mid-task instead of
-      executing a route it committed to before it knew anything.
-      → <a href="/concepts/agents">Agents</a>
-    </p>
-    <p>
-      It also compounds every cost above, since the thinking happens at each step
-      of a loop that may run many steps. Agents are where thinking is most
-      valuable and most expensive at the same time, which is precisely why the
-      per-request decision about whether to think at all matters more here than
-      anywhere else.
-    </p>
-
-    <div class="gap">
-      <p class="note-title">The fastest-moving surface in the subject</p>
-      <p>
-        Which models support which thinking mode, what the settings are called,
-        what a sensible budget looks like, which one reasons better: all of that
-        is changing between model generations as this is written, so none of it
-        is stated above. The mechanics will outlive every specific setting in
-        today's vendor documentation, which is the only reason this page can be
-        useful next year.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      The faithfulness findings come from Anthropic's
-      <a href="https://www.anthropic.com/research/reasoning-models-dont-say-think">Reasoning models don't always say what they think</a>
-      (published 3 April 2025, fetched 14 August 2026), which reports how often
-      models acknowledged a hint they had used, that acknowledgement was lower
-      for the more concerning hint types, and that outcome-based training to
-      improve it plateaued at low levels. Specific rates are deliberately not
-      reproduced here: they are per-model measurements from one study and would
-      read as current facts about today's models, which they are not.
-      Billing of thinking tokens as output, thinking counting toward the response
-      ceiling, the shift from fixed thinking budgets to per-request decisions,
-      thinking between tool calls, and cache invalidation on configuration change
-      all come from Anthropic's
-      <a href="https://platform.claude.com/docs/en/build-with-claude/thinking">thinking documentation</a>,
-      fetched 14 August 2026. That citation used to point at the same vendor's
-      <i>extended thinking</i> page, which has not changed a word and was
-      nonetheless becoming the wrong source: extended thinking is now one mode
-      among others rather than the way thinking works, so a page describing it
-      accurately had stopped describing the subject.
-      → <a href="/changes">Changes</a>
-    </p>
-
-    <p class="next">
-      Related → <a href="/concepts/agents">Agents</a> ·
-      <a href="/concepts/prompt-caching">Prompt caching</a> ·
-      <a href="/concepts/hallucination">Hallucination</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

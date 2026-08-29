@@ -4,6 +4,11 @@
    tight sans for structure, one accent colour, generous measure. */
 
 :root {
+  /* Without this, only the colours below flip in dark mode: everything the
+     browser paints itself — most visibly the scrollbar inside .table-scroll —
+     stayed light against a dark page. */
+  color-scheme: light dark;
+
   --paper: #fcfcfa;
   --paper-sunk: #f4f4f0;
   --ink: #1a2029;
@@ -83,8 +88,17 @@ html { -webkit-text-size-adjust: 100%; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .track:hover { transform: none; }
+  .track:hover,
+  .track:focus-within { transform: none; }
 }
+
+/* A safety net, not a fix for anything currently broken: a long URL, a wide
+   code span or an oversized image would otherwise push the page sideways. */
+/* Deliberately excludes <table>: the model-facts table is wider than the
+   measure on purpose and scrolls inside .table-scroll, so capping it here
+   would squeeze the columns instead of letting them scroll. */
+img, svg, video { max-width: 100%; height: auto; }
+p, li, dd, td, th, figcaption, h1, h2, h3, h4 { overflow-wrap: break-word; }
 
 body {
   margin: 0;
@@ -109,6 +123,12 @@ body {
 }
 
 main { padding-bottom: 5rem; }
+
+/* Paired with tabindex="-1" on <main>. Safari moves the scroll position for a
+   skip link but not the focus, so the next Tab went back to the nav. Focus is
+   moved programmatically by the browser here, not by the user, so it draws no
+   ring. */
+main:focus { outline: none; }
 
 /* ---------- Header ---------- */
 
@@ -276,6 +296,11 @@ h3:hover > .anchor,
 }
 
 .track {
+  /* The anchor used to wrap the whole card, which gave every track link a
+     ~50-word accessible name and put an <h3> inside a link, so heading
+     navigation landed on a link instead of a heading. The anchor now wraps the
+     title only and its ::after stretches the hit area back over the card. */
+  position: relative;
   display: flex;
   flex-direction: column;
   /* The grid stretches each li, but the card inside is only as tall as its own
@@ -292,7 +317,8 @@ h3:hover > .anchor,
   margin: 0;
 }
 
-.track:hover {
+.track:hover,
+.track:focus-within {
   border-color: var(--accent);
   transform: translateY(-2px);
 }
@@ -308,6 +334,21 @@ h3:hover > .anchor,
 }
 
 .track h3 { margin: 0 0 0.4rem; font-size: 1.18rem; }
+
+.track h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Stretches the title link over the whole card. Sits above the card's own
+   background but below nothing else — there is no other interactive element
+   inside a track, so it steals no clicks. */
+.track h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
 
 .track p {
   font-size: 0.98rem;
@@ -523,22 +564,34 @@ td.num { font-variant-numeric: tabular-nums; }
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
 }
 
-.concept-list li { margin: 0; }
-
-.concept-list a {
-  display: block;
+/* The card is the <li>, not the anchor. Same reason as .track above: the
+   anchor used to wrap the name and the paragraph together. The grid stretches
+   the li, so the height: 100% that used to equalise the cards is now free. */
+.concept-list li {
+  position: relative;
+  margin: 0;
   border: 1px solid var(--rule);
   border-radius: 6px;
   padding: 1rem 1.15rem;
-  text-decoration: none;
-  color: inherit;
   transition: border-color 0.15s ease;
-  height: 100%;
 }
 
-.concept-list a:hover { border-color: var(--accent); }
+.concept-list li:hover,
+.concept-list li:focus-within { border-color: var(--accent); }
 
-.concept-list .res-name { display: block; margin-bottom: 0.2rem; }
+.concept-list .res-name {
+  display: block;
+  margin-bottom: 0.2rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.concept-list .res-name::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
 
 .concept-list p { margin: 0; font-size: 0.94rem; }
 
@@ -723,6 +776,20 @@ figure.diagram figcaption {
      markup precisely so the one that costs money never depends on this. */
   details > summary { list-style: none; font-weight: 600; }
   details::details-content { content-visibility: visible !important; }
+
+  /* The stretched card overlays are a pointer affordance and nothing else. On
+     paper they have no job. `content: none` alone is not enough: on
+     sources.html the external-link rule below has equal specificity and comes
+     later, so it wins `content` back and the URL was printed into a box pinned
+     over the whole card. Dropping the positioning is what actually matters —
+     the URL then flows inline after the title, which is the behaviour that
+     rule exists for. Verified by printing sources.html to PDF. */
+  .track h3 a::after,
+  .concept-list .res-name::after {
+    content: none;
+    position: static;
+    inset: auto;
+  }
 
   /* A link the reader cannot follow should at least say where it went. */
   .prose a[href^="http"]::after,

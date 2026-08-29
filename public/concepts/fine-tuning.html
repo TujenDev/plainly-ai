@@ -89,159 +89,173 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Building</p>
-  <h1>Fine-tuning</h1>
-  <p class="standfirst">
-    Training an existing model further on your own examples. It reliably changes
-    how a model behaves and unreliably changes what it knows, and nearly every
-    expensive mistake in this area comes from mixing those two up.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
-    anything numeric lives on <a href="/model-facts">Model facts</a>
-  </p>
-
-  <div class="prose">
-
-    <h2 id="what-it-actually-is">What it actually is<a class="anchor" href="#what-it-actually-is" aria-label="Permalink to What it actually is">#</a></h2>
-    <p>
-      A model arrives already trained on an enormous amount of text. Fine-tuning
-      continues that training on a much smaller set of examples you supply,
-      nudging the model's internal settings toward the pattern your examples
-      demonstrate. The result is a new, private version of the model that leans
-      the way you trained it.
-    </p>
-    <p>
-      Note the shape of that: you are not adding a document to a library the
-      model consults. There is no library. The examples are absorbed into the
-      same diffuse statistical machinery that produced every other tendency the
-      model has, which is precisely why the results are strong for some purposes
-      and treacherous for others.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Building</p>
+    <h1>Fine-tuning</h1>
+    <p class="standfirst">
+      Training an existing model further on your own examples. It reliably changes
+      how a model behaves and unreliably changes what it knows, and nearly every
+      expensive mistake in this area comes from mixing those two up.
     </p>
 
-    <div class="note">
-      <p class="note-title">Behaviour, not knowledge</p>
-      <p>
-        Fine-tuning teaches a model <em>how to behave</em>. Retrieval tells it
-        <em>what is true right now</em>. When the sentence in the meeting is "the
-        assistant should know about our stuff," the answer is almost always
-        retrieval. → <a href="/concepts/rag">RAG and retrieval</a>
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
+      anything numeric lives on <a href="/model-facts">Model facts</a>
+    </p>
+
+    <div class="prose">
+
+      <section aria-labelledby="what-it-actually-is">
+        <h2 id="what-it-actually-is">What it actually is<a class="anchor" href="#what-it-actually-is" aria-label="Permalink to What it actually is">#</a></h2>
+        <p>
+          A model arrives already trained on an enormous amount of text. Fine-tuning
+          continues that training on a much smaller set of examples you supply,
+          nudging the model's internal settings toward the pattern your examples
+          demonstrate. The result is a new, private version of the model that leans
+          the way you trained it.
+        </p>
+        <p>
+          Note the shape of that: you are not adding a document to a library the
+          model consults. There is no library. The examples are absorbed into the
+          same diffuse statistical machinery that produced every other tendency the
+          model has, which is precisely why the results are strong for some purposes
+          and treacherous for others.
+        </p>
+
+        <div class="note">
+          <p class="note-title">Behaviour, not knowledge</p>
+          <p>
+            Fine-tuning teaches a model <em>how to behave</em>. Retrieval tells it
+            <em>what is true right now</em>. When the sentence in the meeting is "the
+            assistant should know about our stuff," the answer is almost always
+            retrieval. → <a href="/concepts/rag">RAG and retrieval</a>
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="what-it-s-genuinely-good-at">
+        <h2 id="what-it-s-genuinely-good-at">What it's genuinely good at<a class="anchor" href="#what-it-s-genuinely-good-at" aria-label="Permalink to What it's genuinely good at">#</a></h2>
+        <p>
+          The wins are real, and they cluster tightly around form and consistency
+          rather than knowledge. OpenAI's own guidance describes the use cases as
+          classification, nuanced translation, generating content in a specific
+          format, and correcting instruction-following failures, so that a model will
+          "consistently format responses in a certain way or handle novel inputs."
+        </p>
+        <ul>
+          <li><strong>Rigid output formats.</strong> When every response must fit a schema exactly, thousands of times, demonstrating the format beats describing it.</li>
+          <li><strong>Classification at volume.</strong> Sorting things into your categories, using your judgement calls, including the awkward edge cases a prompt would need paragraphs to explain.</li>
+          <li><strong>A specific voice or house style.</strong> Style is far easier to show than to specify, and this is the clearest case where examples outperform instructions.</li>
+          <li><strong>Making a smaller model punch above its weight on one narrow task.</strong> Often the strongest commercial case: train a cheaper, faster model to handle the one thing you do a million times, rather than paying a frontier model to do it.</li>
+          <li><strong>Instructions that keep getting ignored.</strong> When a prompt has grown to a page of rules and the model still drifts, examples enforce what prose stopped enforcing.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="why-it-fails-at-teaching-facts">
+        <h2 id="why-it-fails-at-teaching-facts">Why it fails at teaching facts<a class="anchor" href="#why-it-fails-at-teaching-facts" aria-label="Permalink to Why it fails at teaching facts">#</a></h2>
+        <p>
+          This is the part worth understanding mechanically, because the failure is
+          not obvious and the pitch for it is seductive.
+        </p>
+
+        <p><strong>The facts go in diffuse, not indexed.</strong> Your documents
+        don't get stored anywhere retrievable. They shift the model's tendencies
+        slightly, competing against everything it learned during original training,
+        which was vastly larger. The model comes out more inclined to produce
+        text like yours, which is not at all the same as knowing your specifics
+        reliably.</p>
+
+        <p><strong>There is nothing to cite.</strong> A retrieval system can show you
+        the passage it used, so you can check it. A fine-tuned model produces an
+        assertion with no provenance. On a site's worth of internal policy, that
+        difference is the difference between a checkable answer and a confident one.
+        → <a href="/concepts/hallucination">Hallucination</a></p>
+
+        <p><strong>You cannot correct one fact.</strong> A wrong figure in a
+        retrieval corpus is a one-line edit. A wrong figure baked into weights
+        requires assembling a corrected dataset and training again. Facts change
+        constantly; weights do not update themselves.</p>
+
+        <p><strong>It creates a second staleness problem on top of the first.</strong>
+        Your tuned model is frozen at the moment you trained it, and it is built on a
+        base model that will be superseded. When the better base model ships, your
+        tuning does not come with it: you retrain, re-evaluate, and re-deploy, or you
+        stay on the older model while the frontier moves. Every fine-tune is a
+        standing maintenance commitment, and that cost is invisible on day one.
+        → <a href="/concepts/training-cutoff">Training cutoff</a></p>
+      </section>
+
+      <section aria-labelledby="the-order-to-try-things">
+        <h2 id="the-order-to-try-things">The order to try things<a class="anchor" href="#the-order-to-try-things" aria-label="Permalink to The order to try things">#</a></h2>
+        <p>
+          Cheapest and most reversible first. Most projects that reach for
+          fine-tuning stop somewhere earlier once they actually work through this
+          order:
+        </p>
+        <ol>
+          <li><strong>Write a better prompt.</strong> Boring, and frequently sufficient. OpenAI's guidance says outright that "the prompt engineering process may be all you need in order to get great results for your use case."</li>
+          <li><strong>Put examples in the prompt.</strong> A handful of demonstrations of exactly what you want. This is fine-tuning's effect without the commitment, and it is instantly editable.</li>
+          <li><strong>Give it the material.</strong> If the gap is knowledge rather than behaviour, retrieval is the answer and fine-tuning is not.</li>
+          <li><strong>Then fine-tune,</strong> if a specific behaviour still won't hold at the volume you need, or you want a smaller model to do one job cheaply.</li>
+        </ol>
+        <p>
+          A useful diagnostic: if you can get the behaviour you want by pasting three
+          good examples into the prompt, fine-tuning will probably work and probably
+          isn't necessary yet. If pasting examples doesn't help at all, fine-tuning
+          usually won't either, and the problem is elsewhere.
+        </p>
+      </section>
+
+      <section aria-labelledby="the-costs-nobody-quotes">
+        <h2 id="the-costs-nobody-quotes">The costs nobody quotes<a class="anchor" href="#the-costs-nobody-quotes" aria-label="Permalink to The costs nobody quotes">#</a></h2>
+        <p>
+          The training bill is usually the smallest line. The real costs:
+        </p>
+        <ul>
+          <li><strong>Building the dataset.</strong> This is the project. Assembling examples that are correct, consistent and genuinely representative is slow human work, and every inconsistency in them teaches the model to be inconsistent.</li>
+          <li><strong>Knowing whether it worked.</strong> You need a held-back set of cases and an honest comparison against the un-tuned model with a good prompt. Skipping this is how teams end up maintaining a tuned model that never beat the baseline.</li>
+          <li><strong>The upgrade treadmill.</strong> As above, and it recurs on someone else's release schedule rather than yours.</li>
+          <li><strong>Lost generality.</strong> A model tuned hard toward one behaviour can get worse at things it used to handle fine. If it only ever does the one job, that's a fair trade. If it drifted into general use, it is a trap.</li>
+        </ul>
+
+        <div class="gap">
+          <p class="note-title">Check the vendor, not this page</p>
+          <p>
+            Availability is the volatile part here: which vendors offer fine-tuning,
+            on which models, at what price, with what minimum number of examples.
+            All of that varies by platform and changes constantly, so it is
+            deliberately absent above and belongs in the vendor's own current
+            documentation. The mechanics are stable; the offerings are not.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          The described use cases (classification, nuanced translation, generating
+          content in a specific format, correcting instruction-following failures)
+          and the quoted line that prompt engineering "may be all you need" come from
+          OpenAI's
+          <a href="https://developers.openai.com/api/docs/guides/model-optimization">model optimization guide</a>,
+          fetched 11 August 2026. Worth noting what that documentation does
+          <em>not</em> claim: knowledge acquisition is absent from its list of
+          benefits. The argument for why facts specifically fail to stick is
+          mechanical reasoning from how training works, not a vendor statement.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Read first → <a href="/concepts/rag">RAG and retrieval</a> ·
+        Related → <a href="/concepts/prompt-caching">Prompt caching</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
+
     </div>
-
-    <h2 id="what-it-s-genuinely-good-at">What it's genuinely good at<a class="anchor" href="#what-it-s-genuinely-good-at" aria-label="Permalink to What it's genuinely good at">#</a></h2>
-    <p>
-      The wins are real, and they cluster tightly around form and consistency
-      rather than knowledge. OpenAI's own guidance describes the use cases as
-      classification, nuanced translation, generating content in a specific
-      format, and correcting instruction-following failures, so that a model will
-      "consistently format responses in a certain way or handle novel inputs."
-    </p>
-    <ul>
-      <li><strong>Rigid output formats.</strong> When every response must fit a schema exactly, thousands of times, demonstrating the format beats describing it.</li>
-      <li><strong>Classification at volume.</strong> Sorting things into your categories, using your judgement calls, including the awkward edge cases a prompt would need paragraphs to explain.</li>
-      <li><strong>A specific voice or house style.</strong> Style is far easier to show than to specify, and this is the clearest case where examples outperform instructions.</li>
-      <li><strong>Making a smaller model punch above its weight on one narrow task.</strong> Often the strongest commercial case: train a cheaper, faster model to handle the one thing you do a million times, rather than paying a frontier model to do it.</li>
-      <li><strong>Instructions that keep getting ignored.</strong> When a prompt has grown to a page of rules and the model still drifts, examples enforce what prose stopped enforcing.</li>
-    </ul>
-
-    <h2 id="why-it-fails-at-teaching-facts">Why it fails at teaching facts<a class="anchor" href="#why-it-fails-at-teaching-facts" aria-label="Permalink to Why it fails at teaching facts">#</a></h2>
-    <p>
-      This is the part worth understanding mechanically, because the failure is
-      not obvious and the pitch for it is seductive.
-    </p>
-
-    <p><strong>The facts go in diffuse, not indexed.</strong> Your documents
-    don't get stored anywhere retrievable. They shift the model's tendencies
-    slightly, competing against everything it learned during original training,
-    which was vastly larger. The model comes out more inclined to produce
-    text like yours, which is not at all the same as knowing your specifics
-    reliably.</p>
-
-    <p><strong>There is nothing to cite.</strong> A retrieval system can show you
-    the passage it used, so you can check it. A fine-tuned model produces an
-    assertion with no provenance. On a site's worth of internal policy, that
-    difference is the difference between a checkable answer and a confident one.
-    → <a href="/concepts/hallucination">Hallucination</a></p>
-
-    <p><strong>You cannot correct one fact.</strong> A wrong figure in a
-    retrieval corpus is a one-line edit. A wrong figure baked into weights
-    requires assembling a corrected dataset and training again. Facts change
-    constantly; weights do not update themselves.</p>
-
-    <p><strong>It creates a second staleness problem on top of the first.</strong>
-    Your tuned model is frozen at the moment you trained it, and it is built on a
-    base model that will be superseded. When the better base model ships, your
-    tuning does not come with it: you retrain, re-evaluate, and re-deploy, or you
-    stay on the older model while the frontier moves. Every fine-tune is a
-    standing maintenance commitment, and that cost is invisible on day one.
-    → <a href="/concepts/training-cutoff">Training cutoff</a></p>
-
-    <h2 id="the-order-to-try-things">The order to try things<a class="anchor" href="#the-order-to-try-things" aria-label="Permalink to The order to try things">#</a></h2>
-    <p>
-      Cheapest and most reversible first. Most projects that reach for
-      fine-tuning stop somewhere earlier once they actually work through this
-      order:
-    </p>
-    <ol>
-      <li><strong>Write a better prompt.</strong> Boring, and frequently sufficient. OpenAI's guidance says outright that "the prompt engineering process may be all you need in order to get great results for your use case."</li>
-      <li><strong>Put examples in the prompt.</strong> A handful of demonstrations of exactly what you want. This is fine-tuning's effect without the commitment, and it is instantly editable.</li>
-      <li><strong>Give it the material.</strong> If the gap is knowledge rather than behaviour, retrieval is the answer and fine-tuning is not.</li>
-      <li><strong>Then fine-tune,</strong> if a specific behaviour still won't hold at the volume you need, or you want a smaller model to do one job cheaply.</li>
-    </ol>
-    <p>
-      A useful diagnostic: if you can get the behaviour you want by pasting three
-      good examples into the prompt, fine-tuning will probably work and probably
-      isn't necessary yet. If pasting examples doesn't help at all, fine-tuning
-      usually won't either, and the problem is elsewhere.
-    </p>
-
-    <h2 id="the-costs-nobody-quotes">The costs nobody quotes<a class="anchor" href="#the-costs-nobody-quotes" aria-label="Permalink to The costs nobody quotes">#</a></h2>
-    <p>
-      The training bill is usually the smallest line. The real costs:
-    </p>
-    <ul>
-      <li><strong>Building the dataset.</strong> This is the project. Assembling examples that are correct, consistent and genuinely representative is slow human work, and every inconsistency in them teaches the model to be inconsistent.</li>
-      <li><strong>Knowing whether it worked.</strong> You need a held-back set of cases and an honest comparison against the un-tuned model with a good prompt. Skipping this is how teams end up maintaining a tuned model that never beat the baseline.</li>
-      <li><strong>The upgrade treadmill.</strong> As above, and it recurs on someone else's release schedule rather than yours.</li>
-      <li><strong>Lost generality.</strong> A model tuned hard toward one behaviour can get worse at things it used to handle fine. If it only ever does the one job, that's a fair trade. If it drifted into general use, it is a trap.</li>
-    </ul>
-
-    <div class="gap">
-      <p class="note-title">Check the vendor, not this page</p>
-      <p>
-        Availability is the volatile part here: which vendors offer fine-tuning,
-        on which models, at what price, with what minimum number of examples.
-        All of that varies by platform and changes constantly, so it is
-        deliberately absent above and belongs in the vendor's own current
-        documentation. The mechanics are stable; the offerings are not.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      The described use cases (classification, nuanced translation, generating
-      content in a specific format, correcting instruction-following failures)
-      and the quoted line that prompt engineering "may be all you need" come from
-      OpenAI's
-      <a href="https://developers.openai.com/api/docs/guides/model-optimization">model optimization guide</a>,
-      fetched 11 August 2026. Worth noting what that documentation does
-      <em>not</em> claim: knowledge acquisition is absent from its list of
-      benefits. The argument for why facts specifically fail to stick is
-      mechanical reasoning from how training works, not a vendor statement.
-    </p>
-
-    <p class="next">
-      Read first → <a href="/concepts/rag">RAG and retrieval</a> ·
-      Related → <a href="/concepts/prompt-caching">Prompt caching</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

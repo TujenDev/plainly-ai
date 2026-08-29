@@ -89,267 +89,287 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Foundational</p>
-  <h1>Hallucination</h1>
-  <p class="standfirst">
-    When a model states something false with total confidence. Not a defect that
-    a future version will patch out, but a direct consequence of how the thing
-    works at all.
-  </p>
-
-  <p class="stamp">Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-14"><b>14 August 2026</b></time></p>
-
-  <div class="prose">
-
-    <h2 id="it-isn-t-lying-and-it-isn-t-malfunctioning">It isn't lying, and it isn't malfunctioning<a class="anchor" href="#it-isn-t-lying-and-it-isn-t-malfunctioning" aria-label="Permalink to It isn't lying, and it isn't malfunctioning">#</a></h2>
-    <p>
-      Both of those framings mislead. Lying requires knowing the truth and choosing
-      otherwise. Malfunctioning implies a working state it has fallen away from.
-      Neither applies.
-    </p>
-    <p>
-      A language model produces text by repeatedly answering one question: given
-      everything so far, what plausibly comes next? That is the whole mechanism.
-      There is no separate stage where a draft gets checked against a store of
-      facts, because there is no store of facts to check it against. What the model
-      has is a vast statistical sense of how language about the world tends to go.
-    </p>
-    <p>
-      Most of the time, plausible and true coincide. The most plausible completion
-      of "the capital of France is" is "Paris" precisely because that is true and
-      the truth is written down everywhere. The mechanism gets accuracy for free,
-      as a side effect of pursuing plausibility.
-    </p>
-    <p>
-      But when the truth is obscure, absent, or contested, plausibility keeps
-      working perfectly well without it. Asked for the title of a paper that
-      doesn't exist, the model does exactly what it always does and produces a
-      title that <em>reads</em> like a real one. Nothing has gone wrong internally.
-      The same process that produced "Paris" produced the fake paper. That is the
-      uncomfortable part: fluency and accuracy come out of one process, so you
-      cannot have one without risking the other.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Foundational</p>
+    <h1>Hallucination</h1>
+    <p class="standfirst">
+      When a model states something false with total confidence. Not a defect that
+      a future version will patch out, but a direct consequence of how the thing
+      works at all.
     </p>
 
-    <div class="note">
-      <p class="note-title">What it is really doing</p>
-      <p>
-        The model is not trying to tell you the truth and occasionally failing. It
-        is trying to produce convincing text, and the truth is usually the most
-        convincing thing available.
+    <p class="stamp">Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-14"><b>14 August 2026</b></time></p>
+
+    <div class="prose">
+
+      <section aria-labelledby="it-isn-t-lying-and-it-isn-t-malfunctioning">
+        <h2 id="it-isn-t-lying-and-it-isn-t-malfunctioning">It isn't lying, and it isn't malfunctioning<a class="anchor" href="#it-isn-t-lying-and-it-isn-t-malfunctioning" aria-label="Permalink to It isn't lying, and it isn't malfunctioning">#</a></h2>
+        <p>
+          Both of those framings mislead. Lying requires knowing the truth and choosing
+          otherwise. Malfunctioning implies a working state it has fallen away from.
+          Neither applies.
+        </p>
+        <p>
+          A language model produces text by repeatedly answering one question: given
+          everything so far, what plausibly comes next? That is the whole mechanism.
+          There is no separate stage where a draft gets checked against a store of
+          facts, because there is no store of facts to check it against. What the model
+          has is a vast statistical sense of how language about the world tends to go.
+        </p>
+        <p>
+          Most of the time, plausible and true coincide. The most plausible completion
+          of "the capital of France is" is "Paris" precisely because that is true and
+          the truth is written down everywhere. The mechanism gets accuracy for free,
+          as a side effect of pursuing plausibility.
+        </p>
+        <p>
+          But when the truth is obscure, absent, or contested, plausibility keeps
+          working perfectly well without it. Asked for the title of a paper that
+          doesn't exist, the model does exactly what it always does and produces a
+          title that <em>reads</em> like a real one. Nothing has gone wrong internally.
+          The same process that produced "Paris" produced the fake paper. That is the
+          uncomfortable part: fluency and accuracy come out of one process, so you
+          cannot have one without risking the other.
+        </p>
+
+        <div class="note">
+          <p class="note-title">What it is really doing</p>
+          <p>
+            The model is not trying to tell you the truth and occasionally failing. It
+            is trying to produce convincing text, and the truth is usually the most
+            convincing thing available.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="confabulation-is-the-better-word">
+        <h2 id="confabulation-is-the-better-word">"Confabulation" is the better word<a class="anchor" href="#confabulation-is-the-better-word" aria-label="Permalink to &quot;Confabulation&quot; is the better word">#</a></h2>
+        <p>
+          Hallucination is the term that stuck, but it's a poor metaphor: hallucinating
+          means perceiving something that isn't there, and the model isn't perceiving
+          anything. Clinicians have a more precise word for fluently and confidently
+          filling a gap without any awareness that you're filling it, and that word is
+          <strong>confabulation</strong>. It describes this behaviour far better.
+        </p>
+        <p>
+          Worth knowing, partly because it's more accurate and partly because it
+          predicts the behaviour better. Confabulation is not random noise. It is
+          coherent, contextually appropriate, and delivered with the same manner as
+          everything else. That's exactly what makes it hard to catch.
+        </p>
+      </section>
+
+      <section aria-labelledby="why-it-sounds-so-certain">
+        <h2 id="why-it-sounds-so-certain">Why it sounds so certain<a class="anchor" href="#why-it-sounds-so-certain" aria-label="Permalink to Why it sounds so certain">#</a></h2>
+        <p>
+          The tone is the trap. A model's confident register is not evidence of
+          internal confidence, because the register is just more generated text. It
+          writes "the study found" the same way whether the study exists or not, since
+          that's how sentences about studies are phrased.
+        </p>
+        <p>
+          There is genuine uncertainty in the machinery, but by default very little of
+          it surfaces in the prose. Nothing forces a model to write "I'm about 60% sure
+          of this," and quite a lot of its training rewards sounding helpful and
+          fluent. So you get a uniform confident voice across a very wide range of
+          actual reliability, which is the single most dangerous property of these
+          systems for anyone using them for real work.
+        </p>
+      </section>
+
+      <section aria-labelledby="where-it-happens-most">
+        <h2 id="where-it-happens-most">Where it happens most<a class="anchor" href="#where-it-happens-most" aria-label="Permalink to Where it happens most">#</a></h2>
+        <p>
+          This is the practical part, because the risk is not evenly spread. Raise your
+          guard sharply on:
+        </p>
+        <ul>
+          <li><strong>Specific numbers.</strong> Statistics, prices, dates, measurements, scores. A plausible-looking number is trivially easy to generate and almost impossible to spot as fake.</li>
+          <li><strong>Citations, URLs and quotes.</strong> The worst category by far. These have highly regular formats, so a fabricated one looks structurally perfect. Invented papers with real-sounding authors in real journals are a classic, and dead or wrong URLs are routine.</li>
+          <li><strong>Obscure topics.</strong> The less written about something is, the thinner the statistical signal, and the more the model is effectively improvising in the right style.</li>
+          <li><strong>Anything recent.</strong> Past the training cutoff the model has nothing, but it will often answer anyway rather than decline. There's a subtlety here: vendors distinguish a <em>training data cutoff</em> from a <em>reliable knowledge cutoff</em>, the latter being earlier. Events near the boundary are in there thinly, which is arguably worse than absent, because thin coverage produces confident half-knowledge.</li>
+          <li><strong>Precise details about your own material.</strong> Ask which page a clause appears on and you may get a page number invented to satisfy the question.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="the-pressure-problem">
+        <h2 id="the-pressure-problem">The pressure problem<a class="anchor" href="#the-pressure-problem" aria-label="Permalink to The pressure problem">#</a></h2>
+        <p>
+          Here is a failure mode most people trip over without noticing. If you push
+          back on a correct answer, a model will frequently abandon it.
+        </p>
+        <p>
+          Ask "are you sure? I thought it was 2019," and you have not requested a
+          verification. You have supplied a strong hint about what completion you'd
+          find plausible, and plausible-continuation is the only game being played.
+          Agreement is often the most plausible next move. The model will apologise,
+          adopt your date, and sound just as confident as before.
+        </p>
+        <p>
+          So "are you sure?" is close to useless as a checking tool, and worse than
+          useless if you telegraph the answer you expect. If you must probe, keep it
+          neutral and ask for the basis: <em>what is that based on?</em> A real source
+          can be checked. A fabricated one usually falls apart when you go looking for it.
+        </p>
+      </section>
+
+      <section aria-labelledby="what-actually-reduces-it">
+        <h2 id="what-actually-reduces-it">What actually reduces it<a class="anchor" href="#what-actually-reduces-it" aria-label="Permalink to What actually reduces it">#</a></h2>
+
+        <p><strong>Supply the source material.</strong> The single most effective
+        habit, by a distance. A model asked to summarise a document you have pasted in
+        is doing a fundamentally more reliable task than one asked to recall the
+        document from training. Move the work from recall to reading. This is the same
+        insight as → <a href="/concepts/context-windows">Context windows</a>, and it's why
+        the two pages keep pointing at each other.</p>
+
+        <p><strong>Ask for quotes, not summaries, when accuracy is critical.</strong>
+        "Quote the sentence that says this" is checkable in seconds. "Summarise what it
+        says about this" is not.</p>
+
+        <p><strong>Give it a search tool, or use a product that has one.</strong> A
+        model that can look things up and cite what it found is meaningfully more
+        reliable on anything factual or recent. Still verify the citations, because a
+        real search result can be attached to a claim it doesn't support.</p>
+
+        <p><strong>Explicitly permit not knowing.</strong> Adding "if you're not
+        confident, say so" or "say 'I don't know' rather than guessing" genuinely
+        helps, because it makes admitting ignorance a plausible completion rather than
+        an unhelpful-seeming one.</p>
+
+        <p><strong>Ask it to work in the open.</strong> Requesting reasoning before
+        the answer, rather than an answer alone, surfaces more of the path and gives
+        you something to inspect.</p>
+
+        <h3>What doesn't work</h3>
+        <ul>
+          <li><strong>Telling it not to hallucinate.</strong> "Do not make anything up" is a reasonable thing to write and does almost nothing, because the model has no reliable internal flag for which of its output is invented. If it could tell, this page wouldn't need to exist.</li>
+          <li><strong>Asking "are you sure?"</strong> See above. It measures agreeableness, not accuracy.</li>
+          <li><strong>Asking it to grade its own confidence.</strong> The number you get back is itself generated text, and treating it as a real probability is a category error.</li>
+          <li><strong>Assuming a newer or more expensive model has solved it.</strong> Better models confabulate less and hide it better, which does not straightforwardly make them safer to trust unverified.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="two-results-worth-knowing-about">
+        <h2 id="two-results-worth-knowing-about">Two results worth knowing about<a class="anchor" href="#two-results-worth-knowing-about" aria-label="Permalink to Two results worth knowing about">#</a></h2>
+        <p>
+          The account above is the field's settled explanation, and for a long time
+          this page said so without pointing at anything you could go and read. Two
+          results are worth naming, because they sharpen it in different directions.
+        </p>
+        <p>
+          <strong>Some of it is provably unavoidable.</strong> A 2023 result, later
+          published at a theory conference, shows a statistical lower bound on how
+          often a pretrained model must produce false statements of a certain kind
+          &mdash; not because of a flaw in the architecture or dirt in the data, but
+          as a consequence of the model being well
+          <a href="/glossary#calibration">calibrated</a> &mdash; that is, assigning
+          probabilities that match how often things really turn out to be true. Roughly: for facts that
+          appear exactly once in the training data, and whose truth cannot be
+          established from that data, the rate of invention is close to the fraction
+          of facts that appear exactly once. If a model is going to assign sensible
+          probabilities to things it has seen a single time, some of what it produces
+          about them will be wrong. That is a stronger claim than "it isn't
+          malfunctioning." It says a certain amount of this is what working correctly
+          looks like.
+        </p>
+        <p>
+          <strong>The rest is an incentive problem, and that part is fixable.</strong>
+          A 2025 paper argues that invention survives not because nobody can reduce it
+          but because of how models are graded. Most benchmarks score an answer right
+          or wrong and give nothing for "I don't know", so a model that guesses when
+          uncertain scores better than one that admits it, and training rewards the
+          better score. Its authors compare it to a student on an exam with no penalty
+          for a wrong answer, and their proposed remedy is not another hallucination
+          benchmark but changing the scoring of the popular ones. That is a claim about
+          the field's habits rather than about the technology, and it is the most
+          hopeful thing on this page: some of what looks like a hard limit is a
+          scoreboard choice.
+        </p>
+      </section>
+
+      <section aria-labelledby="the-honest-bottom-line">
+        <h2 id="the-honest-bottom-line">The honest bottom line<a class="anchor" href="#the-honest-bottom-line" aria-label="Permalink to The honest bottom line">#</a></h2>
+        <p>
+          This is reducible but not currently eliminable, and any tool promising
+          otherwise is overselling. The workable posture is not distrust, which wastes
+          the tool, but calibrated verification: match your checking to the cost of
+          being wrong.
+        </p>
+        <p>
+          Brainstorming, drafting, explaining, restructuring something you'll read
+          anyway: use it freely, errors are cheap and you'll catch them. Anything
+          load-bearing where a wrong specific has consequences: verify the specifics
+          against a real source before it leaves your hands. Names, numbers, dates,
+          citations and quotes are the five things to check every time, because they
+          are simultaneously the most likely to be invented and the most damaging when
+          they are.
+        </p>
+
+        <div class="gap">
+          <p class="note-title">The two follow-ons</p>
+          <p>
+            Both written since. <a href="/concepts/training-cutoff">Training
+            cutoff</a> covers the knowledge boundary properly, including why models
+            frequently misreport their own.
+            <a href="/concepts/rag">RAG and retrieval</a> covers the main
+            engineering answer to this problem: fetching real source text at
+            question time so the model reads rather than recalls.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          The distinction between a <em>training data cutoff</em> and an earlier
+          <em>reliable knowledge cutoff</em> is drawn from Anthropic's
+          <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+          re-read 14 August 2026, which publishes both dates separately for each model.
+          No hallucination-rate figures are quoted because rates vary enormously by
+          model, task and measurement method, and a single number would be more
+          misleading than no number.
+        </p>
+        <p class="table-note">
+          The unavoidability result is
+          <a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must
+          Hallucinate</a> (Kalai and Vempala, November 2023, published at the ACM
+          Symposium on Theory of Computing in 2024), which shows "an inherent
+          statistical lower-bound on the rate that pretrained language models
+          hallucinate certain types of facts, having nothing to do with the
+          transformer LM architecture or data quality," and ties that rate to "the
+          fraction of facts that occur exactly once in the training data (a
+          'Good-Turing' estimate), even assuming ideal training data without errors."
+          It is a mathematical result about a class of models, not a measurement of
+          any particular one, and it applies to arbitrary facts whose truth the
+          training data cannot settle &mdash; not to everything a model says.
+        </p>
+        <p class="table-note">
+          The incentives argument is
+          <a href="https://arxiv.org/abs/2509.04664">Why Language Models
+          Hallucinate</a> (Kalai, Nachum, Vempala and Zhang, September 2025), which
+          argues models "hallucinate because the training and evaluation procedures
+          reward guessing over acknowledging uncertainty," that such errors "originate
+          simply as errors in binary classification," and that the remedy is
+          "modifying the scoring of existing benchmarks that are misaligned but
+          dominate leaderboards, rather than introducing additional hallucination
+          evaluations." That last part is an argument the authors are making, not a
+          settled finding, and it is described that way above. Both papers read
+          14 August 2026.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Next → <a href="/concepts/context-windows">Context windows</a> ·
+        <a href="/concepts/tokens">Tokens</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
+
     </div>
-
-    <h2 id="confabulation-is-the-better-word">"Confabulation" is the better word<a class="anchor" href="#confabulation-is-the-better-word" aria-label="Permalink to &quot;Confabulation&quot; is the better word">#</a></h2>
-    <p>
-      Hallucination is the term that stuck, but it's a poor metaphor: hallucinating
-      means perceiving something that isn't there, and the model isn't perceiving
-      anything. Clinicians have a more precise word for fluently and confidently
-      filling a gap without any awareness that you're filling it, and that word is
-      <strong>confabulation</strong>. It describes this behaviour far better.
-    </p>
-    <p>
-      Worth knowing, partly because it's more accurate and partly because it
-      predicts the behaviour better. Confabulation is not random noise. It is
-      coherent, contextually appropriate, and delivered with the same manner as
-      everything else. That's exactly what makes it hard to catch.
-    </p>
-
-    <h2 id="why-it-sounds-so-certain">Why it sounds so certain<a class="anchor" href="#why-it-sounds-so-certain" aria-label="Permalink to Why it sounds so certain">#</a></h2>
-    <p>
-      The tone is the trap. A model's confident register is not evidence of
-      internal confidence, because the register is just more generated text. It
-      writes "the study found" the same way whether the study exists or not, since
-      that's how sentences about studies are phrased.
-    </p>
-    <p>
-      There is genuine uncertainty in the machinery, but by default very little of
-      it surfaces in the prose. Nothing forces a model to write "I'm about 60% sure
-      of this," and quite a lot of its training rewards sounding helpful and
-      fluent. So you get a uniform confident voice across a very wide range of
-      actual reliability, which is the single most dangerous property of these
-      systems for anyone using them for real work.
-    </p>
-
-    <h2 id="where-it-happens-most">Where it happens most<a class="anchor" href="#where-it-happens-most" aria-label="Permalink to Where it happens most">#</a></h2>
-    <p>
-      This is the practical part, because the risk is not evenly spread. Raise your
-      guard sharply on:
-    </p>
-    <ul>
-      <li><strong>Specific numbers.</strong> Statistics, prices, dates, measurements, scores. A plausible-looking number is trivially easy to generate and almost impossible to spot as fake.</li>
-      <li><strong>Citations, URLs and quotes.</strong> The worst category by far. These have highly regular formats, so a fabricated one looks structurally perfect. Invented papers with real-sounding authors in real journals are a classic, and dead or wrong URLs are routine.</li>
-      <li><strong>Obscure topics.</strong> The less written about something is, the thinner the statistical signal, and the more the model is effectively improvising in the right style.</li>
-      <li><strong>Anything recent.</strong> Past the training cutoff the model has nothing, but it will often answer anyway rather than decline. There's a subtlety here: vendors distinguish a <em>training data cutoff</em> from a <em>reliable knowledge cutoff</em>, the latter being earlier. Events near the boundary are in there thinly, which is arguably worse than absent, because thin coverage produces confident half-knowledge.</li>
-      <li><strong>Precise details about your own material.</strong> Ask which page a clause appears on and you may get a page number invented to satisfy the question.</li>
-    </ul>
-
-    <h2 id="the-pressure-problem">The pressure problem<a class="anchor" href="#the-pressure-problem" aria-label="Permalink to The pressure problem">#</a></h2>
-    <p>
-      Here is a failure mode most people trip over without noticing. If you push
-      back on a correct answer, a model will frequently abandon it.
-    </p>
-    <p>
-      Ask "are you sure? I thought it was 2019," and you have not requested a
-      verification. You have supplied a strong hint about what completion you'd
-      find plausible, and plausible-continuation is the only game being played.
-      Agreement is often the most plausible next move. The model will apologise,
-      adopt your date, and sound just as confident as before.
-    </p>
-    <p>
-      So "are you sure?" is close to useless as a checking tool, and worse than
-      useless if you telegraph the answer you expect. If you must probe, keep it
-      neutral and ask for the basis: <em>what is that based on?</em> A real source
-      can be checked. A fabricated one usually falls apart when you go looking for it.
-    </p>
-
-    <h2 id="what-actually-reduces-it">What actually reduces it<a class="anchor" href="#what-actually-reduces-it" aria-label="Permalink to What actually reduces it">#</a></h2>
-
-    <p><strong>Supply the source material.</strong> The single most effective
-    habit, by a distance. A model asked to summarise a document you have pasted in
-    is doing a fundamentally more reliable task than one asked to recall the
-    document from training. Move the work from recall to reading. This is the same
-    insight as → <a href="/concepts/context-windows">Context windows</a>, and it's why
-    the two pages keep pointing at each other.</p>
-
-    <p><strong>Ask for quotes, not summaries, when accuracy is critical.</strong>
-    "Quote the sentence that says this" is checkable in seconds. "Summarise what it
-    says about this" is not.</p>
-
-    <p><strong>Give it a search tool, or use a product that has one.</strong> A
-    model that can look things up and cite what it found is meaningfully more
-    reliable on anything factual or recent. Still verify the citations, because a
-    real search result can be attached to a claim it doesn't support.</p>
-
-    <p><strong>Explicitly permit not knowing.</strong> Adding "if you're not
-    confident, say so" or "say 'I don't know' rather than guessing" genuinely
-    helps, because it makes admitting ignorance a plausible completion rather than
-    an unhelpful-seeming one.</p>
-
-    <p><strong>Ask it to work in the open.</strong> Requesting reasoning before
-    the answer, rather than an answer alone, surfaces more of the path and gives
-    you something to inspect.</p>
-
-    <h3>What doesn't work</h3>
-    <ul>
-      <li><strong>Telling it not to hallucinate.</strong> "Do not make anything up" is a reasonable thing to write and does almost nothing, because the model has no reliable internal flag for which of its output is invented. If it could tell, this page wouldn't need to exist.</li>
-      <li><strong>Asking "are you sure?"</strong> See above. It measures agreeableness, not accuracy.</li>
-      <li><strong>Asking it to grade its own confidence.</strong> The number you get back is itself generated text, and treating it as a real probability is a category error.</li>
-      <li><strong>Assuming a newer or more expensive model has solved it.</strong> Better models confabulate less and hide it better, which does not straightforwardly make them safer to trust unverified.</li>
-    </ul>
-
-    <h2 id="two-results-worth-knowing-about">Two results worth knowing about<a class="anchor" href="#two-results-worth-knowing-about" aria-label="Permalink to Two results worth knowing about">#</a></h2>
-    <p>
-      The account above is the field's settled explanation, and for a long time
-      this page said so without pointing at anything you could go and read. Two
-      results are worth naming, because they sharpen it in different directions.
-    </p>
-    <p>
-      <strong>Some of it is provably unavoidable.</strong> A 2023 result, later
-      published at a theory conference, shows a statistical lower bound on how
-      often a pretrained model must produce false statements of a certain kind
-      &mdash; not because of a flaw in the architecture or dirt in the data, but
-      as a consequence of the model being well
-      <a href="/glossary#calibration">calibrated</a> &mdash; that is, assigning
-      probabilities that match how often things really turn out to be true. Roughly: for facts that
-      appear exactly once in the training data, and whose truth cannot be
-      established from that data, the rate of invention is close to the fraction
-      of facts that appear exactly once. If a model is going to assign sensible
-      probabilities to things it has seen a single time, some of what it produces
-      about them will be wrong. That is a stronger claim than "it isn't
-      malfunctioning." It says a certain amount of this is what working correctly
-      looks like.
-    </p>
-    <p>
-      <strong>The rest is an incentive problem, and that part is fixable.</strong>
-      A 2025 paper argues that invention survives not because nobody can reduce it
-      but because of how models are graded. Most benchmarks score an answer right
-      or wrong and give nothing for "I don't know", so a model that guesses when
-      uncertain scores better than one that admits it, and training rewards the
-      better score. Its authors compare it to a student on an exam with no penalty
-      for a wrong answer, and their proposed remedy is not another hallucination
-      benchmark but changing the scoring of the popular ones. That is a claim about
-      the field's habits rather than about the technology, and it is the most
-      hopeful thing on this page: some of what looks like a hard limit is a
-      scoreboard choice.
-    </p>
-
-    <h2 id="the-honest-bottom-line">The honest bottom line<a class="anchor" href="#the-honest-bottom-line" aria-label="Permalink to The honest bottom line">#</a></h2>
-    <p>
-      This is reducible but not currently eliminable, and any tool promising
-      otherwise is overselling. The workable posture is not distrust, which wastes
-      the tool, but calibrated verification: match your checking to the cost of
-      being wrong.
-    </p>
-    <p>
-      Brainstorming, drafting, explaining, restructuring something you'll read
-      anyway: use it freely, errors are cheap and you'll catch them. Anything
-      load-bearing where a wrong specific has consequences: verify the specifics
-      against a real source before it leaves your hands. Names, numbers, dates,
-      citations and quotes are the five things to check every time, because they
-      are simultaneously the most likely to be invented and the most damaging when
-      they are.
-    </p>
-
-    <div class="gap">
-      <p class="note-title">The two follow-ons</p>
-      <p>
-        Both written since. <a href="/concepts/training-cutoff">Training
-        cutoff</a> covers the knowledge boundary properly, including why models
-        frequently misreport their own.
-        <a href="/concepts/rag">RAG and retrieval</a> covers the main
-        engineering answer to this problem: fetching real source text at
-        question time so the model reads rather than recalls.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      The distinction between a <em>training data cutoff</em> and an earlier
-      <em>reliable knowledge cutoff</em> is drawn from Anthropic's
-      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
-      re-read 14 August 2026, which publishes both dates separately for each model.
-      No hallucination-rate figures are quoted because rates vary enormously by
-      model, task and measurement method, and a single number would be more
-      misleading than no number.
-    </p>
-    <p class="table-note">
-      The unavoidability result is
-      <a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must
-      Hallucinate</a> (Kalai and Vempala, November 2023, published at the ACM
-      Symposium on Theory of Computing in 2024), which shows "an inherent
-      statistical lower-bound on the rate that pretrained language models
-      hallucinate certain types of facts, having nothing to do with the
-      transformer LM architecture or data quality," and ties that rate to "the
-      fraction of facts that occur exactly once in the training data (a
-      'Good-Turing' estimate), even assuming ideal training data without errors."
-      It is a mathematical result about a class of models, not a measurement of
-      any particular one, and it applies to arbitrary facts whose truth the
-      training data cannot settle &mdash; not to everything a model says.
-    </p>
-    <p class="table-note">
-      The incentives argument is
-      <a href="https://arxiv.org/abs/2509.04664">Why Language Models
-      Hallucinate</a> (Kalai, Nachum, Vempala and Zhang, September 2025), which
-      argues models "hallucinate because the training and evaluation procedures
-      reward guessing over acknowledging uncertainty," that such errors "originate
-      simply as errors in binary classification," and that the remedy is
-      "modifying the scoring of existing benchmarks that are misaligned but
-      dominate leaderboards, rather than introducing additional hallucination
-      evaluations." That last part is an argument the authors are making, not a
-      settled finding, and it is described that way above. Both papers read
-      14 August 2026.
-    </p>
-
-    <p class="next">
-      Next → <a href="/concepts/context-windows">Context windows</a> ·
-      <a href="/concepts/tokens">Tokens</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

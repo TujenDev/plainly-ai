@@ -89,164 +89,178 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Building</p>
-  <h1>Prompt caching</h1>
-  <p class="standfirst">
-    The largest cost lever available to most people building with these models,
-    and the one least likely to come up in a tutorial. It is also unusually
-    easy to break by accident, in a way that shows up on the bill rather than in
-    the output.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
-    rates and lifetimes are vendor-specific and change, so check their docs
-  </p>
-
-  <div class="prose">
-
-    <h2 id="the-problem-it-solves">The problem it solves<a class="anchor" href="#the-problem-it-solves" aria-label="Permalink to The problem it solves">#</a></h2>
-    <p>
-      A model has no memory between calls, so everything it needs must be sent
-      every time. In any real application that means the same large preamble goes
-      up over and over: your system instructions, your tool definitions, your
-      style examples, the document being discussed, the conversation so far.
-      → <a href="/concepts/context-windows">Context windows</a>
-    </p>
-    <p>
-      You pay for all of it on every single call, and you wait for it to be
-      processed on every single call. In a long conversation or an agent loop,
-      the overwhelming majority of what you are paying for is material the model
-      already saw a moment ago. → <a href="/concepts/tokens">Tokens</a>
-    </p>
-    <p>
-      Prompt caching lets the provider keep the processed form of that unchanging
-      opening section and reuse it, so repeat sends are much cheaper and much
-      faster. The savings on a workload with a big fixed preamble are not a
-      rounding error, which is why it is worth understanding before you optimise
-      anything else.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Building</p>
+    <h1>Prompt caching</h1>
+    <p class="standfirst">
+      The largest cost lever available to most people building with these models,
+      and the one least likely to come up in a tutorial. It is also unusually
+      easy to break by accident, in a way that shows up on the bill rather than in
+      the output.
     </p>
 
-    <h2 id="how-it-works-and-the-one-rule-that-matters">How it works, and the one rule that matters<a class="anchor" href="#how-it-works-and-the-one-rule-that-matters" aria-label="Permalink to How it works, and the one rule that matters">#</a></h2>
-    <p>
-      Caching is <strong>prefix-based</strong>. It matches from the very start of
-      your prompt forward, and Anthropic's documentation is explicit that a hit
-      requires "100% identical prompt segments" up to the point you marked for
-      caching. Not similar. Identical.
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
+      rates and lifetimes are vendor-specific and change, so check their docs
     </p>
-    <p>
-      Everything else follows from that one property:
-    </p>
-    <ul>
-      <li><strong>Static content goes first, changing content goes last.</strong> The vendor guidance is to "place static content (tool definitions, system instructions, context, examples) at the beginning of your prompt." Anything that varies per request must sit after everything you want reused.</li>
-      <li><strong>A change invalidates everything after it.</strong> The prompt is treated in a fixed order, tools then system then messages, and "changes at each level invalidate that level and all subsequent levels." Edit a tool definition and the whole cache goes, not just the tool part.</li>
-      <li><strong>The reusable section has to actually be reusable.</strong> If a value in your opening section differs between requests, there is no shared prefix, and there is nothing to hit.</li>
-    </ul>
 
-    <div class="gap">
-      <p class="note-title">The mistake that costs the most</p>
-      <p>
-        Putting something that changes every request inside the section you meant
-        to cache. The classic is a timestamp, a session ID or the user's message
-        placed in the system preamble rather than after it. Every request then
-        looks brand new, so the system writes a fresh cache entry and never reads
-        one. Writing to cache is not free, so this is worse than not caching at
-        all: you pay the premium every time and collect the benefit never.
+    <div class="prose">
+
+      <section aria-labelledby="the-problem-it-solves">
+        <h2 id="the-problem-it-solves">The problem it solves<a class="anchor" href="#the-problem-it-solves" aria-label="Permalink to The problem it solves">#</a></h2>
+        <p>
+          A model has no memory between calls, so everything it needs must be sent
+          every time. In any real application that means the same large preamble goes
+          up over and over: your system instructions, your tool definitions, your
+          style examples, the document being discussed, the conversation so far.
+          → <a href="/concepts/context-windows">Context windows</a>
+        </p>
+        <p>
+          You pay for all of it on every single call, and you wait for it to be
+          processed on every single call. In a long conversation or an agent loop,
+          the overwhelming majority of what you are paying for is material the model
+          already saw a moment ago. → <a href="/concepts/tokens">Tokens</a>
+        </p>
+        <p>
+          Prompt caching lets the provider keep the processed form of that unchanging
+          opening section and reuse it, so repeat sends are much cheaper and much
+          faster. The savings on a workload with a big fixed preamble are not a
+          rounding error, which is why it is worth understanding before you optimise
+          anything else.
+        </p>
+      </section>
+
+      <section aria-labelledby="how-it-works-and-the-one-rule-that-matters">
+        <h2 id="how-it-works-and-the-one-rule-that-matters">How it works, and the one rule that matters<a class="anchor" href="#how-it-works-and-the-one-rule-that-matters" aria-label="Permalink to How it works, and the one rule that matters">#</a></h2>
+        <p>
+          Caching is <strong>prefix-based</strong>. It matches from the very start of
+          your prompt forward, and Anthropic's documentation is explicit that a hit
+          requires "100% identical prompt segments" up to the point you marked for
+          caching. Not similar. Identical.
+        </p>
+        <p>
+          Everything else follows from that one property:
+        </p>
+        <ul>
+          <li><strong>Static content goes first, changing content goes last.</strong> The vendor guidance is to "place static content (tool definitions, system instructions, context, examples) at the beginning of your prompt." Anything that varies per request must sit after everything you want reused.</li>
+          <li><strong>A change invalidates everything after it.</strong> The prompt is treated in a fixed order, tools then system then messages, and "changes at each level invalidate that level and all subsequent levels." Edit a tool definition and the whole cache goes, not just the tool part.</li>
+          <li><strong>The reusable section has to actually be reusable.</strong> If a value in your opening section differs between requests, there is no shared prefix, and there is nothing to hit.</li>
+        </ul>
+
+        <div class="gap">
+          <p class="note-title">The mistake that costs the most</p>
+          <p>
+            Putting something that changes every request inside the section you meant
+            to cache. The classic is a timestamp, a session ID or the user's message
+            placed in the system preamble rather than after it. Every request then
+            looks brand new, so the system writes a fresh cache entry and never reads
+            one. Writing to cache is not free, so this is worse than not caching at
+            all: you pay the premium every time and collect the benefit never.
+          </p>
+          <p>
+            It produces no error and no visible defect in the output. The only
+            symptom is the bill, which is exactly why it survives so long in
+            production.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="where-the-wins-actually-are">
+        <h2 id="where-the-wins-actually-are">Where the wins actually are<a class="anchor" href="#where-the-wins-actually-are" aria-label="Permalink to Where the wins actually are">#</a></h2>
+        <p>
+          The pattern to look for is a large unchanging preamble followed by a small
+          changing part, repeated many times.
+        </p>
+        <ul>
+          <li><strong>Agent loops.</strong> The best case there is. The system prompt and tool definitions get re-sent at every single step of the loop, unchanged, dozens of times per task. → <a href="/concepts/agents">Agents</a></li>
+          <li><strong>Long conversations.</strong> The history grows but its earlier portion never changes, so each turn can reuse everything up to the newest exchange.</li>
+          <li><strong>One big document, many questions.</strong> Put the document in the cached section and ask against it repeatedly.</li>
+          <li><strong>Retrieval systems, partly.</strong> The instructions and examples cache well. The retrieved passages change per question by definition, so they belong after the cached section, not inside it. → <a href="/concepts/rag">RAG and retrieval</a></li>
+        </ul>
+        <p>
+          And where it does nothing: one-off calls with short prompts, or workloads
+          where every request genuinely differs from the start. There is no shared
+          prefix to reuse, and no amount of configuration invents one.
+        </p>
+      </section>
+
+      <section aria-labelledby="what-it-is-not">
+        <h2 id="what-it-is-not">What it is not<a class="anchor" href="#what-it-is-not" aria-label="Permalink to What it is not">#</a></h2>
+        <p>
+          Three misunderstandings worth heading off, because all three lead somewhere
+          expensive.
+        </p>
+        <p>
+          <strong>It is not memory.</strong> The model does not remember your
+          conversation between sessions because it was cached. Caching stores the
+          processed form of text you are <em>still sending</em>. Stop sending it and
+          it is gone from the model's view entirely.
+        </p>
+        <p>
+          <strong>It does not free up context.</strong> Cached tokens still occupy the
+          window exactly as they did before. This is a cost and latency optimisation,
+          not a capacity one, and a prompt that overflows the window will still
+          overflow it.
+        </p>
+        <p>
+          <strong>It does not persist for long, and it is not a database.</strong>
+          Entries expire on a short timer measured in minutes by default, with longer
+          options available at higher write cost, and the specifics differ by vendor
+          and change over time. Anything that must survive reliably belongs in your
+          own storage, not in a cache you do not control.
+        </p>
+      </section>
+
+      <section aria-labelledby="how-to-tell-whether-it-s-working">
+        <h2 id="how-to-tell-whether-it-s-working">How to tell whether it's working<a class="anchor" href="#how-to-tell-whether-it-s-working" aria-label="Permalink to How to tell whether it's working">#</a></h2>
+        <p>
+          Do not assume, and do not infer it from the bill at the end of the month.
+          Providers report per-call whether tokens were written to the cache or read
+          from it, and that is the number to watch. A healthy repetitive workload
+          shows one write followed by many reads. If you see writes on nearly every
+          call and almost no reads, something in your supposedly-static section is
+          changing, and finding it is usually the highest-value hour of work
+          available to you.
+        </p>
+
+        <div class="note">
+          <p class="note-title">The practical checklist</p>
+          <p>
+            Put everything unchanging at the top, in a stable order. Keep anything
+            per-request strictly after it. Mark the boundary at the end of the static
+            material rather than on the varying part. Then check the reported
+            read-versus-write counts on real traffic, not on a test call.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          The prefix-matching behaviour, the requirement for "100% identical prompt
+          segments", the instruction to place static content at the beginning, and
+          the rule that "changes at each level invalidate that level and all
+          subsequent levels" come from Anthropic's
+          <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">prompt caching documentation</a>,
+          fetched 11 August 2026. That page also documents cache lifetimes, minimum
+          cacheable sizes and the pricing multipliers involved; those are deliberately
+          not reproduced here because they are model-specific and change, and a stale
+          copy of them would be worse than none.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Related → <a href="/concepts/agents">Agents</a> ·
+        <a href="/concepts/tokens">Tokens</a> ·
+        <a href="/concepts/context-windows">Context windows</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
-      <p>
-        It produces no error and no visible defect in the output. The only
-        symptom is the bill, which is exactly why it survives so long in
-        production.
-      </p>
+
     </div>
-
-    <h2 id="where-the-wins-actually-are">Where the wins actually are<a class="anchor" href="#where-the-wins-actually-are" aria-label="Permalink to Where the wins actually are">#</a></h2>
-    <p>
-      The pattern to look for is a large unchanging preamble followed by a small
-      changing part, repeated many times.
-    </p>
-    <ul>
-      <li><strong>Agent loops.</strong> The best case there is. The system prompt and tool definitions get re-sent at every single step of the loop, unchanged, dozens of times per task. → <a href="/concepts/agents">Agents</a></li>
-      <li><strong>Long conversations.</strong> The history grows but its earlier portion never changes, so each turn can reuse everything up to the newest exchange.</li>
-      <li><strong>One big document, many questions.</strong> Put the document in the cached section and ask against it repeatedly.</li>
-      <li><strong>Retrieval systems, partly.</strong> The instructions and examples cache well. The retrieved passages change per question by definition, so they belong after the cached section, not inside it. → <a href="/concepts/rag">RAG and retrieval</a></li>
-    </ul>
-    <p>
-      And where it does nothing: one-off calls with short prompts, or workloads
-      where every request genuinely differs from the start. There is no shared
-      prefix to reuse, and no amount of configuration invents one.
-    </p>
-
-    <h2 id="what-it-is-not">What it is not<a class="anchor" href="#what-it-is-not" aria-label="Permalink to What it is not">#</a></h2>
-    <p>
-      Three misunderstandings worth heading off, because all three lead somewhere
-      expensive.
-    </p>
-    <p>
-      <strong>It is not memory.</strong> The model does not remember your
-      conversation between sessions because it was cached. Caching stores the
-      processed form of text you are <em>still sending</em>. Stop sending it and
-      it is gone from the model's view entirely.
-    </p>
-    <p>
-      <strong>It does not free up context.</strong> Cached tokens still occupy the
-      window exactly as they did before. This is a cost and latency optimisation,
-      not a capacity one, and a prompt that overflows the window will still
-      overflow it.
-    </p>
-    <p>
-      <strong>It does not persist for long, and it is not a database.</strong>
-      Entries expire on a short timer measured in minutes by default, with longer
-      options available at higher write cost, and the specifics differ by vendor
-      and change over time. Anything that must survive reliably belongs in your
-      own storage, not in a cache you do not control.
-    </p>
-
-    <h2 id="how-to-tell-whether-it-s-working">How to tell whether it's working<a class="anchor" href="#how-to-tell-whether-it-s-working" aria-label="Permalink to How to tell whether it's working">#</a></h2>
-    <p>
-      Do not assume, and do not infer it from the bill at the end of the month.
-      Providers report per-call whether tokens were written to the cache or read
-      from it, and that is the number to watch. A healthy repetitive workload
-      shows one write followed by many reads. If you see writes on nearly every
-      call and almost no reads, something in your supposedly-static section is
-      changing, and finding it is usually the highest-value hour of work
-      available to you.
-    </p>
-
-    <div class="note">
-      <p class="note-title">The practical checklist</p>
-      <p>
-        Put everything unchanging at the top, in a stable order. Keep anything
-        per-request strictly after it. Mark the boundary at the end of the static
-        material rather than on the varying part. Then check the reported
-        read-versus-write counts on real traffic, not on a test call.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      The prefix-matching behaviour, the requirement for "100% identical prompt
-      segments", the instruction to place static content at the beginning, and
-      the rule that "changes at each level invalidate that level and all
-      subsequent levels" come from Anthropic's
-      <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">prompt caching documentation</a>,
-      fetched 11 August 2026. That page also documents cache lifetimes, minimum
-      cacheable sizes and the pricing multipliers involved; those are deliberately
-      not reproduced here because they are model-specific and change, and a stale
-      copy of them would be worse than none.
-    </p>
-
-    <p class="next">
-      Related → <a href="/concepts/agents">Agents</a> ·
-      <a href="/concepts/tokens">Tokens</a> ·
-      <a href="/concepts/context-windows">Context windows</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

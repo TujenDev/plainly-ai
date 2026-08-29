@@ -58,361 +58,361 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">The dependency list</p>
+    <h1>Sources</h1>
+    <p class="standfirst">
+      Every outside document this site leans on, what it is cited for, which pages
+      fall over if it changes, and when it was last actually read. This is the
+      maintenance list, published rather than kept privately.
+    </p>
 
-  <p class="kicker">The dependency list</p>
-  <h1>Sources</h1>
-  <p class="standfirst">
-    Every outside document this site leans on, what it is cited for, which pages
-    fall over if it changes, and when it was last actually read. This is the
-    maintenance list, published rather than kept privately.
-  </p>
+    <p class="stamp">
+      Published <time datetime="2026-08-12"><b>12 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-26"><b>26 August 2026</b></time>
+      &nbsp;&middot;&nbsp; Every URL below was requested on that date and returned a
+      working page. The per-document dates in the last column are the separate,
+      stronger claim: on that date seven of them were re-read in full for the
+      monthly Model facts check
+    </p>
 
-  <p class="stamp">
-    Published <time datetime="2026-08-12"><b>12 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-26"><b>26 August 2026</b></time>
-    &nbsp;&middot;&nbsp; Every URL below was requested on that date and returned a
-    working page. The per-document dates in the last column are the separate,
-    stronger claim: on that date seven of them were re-read in full for the
-    monthly Model facts check
-  </p>
+    <div class="prose">
 
-  <div class="prose">
+      <div class="note">
+        <p class="note-title">The failure that produced this list</p>
+        <p>
+          On 12 August 2026 this site was found citing a real figure to two pages
+          that did not contain it. The number was right and the citation was
+          unfollowable, which is worse than no citation at all: a reader doing the
+          check <a href="/is-this-out-of-date">this site recommends</a> would have
+          concluded the figure was invented. That is
+          <a href="/changes">logged in full</a>, and this page is the structural
+          fix. When every external claim is listed in one place with its source and
+          its date, a citation that leads nowhere has somewhere to be caught.
+        </p>
+      </div>
 
-    <div class="note">
-      <p class="note-title">The failure that produced this list</p>
       <p>
-        On 12 August 2026 this site was found citing a real figure to two pages
-        that did not contain it. The number was right and the citation was
-        unfollowable, which is worse than no citation at all: a reader doing the
-        check <a href="/is-this-out-of-date">this site recommends</a> would have
-        concluded the figure was invented. That is
-        <a href="/changes">logged in full</a>, and this page is the structural
-        fix. When every external claim is listed in one place with its source and
-        its date, a citation that leads nowhere has somewhere to be caught.
+        It also makes the maintenance honest. The re-checking commitment on
+        <a href="/changes">the changes page</a> is easy to state and hard to verify
+        from outside. What it actually amounts to is re-reading the documents below
+        and seeing which pages move. There are twenty-seven of them: eleven vendor
+        documents carrying figures, twelve explaining a mechanism, and four research
+        papers. That is a real afternoon, not an impossible one, and now you can
+        hold the site to it rather than take its word.
       </p>
     </div>
 
-    <p>
-      It also makes the maintenance honest. The re-checking commitment on
-      <a href="/changes">the changes page</a> is easy to state and hard to verify
-      from outside. What it actually amounts to is re-reading the documents below
-      and seeing which pages move. There are twenty-seven of them: eleven vendor
-      documents carrying figures, twelve explaining a mechanism, and four research
-      papers. That is a real afternoon, not an impossible one, and now you can
-      hold the site to it rather than take its word.
-    </p>
-  </div>
+    <h2>Primary sources: vendor documentation</h2>
 
-  <h2>Primary sources: vendor documentation</h2>
-
-  <p class="prose">
-    These carry the hard figures. If one of these changes, something on this site
-    is wrong until it is updated.
-  </p>
-
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Vendor documentation sources, with dependent pages and dates. Scrolls horizontally">
-    <table>
-      <thead>
-        <tr>
-          <th>Document</th>
-          <th>Cited for</th>
-          <th>Pages that depend on it</th>
-          <th>Last read</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic — models overview</a></td>
-          <td>Context windows, output limits, prices, both cutoff dates, and the word/character approximations</td>
-          <td><a href="/model-facts">Model facts</a>, <a href="/concepts/tokens">Tokens</a>, <a href="/concepts/context-windows">Context windows</a>, <a href="/concepts/training-cutoff">Training cutoff</a>, <a href="/concepts/hallucination">Hallucination</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic — pricing</a></td>
-          <td>The Sonnet 5 rate becoming permanent; batch and caching discounts</td>
-          <td><a href="/model-facts">Model facts</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/build-with-claude/token-counting">Anthropic — token counting</a></td>
-          <td>The ~30% tokeniser increase and the model it starts at</td>
-          <td><a href="/concepts/tokens">Tokens</a></td>
-          <td>12 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://github.com/anthropics/skills/blob/main/skills/claude-api/shared/token-counting.md">Anthropic — token counting guidance for developers</a></td>
-          <td>The 15–20% <code>tiktoken</code> undercounting range</td>
-          <td><a href="/concepts/tokens">Tokens</a></td>
-          <td>12 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Anthropic — prompting best practices</a></td>
-          <td>Examples as a steering lever, the colleague test, self-verification and its exception</td>
-          <td><a href="/getting-better-results">Getting better results</a></td>
-          <td>12 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://developers.openai.com/api/docs/pricing">OpenAI — pricing</a></td>
-          <td>GPT-5.6 prices, and the long-context tiers that are not in the table</td>
-          <td><a href="/model-facts">Model facts</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://developers.openai.com/api/docs/models">OpenAI — models</a></td>
-          <td>Context and output limits, knowledge cutoff</td>
-          <td><a href="/model-facts">Model facts</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://ai.google.dev/gemini-api/docs/pricing">Google — Gemini API pricing</a></td>
-          <td>Gemini 3.6 Flash prices and tiering</td>
-          <td><a href="/model-facts">Model facts</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Google — Gemini 3.6 Flash</a></td>
-          <td>Context and output limits, and the absence of a published cutoff</td>
-          <td><a href="/model-facts">Model facts</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Meta — Model API pricing</a></td>
-          <td>Muse Spark pricing, the contributor tier, and the absence of a first-party Llama price</td>
-          <td><a href="/model-facts">Model facts</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://developers.openai.com/api/docs/guides/model-optimization">OpenAI — model optimization</a></td>
-          <td>What fine-tuning is sold as doing, in the vendor's own words</td>
-          <td><a href="/concepts/fine-tuning">Fine-tuning</a></td>
-          <td>11 Aug 2026</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Vendor writing on mechanism</h2>
-
-  <p class="prose">
-    Not figures, but explanations of how something works, cited where this site
-    describes the same mechanism. These age more slowly and are worth reading
-    directly.
-  </p>
-
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Mechanism sources, with dependent pages and dates. Scrolls horizontally">
-    <table>
-      <thead>
-        <tr>
-          <th>Document</th>
-          <th>Cited for</th>
-          <th>Pages that depend on it</th>
-          <th>Last read</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic — Building effective agents</a></td>
-          <td>The workflow/agent distinction, and the case for the simplest thing that works</td>
-          <td><a href="/concepts/agents">Agents</a></td>
-          <td>11 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.anthropic.com/research/reasoning-models-dont-say-think">Anthropic — Reasoning models don't always say what they think</a></td>
-          <td>Visible reasoning not being a reliable account of the actual process</td>
-          <td><a href="/concepts/thinking">Thinking and reasoning</a>, <a href="/what-ai-is-bad-at">What AI is actually bad at</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/api/errors">Anthropic — API errors</a></td>
-          <td>The error taxonomy, the SDKs' built-in retry with backoff, and a streaming error arriving after a successful status</td>
-          <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/api/rate-limits">Anthropic — Rate limits</a></td>
-          <td>The token bucket and continuous replenishment, enforcement over shorter intervals than quoted, the response headers, and the spend-cap refusal that carries no retry-after</td>
-          <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/api/messages">Anthropic — Messages API</a></td>
-          <td>The stop reason values, including truncation and refusal arriving on a successful response</td>
-          <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.anthropic.com/research/reward-tampering">Anthropic — Sycophancy to subterfuge: Investigating reward tampering</a></td>
-          <td>The definition of specification gaming, the escalating curriculum, tampering emerging without training for it, and the refusal to generalise to production models</td>
-          <td><a href="/things-nobody-asked-for">Why it does things nobody asked for</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.anthropic.com/research/emergent-misalignment-reward-hacking">Anthropic — From shortcuts to sabotage: natural emergent misalignment from reward hacking</a></td>
-          <td>Unrelated misaligned behaviour appearing alongside learned cheating, RLHF making it context-dependent, and inoculation prompting</td>
-          <td><a href="/things-nobody-asked-for">Why it does things nobody asked for</a></td>
-          <td>26 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests">Anthropic — Define success criteria and build evaluations</a></td>
-          <td>What makes a criterion measurable, the three eval design principles, and the ordering of code, human and model grading</td>
-          <td><a href="/did-it-get-better">How to tell if it actually got better</a></td>
-          <td>25 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations">Anthropic — Reduce hallucinations</a></td>
-          <td>Best-of-N verification, and the caveat that these techniques reduce rather than remove the problem</td>
-          <td><a href="/check-an-answer">How to check an AI's answer</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://www.anthropic.com/engineering/contextual-retrieval">Anthropic — Contextual retrieval</a></td>
-          <td>Why naive chunking loses the context a chunk needed</td>
-          <td><a href="/concepts/rag">RAG and retrieval</a></td>
-          <td>12 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/build-with-claude/thinking">Anthropic — thinking</a></td>
-          <td>How thinking is configured and billed, and what invalidates a cache</td>
-          <td><a href="/concepts/thinking">Thinking and reasoning</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Anthropic — prompt caching</a></td>
-          <td>Prefix matching, breakpoints, and what silently invalidates a cache</td>
-          <td><a href="/concepts/prompt-caching">Prompt caching</a></td>
-          <td>11 Aug 2026</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Research papers</h2>
-
-  <p class="prose">
-    Peer-reviewed and preprint work, cited where this site describes a finding
-    that came out of the literature rather than out of a vendor's documentation.
-    These are the slowest-moving sources here and the only ones nobody is selling
-    anything with. Where a paper reports per-model measurements, those numbers
-    stay in the paper: this site's pages describe the finding and leave the
-    figures where they can be checked in context.
-  </p>
-
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Research paper sources, with dependent pages and dates. Scrolls horizontally">
-    <table>
-      <thead>
-        <tr>
-          <th>Paper</th>
-          <th>Cited for</th>
-          <th>Pages that depend on it</th>
-          <th>Last read</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language Models Use Long Contexts</a> (Liu et al., 2023; TACL)</td>
-          <td>Accuracy being highest at the start and end of a context and worst in the middle</td>
-          <td><a href="/concepts/context-windows">Context windows</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://arxiv.org/abs/2502.05167">NoLiMa: Long-Context Evaluation Beyond Literal Matching</a> (Modarressi et al., 2025; ICML)</td>
-          <td>That long-context degradation persists on current models once keyword-matching shortcuts are removed</td>
-          <td><a href="/concepts/context-windows">Context windows</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must Hallucinate</a> (Kalai and Vempala, 2023; STOC 2024)</td>
-          <td>The statistical lower bound on invention, and its link to facts appearing once in training</td>
-          <td><a href="/concepts/hallucination">Hallucination</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-        <tr>
-          <td><a href="https://arxiv.org/abs/2509.04664">Why Language Models Hallucinate</a> (Kalai, Nachum, Vempala and Zhang, 2025)</td>
-          <td>Invention as binary-classification error, and benchmark scoring rewarding a guess over an admission of uncertainty</td>
-          <td><a href="/concepts/hallucination">Hallucination</a></td>
-          <td>14 Aug 2026</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>Learning resources</h2>
-
-  <p class="prose">
-    Listed on <a href="/start-here">Start here</a> as places to go, not cited for
-    any claim. Each was opened and confirmed on the date shown; where a site does
-    not publish pricing, that is recorded as a fact rather than guessed at.
-  </p>
-
-  <ul class="concept-list">
-    <li><a href="https://www.elementsofai.com/">
-      <span class="res-name">Elements of AI</span>
-      <p>Free, non-technical, predates the chatbot boom. Confirmed 11 Aug 2026.</p>
-    </a></li>
-    <li><a href="https://www.anthropic.com/learn">
-      <span class="res-name">Anthropic Academy</span>
-      <p>Structured courses; publishes no pricing on its hub page. Confirmed 11 Aug 2026.</p>
-    </a></li>
-    <li><a href="https://huggingface.co/learn">
-      <span class="res-name">Hugging Face Learn</span>
-      <p>Hands-on, between conceptual and technical. Confirmed 11 Aug 2026.</p>
-    </a></li>
-    <li><a href="https://www.deeplearning.ai/courses">
-      <span class="res-name">DeepLearning.AI</span>
-      <p>Mixed free and paid; verify per course. Confirmed 11 Aug 2026.</p>
-    </a></li>
-    <li><a href="https://platform.claude.com/docs/en/intro">
-      <span class="res-name">Anthropic — recommended path for new developers</span>
-      <p>The primary source, already sequenced. Confirmed 11 Aug 2026.</p>
-    </a></li>
-    <li><a href="https://www.fast.ai/">
-      <span class="res-name">fast.ai</span>
-      <p>For understanding the machinery rather than calling it. Confirmed 11 Aug 2026.</p>
-    </a></li>
-  </ul>
-
-  <div class="prose">
-
-    <h2>How to use this against the site</h2>
-    <p>
-      Pick any figure on <a href="/model-facts">Model facts</a>, find the document
-      it came from above, and open it. If the two disagree, this site is wrong and
-      that is worth <a href="https://github.com/TujenDev/plainly-ai/issues">reporting</a>.
-      The dates in the last column are the honest limit of what is claimed: a
-      source last read on 11 August is a source that could have changed on the
-      12th, and nothing here pretends otherwise.
-    </p>
-    <p>
-      The pattern to watch for is the one that caught this site out. A source can
-      keep saying what it always said while quietly ceasing to be the right source.
-      The row above for <a href="/concepts/thinking">Thinking and reasoning</a>
-      used to cite that vendor's <i>extended thinking</i> page, which is still
-      published and still accurate; extended thinking simply stopped being the
-      way thinking works and became one mode among others, so the citation was
-      wrong while the document was right. It was moved on 14 August 2026. Nothing
-      about that kind of rot looks like rot, which is exactly why it needs a list.
+    <p class="prose">
+      These carry the hard figures. If one of these changes, something on this site
+      is wrong until it is updated.
     </p>
 
-    <div class="note">
-      <p class="note-title">The gap this page used to admit to</p>
-      <p>
-        Until 14 August 2026 there were no research papers here at all, and two
-        pages said on themselves that they described findings from the literature
-        without citing any of it. That is now filled: four papers, read rather
-        than harvested from a search result, and both pages rewritten where the
-        reading changed what could honestly be claimed. It took one afternoon,
-        which is worth knowing, because the reason this genre cites nothing is
-        never that it is hard.
-      </p>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Vendor documentation sources, with dependent pages and dates. Scrolls horizontally">
+      <table>
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Cited for</th>
+            <th>Pages that depend on it</th>
+            <th>Last read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic — models overview</a></td>
+            <td>Context windows, output limits, prices, both cutoff dates, and the word/character approximations</td>
+            <td><a href="/model-facts">Model facts</a>, <a href="/concepts/tokens">Tokens</a>, <a href="/concepts/context-windows">Context windows</a>, <a href="/concepts/training-cutoff">Training cutoff</a>, <a href="/concepts/hallucination">Hallucination</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic — pricing</a></td>
+            <td>The Sonnet 5 rate becoming permanent; batch and caching discounts</td>
+            <td><a href="/model-facts">Model facts</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/build-with-claude/token-counting">Anthropic — token counting</a></td>
+            <td>The ~30% tokeniser increase and the model it starts at</td>
+            <td><a href="/concepts/tokens">Tokens</a></td>
+            <td>12 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://github.com/anthropics/skills/blob/main/skills/claude-api/shared/token-counting.md">Anthropic — token counting guidance for developers</a></td>
+            <td>The 15–20% <code>tiktoken</code> undercounting range</td>
+            <td><a href="/concepts/tokens">Tokens</a></td>
+            <td>12 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices">Anthropic — prompting best practices</a></td>
+            <td>Examples as a steering lever, the colleague test, self-verification and its exception</td>
+            <td><a href="/getting-better-results">Getting better results</a></td>
+            <td>12 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://developers.openai.com/api/docs/pricing">OpenAI — pricing</a></td>
+            <td>GPT-5.6 prices, and the long-context tiers that are not in the table</td>
+            <td><a href="/model-facts">Model facts</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://developers.openai.com/api/docs/models">OpenAI — models</a></td>
+            <td>Context and output limits, knowledge cutoff</td>
+            <td><a href="/model-facts">Model facts</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://ai.google.dev/gemini-api/docs/pricing">Google — Gemini API pricing</a></td>
+            <td>Gemini 3.6 Flash prices and tiering</td>
+            <td><a href="/model-facts">Model facts</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Google — Gemini 3.6 Flash</a></td>
+            <td>Context and output limits, and the absence of a published cutoff</td>
+            <td><a href="/model-facts">Model facts</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Meta — Model API pricing</a></td>
+            <td>Muse Spark pricing, the contributor tier, and the absence of a first-party Llama price</td>
+            <td><a href="/model-facts">Model facts</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://developers.openai.com/api/docs/guides/model-optimization">OpenAI — model optimization</a></td>
+            <td>What fine-tuning is sold as doing, in the vendor's own words</td>
+            <td><a href="/concepts/fine-tuning">Fine-tuning</a></td>
+            <td>11 Aug 2026</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <p class="next">
-      What changed, and when → <a href="/changes">Changes</a> ·
-      The method → <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
+    <h2>Vendor writing on mechanism</h2>
+
+    <p class="prose">
+      Not figures, but explanations of how something works, cited where this site
+      describes the same mechanism. These age more slowly and are worth reading
+      directly.
     </p>
 
-  </div>
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Mechanism sources, with dependent pages and dates. Scrolls horizontally">
+      <table>
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Cited for</th>
+            <th>Pages that depend on it</th>
+            <th>Last read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://www.anthropic.com/engineering/building-effective-agents">Anthropic — Building effective agents</a></td>
+            <td>The workflow/agent distinction, and the case for the simplest thing that works</td>
+            <td><a href="/concepts/agents">Agents</a></td>
+            <td>11 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.anthropic.com/research/reasoning-models-dont-say-think">Anthropic — Reasoning models don't always say what they think</a></td>
+            <td>Visible reasoning not being a reliable account of the actual process</td>
+            <td><a href="/concepts/thinking">Thinking and reasoning</a>, <a href="/what-ai-is-bad-at">What AI is actually bad at</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/api/errors">Anthropic — API errors</a></td>
+            <td>The error taxonomy, the SDKs' built-in retry with backoff, and a streaming error arriving after a successful status</td>
+            <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/api/rate-limits">Anthropic — Rate limits</a></td>
+            <td>The token bucket and continuous replenishment, enforcement over shorter intervals than quoted, the response headers, and the spend-cap refusal that carries no retry-after</td>
+            <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/api/messages">Anthropic — Messages API</a></td>
+            <td>The stop reason values, including truncation and refusal arriving on a successful response</td>
+            <td><a href="/designing-for-failure">Designing for the ways it fails</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.anthropic.com/research/reward-tampering">Anthropic — Sycophancy to subterfuge: Investigating reward tampering</a></td>
+            <td>The definition of specification gaming, the escalating curriculum, tampering emerging without training for it, and the refusal to generalise to production models</td>
+            <td><a href="/things-nobody-asked-for">Why it does things nobody asked for</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.anthropic.com/research/emergent-misalignment-reward-hacking">Anthropic — From shortcuts to sabotage: natural emergent misalignment from reward hacking</a></td>
+            <td>Unrelated misaligned behaviour appearing alongside learned cheating, RLHF making it context-dependent, and inoculation prompting</td>
+            <td><a href="/things-nobody-asked-for">Why it does things nobody asked for</a></td>
+            <td>26 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/test-and-evaluate/develop-tests">Anthropic — Define success criteria and build evaluations</a></td>
+            <td>What makes a criterion measurable, the three eval design principles, and the ordering of code, human and model grading</td>
+            <td><a href="/did-it-get-better">How to tell if it actually got better</a></td>
+            <td>25 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations">Anthropic — Reduce hallucinations</a></td>
+            <td>Best-of-N verification, and the caveat that these techniques reduce rather than remove the problem</td>
+            <td><a href="/check-an-answer">How to check an AI's answer</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://www.anthropic.com/engineering/contextual-retrieval">Anthropic — Contextual retrieval</a></td>
+            <td>Why naive chunking loses the context a chunk needed</td>
+            <td><a href="/concepts/rag">RAG and retrieval</a></td>
+            <td>12 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/build-with-claude/thinking">Anthropic — thinking</a></td>
+            <td>How thinking is configured and billed, and what invalidates a cache</td>
+            <td><a href="/concepts/thinking">Thinking and reasoning</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Anthropic — prompt caching</a></td>
+            <td>Prefix matching, breakpoints, and what silently invalidates a cache</td>
+            <td><a href="/concepts/prompt-caching">Prompt caching</a></td>
+            <td>11 Aug 2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
+    <h2>Research papers</h2>
+
+    <p class="prose">
+      Peer-reviewed and preprint work, cited where this site describes a finding
+      that came out of the literature rather than out of a vendor's documentation.
+      These are the slowest-moving sources here and the only ones nobody is selling
+      anything with. Where a paper reports per-model measurements, those numbers
+      stay in the paper: this site's pages describe the finding and leave the
+      figures where they can be checked in context.
+    </p>
+
+    <div class="table-scroll" tabindex="0" role="region" aria-label="Research paper sources, with dependent pages and dates. Scrolls horizontally">
+      <table>
+        <thead>
+          <tr>
+            <th>Paper</th>
+            <th>Cited for</th>
+            <th>Pages that depend on it</th>
+            <th>Last read</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language Models Use Long Contexts</a> (Liu et al., 2023; TACL)</td>
+            <td>Accuracy being highest at the start and end of a context and worst in the middle</td>
+            <td><a href="/concepts/context-windows">Context windows</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://arxiv.org/abs/2502.05167">NoLiMa: Long-Context Evaluation Beyond Literal Matching</a> (Modarressi et al., 2025; ICML)</td>
+            <td>That long-context degradation persists on current models once keyword-matching shortcuts are removed</td>
+            <td><a href="/concepts/context-windows">Context windows</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://arxiv.org/abs/2311.14648">Calibrated Language Models Must Hallucinate</a> (Kalai and Vempala, 2023; STOC 2024)</td>
+            <td>The statistical lower bound on invention, and its link to facts appearing once in training</td>
+            <td><a href="/concepts/hallucination">Hallucination</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+          <tr>
+            <td><a href="https://arxiv.org/abs/2509.04664">Why Language Models Hallucinate</a> (Kalai, Nachum, Vempala and Zhang, 2025)</td>
+            <td>Invention as binary-classification error, and benchmark scoring rewarding a guess over an admission of uncertainty</td>
+            <td><a href="/concepts/hallucination">Hallucination</a></td>
+            <td>14 Aug 2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Learning resources</h2>
+
+    <p class="prose">
+      Listed on <a href="/start-here">Start here</a> as places to go, not cited for
+      any claim. Each was opened and confirmed on the date shown; where a site does
+      not publish pricing, that is recorded as a fact rather than guessed at.
+    </p>
+
+    <ul class="concept-list">
+      <li>
+        <a class="res-name" href="https://www.elementsofai.com/">Elements of AI</a>
+        <p>Free, non-technical, predates the chatbot boom. Confirmed 11 Aug 2026.</p>
+      </li>
+      <li>
+        <a class="res-name" href="https://www.anthropic.com/learn">Anthropic Academy</a>
+        <p>Structured courses; publishes no pricing on its hub page. Confirmed 11 Aug 2026.</p>
+      </li>
+      <li>
+        <a class="res-name" href="https://huggingface.co/learn">Hugging Face Learn</a>
+        <p>Hands-on, between conceptual and technical. Confirmed 11 Aug 2026.</p>
+      </li>
+      <li>
+        <a class="res-name" href="https://www.deeplearning.ai/courses">DeepLearning.AI</a>
+        <p>Mixed free and paid; verify per course. Confirmed 11 Aug 2026.</p>
+      </li>
+      <li>
+        <a class="res-name" href="https://platform.claude.com/docs/en/intro">Anthropic — recommended path for new developers</a>
+        <p>The primary source, already sequenced. Confirmed 11 Aug 2026.</p>
+      </li>
+      <li>
+        <a class="res-name" href="https://www.fast.ai/">fast.ai</a>
+        <p>For understanding the machinery rather than calling it. Confirmed 11 Aug 2026.</p>
+      </li>
+    </ul>
+
+    <div class="prose">
+
+      <h2>How to use this against the site</h2>
+      <p>
+        Pick any figure on <a href="/model-facts">Model facts</a>, find the document
+        it came from above, and open it. If the two disagree, this site is wrong and
+        that is worth <a href="https://github.com/TujenDev/plainly-ai/issues">reporting</a>.
+        The dates in the last column are the honest limit of what is claimed: a
+        source last read on 11 August is a source that could have changed on the
+        12th, and nothing here pretends otherwise.
+      </p>
+      <p>
+        The pattern to watch for is the one that caught this site out. A source can
+        keep saying what it always said while quietly ceasing to be the right source.
+        The row above for <a href="/concepts/thinking">Thinking and reasoning</a>
+        used to cite that vendor's <i>extended thinking</i> page, which is still
+        published and still accurate; extended thinking simply stopped being the
+        way thinking works and became one mode among others, so the citation was
+        wrong while the document was right. It was moved on 14 August 2026. Nothing
+        about that kind of rot looks like rot, which is exactly why it needs a list.
+      </p>
+
+      <div class="note">
+        <p class="note-title">The gap this page used to admit to</p>
+        <p>
+          Until 14 August 2026 there were no research papers here at all, and two
+          pages said on themselves that they described findings from the literature
+          without citing any of it. That is now filled: four papers, read rather
+          than harvested from a search result, and both pages rewritten where the
+          reading changed what could honestly be claimed. It took one afternoon,
+          which is worth knowing, because the reason this genre cites nothing is
+          never that it is hard.
+        </p>
+      </div>
+
+      <p class="next">
+        What changed, and when → <a href="/changes">Changes</a> ·
+        The method → <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
+      </p>
+
+    </div>
+  </article>
 </main>
 
 <footer class="site-foot">

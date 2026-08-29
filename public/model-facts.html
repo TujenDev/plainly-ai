@@ -85,344 +85,354 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">The one page with numbers on it</p>
+    <h1>Model facts</h1>
+    <p class="standfirst">
+      Every per-model figure on this site lives here, so there is one page to keep
+      current instead of a hundred. If an explainer quotes a price, a limit or a
+      date, it links back to this table. Two concept pages do their own arithmetic
+      where the sums are the point, and they say so on the page.
+    </p>
 
-  <p class="kicker">The one page with numbers on it</p>
-  <h1>Model facts</h1>
-  <p class="standfirst">
-    Every per-model figure on this site lives here, so there is one page to keep
-    current instead of a hundred. If an explainer quotes a price, a limit or a
-    date, it links back to this table. Two concept pages do their own arithmetic
-    where the sums are the point, and they say so on the page.
-  </p>
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-26"><b>26 August 2026</b></time> against each vendor's own documentation,
+      across four passes that produced five corrections, all logged on
+      <a href="/changes">the changes page</a>. Anything not verified is flagged in
+      orange.
+    </p>
 
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-26"><b>26 August 2026</b></time> against each vendor's own documentation,
-    across four passes that produced five corrections, all logged on
-    <a href="/changes">the changes page</a>. Anything not verified is flagged in
-    orange.
-  </p>
-
-  <div class="prose">
-    <div class="note">
-      <p class="note-title">How to read this</p>
-      <p>
-        <strong>Context window</strong> is how much the model can hold in mind at
-        once, input and output together. <strong>Max output</strong> is the ceiling
-        on a single reply. <strong>Price</strong> is per million tokens —
-        which is what <em>MTok</em> means in the column headings — quoted
-        separately for what you send (input) and what you get back (output);
-        output almost always costs several times more.
-      </p>
-    </div>
-  </div>
-
-  <h2 id="anthropic-claude">Anthropic (Claude)<a class="anchor" href="#anthropic-claude" aria-label="Permalink to Anthropic (Claude)">#</a></h2>
-
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Anthropic models: pricing, limits and cutoffs. Scrolls horizontally">
-    <table>
-      <thead>
-        <tr>
-          <th>Model</th>
-          <th>API ID</th>
-          <th>Context</th>
-          <th>Max output</th>
-          <th>Input / MTok</th>
-          <th>Output / MTok</th>
-          <th>Reliable cutoff</th>
-          <th>Training cutoff</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Claude Fable 5</td>
-          <td><code>claude-fable-5</code></td>
-          <td class="num">1M</td>
-          <td class="num">128k</td>
-          <td class="num">$10</td>
-          <td class="num">$50</td>
-          <td>Jan 2026</td>
-          <td>Jan 2026</td>
-        </tr>
-        <tr>
-          <td>Claude Opus 5</td>
-          <td><code>claude-opus-5</code></td>
-          <td class="num">1M</td>
-          <td class="num">128k</td>
-          <td class="num">$5</td>
-          <td class="num">$25</td>
-          <td>May 2026</td>
-          <td>May 2026</td>
-        </tr>
-        <tr>
-          <td>Claude Sonnet 5</td>
-          <td><code>claude-sonnet-5</code></td>
-          <td class="num">1M</td>
-          <td class="num">128k</td>
-          <td class="num">$2</td>
-          <td class="num">$10</td>
-          <td>Jan 2026</td>
-          <td>Jan 2026</td>
-        </tr>
-        <tr>
-          <td>Claude Haiku 4.5</td>
-          <td><code>claude-haiku-4-5-20251001</code></td>
-          <td class="num">200k</td>
-          <td class="num">64k</td>
-          <td class="num">$1</td>
-          <td class="num">$5</td>
-          <td>Feb 2025</td>
-          <td>Jul 2025</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p class="table-note">
-    <strong>Correction, 11 August 2026.</strong> This page previously flagged
-    Sonnet 5's $2 / $10 rate as introductory, said the standard rate was
-    $3 / $15, and told you to check whether the promotion had ended before
-    relying on it. On re-checking, that is no longer true. Anthropic's pricing
-    documentation now states that the $2 / $10 pricing, "announced at launch as
-    introductory pricing through August 31, 2026, is now the standard price,"
-    and that "the previously scheduled increase to $3 / $15 per million
-    input/output tokens on September 1, 2026 will not occur." The warning has
-    been removed and the asterisks with it.<br>
-    Sources: <a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic models overview</a>
-    and <a href="https://platform.claude.com/docs/en/about-claude/pricing">pricing documentation</a>,
-    both fetched 11 August 2026. Batch processing and prompt caching change these
-    numbers substantially and are documented on that pricing page.<br>
-    <strong>Two cutoff columns:</strong> the <em>reliable</em> date is how far the
-    model's knowledge is dependable; the <em>training</em> date is the outer edge
-    of its data. The months between are thin, half-known territory — note Haiku's
-    five-month gap. Explained properly in
-    <a href="/concepts/training-cutoff">Training cutoff</a>.
-  </p>
-
-  <h2 id="openai-google-and-meta">OpenAI, Google and Meta<a class="anchor" href="#openai-google-and-meta" aria-label="Permalink to OpenAI, Google and Meta">#</a></h2>
-
-  <div class="table-scroll" tabindex="0" role="region" aria-label="Other vendors: pricing and limits. Scrolls horizontally">
-    <table>
-      <thead>
-        <tr>
-          <th>Vendor</th>
-          <th>Model</th>
-          <th>API ID</th>
-          <th>Context</th>
-          <th>Max output</th>
-          <th>Input / MTok</th>
-          <th>Output / MTok</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>OpenAI</td>
-          <td>GPT-5.6 Sol</td>
-          <td><code>gpt-5.6-sol</code></td>
-          <td class="num">1.05M</td>
-          <td class="num">128k</td>
-          <td class="num">$4</td>
-          <td class="num">$20</td>
-        </tr>
-        <tr>
-          <td>OpenAI</td>
-          <td>GPT-5.6 Terra</td>
-          <td><code>gpt-5.6-terra</code></td>
-          <td class="num">1.05M</td>
-          <td class="num">128k</td>
-          <td class="num">$2</td>
-          <td class="num">$12</td>
-        </tr>
-        <tr>
-          <td>Google</td>
-          <td>Gemini 3.6 Flash</td>
-          <td><code>gemini-3.6-flash</code></td>
-          <td class="num">1.05M</td>
-          <td class="num">64k</td>
-          <td class="num">$0.75</td>
-          <td class="num">$3.75</td>
-        </tr>
-        <tr>
-          <td>Meta</td>
-          <td>Muse Spark 1.2</td>
-          <td><code>muse-spark-1.2</code></td>
-          <td class="unverified">not published</td>
-          <td class="unverified">not published</td>
-          <td class="num">$1.25</td>
-          <td class="num">$4.25</td>
-        </tr>
-        <tr>
-          <td>Meta</td>
-          <td>Llama 4 / Llama 3</td>
-          <td><code>—</code></td>
-          <td class="unverified">n/a</td>
-          <td class="unverified">n/a</td>
-          <td class="unverified">no first-party price</td>
-          <td class="unverified">no first-party price</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <p class="table-note">
-    <strong>Every source behind this table is listed, dated, on
-    <a href="/sources">Sources</a>.</strong> What was corrected and when, and the
-    decisions behind what is and is not in the table, are below. They are folded
-    because there are eight of them. The one that costs money is not.
-  </p>
-
-  <div class="table-notes">
-
-    <details class="cost" open>
-      <summary>Tiering: the prices above are short-context rates, and long-context work costs more</summary>
-      <p>
-        OpenAI's pricing page lists GPT-5.6 Sol at $8 input / $30 output above its
-        context threshold, against the $4 / $20 quoted here, and GPT-5.6 Terra at
-        $4 / $18 against $2 / $12: double on input in both cases. Google prices
-        some models the same way, above and below a prompt-size threshold, and
-        offers batch, flex and priority rates that differ substantially from the
-        standard rate quoted. Meta publishes a cheaper &ldquo;contributor&rdquo;
-        tier. Nobody should budget a long-context job from this table; read the
-        vendor's own page.
-      </p>
-    </details>
-
-    <details>
-      <summary>Correction, 26 August 2026 &mdash; OpenAI cut the price of GPT-5.6 Sol, and this table was a fortnight behind</summary>
-      <p>
-        Sol was listed at $5 input / $30 output. OpenAI's pricing page and its
-        models page both now give <strong>$4 and $20</strong>, and the
-        long-context tier has moved with it, from $10 / $45 to $8 / $30. Those
-        figures were correct when this table was last verified on 14 August, when
-        the log records OpenAI as re-read and unchanged, so the most likely
-        account is a cut somewhere in the twelve days between. This page cannot
-        prove that from the outside: a vendor's current page shows today's price
-        and not the date it changed, so a cut on the 20th and a misreading on the
-        14th look identical from here. Either way, anyone who budgeted a Sol job
-        from this table in that window over-estimated by a quarter on input and
-        half on output. Erring expensive is the better direction to be wrong in,
-        and it is still being wrong. GPT-5.6 Terra was checked in the same pass
-        and has not moved.
-      </p>
-    </details>
-
-    <details>
-      <summary>Correction, 14 August 2026 &mdash; the Gemini 3.6 Flash prices here were wrong, in the expensive direction to trust</summary>
-      <p>
-        This table said $1.50 input / $7.50 output. Google's pricing page gives
-        $0.75 and $3.75 &ldquo;through December 31, 2026&rdquo;, with $1.50 and
-        $7.50 &ldquo;starting January 1, 2027&rdquo;. The figures printed here
-        were the <em>future</em> price, so anyone budgeting a Gemini Flash job
-        from this table between 11 and 14 August would have doubled their
-        estimate. The cells now carry the current rate, and the date the rate
-        changes is stated rather than left as a footnote nobody reads:
-        <strong>these Gemini figures expire on 1 January 2027.</strong> Google
-        also publishes batch and flex rates at half the standard price, and a
-        priority rate well above it.
-      </p>
-    </details>
-
-    <details>
-      <summary>Verified 26 August 2026, against each vendor's own documentation</summary>
-      <p>
-        OpenAI's <a href="https://developers.openai.com/api/docs/pricing">pricing</a>
-        and <a href="https://developers.openai.com/api/docs/models">models</a>
-        pages, Google's
-        <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
-        and its
-        <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
-        model page, and Meta's
-        <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.
-      </p>
-    </details>
-
-    <details>
-      <summary>Selection: current general-purpose text models, not the full catalogue</summary>
-      <p>
-        Each vendor sells cheaper small models and more expensive reasoning
-        tiers; this table exists to make the shape of the market legible, not to
-        be exhaustive.
-      </p>
-    </details>
-
-    <details>
-      <summary>API IDs: which string each row carries, and the one alias worth knowing</summary>
-      <p>
-        The string in that column is the one Anthropic documents as the API ID.
-        For Claude Haiku 4.5 that is the dated
-        <code>claude-haiku-4-5-20251001</code>; the shorter
-        <code>claude-haiku-4-5</code> is documented as an alias and also works.
-        From the 4.6 generation onward the two are identical, so Haiku is the only
-        row where the distinction shows.
-      </p>
-    </details>
-
-    <details>
-      <summary>Context figures: why two vendors' numbers look different and are not</summary>
-      <p>
-        Google publishes an exact input limit of 1,048,576 tokens and an output
-        limit of 65,536; OpenAI publishes 1.05M and 128K. The first two are the
-        same number written two ways.
-      </p>
-    </details>
-
-    <details>
-      <summary>Cutoffs: who publishes one, and why a column is missing</summary>
-      <p>
-        OpenAI publishes a knowledge cutoff of 16 February 2026 for the GPT-5.6
-        family. Google's model page for Gemini 3.6 Flash does not publish one,
-        which is why there is no cutoff column here.
-      </p>
-    </details>
-
-  </div>
-
-  <div class="prose">
-    <div class="gap">
-      <p class="note-title">Two honest gaps in the table above</p>
-      <p>
-        <strong>Meta doesn't fit the shape of this table, and that's the finding
-        rather than an omission.</strong> Llama models are downloaded and run by
-        you or by whichever host you choose, so Meta publishes no per-token price
-        for them at all; what you pay depends entirely on where you run them.
-        Meta's paid API sells different models (the Muse family), and its
-        published pricing page gives rates without stating context or output
-        limits, so those two cells say "not published" rather than carrying a
-        number from somewhere else.
-      </p>
-      <p>
-        <strong>A price comparison across vendors is less meaningful than it
-        looks.</strong> Identical per-token rates do not imply identical cost for
-        the same job, because tokenisers differ, so the same text is a different
-        number of tokens for different vendors. Treat the columns as
-        order-of-magnitude guidance, not a league table.
-        → <a href="/concepts/tokens">Tokens</a>
-      </p>
+    <div class="prose">
+      <div class="note">
+        <p class="note-title">How to read this</p>
+        <p>
+          <strong>Context window</strong> is how much the model can hold in mind at
+          once, input and output together. <strong>Max output</strong> is the ceiling
+          on a single reply. <strong>Price</strong> is per million tokens —
+          which is what <em>MTok</em> means in the column headings — quoted
+          separately for what you send (input) and what you get back (output);
+          output almost always costs several times more.
+        </p>
+      </div>
     </div>
 
-    <h2 id="what-changes-and-how-fast">What changes, and how fast<a class="anchor" href="#what-changes-and-how-fast" aria-label="Permalink to What changes, and how fast">#</a></h2>
-    <p>
-      Rough guide to how much you should trust a figure of a given age:
-    </p>
-    <ul>
-      <li><strong>Prices:</strong> can change with no notice. Introductory rates expire, or quietly become permanent, and an old page will not tell you which happened. Treat anything over three months old as unreliable.</li>
-      <li><strong>Model names and IDs:</strong> new models land every few months and old ones get retired. An ID from a year-old tutorial may simply error.</li>
-      <li><strong>Context windows and output limits:</strong> slower moving, and generally only go up.</li>
-      <li><strong>Concepts:</strong> stable for years. What a token is has not changed. This is why the explainers on this site avoid numbers and link here instead.</li>
-    </ul>
+    <section aria-labelledby="anthropic-claude">
+      <h2 id="anthropic-claude">Anthropic (Claude)<a class="anchor" href="#anthropic-claude" aria-label="Permalink to Anthropic (Claude)">#</a></h2>
 
-    <p class="next">
-      Concepts behind these numbers →
-      <a href="/concepts/context-windows">Context windows</a> &middot;
-      <a href="/concepts/tokens">Tokens</a> &middot;
-      <a href="/concepts/training-cutoff">Training cutoff</a><br>
-      Checking any of this yourself →
-      <a href="/sources">Sources</a> &middot;
-      <a href="/changes">Changes</a> &middot;
-      <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
-    </p>
-  </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Anthropic models: pricing, limits and cutoffs. Scrolls horizontally">
+        <table>
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>API ID</th>
+              <th>Context</th>
+              <th>Max output</th>
+              <th>Input / MTok</th>
+              <th>Output / MTok</th>
+              <th>Reliable cutoff</th>
+              <th>Training cutoff</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Claude Fable 5</td>
+              <td><code>claude-fable-5</code></td>
+              <td class="num">1M</td>
+              <td class="num">128k</td>
+              <td class="num">$10</td>
+              <td class="num">$50</td>
+              <td>Jan 2026</td>
+              <td>Jan 2026</td>
+            </tr>
+            <tr>
+              <td>Claude Opus 5</td>
+              <td><code>claude-opus-5</code></td>
+              <td class="num">1M</td>
+              <td class="num">128k</td>
+              <td class="num">$5</td>
+              <td class="num">$25</td>
+              <td>May 2026</td>
+              <td>May 2026</td>
+            </tr>
+            <tr>
+              <td>Claude Sonnet 5</td>
+              <td><code>claude-sonnet-5</code></td>
+              <td class="num">1M</td>
+              <td class="num">128k</td>
+              <td class="num">$2</td>
+              <td class="num">$10</td>
+              <td>Jan 2026</td>
+              <td>Jan 2026</td>
+            </tr>
+            <tr>
+              <td>Claude Haiku 4.5</td>
+              <td><code>claude-haiku-4-5-20251001</code></td>
+              <td class="num">200k</td>
+              <td class="num">64k</td>
+              <td class="num">$1</td>
+              <td class="num">$5</td>
+              <td>Feb 2025</td>
+              <td>Jul 2025</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
+      <p class="table-note">
+        <strong>Correction, 11 August 2026.</strong> This page previously flagged
+        Sonnet 5's $2 / $10 rate as introductory, said the standard rate was
+        $3 / $15, and told you to check whether the promotion had ended before
+        relying on it. On re-checking, that is no longer true. Anthropic's pricing
+        documentation now states that the $2 / $10 pricing, "announced at launch as
+        introductory pricing through August 31, 2026, is now the standard price,"
+        and that "the previously scheduled increase to $3 / $15 per million
+        input/output tokens on September 1, 2026 will not occur." The warning has
+        been removed and the asterisks with it.<br>
+        Sources: <a href="https://platform.claude.com/docs/en/about-claude/models/overview">Anthropic models overview</a>
+        and <a href="https://platform.claude.com/docs/en/about-claude/pricing">pricing documentation</a>,
+        both fetched 11 August 2026. Batch processing and prompt caching change these
+        numbers substantially and are documented on that pricing page.<br>
+        <strong>Two cutoff columns:</strong> the <em>reliable</em> date is how far the
+        model's knowledge is dependable; the <em>training</em> date is the outer edge
+        of its data. The months between are thin, half-known territory — note Haiku's
+        five-month gap. Explained properly in
+        <a href="/concepts/training-cutoff">Training cutoff</a>.
+      </p>
+    </section>
+
+    <section aria-labelledby="openai-google-and-meta">
+      <h2 id="openai-google-and-meta">OpenAI, Google and Meta<a class="anchor" href="#openai-google-and-meta" aria-label="Permalink to OpenAI, Google and Meta">#</a></h2>
+
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Other vendors: pricing and limits. Scrolls horizontally">
+        <table>
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>Model</th>
+              <th>API ID</th>
+              <th>Context</th>
+              <th>Max output</th>
+              <th>Input / MTok</th>
+              <th>Output / MTok</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OpenAI</td>
+              <td>GPT-5.6 Sol</td>
+              <td><code>gpt-5.6-sol</code></td>
+              <td class="num">1.05M</td>
+              <td class="num">128k</td>
+              <td class="num">$4</td>
+              <td class="num">$20</td>
+            </tr>
+            <tr>
+              <td>OpenAI</td>
+              <td>GPT-5.6 Terra</td>
+              <td><code>gpt-5.6-terra</code></td>
+              <td class="num">1.05M</td>
+              <td class="num">128k</td>
+              <td class="num">$2</td>
+              <td class="num">$12</td>
+            </tr>
+            <tr>
+              <td>Google</td>
+              <td>Gemini 3.6 Flash</td>
+              <td><code>gemini-3.6-flash</code></td>
+              <td class="num">1.05M</td>
+              <td class="num">64k</td>
+              <td class="num">$0.75</td>
+              <td class="num">$3.75</td>
+            </tr>
+            <tr>
+              <td>Meta</td>
+              <td>Muse Spark 1.2</td>
+              <td><code>muse-spark-1.2</code></td>
+              <td class="unverified">not published</td>
+              <td class="unverified">not published</td>
+              <td class="num">$1.25</td>
+              <td class="num">$4.25</td>
+            </tr>
+            <tr>
+              <td>Meta</td>
+              <td>Llama 4 / Llama 3</td>
+              <td><code>—</code></td>
+              <td class="unverified">n/a</td>
+              <td class="unverified">n/a</td>
+              <td class="unverified">no first-party price</td>
+              <td class="unverified">no first-party price</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="table-note">
+        <strong>Every source behind this table is listed, dated, on
+        <a href="/sources">Sources</a>.</strong> What was corrected and when, and the
+        decisions behind what is and is not in the table, are below. They are folded
+        because there are eight of them. The one that costs money is not.
+      </p>
+
+      <div class="table-notes">
+
+        <details class="cost" open>
+          <summary>Tiering: the prices above are short-context rates, and long-context work costs more</summary>
+          <p>
+            OpenAI's pricing page lists GPT-5.6 Sol at $8 input / $30 output above its
+            context threshold, against the $4 / $20 quoted here, and GPT-5.6 Terra at
+            $4 / $18 against $2 / $12: double on input in both cases. Google prices
+            some models the same way, above and below a prompt-size threshold, and
+            offers batch, flex and priority rates that differ substantially from the
+            standard rate quoted. Meta publishes a cheaper &ldquo;contributor&rdquo;
+            tier. Nobody should budget a long-context job from this table; read the
+            vendor's own page.
+          </p>
+        </details>
+
+        <details>
+          <summary>Correction, 26 August 2026 &mdash; OpenAI cut the price of GPT-5.6 Sol, and this table was a fortnight behind</summary>
+          <p>
+            Sol was listed at $5 input / $30 output. OpenAI's pricing page and its
+            models page both now give <strong>$4 and $20</strong>, and the
+            long-context tier has moved with it, from $10 / $45 to $8 / $30. Those
+            figures were correct when this table was last verified on 14 August, when
+            the log records OpenAI as re-read and unchanged, so the most likely
+            account is a cut somewhere in the twelve days between. This page cannot
+            prove that from the outside: a vendor's current page shows today's price
+            and not the date it changed, so a cut on the 20th and a misreading on the
+            14th look identical from here. Either way, anyone who budgeted a Sol job
+            from this table in that window over-estimated by a quarter on input and
+            half on output. Erring expensive is the better direction to be wrong in,
+            and it is still being wrong. GPT-5.6 Terra was checked in the same pass
+            and has not moved.
+          </p>
+        </details>
+
+        <details>
+          <summary>Correction, 14 August 2026 &mdash; the Gemini 3.6 Flash prices here were wrong, in the expensive direction to trust</summary>
+          <p>
+            This table said $1.50 input / $7.50 output. Google's pricing page gives
+            $0.75 and $3.75 &ldquo;through December 31, 2026&rdquo;, with $1.50 and
+            $7.50 &ldquo;starting January 1, 2027&rdquo;. The figures printed here
+            were the <em>future</em> price, so anyone budgeting a Gemini Flash job
+            from this table between 11 and 14 August would have doubled their
+            estimate. The cells now carry the current rate, and the date the rate
+            changes is stated rather than left as a footnote nobody reads:
+            <strong>these Gemini figures expire on 1 January 2027.</strong> Google
+            also publishes batch and flex rates at half the standard price, and a
+            priority rate well above it.
+          </p>
+        </details>
+
+        <details>
+          <summary>Verified 26 August 2026, against each vendor's own documentation</summary>
+          <p>
+            OpenAI's <a href="https://developers.openai.com/api/docs/pricing">pricing</a>
+            and <a href="https://developers.openai.com/api/docs/models">models</a>
+            pages, Google's
+            <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
+            and its
+            <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
+            model page, and Meta's
+            <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.
+          </p>
+        </details>
+
+        <details>
+          <summary>Selection: current general-purpose text models, not the full catalogue</summary>
+          <p>
+            Each vendor sells cheaper small models and more expensive reasoning
+            tiers; this table exists to make the shape of the market legible, not to
+            be exhaustive.
+          </p>
+        </details>
+
+        <details>
+          <summary>API IDs: which string each row carries, and the one alias worth knowing</summary>
+          <p>
+            The string in that column is the one Anthropic documents as the API ID.
+            For Claude Haiku 4.5 that is the dated
+            <code>claude-haiku-4-5-20251001</code>; the shorter
+            <code>claude-haiku-4-5</code> is documented as an alias and also works.
+            From the 4.6 generation onward the two are identical, so Haiku is the only
+            row where the distinction shows.
+          </p>
+        </details>
+
+        <details>
+          <summary>Context figures: why two vendors' numbers look different and are not</summary>
+          <p>
+            Google publishes an exact input limit of 1,048,576 tokens and an output
+            limit of 65,536; OpenAI publishes 1.05M and 128K. The first two are the
+            same number written two ways.
+          </p>
+        </details>
+
+        <details>
+          <summary>Cutoffs: who publishes one, and why a column is missing</summary>
+          <p>
+            OpenAI publishes a knowledge cutoff of 16 February 2026 for the GPT-5.6
+            family. Google's model page for Gemini 3.6 Flash does not publish one,
+            which is why there is no cutoff column here.
+          </p>
+        </details>
+
+      </div>
+    </section>
+
+    
+
+    <div class="prose">
+      <div class="gap">
+        <p class="note-title">Two honest gaps in the table above</p>
+        <p>
+          <strong>Meta doesn't fit the shape of this table, and that's the finding
+          rather than an omission.</strong> Llama models are downloaded and run by
+          you or by whichever host you choose, so Meta publishes no per-token price
+          for them at all; what you pay depends entirely on where you run them.
+          Meta's paid API sells different models (the Muse family), and its
+          published pricing page gives rates without stating context or output
+          limits, so those two cells say "not published" rather than carrying a
+          number from somewhere else.
+        </p>
+        <p>
+          <strong>A price comparison across vendors is less meaningful than it
+          looks.</strong> Identical per-token rates do not imply identical cost for
+          the same job, because tokenisers differ, so the same text is a different
+          number of tokens for different vendors. Treat the columns as
+          order-of-magnitude guidance, not a league table.
+          → <a href="/concepts/tokens">Tokens</a>
+        </p>
+      </div>
+
+      <section aria-labelledby="what-changes-and-how-fast">
+        <h2 id="what-changes-and-how-fast">What changes, and how fast<a class="anchor" href="#what-changes-and-how-fast" aria-label="Permalink to What changes, and how fast">#</a></h2>
+        <p>
+          Rough guide to how much you should trust a figure of a given age:
+        </p>
+        <ul>
+          <li><strong>Prices:</strong> can change with no notice. Introductory rates expire, or quietly become permanent, and an old page will not tell you which happened. Treat anything over three months old as unreliable.</li>
+          <li><strong>Model names and IDs:</strong> new models land every few months and old ones get retired. An ID from a year-old tutorial may simply error.</li>
+          <li><strong>Context windows and output limits:</strong> slower moving, and generally only go up.</li>
+          <li><strong>Concepts:</strong> stable for years. What a token is has not changed. This is why the explainers on this site avoid numbers and link here instead.</li>
+        </ul>
+      </section>
+
+    
+
+      <p class="next">
+        Concepts behind these numbers →
+        <a href="/concepts/context-windows">Context windows</a> &middot;
+        <a href="/concepts/tokens">Tokens</a> &middot;
+        <a href="/concepts/training-cutoff">Training cutoff</a><br>
+        Checking any of this yourself →
+        <a href="/sources">Sources</a> &middot;
+        <a href="/changes">Changes</a> &middot;
+        <a href="/is-this-out-of-date">Is what you're reading out of date?</a>
+      </p>
+    </div>
+  </article>
 </main>
 
 <footer class="site-foot">

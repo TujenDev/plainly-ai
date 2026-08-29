@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>a link that read out fifty words, and four repairs behind it</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-a-link-that-read-out"/>
+    <id>https://plainlyai.org/changes#29-august-2026-a-link-that-read-out</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">Every card on this site was one enormous link. The whole box — heading, description, and the small line underneath — sat inside a single a element, which is convenient with a mouse and hostile with a screen reader: the link announced itself by reading its entire contents, close to fifty words, before the reader could tell whether they wanted it. The card headings sat inside those links too, so moving through a page by heading landed on a link every time. The structure the page was written with was not the structure it offered.</summary>
+  </entry>
+  <entry>
     <title>two dead ends, and a nav decision that can no longer quietly rot</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-two-dead-ends-and-a"/>
     <id>https://plainlyai.org/changes#29-august-2026-two-dead-ends-and-a</id>

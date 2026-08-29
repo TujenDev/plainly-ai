@@ -89,254 +89,268 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Foundational</p>
-  <h1>Tokens</h1>
-  <p class="standfirst">
-    The unit these systems actually read, write and bill in. Not words, not
-    characters, and the gap between them is where surprise invoices come from.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-12"><b>12 August 2026</b></time> &nbsp;·&nbsp; Figures referenced here live on
-    <a href="/model-facts">Model facts</a>
-  </p>
-
-  <div class="prose">
-
-    <h2 id="a-token-is-a-chunk-of-text">A token is a chunk of text<a class="anchor" href="#a-token-is-a-chunk-of-text" aria-label="Permalink to A token is a chunk of text">#</a></h2>
-    <p>
-      A model does not see letters and it does not see words. Before anything
-      happens, your text is chopped into pieces called tokens, each of which the
-      model has learned as a single unit. A token is usually a common word, a
-      fragment of a longer word, a punctuation mark, or a space plus the word that
-      follows it.
-    </p>
-    <p>
-      Roughly, <code>unbelievable</code> might become three pieces along the lines
-      of <code>un</code> / <code>believ</code> / <code>able</code>, while
-      <code>the</code> is a single piece because it appears constantly. Common text
-      compresses into few tokens; unusual text sprawls into many.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Foundational</p>
+    <h1>Tokens</h1>
+    <p class="standfirst">
+      The unit these systems actually read, write and bill in. Not words, not
+      characters, and the gap between them is where surprise invoices come from.
     </p>
 
-    <h2 id="why-not-just-use-words">Why not just use words?<a class="anchor" href="#why-not-just-use-words" aria-label="Permalink to Why not just use words?">#</a></h2>
-    <p>
-      Because words are a bad unit for a general system. Tokenisation solves four
-      problems at once:
-    </p>
-    <ul>
-      <li><strong>Unknown words.</strong> A word-based system hits something it has never seen and has no representation for it at all. A token-based one spells it out from familiar fragments, which is how these models handle new product names, surnames and jargon.</li>
-      <li><strong>Typos.</strong> <code>teh</code> is not a word, but it is a perfectly reasonable sequence of pieces.</li>
-      <li><strong>Other languages.</strong> Many languages don't delimit words with spaces at all, so "split on spaces" isn't available.</li>
-      <li><strong>Code and structured text.</strong> Brackets, indentation and symbols carry meaning and need to survive the process.</li>
-    </ul>
-
-    <h2 id="the-rule-of-thumb-everyone-repeats-is-attached">The rule of thumb everyone repeats is attached to a tokeniser<a class="anchor" href="#the-rule-of-thumb-everyone-repeats-is-attached" aria-label="Permalink to The rule of thumb everyone repeats is attached to a tokeniser">#</a></h2>
-    <p>
-      You will find, in a great many places, the claim that one token is about
-      four characters, or about three quarters of a word. That number entered
-      circulation years ago, attached to a particular generation of tokeniser, and
-      it has been copied forward ever since without being rechecked.
-    </p>
-    <p>
-      It is wrong for the newest models and still right for others, which is the
-      more interesting fact. Anthropic describes the one-million-token context
-      window on its current flagship models as approximately <strong>555,000
-      words</strong> and approximately <strong>2.5 million characters</strong>.
-      Work backwards from the vendor's own figures and you get:
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-12"><b>12 August 2026</b></time> &nbsp;·&nbsp; Figures referenced here live on
+      <a href="/model-facts">Model facts</a>
     </p>
 
-    <div class="table-scroll" tabindex="0" role="region" aria-label="Token ratio comparison, scrolls horizontally">
-      <table>
-        <thead>
-          <tr>
-            <th>Ratio</th>
-            <th>Widely repeated folklore</th>
-            <th>Implied by current figures</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Words per token</td>
-            <td class="num">~0.75</td>
-            <td class="num">~0.56</td>
-          </tr>
-          <tr>
-            <td>Tokens per word</td>
-            <td class="num">~1.3</td>
-            <td class="num">~1.8</td>
-          </tr>
-          <tr>
-            <td>Characters per token</td>
-            <td class="num">~4</td>
-            <td class="num">~2.5</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="prose">
 
-    <p class="table-note">
-      Derived by division from Anthropic's stated approximations (1M tokens ≈ 555k
-      words ≈ 2.5M characters) on its
-      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
-      fetched 12 August 2026. These are approximations of approximations: treat
-      them as an order of magnitude, not a calculator.
-    </p>
+      <section aria-labelledby="a-token-is-a-chunk-of-text">
+        <h2 id="a-token-is-a-chunk-of-text">A token is a chunk of text<a class="anchor" href="#a-token-is-a-chunk-of-text" aria-label="Permalink to A token is a chunk of text">#</a></h2>
+        <p>
+          A model does not see letters and it does not see words. Before anything
+          happens, your text is chopped into pieces called tokens, each of which the
+          model has learned as a single unit. A token is usually a common word, a
+          fragment of a longer word, a punctuation mark, or a space plus the word that
+          follows it.
+        </p>
+        <p>
+          Roughly, <code>unbelievable</code> might become three pieces along the lines
+          of <code>un</code> / <code>believ</code> / <code>able</code>, while
+          <code>the</code> is a single piece because it appears constantly. Common text
+          compresses into few tokens; unusual text sprawls into many.
+        </p>
+      </section>
 
-    <p>
-      That is not a rounding difference. If you budget a job using the old ratio,
-      you can be out by something like forty per cent on token count, and
-      therefore on cost. Anthropic states directly that its newer tokeniser
-      produces roughly <strong>30% more tokens for the same text</strong> than the
-      generation before it, and dates the change precisely: models from Claude
-      Opus 4.7 onward use it, everything earlier does not.
-    </p>
-    <p>
-      Which is why the folklore is not simply dead. On the same page, the older
-      one-million-token models are described as approximately 750,000 words and
-      3.4 million characters, and Claude Haiku 4.5 &mdash; a current model, on
-      this site's own <a href="/model-facts">Model facts</a> table &mdash; as
-      approximately 150,000 words and 680,000 characters for its 200,000-token
-      window. Both work out to <strong>0.75 words per token</strong> &mdash; the
-      memorised figure exactly &mdash; and about 3.4 characters, nearer the
-      folklore's four than the 2.5 above. The old ratio is not dead; it is
-      accurate on models people are using today. One vendor's documentation
-      supports both sets of numbers, in different rows of the same table, and it
-      is right to.
-    </p>
+      <section aria-labelledby="why-not-just-use-words">
+        <h2 id="why-not-just-use-words">Why not just use words?<a class="anchor" href="#why-not-just-use-words" aria-label="Permalink to Why not just use words?">#</a></h2>
+        <p>
+          Because words are a bad unit for a general system. Tokenisation solves four
+          problems at once:
+        </p>
+        <ul>
+          <li><strong>Unknown words.</strong> A word-based system hits something it has never seen and has no representation for it at all. A token-based one spells it out from familiar fragments, which is how these models handle new product names, surnames and jargon.</li>
+          <li><strong>Typos.</strong> <code>teh</code> is not a word, but it is a perfectly reasonable sequence of pieces.</li>
+          <li><strong>Other languages.</strong> Many languages don't delimit words with spaces at all, so "split on spaces" isn't available.</li>
+          <li><strong>Code and structured text.</strong> Brackets, indentation and symbols carry meaning and need to survive the process.</li>
+        </ul>
+      </section>
 
-    <div class="note">
-      <p class="note-title">The genuinely useful takeaway</p>
-      <p>
-        Tokenisation is not a fixed property of language, it is a property of a
-        specific model. Two models can read identical text and count it
-        differently. Any ratio you memorise is attached to a model version, and it
-        expires when that version does.
+      <section aria-labelledby="the-rule-of-thumb-everyone-repeats-is-attached">
+        <h2 id="the-rule-of-thumb-everyone-repeats-is-attached">The rule of thumb everyone repeats is attached to a tokeniser<a class="anchor" href="#the-rule-of-thumb-everyone-repeats-is-attached" aria-label="Permalink to The rule of thumb everyone repeats is attached to a tokeniser">#</a></h2>
+        <p>
+          You will find, in a great many places, the claim that one token is about
+          four characters, or about three quarters of a word. That number entered
+          circulation years ago, attached to a particular generation of tokeniser, and
+          it has been copied forward ever since without being rechecked.
+        </p>
+        <p>
+          It is wrong for the newest models and still right for others, which is the
+          more interesting fact. Anthropic describes the one-million-token context
+          window on its current flagship models as approximately <strong>555,000
+          words</strong> and approximately <strong>2.5 million characters</strong>.
+          Work backwards from the vendor's own figures and you get:
+        </p>
+
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Token ratio comparison, scrolls horizontally">
+          <table>
+            <thead>
+              <tr>
+                <th>Ratio</th>
+                <th>Widely repeated folklore</th>
+                <th>Implied by current figures</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Words per token</td>
+                <td class="num">~0.75</td>
+                <td class="num">~0.56</td>
+              </tr>
+              <tr>
+                <td>Tokens per word</td>
+                <td class="num">~1.3</td>
+                <td class="num">~1.8</td>
+              </tr>
+              <tr>
+                <td>Characters per token</td>
+                <td class="num">~4</td>
+                <td class="num">~2.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="table-note">
+          Derived by division from Anthropic's stated approximations (1M tokens ≈ 555k
+          words ≈ 2.5M characters) on its
+          <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+          fetched 12 August 2026. These are approximations of approximations: treat
+          them as an order of magnitude, not a calculator.
+        </p>
+
+        <p>
+          That is not a rounding difference. If you budget a job using the old ratio,
+          you can be out by something like forty per cent on token count, and
+          therefore on cost. Anthropic states directly that its newer tokeniser
+          produces roughly <strong>30% more tokens for the same text</strong> than the
+          generation before it, and dates the change precisely: models from Claude
+          Opus 4.7 onward use it, everything earlier does not.
+        </p>
+        <p>
+          Which is why the folklore is not simply dead. On the same page, the older
+          one-million-token models are described as approximately 750,000 words and
+          3.4 million characters, and Claude Haiku 4.5 &mdash; a current model, on
+          this site's own <a href="/model-facts">Model facts</a> table &mdash; as
+          approximately 150,000 words and 680,000 characters for its 200,000-token
+          window. Both work out to <strong>0.75 words per token</strong> &mdash; the
+          memorised figure exactly &mdash; and about 3.4 characters, nearer the
+          folklore's four than the 2.5 above. The old ratio is not dead; it is
+          accurate on models people are using today. One vendor's documentation
+          supports both sets of numbers, in different rows of the same table, and it
+          is right to.
+        </p>
+
+        <div class="note">
+          <p class="note-title">The genuinely useful takeaway</p>
+          <p>
+            Tokenisation is not a fixed property of language, it is a property of a
+            specific model. Two models can read identical text and count it
+            differently. Any ratio you memorise is attached to a model version, and it
+            expires when that version does.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="why-you-should-care">
+        <h2 id="why-you-should-care">Why you should care<a class="anchor" href="#why-you-should-care" aria-label="Permalink to Why you should care">#</a></h2>
+
+        <h3>It is the unit you are billed in</h3>
+        <p>
+          Pricing is quoted per million tokens, and quoted separately for input and
+          output. Output costs several times more than input on every current model,
+          which is worth internalising: asking for a long answer is far more expensive
+          than supplying a long question. Current rates are on
+          <a href="/model-facts">Model facts</a>.
+        </p>
+
+        <h3>It is the unit the context window is measured in</h3>
+        <p>
+          The window is a token budget, not a page count, and it is shared between what
+          you send and what comes back. This is why the two concepts have to be learned
+          together. → <a href="/concepts/context-windows">Context windows</a>
+        </p>
+
+        <h3>It makes some content far more expensive than it looks</h3>
+        <p>
+          Because compression depends on how ordinary the text is, cost per page varies
+          more than people expect.
+        </p>
+        <ul>
+          <li><strong>Cheap per page:</strong> plain English prose, common vocabulary.</li>
+          <li><strong>More expensive:</strong> code, especially with deep indentation and long identifiers. JSON and XML, where structural punctuation is a large fraction of the content. Tables. Long unbroken strings such as IDs, hashes and base64.</li>
+          <li><strong>Considerably more expensive:</strong> languages that were less represented in the tokeniser's training. The same meaning can cost noticeably more tokens in some languages than in English, which is a real and under-discussed fairness problem in how these systems are priced.</li>
+        </ul>
+
+        <h3>A conversation costs more than the sum of its turns</h3>
+        <p>
+          These systems have no memory between requests, so a chat application resends
+          the entire conversation every time you send a message. Your tenth message
+          pays to read the first nine again. The cost of a conversation therefore grows
+          with roughly the square of its length rather than in step with it: doubling
+          the number of turns quadruples the input you are billed for, near enough,
+          which is why a long session gets expensive faster than anyone expects.
+        </p>
+        <p>
+          The same arithmetic governs an agent, and more harshly, because each step
+          resends the whole accumulated trace of what it has done so far. A long
+          agent run spends most of its input budget re-reading its own history rather
+          than on the task. → <a href="/concepts/agents">Agents</a>
+        </p>
+        <p>
+          Two things blunt it. Caching a repeated prefix means you are charged a
+          reduced rate for the part that has not changed, which is exactly the shape
+          this problem has. → <a href="/concepts/prompt-caching">Prompt caching</a>
+          And the older parts of a conversation can be summarised or dropped rather
+          than resent in full, which costs some fidelity and is usually the right
+          trade. → <a href="/concepts/context-windows">Context windows</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="don-t-try-to-count-them-yourself">
+        <h2 id="don-t-try-to-count-them-yourself">Don't try to count them yourself<a class="anchor" href="#don-t-try-to-count-them-yourself" aria-label="Permalink to Don't try to count them yourself">#</a></h2>
+        <p>
+          Two specific traps.
+        </p>
+        <p>
+          <strong>Don't estimate from a character count.</strong> If the number matters
+          for budgeting, ask the model's own API for the count. Anthropic, for
+          instance, exposes a dedicated token-counting endpoint. Every guess you make
+          is worse than an exact answer that is free to obtain.
+        </p>
+        <p>
+          <strong>Don't use another vendor's tokeniser.</strong> The popular
+          <code>tiktoken</code> library is OpenAI's, and it is simply the wrong tool
+          for Claude. Anthropic's published guidance for its own developers puts the
+          error at <strong>15–20% undercounting on typical text</strong>, and worse on
+          code or non-English input. This is a common enough mistake to be worth
+          naming: cross-vendor token estimates are not approximately right, they are
+          systematically wrong in one direction.
+        </p>
+
+        <div class="gap">
+          <p class="note-title">Where this page stops</p>
+          <p>
+            The single largest lever on token cost for anyone building is
+            <a href="/concepts/prompt-caching">prompt caching</a>, which can change
+            the economics of a repeated prompt substantially and now has its own
+            page. The other follow-on, why models are bad at counting letters in a
+            word, is downstream of tokenisation and is covered in
+            <a href="/what-ai-is-bad-at">what AI is actually bad at</a>, where it
+            serves as the clearest case of a limitation with a mundane mechanical
+            cause rather than a mysterious one.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          Word, character and token approximations come from Anthropic's
+          <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
+          where they appear as tooltips on each model's context window. The 30%
+          tokeniser increase, and the fact that it begins with Claude Opus 4.7, come
+          from its
+          <a href="https://platform.claude.com/docs/en/build-with-claude/token-counting">token counting documentation</a>.
+          Both fetched 12 August 2026.
+        </p>
+        <p class="table-note">
+          The <code>tiktoken</code> undercounting range is Anthropic's figure but is
+          <strong>not</strong> on either page above, which is where this page cited it
+          until 12 August 2026. It is published in Anthropic's
+          <a href="https://github.com/anthropics/skills/blob/main/skills/claude-api/shared/token-counting.md">token counting guidance for developers</a>:
+          "It undercounts Claude tokens by ~15–20% on typical text, and by much more
+          on code or non-English input." A citation you cannot follow to the claim is
+          worse than no citation at all, so the correction is logged on
+          <a href="/changes">the changes page</a> rather than quietly fixed.
+        </p>
+        <p class="table-note">
+          Ratios in the comparison table above are arithmetic on the published figures
+          rather than independent measurements, and are labelled as such. Equivalent
+          figures for other vendors have not been verified and are deliberately not
+          stated here.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Next → <a href="/concepts/context-windows">Context windows</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
+
     </div>
-
-    <h2 id="why-you-should-care">Why you should care<a class="anchor" href="#why-you-should-care" aria-label="Permalink to Why you should care">#</a></h2>
-
-    <h3>It is the unit you are billed in</h3>
-    <p>
-      Pricing is quoted per million tokens, and quoted separately for input and
-      output. Output costs several times more than input on every current model,
-      which is worth internalising: asking for a long answer is far more expensive
-      than supplying a long question. Current rates are on
-      <a href="/model-facts">Model facts</a>.
-    </p>
-
-    <h3>It is the unit the context window is measured in</h3>
-    <p>
-      The window is a token budget, not a page count, and it is shared between what
-      you send and what comes back. This is why the two concepts have to be learned
-      together. → <a href="/concepts/context-windows">Context windows</a>
-    </p>
-
-    <h3>It makes some content far more expensive than it looks</h3>
-    <p>
-      Because compression depends on how ordinary the text is, cost per page varies
-      more than people expect.
-    </p>
-    <ul>
-      <li><strong>Cheap per page:</strong> plain English prose, common vocabulary.</li>
-      <li><strong>More expensive:</strong> code, especially with deep indentation and long identifiers. JSON and XML, where structural punctuation is a large fraction of the content. Tables. Long unbroken strings such as IDs, hashes and base64.</li>
-      <li><strong>Considerably more expensive:</strong> languages that were less represented in the tokeniser's training. The same meaning can cost noticeably more tokens in some languages than in English, which is a real and under-discussed fairness problem in how these systems are priced.</li>
-    </ul>
-
-    <h3>A conversation costs more than the sum of its turns</h3>
-    <p>
-      These systems have no memory between requests, so a chat application resends
-      the entire conversation every time you send a message. Your tenth message
-      pays to read the first nine again. The cost of a conversation therefore grows
-      with roughly the square of its length rather than in step with it: doubling
-      the number of turns quadruples the input you are billed for, near enough,
-      which is why a long session gets expensive faster than anyone expects.
-    </p>
-    <p>
-      The same arithmetic governs an agent, and more harshly, because each step
-      resends the whole accumulated trace of what it has done so far. A long
-      agent run spends most of its input budget re-reading its own history rather
-      than on the task. → <a href="/concepts/agents">Agents</a>
-    </p>
-    <p>
-      Two things blunt it. Caching a repeated prefix means you are charged a
-      reduced rate for the part that has not changed, which is exactly the shape
-      this problem has. → <a href="/concepts/prompt-caching">Prompt caching</a>
-      And the older parts of a conversation can be summarised or dropped rather
-      than resent in full, which costs some fidelity and is usually the right
-      trade. → <a href="/concepts/context-windows">Context windows</a>
-    </p>
-
-    <h2 id="don-t-try-to-count-them-yourself">Don't try to count them yourself<a class="anchor" href="#don-t-try-to-count-them-yourself" aria-label="Permalink to Don't try to count them yourself">#</a></h2>
-    <p>
-      Two specific traps.
-    </p>
-    <p>
-      <strong>Don't estimate from a character count.</strong> If the number matters
-      for budgeting, ask the model's own API for the count. Anthropic, for
-      instance, exposes a dedicated token-counting endpoint. Every guess you make
-      is worse than an exact answer that is free to obtain.
-    </p>
-    <p>
-      <strong>Don't use another vendor's tokeniser.</strong> The popular
-      <code>tiktoken</code> library is OpenAI's, and it is simply the wrong tool
-      for Claude. Anthropic's published guidance for its own developers puts the
-      error at <strong>15–20% undercounting on typical text</strong>, and worse on
-      code or non-English input. This is a common enough mistake to be worth
-      naming: cross-vendor token estimates are not approximately right, they are
-      systematically wrong in one direction.
-    </p>
-
-    <div class="gap">
-      <p class="note-title">Where this page stops</p>
-      <p>
-        The single largest lever on token cost for anyone building is
-        <a href="/concepts/prompt-caching">prompt caching</a>, which can change
-        the economics of a repeated prompt substantially and now has its own
-        page. The other follow-on, why models are bad at counting letters in a
-        word, is downstream of tokenisation and is covered in
-        <a href="/what-ai-is-bad-at">what AI is actually bad at</a>, where it
-        serves as the clearest case of a limitation with a mundane mechanical
-        cause rather than a mysterious one.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      Word, character and token approximations come from Anthropic's
-      <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>,
-      where they appear as tooltips on each model's context window. The 30%
-      tokeniser increase, and the fact that it begins with Claude Opus 4.7, come
-      from its
-      <a href="https://platform.claude.com/docs/en/build-with-claude/token-counting">token counting documentation</a>.
-      Both fetched 12 August 2026.
-    </p>
-    <p class="table-note">
-      The <code>tiktoken</code> undercounting range is Anthropic's figure but is
-      <strong>not</strong> on either page above, which is where this page cited it
-      until 12 August 2026. It is published in Anthropic's
-      <a href="https://github.com/anthropics/skills/blob/main/skills/claude-api/shared/token-counting.md">token counting guidance for developers</a>:
-      "It undercounts Claude tokens by ~15–20% on typical text, and by much more
-      on code or non-English input." A citation you cannot follow to the claim is
-      worse than no citation at all, so the correction is logged on
-      <a href="/changes">the changes page</a> rather than quietly fixed.
-    </p>
-    <p class="table-note">
-      Ratios in the comparison table above are arithmetic on the published figures
-      rather than independent measurements, and are labelled as such. Equivalent
-      figures for other vendors have not been verified and are deliberately not
-      stated here.
-    </p>
-
-    <p class="next">
-      Next → <a href="/concepts/context-windows">Context windows</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

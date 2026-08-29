@@ -89,221 +89,237 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Building</p>
-  <h1>RAG and retrieval</h1>
-  <p class="standfirst">
-    How a model answers questions about documents it never saw in training. The
-    acronym makes it sound like AI machinery. It is mostly a search problem
-    wearing an AI costume, and that framing predicts almost everything about how
-    it fails.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
-    anything numeric lives on <a href="/model-facts">Model facts</a>
-  </p>
-
-  <div class="prose">
-
-    <h2 id="the-problem-it-solves">The problem it solves<a class="anchor" href="#the-problem-it-solves" aria-label="Permalink to The problem it solves">#</a></h2>
-    <p>
-      A model knows what was in its training data and nothing else. It has never
-      seen your company handbook, your support tickets, or anything published
-      after its cutoff. Ask it about any of that and you get either an admission
-      or an invention, and which one you get is not up to you.
-      → <a href="/concepts/training-cutoff">Training cutoff</a>
-    </p>
-    <p>
-      There is an obvious fix, and it is the one that works: put the relevant
-      material in front of the model as part of the question. Everything a model
-      can read in the moment, it can use. The only difficulty is that "the
-      relevant material" might be ten thousand documents, and you cannot paste
-      ten thousand documents into a question.
-    </p>
-    <p>
-      <strong>Retrieval-augmented generation</strong> is the name for solving
-      that difficulty in the obvious way: before answering, go and find the few
-      pieces that are actually relevant, then paste those in. Retrieve, then
-      generate. That is the whole idea.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Building</p>
+    <h1>RAG and retrieval</h1>
+    <p class="standfirst">
+      How a model answers questions about documents it never saw in training. The
+      acronym makes it sound like AI machinery. It is mostly a search problem
+      wearing an AI costume, and that framing predicts almost everything about how
+      it fails.
     </p>
 
-    <div class="note">
-      <p class="note-title">The thing to hold onto</p>
-      <p>
-        The model does not learn anything. Nothing is absorbed, nothing persists,
-        and the next question starts from the same blank slate. RAG is
-        <em>reading</em>, not remembering. If you take one thing from this page,
-        take that, because most confusion about what RAG can do comes from
-        imagining it as teaching.
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
+      anything numeric lives on <a href="/model-facts">Model facts</a>
+    </p>
+
+    <div class="prose">
+
+      <section aria-labelledby="the-problem-it-solves">
+        <h2 id="the-problem-it-solves">The problem it solves<a class="anchor" href="#the-problem-it-solves" aria-label="Permalink to The problem it solves">#</a></h2>
+        <p>
+          A model knows what was in its training data and nothing else. It has never
+          seen your company handbook, your support tickets, or anything published
+          after its cutoff. Ask it about any of that and you get either an admission
+          or an invention, and which one you get is not up to you.
+          → <a href="/concepts/training-cutoff">Training cutoff</a>
+        </p>
+        <p>
+          There is an obvious fix, and it is the one that works: put the relevant
+          material in front of the model as part of the question. Everything a model
+          can read in the moment, it can use. The only difficulty is that "the
+          relevant material" might be ten thousand documents, and you cannot paste
+          ten thousand documents into a question.
+        </p>
+        <p>
+          <strong>Retrieval-augmented generation</strong> is the name for solving
+          that difficulty in the obvious way: before answering, go and find the few
+          pieces that are actually relevant, then paste those in. Retrieve, then
+          generate. That is the whole idea.
+        </p>
+
+        <div class="note">
+          <p class="note-title">The thing to hold onto</p>
+          <p>
+            The model does not learn anything. Nothing is absorbed, nothing persists,
+            and the next question starts from the same blank slate. RAG is
+            <em>reading</em>, not remembering. If you take one thing from this page,
+            take that, because most confusion about what RAG can do comes from
+            imagining it as teaching.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="what-actually-happens">
+        <h2 id="what-actually-happens">What actually happens<a class="anchor" href="#what-actually-happens" aria-label="Permalink to What actually happens">#</a></h2>
+        <p>
+          Ahead of time, your documents are cut into chunks, and each chunk is turned
+          into a list of numbers that represents roughly what it is about. Those
+          numbers are called an <strong>embedding</strong>, and their useful property
+          is that passages about similar things end up with similar numbers, even when
+          they share no words at all. "Cancelling your plan" and "how to end a
+          subscription" land near each other.
+        </p>
+        <p>
+          Then, when a question arrives:
+        </p>
+        <ol>
+          <li>The question gets turned into numbers the same way.</li>
+          <li>The system finds the chunks whose numbers sit closest to it.</li>
+          <li>Those chunks get pasted into the prompt, above the question, usually with an instruction like "answer using only the material below."</li>
+          <li>The model reads all of it and writes an answer.</li>
+        </ol>
+        <p>
+          Step four is the part everyone photographs. Steps one to three are the part
+          that determines whether the answer is any good.
+        </p>
+      </section>
+
+      <section aria-labelledby="why-most-rag-failures-are-search-failures">
+        <h2 id="why-most-rag-failures-are-search-failures">Why most RAG failures are search failures<a class="anchor" href="#why-most-rag-failures-are-search-failures" aria-label="Permalink to Why most RAG failures are search failures">#</a></h2>
+        <p>
+          This is the single most useful thing on this page. <strong>If retrieval
+          hands over the wrong chunks, no model can rescue the answer.</strong> It
+          cannot know that the right passage exists somewhere it wasn't shown. It will
+          do what it always does with insufficient material: produce something
+          fluent and plausible from what it has.
+          → <a href="/concepts/hallucination">Hallucination</a>
+        </p>
+        <p>
+          So when a system built this way gives bad answers, the instinct is to blame
+          the model, and the cause is usually one of these instead:
+        </p>
+
+        <p><strong>The chunking destroyed the meaning.</strong> The least glamorous
+        decision in the whole system, and the one that sets your ceiling before
+        anything else gets a say. Cut a table away from its heading and
+        the numbers become anonymous. Cut a paragraph mid-argument and it retrieves as
+        a fragment that says something the document never said. Anthropic's own
+        engineering write-up puts the general problem plainly: splitting documents for
+        retrieval "can lead to problems when individual chunks lack sufficient
+        context," and their example is a chunk reporting that revenue grew by some
+        percentage over the previous quarter, with nothing in it to say which company
+        or which quarter. Retrieved on its own, it is worse than useless, because it
+        is confidently about nothing.</p>
+
+        <p><strong>Semantic search missed something exact.</strong> Embeddings are
+        good at meaning and bad at literal strings. Part numbers, error codes,
+        surnames, policy identifiers: these are precisely where "close in meaning"
+        stops being the right question, and old-fashioned keyword matching does far
+        better. This is why the standard advice is to run both and merge the results.
+        Anthropic recommends the same combination, on the grounds that keyword search
+        excels at exact matches while embeddings capture relationships, and the two
+        are complementary rather than competing.</p>
+
+        <p><strong>The answer was spread across many documents.</strong> Retrieval
+        fetches passages that resemble the question. A question like "how has our
+        refund policy changed over five years" has an answer that exists in no single
+        passage, so nothing resembles it well enough to surface. Questions that
+        require aggregating or counting across a whole corpus are a genuinely poor
+        fit, and no amount of tuning changes that.</p>
+
+        <p><strong>Nothing relevant existed, and the system answered anyway.</strong>
+        Unless instructed otherwise, a model handed thin material will fall back on
+        what it absorbed in training and blend the two, producing an answer that
+        sounds sourced and isn't. The fix is boring and effective: instruct it to
+        answer only from the supplied material, to say when the material doesn't
+        cover the question, and to cite which passage each claim came from. Citations
+        matter less as a courtesy to the reader than as a way to catch this failure
+        at a glance.</p>
+      </section>
+
+      <section aria-labelledby="can-t-i-just-paste-everything-in-now">
+        <h2 id="can-t-i-just-paste-everything-in-now">"Can't I just paste everything in now?"<a class="anchor" href="#can-t-i-just-paste-everything-in-now" aria-label="Permalink to &quot;Can't I just paste everything in now?&quot;">#</a></h2>
+        <p>
+          Increasingly, for small collections, yes, and it's the right first move.
+          Windows have grown enough that a handbook or a contract set can simply be
+          included wholesale. That removes the retrieval step, and with it every
+          failure above. If your material fits, do that and skip the machinery.
+          → <a href="/concepts/context-windows">Context windows</a>
+        </p>
+        <p>
+          What makes it stop working is not a size limit so much as three costs that
+          grow together. You pay for every token on every question, so re-sending an
+          entire corpus each time is expensive in a way that scales with usage rather
+          than with content. → <a href="/concepts/tokens">Tokens</a> Long inputs are
+          slower. And a model asked to find one relevant line inside an enormous pile
+          of mostly irrelevant material tends to do worse than one handed the few
+          passages that matter, so more context is not automatically better answers.
+        </p>
+        <p>
+          The honest decision rule: paste it all in while you can, and reach for
+          retrieval when the collection is too big, too expensive to re-send, or
+          changing too often to keep pasting.
+        </p>
+      </section>
+
+      <section aria-labelledby="rag-is-not-fine-tuning-and-the-confusion-is">
+        <h2 id="rag-is-not-fine-tuning-and-the-confusion-is">RAG is not fine-tuning, and the confusion is expensive<a class="anchor" href="#rag-is-not-fine-tuning-and-the-confusion-is" aria-label="Permalink to RAG is not fine-tuning, and the confusion is expensive">#</a></h2>
+        <p>
+          These get proposed interchangeably in meetings, and they solve different
+          problems. Retrieval gives a model <em>information</em> at the moment it
+          answers. Fine-tuning adjusts the model itself, and what it reliably changes
+          is behaviour and form: tone, format, how to structure an output, how to
+          follow a house style.
+        </p>
+        <p>
+          Trying to teach facts by fine-tuning is the expensive mistake in this
+          neighbourhood. Facts trained in this way are diffuse rather than looked up,
+          they cannot be cited, they cannot be corrected without retraining, and they
+          go stale the moment the underlying document changes. When the requirement is
+          "the assistant should know about our stuff," the answer is almost always
+          retrieval. <a href="/concepts/fine-tuning">Fine-tuning</a> has its own page,
+          including why facts specifically fail to stick.
+        </p>
+      </section>
+
+      <section aria-labelledby="how-to-tell-whether-yours-is-working">
+        <h2 id="how-to-tell-whether-yours-is-working">How to tell whether yours is working<a class="anchor" href="#how-to-tell-whether-yours-is-working" aria-label="Permalink to How to tell whether yours is working">#</a></h2>
+        <p>
+          The one practical habit worth adopting: <strong>test the search separately
+          from the answer.</strong> Take a set of real questions, run only the
+          retrieval step, and look at what came back. If the right passage isn't in
+          there, nothing downstream can fix it, and you now know which half of the
+          system to work on. Most teams skip this and spend weeks rewording prompts
+          to compensate for a search problem.
+        </p>
+        <p>
+          After that, the highest-value improvements are usually the least
+          sophisticated: chunk along the document's own structure rather than by
+          character count, keep headings attached to what they head, add keyword
+          search alongside the embeddings, and make the system show its sources so
+          failures are visible instead of silent.
+        </p>
+
+        <div class="gap">
+          <p class="note-title">Don't expect a chunk size from this page</p>
+          <p>
+            There is no recommended chunk size here, no vector database comparison
+            and no embedding rankings, because those are the fastest-rotting claims
+            in the subject and mostly come from vendors. The failure modes above, by
+            contrast, have not changed since the technique acquired its name, and
+            knowing them is what actually improves a system.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          The chunk-context problem, the quoted phrasing about chunks lacking
+          sufficient context, and the recommendation to combine keyword search with
+          embeddings all come from Anthropic's
+          <a href="https://www.anthropic.com/engineering/contextual-retrieval">Introducing Contextual Retrieval</a>,
+          fetched 11 August 2026. Its own proposed technique, prepending a short
+          explanation to each chunk before indexing it, is a direct response to the
+          first failure mode described above. The rest of this page is mechanical
+          argument from how retrieval works rather than vendor claim.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Read first → <a href="/concepts/tool-use">Tool use</a> ·
+        Related → <a href="/concepts/agents">Agents</a> ·
+        <a href="/concepts/context-windows">Context windows</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
+
     </div>
-
-    <h2 id="what-actually-happens">What actually happens<a class="anchor" href="#what-actually-happens" aria-label="Permalink to What actually happens">#</a></h2>
-    <p>
-      Ahead of time, your documents are cut into chunks, and each chunk is turned
-      into a list of numbers that represents roughly what it is about. Those
-      numbers are called an <strong>embedding</strong>, and their useful property
-      is that passages about similar things end up with similar numbers, even when
-      they share no words at all. "Cancelling your plan" and "how to end a
-      subscription" land near each other.
-    </p>
-    <p>
-      Then, when a question arrives:
-    </p>
-    <ol>
-      <li>The question gets turned into numbers the same way.</li>
-      <li>The system finds the chunks whose numbers sit closest to it.</li>
-      <li>Those chunks get pasted into the prompt, above the question, usually with an instruction like "answer using only the material below."</li>
-      <li>The model reads all of it and writes an answer.</li>
-    </ol>
-    <p>
-      Step four is the part everyone photographs. Steps one to three are the part
-      that determines whether the answer is any good.
-    </p>
-
-    <h2 id="why-most-rag-failures-are-search-failures">Why most RAG failures are search failures<a class="anchor" href="#why-most-rag-failures-are-search-failures" aria-label="Permalink to Why most RAG failures are search failures">#</a></h2>
-    <p>
-      This is the single most useful thing on this page. <strong>If retrieval
-      hands over the wrong chunks, no model can rescue the answer.</strong> It
-      cannot know that the right passage exists somewhere it wasn't shown. It will
-      do what it always does with insufficient material: produce something
-      fluent and plausible from what it has.
-      → <a href="/concepts/hallucination">Hallucination</a>
-    </p>
-    <p>
-      So when a system built this way gives bad answers, the instinct is to blame
-      the model, and the cause is usually one of these instead:
-    </p>
-
-    <p><strong>The chunking destroyed the meaning.</strong> The least glamorous
-    decision in the whole system, and the one that sets your ceiling before
-    anything else gets a say. Cut a table away from its heading and
-    the numbers become anonymous. Cut a paragraph mid-argument and it retrieves as
-    a fragment that says something the document never said. Anthropic's own
-    engineering write-up puts the general problem plainly: splitting documents for
-    retrieval "can lead to problems when individual chunks lack sufficient
-    context," and their example is a chunk reporting that revenue grew by some
-    percentage over the previous quarter, with nothing in it to say which company
-    or which quarter. Retrieved on its own, it is worse than useless, because it
-    is confidently about nothing.</p>
-
-    <p><strong>Semantic search missed something exact.</strong> Embeddings are
-    good at meaning and bad at literal strings. Part numbers, error codes,
-    surnames, policy identifiers: these are precisely where "close in meaning"
-    stops being the right question, and old-fashioned keyword matching does far
-    better. This is why the standard advice is to run both and merge the results.
-    Anthropic recommends the same combination, on the grounds that keyword search
-    excels at exact matches while embeddings capture relationships, and the two
-    are complementary rather than competing.</p>
-
-    <p><strong>The answer was spread across many documents.</strong> Retrieval
-    fetches passages that resemble the question. A question like "how has our
-    refund policy changed over five years" has an answer that exists in no single
-    passage, so nothing resembles it well enough to surface. Questions that
-    require aggregating or counting across a whole corpus are a genuinely poor
-    fit, and no amount of tuning changes that.</p>
-
-    <p><strong>Nothing relevant existed, and the system answered anyway.</strong>
-    Unless instructed otherwise, a model handed thin material will fall back on
-    what it absorbed in training and blend the two, producing an answer that
-    sounds sourced and isn't. The fix is boring and effective: instruct it to
-    answer only from the supplied material, to say when the material doesn't
-    cover the question, and to cite which passage each claim came from. Citations
-    matter less as a courtesy to the reader than as a way to catch this failure
-    at a glance.</p>
-
-    <h2 id="can-t-i-just-paste-everything-in-now">"Can't I just paste everything in now?"<a class="anchor" href="#can-t-i-just-paste-everything-in-now" aria-label="Permalink to &quot;Can't I just paste everything in now?&quot;">#</a></h2>
-    <p>
-      Increasingly, for small collections, yes, and it's the right first move.
-      Windows have grown enough that a handbook or a contract set can simply be
-      included wholesale. That removes the retrieval step, and with it every
-      failure above. If your material fits, do that and skip the machinery.
-      → <a href="/concepts/context-windows">Context windows</a>
-    </p>
-    <p>
-      What makes it stop working is not a size limit so much as three costs that
-      grow together. You pay for every token on every question, so re-sending an
-      entire corpus each time is expensive in a way that scales with usage rather
-      than with content. → <a href="/concepts/tokens">Tokens</a> Long inputs are
-      slower. And a model asked to find one relevant line inside an enormous pile
-      of mostly irrelevant material tends to do worse than one handed the few
-      passages that matter, so more context is not automatically better answers.
-    </p>
-    <p>
-      The honest decision rule: paste it all in while you can, and reach for
-      retrieval when the collection is too big, too expensive to re-send, or
-      changing too often to keep pasting.
-    </p>
-
-    <h2 id="rag-is-not-fine-tuning-and-the-confusion-is">RAG is not fine-tuning, and the confusion is expensive<a class="anchor" href="#rag-is-not-fine-tuning-and-the-confusion-is" aria-label="Permalink to RAG is not fine-tuning, and the confusion is expensive">#</a></h2>
-    <p>
-      These get proposed interchangeably in meetings, and they solve different
-      problems. Retrieval gives a model <em>information</em> at the moment it
-      answers. Fine-tuning adjusts the model itself, and what it reliably changes
-      is behaviour and form: tone, format, how to structure an output, how to
-      follow a house style.
-    </p>
-    <p>
-      Trying to teach facts by fine-tuning is the expensive mistake in this
-      neighbourhood. Facts trained in this way are diffuse rather than looked up,
-      they cannot be cited, they cannot be corrected without retraining, and they
-      go stale the moment the underlying document changes. When the requirement is
-      "the assistant should know about our stuff," the answer is almost always
-      retrieval. <a href="/concepts/fine-tuning">Fine-tuning</a> has its own page,
-      including why facts specifically fail to stick.
-    </p>
-
-    <h2 id="how-to-tell-whether-yours-is-working">How to tell whether yours is working<a class="anchor" href="#how-to-tell-whether-yours-is-working" aria-label="Permalink to How to tell whether yours is working">#</a></h2>
-    <p>
-      The one practical habit worth adopting: <strong>test the search separately
-      from the answer.</strong> Take a set of real questions, run only the
-      retrieval step, and look at what came back. If the right passage isn't in
-      there, nothing downstream can fix it, and you now know which half of the
-      system to work on. Most teams skip this and spend weeks rewording prompts
-      to compensate for a search problem.
-    </p>
-    <p>
-      After that, the highest-value improvements are usually the least
-      sophisticated: chunk along the document's own structure rather than by
-      character count, keep headings attached to what they head, add keyword
-      search alongside the embeddings, and make the system show its sources so
-      failures are visible instead of silent.
-    </p>
-
-    <div class="gap">
-      <p class="note-title">Don't expect a chunk size from this page</p>
-      <p>
-        There is no recommended chunk size here, no vector database comparison
-        and no embedding rankings, because those are the fastest-rotting claims
-        in the subject and mostly come from vendors. The failure modes above, by
-        contrast, have not changed since the technique acquired its name, and
-        knowing them is what actually improves a system.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      The chunk-context problem, the quoted phrasing about chunks lacking
-      sufficient context, and the recommendation to combine keyword search with
-      embeddings all come from Anthropic's
-      <a href="https://www.anthropic.com/engineering/contextual-retrieval">Introducing Contextual Retrieval</a>,
-      fetched 11 August 2026. Its own proposed technique, prepending a short
-      explanation to each chunk before indexing it, is a direct response to the
-      first failure mode described above. The rest of this page is mechanical
-      argument from how retrieval works rather than vendor claim.
-    </p>
-
-    <p class="next">
-      Read first → <a href="/concepts/tool-use">Tool use</a> ·
-      Related → <a href="/concepts/agents">Agents</a> ·
-      <a href="/concepts/context-windows">Context windows</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

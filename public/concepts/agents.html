@@ -89,245 +89,261 @@
   </div>
 </header>
 
-<main class="wrap" id="main">
-
-  <p class="kicker">Concept · Building</p>
-  <h1>Agents</h1>
-  <p class="standfirst">
-    The most abused word in the field, and one of the simplest ideas underneath.
-    An agent is a model in a loop with tools. Everything interesting, and
-    everything difficult, comes from the loop.
-  </p>
-
-  <p class="stamp">
-    Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
-    anything numeric lives on <a href="/model-facts">Model facts</a>
-  </p>
-
-  <div class="prose">
-
-    <h2 id="the-definition-that-survives-contact">The definition that survives contact<a class="anchor" href="#the-definition-that-survives-contact" aria-label="Permalink to The definition that survives contact">#</a></h2>
-    <p>
-      Start from <a href="/concepts/tool-use">tool use</a>, because an agent is
-      what you get when you put tool use in a loop. A model can't do anything but
-      produce text. Give it a list of tools it may request, and its text can
-      include a request: search this, read that file, run this query. Something
-      outside the model carries the request out and hands back the result.
-    </p>
-    <p>
-      A single pass through that cycle is tool use. An agent is the same cycle,
-      repeated, with the model deciding each time what to do next based on what
-      came back:
-    </p>
-    <ol>
-      <li>You give it a goal.</li>
-      <li>It looks at what it knows and picks a next action.</li>
-      <li>Something runs that action and returns the result.</li>
-      <li>The result gets added to what it knows, and it decides again.</li>
-      <li>It keeps going until it judges the goal met, or something stops it.</li>
-    </ol>
-
-    <figure class="diagram">
-      <svg viewBox="0 0 560 265" role="img" aria-labelledby="agent-t agent-d" xmlns="http://www.w3.org/2000/svg">
-        <title id="agent-t">The agent loop</title>
-        <desc id="agent-d">Three steps in a row — pick an action, something runs it, the result joins the record — with an arrow returning from the third back to the first. A goal enters at the start. Each pass round the loop leaves the record one step longer.</desc>
-
-        <defs>
-          <marker id="ah-agent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path class="d-head" d="M 0 0 L 10 5 L 0 10 z"/>
-          </marker>
-        </defs>
-
-        <text class="t-small t-accent" x="95" y="26" text-anchor="middle">your goal</text>
-        <line class="d-arrow" x1="95" y1="36" x2="95" y2="66" marker-end="url(#ah-agent)"/>
-
-        <rect class="d-new" x="20" y="70" width="150" height="76" rx="4"/>
-        <text class="t-small" x="95" y="103" text-anchor="middle">it picks the</text>
-        <text class="t-small" x="95" y="125" text-anchor="middle">next action</text>
-
-        <rect class="d-surface" x="205" y="70" width="150" height="76" rx="4"/>
-        <text class="t-small" x="280" y="103" text-anchor="middle">something</text>
-        <text class="t-small" x="280" y="125" text-anchor="middle">runs it</text>
-
-        <rect class="d-surface" x="390" y="70" width="150" height="76" rx="4"/>
-        <text class="t-small" x="465" y="103" text-anchor="middle">the result joins</text>
-        <text class="t-small" x="465" y="125" text-anchor="middle">the record</text>
-
-        <line class="d-arrow" x1="172" y1="108" x2="203" y2="108" marker-end="url(#ah-agent)"/>
-        <line class="d-arrow" x1="357" y1="108" x2="388" y2="108" marker-end="url(#ah-agent)"/>
-
-        <path class="d-arrow" d="M 465 148 L 465 196 L 95 196 L 95 150" marker-end="url(#ah-agent)"/>
-        <text class="t-small" x="280" y="222" text-anchor="middle">and it decides again, with the record one step longer</text>
-        <text class="t-small" x="280" y="248" text-anchor="middle">until it judges the goal met, or something stops it</text>
-      </svg>
-      <figcaption>
-        This is the whole of it, and both of the hard problems live in the return
-        arrow. Errors compound, because a mistake that entered the record on one
-        pass is read as fact on the next. And the record only grows, so a long run
-        steadily fills the context window — at which point the earliest material
-        gets dropped, and the earliest material is where the original instructions
-        were.
-      </figcaption>
-    </figure>
-    <p>
-      That's the whole architecture. Not a new kind of model, not a mind with
-      intentions. A loop, a list of available actions, and a stopping condition.
-      When someone describes an agent in language that can't be reduced to those
-      three things, they are usually selling rather than explaining.
+<main class="wrap" id="main" tabindex="-1">
+  <article>
+    <p class="kicker">Concept · Building</p>
+    <h1>Agents</h1>
+    <p class="standfirst">
+      The most abused word in the field, and one of the simplest ideas underneath.
+      An agent is a model in a loop with tools. Everything interesting, and
+      everything difficult, comes from the loop.
     </p>
 
-    <div class="note">
-      <p class="note-title">Why the word does so much damage</p>
-      <p>
-        "Agent" borrows the vocabulary of an employee: it <em>decides</em>, it
-        <em>works on</em>, it <em>handles</em>. Those words invite you to assume
-        judgement, accountability and memory of why it did something. What is
-        actually there is a text generator choosing a next step from a menu, with
-        no more grasp of consequence at step forty than it had at step one.
+    <p class="stamp">
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;·&nbsp; No figures on this page;
+      anything numeric lives on <a href="/model-facts">Model facts</a>
+    </p>
+
+    <div class="prose">
+
+      <section aria-labelledby="the-definition-that-survives-contact">
+        <h2 id="the-definition-that-survives-contact">The definition that survives contact<a class="anchor" href="#the-definition-that-survives-contact" aria-label="Permalink to The definition that survives contact">#</a></h2>
+        <p>
+          Start from <a href="/concepts/tool-use">tool use</a>, because an agent is
+          what you get when you put tool use in a loop. A model can't do anything but
+          produce text. Give it a list of tools it may request, and its text can
+          include a request: search this, read that file, run this query. Something
+          outside the model carries the request out and hands back the result.
+        </p>
+        <p>
+          A single pass through that cycle is tool use. An agent is the same cycle,
+          repeated, with the model deciding each time what to do next based on what
+          came back:
+        </p>
+        <ol>
+          <li>You give it a goal.</li>
+          <li>It looks at what it knows and picks a next action.</li>
+          <li>Something runs that action and returns the result.</li>
+          <li>The result gets added to what it knows, and it decides again.</li>
+          <li>It keeps going until it judges the goal met, or something stops it.</li>
+        </ol>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 560 265" role="img" aria-labelledby="agent-t agent-d" xmlns="http://www.w3.org/2000/svg">
+            <title id="agent-t">The agent loop</title>
+            <desc id="agent-d">Three steps in a row — pick an action, something runs it, the result joins the record — with an arrow returning from the third back to the first. A goal enters at the start. Each pass round the loop leaves the record one step longer.</desc>
+
+            <defs>
+              <marker id="ah-agent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path class="d-head" d="M 0 0 L 10 5 L 0 10 z"/>
+              </marker>
+            </defs>
+
+            <text class="t-small t-accent" x="95" y="26" text-anchor="middle">your goal</text>
+            <line class="d-arrow" x1="95" y1="36" x2="95" y2="66" marker-end="url(#ah-agent)"/>
+
+            <rect class="d-new" x="20" y="70" width="150" height="76" rx="4"/>
+            <text class="t-small" x="95" y="103" text-anchor="middle">it picks the</text>
+            <text class="t-small" x="95" y="125" text-anchor="middle">next action</text>
+
+            <rect class="d-surface" x="205" y="70" width="150" height="76" rx="4"/>
+            <text class="t-small" x="280" y="103" text-anchor="middle">something</text>
+            <text class="t-small" x="280" y="125" text-anchor="middle">runs it</text>
+
+            <rect class="d-surface" x="390" y="70" width="150" height="76" rx="4"/>
+            <text class="t-small" x="465" y="103" text-anchor="middle">the result joins</text>
+            <text class="t-small" x="465" y="125" text-anchor="middle">the record</text>
+
+            <line class="d-arrow" x1="172" y1="108" x2="203" y2="108" marker-end="url(#ah-agent)"/>
+            <line class="d-arrow" x1="357" y1="108" x2="388" y2="108" marker-end="url(#ah-agent)"/>
+
+            <path class="d-arrow" d="M 465 148 L 465 196 L 95 196 L 95 150" marker-end="url(#ah-agent)"/>
+            <text class="t-small" x="280" y="222" text-anchor="middle">and it decides again, with the record one step longer</text>
+            <text class="t-small" x="280" y="248" text-anchor="middle">until it judges the goal met, or something stops it</text>
+          </svg>
+          <figcaption>
+            This is the whole of it, and both of the hard problems live in the return
+            arrow. Errors compound, because a mistake that entered the record on one
+            pass is read as fact on the next. And the record only grows, so a long run
+            steadily fills the context window — at which point the earliest material
+            gets dropped, and the earliest material is where the original instructions
+            were.
+          </figcaption>
+        </figure>
+        <p>
+          That's the whole architecture. Not a new kind of model, not a mind with
+          intentions. A loop, a list of available actions, and a stopping condition.
+          When someone describes an agent in language that can't be reduced to those
+          three things, they are usually selling rather than explaining.
+        </p>
+
+        <div class="note">
+          <p class="note-title">Why the word does so much damage</p>
+          <p>
+            "Agent" borrows the vocabulary of an employee: it <em>decides</em>, it
+            <em>works on</em>, it <em>handles</em>. Those words invite you to assume
+            judgement, accountability and memory of why it did something. What is
+            actually there is a text generator choosing a next step from a menu, with
+            no more grasp of consequence at step forty than it had at step one.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="two-very-different-things-share-the-name">
+        <h2 id="two-very-different-things-share-the-name">Two very different things share the name<a class="anchor" href="#two-very-different-things-share-the-name" aria-label="Permalink to Two very different things share the name">#</a></h2>
+        <p>
+          This distinction is the single most useful thing to hold onto, and Anthropic
+          draws it cleanly in its own engineering guidance. <strong>Workflows</strong>
+          are systems where, in their words, "LLMs and tools are orchestrated through
+          predefined code paths." <strong>Agents</strong> are systems where "LLMs
+          dynamically direct their own processes and tool usage, maintaining control
+          over how they accomplish tasks."
+        </p>
+        <p>
+          The difference is who chooses the path. In a workflow, a developer wrote the
+          steps and the model fills in the parts that need language: summarise this,
+          classify that, draft the reply. The route is fixed and inspectable. In an
+          agent, the route is decided at runtime by the model, and two runs of the
+          same task may take different paths.
+        </p>
+        <p>
+          Most products sold as agents are workflows, and that is not a criticism.
+          Fixed paths are cheaper, faster, far easier to test, and much easier to
+          reason about when something goes wrong. Anthropic's own advice is to "find
+          the simplest solution possible, and only increase complexity when needed,"
+          including the possibility of "not building agentic systems at all." The
+          honest reason to reach for a real agent is a task where you genuinely cannot
+          predict the steps in advance.
+        </p>
+      </section>
+
+      <section aria-labelledby="the-loop-is-where-the-difficulty-lives">
+        <h2 id="the-loop-is-where-the-difficulty-lives">The loop is where the difficulty lives<a class="anchor" href="#the-loop-is-where-the-difficulty-lives" aria-label="Permalink to The loop is where the difficulty lives">#</a></h2>
+
+        <p><strong>Errors compound.</strong> This is the fundamental one. A single
+        model call has some chance of going wrong. Chain many calls and each one
+        inherits everything the previous ones got wrong, because the mistake is now
+        sitting in the record as though it were a fact. The arithmetic is brutal and
+        entirely general: multiply a per-step success rate by itself enough times and
+        even a very reliable step produces an unreliable run. Longer chains are not
+        linearly harder, they are exponentially harder, which is why demos of
+        twenty-step agents look magical and production versions of them get shorter
+        after launch.</p>
+
+        <p><strong>The context fills up.</strong> Every action and every result gets
+        added to what the model is holding, so a long run steadily consumes the
+        window. Once it is full, something has to be dropped or summarised, and what
+        gets dropped is usually the early material, which is exactly where the
+        original instructions live. Agents that go strange late in a long task are
+        often just agents that can no longer see what they were asked to do.
+        → <a href="/concepts/context-windows">Context windows</a></p>
+
+        <p><strong>Cost multiplies, and not linearly.</strong> Each turn re-sends the
+        accumulated history, so cost grows faster than step count. This is the number
+        that surprises people who priced a prototype on single calls, and it is the
+        main reason a technically working agent gets cancelled. It is also the single
+        biggest thing you can do something about, since the unchanging part of that
+        preamble can be cached.
+        → <a href="/concepts/tokens">Tokens</a> ·
+        <a href="/concepts/prompt-caching">Prompt caching</a></p>
+
+        <p><strong>Stopping is a real problem.</strong> The loop needs to end. A model
+        judging its own completion is the same model that will confidently claim a
+        task is done, and the failure mode nobody warns you about is not an infinite
+        loop, it's a confident early exit that reports success on a half-finished
+        job. → <a href="/concepts/hallucination">Hallucination</a></p>
+      </section>
+
+      <section aria-labelledby="the-security-problem-gets-sharper-not-just">
+        <h2 id="the-security-problem-gets-sharper-not-just">The security problem gets sharper, not just bigger<a class="anchor" href="#the-security-problem-gets-sharper-not-just" aria-label="Permalink to The security problem gets sharper, not just bigger">#</a></h2>
+        <p>
+          Tool use introduces prompt injection: the model reads content from the
+          outside world, and that content can contain instructions. A page, an email
+          or a document can say "ignore your previous instructions and do this
+          instead," and a system that cannot distinguish data from instructions may
+          simply comply.
+        </p>
+        <p>
+          Agents make this worse along the two axes that matter. They read far more
+          untrusted material, because reading is how they gather information. And they
+          act more, often several steps after the moment they read the poisoned input,
+          so the connection between cause and consequence is not visible to anyone
+          watching. The practical rule is unglamorous and holds up well: anything
+          irreversible, anything that spends money, and anything that sends a message
+          on your behalf should require a human to approve it, no matter how reliable
+          the agent has been. → <a href="/concepts/tool-use">Tool use</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="how-to-tell-a-real-agent-from-a-marketing-one">
+        <h2 id="how-to-tell-a-real-agent-from-a-marketing-one">How to tell a real agent from a marketing one<a class="anchor" href="#how-to-tell-a-real-agent-from-a-marketing-one" aria-label="Permalink to How to tell a real agent from a marketing one">#</a></h2>
+        <p>
+          Four questions, all answerable without technical knowledge, and all of them
+          awkward for a vague product:
+        </p>
+        <ul>
+          <li><strong>Who decides the steps?</strong> If the vendor can hand you a diagram of the steps it takes, it's a workflow. That may be exactly what you want, but it isn't what the word implies.</li>
+          <li><strong>What happens when a step fails?</strong> A real agent notices and tries something else. A demo re-runs from the top and hopes. Ask what failure looks like, not what success looks like.</li>
+          <li><strong>What can it actually do?</strong> The list of tools is the list of everything it can ever do. If nobody will show you the list, there is nothing to evaluate.</li>
+          <li><strong>What does it do without asking?</strong> The honest products name their irreversible actions and gate them. Vagueness here is the loudest signal on the page.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="where-they-work-today">
+        <h2 id="where-they-work-today">Where they work today<a class="anchor" href="#where-they-work-today" aria-label="Permalink to Where they work today">#</a></h2>
+        <p>
+          The pattern that predicts success has little to do with model quality and
+          almost everything to do with the shape of the task. Agents do well where
+          three things hold at once:
+        </p>
+        <ul>
+          <li><strong>The result can be checked automatically.</strong> Code that must pass tests, a query whose output can be validated, a task with a verifiable end state. When the loop can tell whether it succeeded, it can correct itself, which is what breaks the compounding-error problem.</li>
+          <li><strong>Failure is cheap and reversible.</strong> Work in a scratch copy, a branch, a sandbox. Blast radius matters more than accuracy.</li>
+          <li><strong>The path can't be written down in advance.</strong> Investigation, search, debugging: work where the next step depends on what the last one turned up.</li>
+        </ul>
+        <p>
+          Where all three fail — an unverifiable result, irreversible consequences, a
+          task you could have written down as steps — an agent is the expensive way to
+          get an unreliable version of something a workflow would have done cleanly.
+        </p>
+
+        <div class="gap">
+          <p class="note-title">Why there are no numbers here</p>
+          <p>
+            You will not find benchmark scores, framework rankings or reliability
+            percentages on this page. They change monthly, most are published by
+            someone selling something, and a page carrying them would be wrong within
+            a season without looking any different. The mechanics above should hold
+            up for years, which is the trade being made.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="sources">
+        <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
+        <p class="table-note">
+          The workflow/agent distinction and the quoted definitions come from
+          Anthropic's
+          <a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>,
+          fetched 11 August 2026, which also contains the recommendation to find the
+          simplest solution and only add complexity when needed. The rest of this page
+          is mechanical argument from how the loop works rather than vendor claim, and
+          is presented as reasoning you can check rather than fact you should take on
+          trust.
+        </p>
+      </section>
+
+    
+
+      <p class="next">
+        Read first → <a href="/concepts/tool-use">Tool use</a> ·
+        Related → <a href="/concepts/rag">RAG and retrieval</a> ·
+        <a href="/concepts/context-windows">Context windows</a> ·
+        All → <a href="/concepts/">Concepts</a>
       </p>
+
     </div>
-
-    <h2 id="two-very-different-things-share-the-name">Two very different things share the name<a class="anchor" href="#two-very-different-things-share-the-name" aria-label="Permalink to Two very different things share the name">#</a></h2>
-    <p>
-      This distinction is the single most useful thing to hold onto, and Anthropic
-      draws it cleanly in its own engineering guidance. <strong>Workflows</strong>
-      are systems where, in their words, "LLMs and tools are orchestrated through
-      predefined code paths." <strong>Agents</strong> are systems where "LLMs
-      dynamically direct their own processes and tool usage, maintaining control
-      over how they accomplish tasks."
-    </p>
-    <p>
-      The difference is who chooses the path. In a workflow, a developer wrote the
-      steps and the model fills in the parts that need language: summarise this,
-      classify that, draft the reply. The route is fixed and inspectable. In an
-      agent, the route is decided at runtime by the model, and two runs of the
-      same task may take different paths.
-    </p>
-    <p>
-      Most products sold as agents are workflows, and that is not a criticism.
-      Fixed paths are cheaper, faster, far easier to test, and much easier to
-      reason about when something goes wrong. Anthropic's own advice is to "find
-      the simplest solution possible, and only increase complexity when needed,"
-      including the possibility of "not building agentic systems at all." The
-      honest reason to reach for a real agent is a task where you genuinely cannot
-      predict the steps in advance.
-    </p>
-
-    <h2 id="the-loop-is-where-the-difficulty-lives">The loop is where the difficulty lives<a class="anchor" href="#the-loop-is-where-the-difficulty-lives" aria-label="Permalink to The loop is where the difficulty lives">#</a></h2>
-
-    <p><strong>Errors compound.</strong> This is the fundamental one. A single
-    model call has some chance of going wrong. Chain many calls and each one
-    inherits everything the previous ones got wrong, because the mistake is now
-    sitting in the record as though it were a fact. The arithmetic is brutal and
-    entirely general: multiply a per-step success rate by itself enough times and
-    even a very reliable step produces an unreliable run. Longer chains are not
-    linearly harder, they are exponentially harder, which is why demos of
-    twenty-step agents look magical and production versions of them get shorter
-    after launch.</p>
-
-    <p><strong>The context fills up.</strong> Every action and every result gets
-    added to what the model is holding, so a long run steadily consumes the
-    window. Once it is full, something has to be dropped or summarised, and what
-    gets dropped is usually the early material, which is exactly where the
-    original instructions live. Agents that go strange late in a long task are
-    often just agents that can no longer see what they were asked to do.
-    → <a href="/concepts/context-windows">Context windows</a></p>
-
-    <p><strong>Cost multiplies, and not linearly.</strong> Each turn re-sends the
-    accumulated history, so cost grows faster than step count. This is the number
-    that surprises people who priced a prototype on single calls, and it is the
-    main reason a technically working agent gets cancelled. It is also the single
-    biggest thing you can do something about, since the unchanging part of that
-    preamble can be cached.
-    → <a href="/concepts/tokens">Tokens</a> ·
-    <a href="/concepts/prompt-caching">Prompt caching</a></p>
-
-    <p><strong>Stopping is a real problem.</strong> The loop needs to end. A model
-    judging its own completion is the same model that will confidently claim a
-    task is done, and the failure mode nobody warns you about is not an infinite
-    loop, it's a confident early exit that reports success on a half-finished
-    job. → <a href="/concepts/hallucination">Hallucination</a></p>
-
-    <h2 id="the-security-problem-gets-sharper-not-just">The security problem gets sharper, not just bigger<a class="anchor" href="#the-security-problem-gets-sharper-not-just" aria-label="Permalink to The security problem gets sharper, not just bigger">#</a></h2>
-    <p>
-      Tool use introduces prompt injection: the model reads content from the
-      outside world, and that content can contain instructions. A page, an email
-      or a document can say "ignore your previous instructions and do this
-      instead," and a system that cannot distinguish data from instructions may
-      simply comply.
-    </p>
-    <p>
-      Agents make this worse along the two axes that matter. They read far more
-      untrusted material, because reading is how they gather information. And they
-      act more, often several steps after the moment they read the poisoned input,
-      so the connection between cause and consequence is not visible to anyone
-      watching. The practical rule is unglamorous and holds up well: anything
-      irreversible, anything that spends money, and anything that sends a message
-      on your behalf should require a human to approve it, no matter how reliable
-      the agent has been. → <a href="/concepts/tool-use">Tool use</a>
-    </p>
-
-    <h2 id="how-to-tell-a-real-agent-from-a-marketing-one">How to tell a real agent from a marketing one<a class="anchor" href="#how-to-tell-a-real-agent-from-a-marketing-one" aria-label="Permalink to How to tell a real agent from a marketing one">#</a></h2>
-    <p>
-      Four questions, all answerable without technical knowledge, and all of them
-      awkward for a vague product:
-    </p>
-    <ul>
-      <li><strong>Who decides the steps?</strong> If the vendor can hand you a diagram of the steps it takes, it's a workflow. That may be exactly what you want, but it isn't what the word implies.</li>
-      <li><strong>What happens when a step fails?</strong> A real agent notices and tries something else. A demo re-runs from the top and hopes. Ask what failure looks like, not what success looks like.</li>
-      <li><strong>What can it actually do?</strong> The list of tools is the list of everything it can ever do. If nobody will show you the list, there is nothing to evaluate.</li>
-      <li><strong>What does it do without asking?</strong> The honest products name their irreversible actions and gate them. Vagueness here is the loudest signal on the page.</li>
-    </ul>
-
-    <h2 id="where-they-work-today">Where they work today<a class="anchor" href="#where-they-work-today" aria-label="Permalink to Where they work today">#</a></h2>
-    <p>
-      The pattern that predicts success has little to do with model quality and
-      almost everything to do with the shape of the task. Agents do well where
-      three things hold at once:
-    </p>
-    <ul>
-      <li><strong>The result can be checked automatically.</strong> Code that must pass tests, a query whose output can be validated, a task with a verifiable end state. When the loop can tell whether it succeeded, it can correct itself, which is what breaks the compounding-error problem.</li>
-      <li><strong>Failure is cheap and reversible.</strong> Work in a scratch copy, a branch, a sandbox. Blast radius matters more than accuracy.</li>
-      <li><strong>The path can't be written down in advance.</strong> Investigation, search, debugging: work where the next step depends on what the last one turned up.</li>
-    </ul>
-    <p>
-      Where all three fail — an unverifiable result, irreversible consequences, a
-      task you could have written down as steps — an agent is the expensive way to
-      get an unreliable version of something a workflow would have done cleanly.
-    </p>
-
-    <div class="gap">
-      <p class="note-title">Why there are no numbers here</p>
-      <p>
-        You will not find benchmark scores, framework rankings or reliability
-        percentages on this page. They change monthly, most are published by
-        someone selling something, and a page carrying them would be wrong within
-        a season without looking any different. The mechanics above should hold
-        up for years, which is the trade being made.
-      </p>
-    </div>
-
-    <h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Permalink to Sources">#</a></h2>
-    <p class="table-note">
-      The workflow/agent distinction and the quoted definitions come from
-      Anthropic's
-      <a href="https://www.anthropic.com/engineering/building-effective-agents">Building effective agents</a>,
-      fetched 11 August 2026, which also contains the recommendation to find the
-      simplest solution and only add complexity when needed. The rest of this page
-      is mechanical argument from how the loop works rather than vendor claim, and
-      is presented as reasoning you can check rather than fact you should take on
-      trust.
-    </p>
-
-    <p class="next">
-      Read first → <a href="/concepts/tool-use">Tool use</a> ·
-      Related → <a href="/concepts/rag">RAG and retrieval</a> ·
-      <a href="/concepts/context-windows">Context windows</a> ·
-      All → <a href="/concepts/">Concepts</a>
-    </p>
-
-  </div>
-
+  </article>
 </main>
 
 <footer class="site-foot">

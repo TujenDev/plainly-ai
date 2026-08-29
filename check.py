@@ -193,6 +193,13 @@ for name, s in src.items():
         note("no lang attribute", name)
     if s.count("<main") != 1:
         note("main", f"{name} has {s.count('<main')} <main> elements, expected 1")
+    # Added with M4. Every page's body is one <article> inside <main>, so a
+    # crawler and a screen reader can both tell the page's own content from the
+    # nav and footer that surround it. It is one line of markup and nothing
+    # visual depends on it, which is exactly the kind of thing that gets
+    # dropped from the next new page without this.
+    if s.count("<article") != 1:
+        note("article", f"{name} has {s.count('<article')} <article> elements, expected 1")
     if 'class="skip-link"' not in s:
         note("no skip link", name)
     h1s = len(re.findall(r"<h1[ >]", s))

@@ -22,6 +22,23 @@
 <meta name="twitter:image" content="https://plainlyai.org/og-image.png">
 <meta name="twitter:title" content="Changes — Plainly">
 <meta name="twitter:description" content="Every correction, addition and re-check made to this site, dated. The maintenance promise, made checkable instead of asserted.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Changes",
+  "description": "Every correction, addition and re-check made to this site, dated. The maintenance promise, made checkable instead of asserted.",
+  "url": "https://plainlyai.org/changes",
+  "inLanguage": "en",
+  "isAccessibleForFree": true,
+  "dateModified": "2026-08-28",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Plainly",
+    "url": "https://plainlyai.org/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -51,7 +68,7 @@
   </p>
 
   <p class="stamp">
-    Last updated <b>28 August 2026</b> &nbsp;·&nbsp; Every page also carries its own
+    Last updated <time datetime="2026-08-28"><b>28 August 2026</b></time> &nbsp;·&nbsp; Every page also carries its own
     pair of dates at the top &nbsp;·&nbsp; <a href="/feed.xml">Atom feed</a> of
     everything below
   </p>
@@ -139,6 +156,55 @@
     </ul>
 
     <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+    <h3 id="28-august-2026-dates-a-machine-can">28 August 2026 &mdash; dates a machine can read<a class="anchor" href="#28-august-2026-dates-a-machine-can" aria-label="Permalink to 28 August 2026 — dates a machine can read">#</a></h3>
+    <p>
+      The <a href="/robots.txt">robots file</a> asks every crawler that takes a
+      fact from this site to carry the last-verified date along with it. That was
+      an odd thing to ask, because until today the date was only prose &mdash;
+      bolded text in a sentence, in a format a parser has to guess at, with
+      nothing marking which of the dates on a page was the one being asked about.
+      Every date on the site now sits in a <code>time</code> element with an
+      ISO value beside the words a reader sees. The request is the same; it is now
+      one a machine can actually comply with.
+    </p>
+    <p>
+      Each page also carries a block of structured data naming what the page is,
+      when it was published, when it was last verified, and the address it is
+      served at. Model facts declares itself a dataset and names the four
+      quantities it measures. Nothing about the pages themselves has changed.
+    </p>
+    <p>
+      This needed no change to the content security policy, which is worth saying
+      because the source of every page now contains the word
+      <code>script</code> and this site has made a point of serving none. The
+      policy is still <code>script-src 'none'</code>, the strictest setting
+      available, and the position taken on 25 August &mdash; that saving a reader
+      one keystroke is not worth giving that up &mdash; is unchanged. A structured
+      data block is data, not code: the browser never executes it, and the policy
+      never applies to it. That was tested rather than assumed, by serving the
+      site under its own real policy and confirming the browser reported no
+      violation and the block still parsed.
+    </p>
+    <p>
+      The uncomfortable part is that the last-verified date is now written twice
+      on every page, once for a reader and once for a machine. Two copies of the
+      same fact is the exact arrangement this site refuses everywhere else, and it
+      is the reason there is only one page with numbers on it. It is allowed here
+      on one condition: the structural check now fails if the two dates disagree,
+      or if either goes missing. That was confirmed by changing each of them
+      independently and watching the check refuse both. If that guard is ever
+      removed, the right move is to delete the structured data, not to trust it.
+    </p>
+    <p>
+      What the structured data deliberately does not do is repeat the pages. The
+      glossary declares itself a set of defined terms without listing its
+      forty-four entries, and the log does not restate its entries as posts,
+      because the <a href="/feed.xml">Atom feed</a> is already exactly that and
+      keeping two machine-readable copies of the same log is the same mistake in a
+      different file. Structured data here describes a page. It does not become a
+      second copy of one. Committed, not yet published.
+    </p>
 
     <h3 id="28-august-2026-the-structural-check">28 August 2026 &mdash; the structural check now enforces the rules<a class="anchor" href="#28-august-2026-the-structural-check" aria-label="Permalink to 28 August 2026 — the structural check now enforces the rules">#</a></h3>
     <p>

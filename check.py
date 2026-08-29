@@ -238,6 +238,51 @@ else:
         note("sitemap lists a page that does not exist", n)
 
 
+# 10. the structured data agrees with the page it sits on. The last-verified
+#     date is now written twice — once for the reader in the stamp, once for a
+#     crawler in JSON-LD — and robots.txt asks every crawler to carry that date
+#     with any fact it takes. Two copies of a date is exactly the arrangement
+#     this site refuses everywhere else, so it is allowed here only because this
+#     check makes them impossible to disagree. If that ever becomes untrue,
+#     delete the JSON-LD rather than letting it drift.
+import json
+
+STAMP = re.compile(r'<p class="stamp"[^>]*>(.*?)</p>', re.S)
+LD = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
+
+for name, s in src.items():
+    blocks = LD.findall(s)
+    if name == "404":
+        if blocks:
+            note("json-ld", "404 carries structured data; it is not indexed")
+        continue
+    if len(blocks) != 1:
+        note("json-ld", f"{name} has {len(blocks)} ld+json blocks, expected 1")
+        continue
+    try:
+        data = json.loads(blocks[0])
+    except json.JSONDecodeError as e:
+        note("json-ld", f"{name} does not parse: {e}")
+        continue
+    node = data.get("@graph", [data])[0]
+    canon = re.search(r'<link rel="canonical" href="([^"]+)"', s)
+    if canon and node.get("url") != canon.group(1):
+        note("json-ld url", f"{name} -> {node.get('url')}, canonical is {canon.group(1)}")
+    st = STAMP.search(s)
+    if not st:
+        continue
+    for label, field in (("Published", "datePublished"),
+                         ("Last (?:verified|updated)", "dateModified")):
+        m = re.search(label + r' <time datetime="([^"]+)"', st.group(1))
+        if not m:
+            if field == "dateModified":
+                note("stamp", f"{name} has no machine-readable last-verified date")
+            continue
+        if node.get(field) != m.group(1):
+            note("json-ld date", f"{name} {field}={node.get(field)} "
+                                 f"but the stamp says {m.group(1)}")
+
+
 print(f"{len(pages)} pages, {links} links, {anchors} anchors")
 if problems:
     print(f"\n{len(problems)} problem(s):")

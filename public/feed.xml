@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>dates a machine can read</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#28-august-2026-dates-a-machine-can"/>
+    <id>https://plainlyai.org/changes#28-august-2026-dates-a-machine-can</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <summary type="text">The robots file asks every crawler that takes a fact from this site to carry the last-verified date along with it. That was an odd thing to ask, because until today the date was only prose — bolded text in a sentence, in a format a parser has to guess at, with nothing marking which of the dates on a page was the one being asked about. Every date on the site now sits in a time element with an ISO value beside the words a reader sees. The request is the same; it is now one a machine can actually comply with.</summary>
+  </entry>
+  <entry>
     <title>the structural check now enforces the rules</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#28-august-2026-the-structural-check"/>
     <id>https://plainlyai.org/changes#28-august-2026-the-structural-check</id>

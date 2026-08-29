@@ -570,3 +570,73 @@ hr {
   border-top: 1px solid var(--rule);
   margin: 3rem 0;
 }
+
+/* ---------- Diagrams ---------- */
+
+/* Inline SVG, drawn with the same custom properties as everything else, so a
+   diagram follows the theme without a second copy of the palette and without a
+   request. There are no raster images on this site and these do not add any.
+
+   Every figure carries a caption that states the same thing in words. That is
+   not a courtesy to screen readers, it is the rule: a reader who cannot see the
+   picture must not be reading a page with a hole in it. If a caption cannot be
+   written, the diagram is decoration and does not belong here. */
+
+figure.diagram {
+  margin: 2.4rem 0;
+}
+
+figure.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+figure.diagram figcaption {
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
+  margin-top: 0.9rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--rule);
+}
+
+/* The drawing vocabulary. Four fills, three strokes, two text weights — kept
+   deliberately small so every diagram reads as the same hand. */
+.diagram .d-surface { fill: var(--paper-sunk); stroke: var(--rule); stroke-width: 1; }
+.diagram .d-block   { fill: var(--paper); stroke: var(--ink-faint); stroke-width: 1; }
+.diagram .d-new     { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; }
+.diagram .d-warn    { fill: var(--flag-soft); stroke: var(--flag); stroke-width: 1.5; }
+.diagram .d-rule    { stroke: var(--rule); stroke-width: 1; fill: none; }
+.diagram .d-arrow   { stroke: var(--ink-soft); stroke-width: 1.5; fill: none; }
+.diagram .d-curve   { stroke: var(--accent); stroke-width: 2.5; fill: none; }
+.diagram .d-head    { fill: var(--ink-soft); }
+.diagram .d-accent-head { fill: var(--accent); }
+
+.diagram text {
+  font-family: var(--sans);
+  fill: var(--ink);
+  font-size: 19px;
+}
+.diagram .t-small { font-size: 16px; fill: var(--ink-faint); }
+.diagram .t-lead  { font-size: 19px; font-weight: 600; }
+.diagram .t-accent { fill: var(--accent); font-weight: 600; }
+.diagram .t-warn   { fill: var(--flag); font-weight: 600; }
+
+/* On a narrow screen the drawing scales down with its container, and a label
+   set in 16 user units lands near 10px on a phone. Raising the user-unit size
+   below the prose measure cancels most of that: the shapes stay where they are
+   and only the type grows relative to them. The figcaption carries the whole
+   point in real body text regardless, which is why this can be a degradation
+   rather than a failure. */
+@media (max-width: 40rem) {
+  .diagram text    { font-size: 23px; }
+  .diagram .t-small { font-size: 21px; }
+  .diagram .t-lead  { font-size: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  figure.diagram svg * { transition: none; }
+}

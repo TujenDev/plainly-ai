@@ -126,6 +126,49 @@
       <li>The result gets added to what it knows, and it decides again.</li>
       <li>It keeps going until it judges the goal met, or something stops it.</li>
     </ol>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 560 265" role="img" aria-labelledby="agent-t agent-d" xmlns="http://www.w3.org/2000/svg">
+        <title id="agent-t">The agent loop</title>
+        <desc id="agent-d">Three steps in a row — pick an action, something runs it, the result joins the record — with an arrow returning from the third back to the first. A goal enters at the start. Each pass round the loop leaves the record one step longer.</desc>
+
+        <defs>
+          <marker id="ah-agent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="d-head" d="M 0 0 L 10 5 L 0 10 z"/>
+          </marker>
+        </defs>
+
+        <text class="t-small t-accent" x="95" y="26" text-anchor="middle">your goal</text>
+        <line class="d-arrow" x1="95" y1="36" x2="95" y2="66" marker-end="url(#ah-agent)"/>
+
+        <rect class="d-new" x="20" y="70" width="150" height="76" rx="4"/>
+        <text class="t-small" x="95" y="103" text-anchor="middle">it picks the</text>
+        <text class="t-small" x="95" y="125" text-anchor="middle">next action</text>
+
+        <rect class="d-surface" x="205" y="70" width="150" height="76" rx="4"/>
+        <text class="t-small" x="280" y="103" text-anchor="middle">something</text>
+        <text class="t-small" x="280" y="125" text-anchor="middle">runs it</text>
+
+        <rect class="d-surface" x="390" y="70" width="150" height="76" rx="4"/>
+        <text class="t-small" x="465" y="103" text-anchor="middle">the result joins</text>
+        <text class="t-small" x="465" y="125" text-anchor="middle">the record</text>
+
+        <line class="d-arrow" x1="172" y1="108" x2="203" y2="108" marker-end="url(#ah-agent)"/>
+        <line class="d-arrow" x1="357" y1="108" x2="388" y2="108" marker-end="url(#ah-agent)"/>
+
+        <path class="d-arrow" d="M 465 148 L 465 196 L 95 196 L 95 150" marker-end="url(#ah-agent)"/>
+        <text class="t-small" x="280" y="222" text-anchor="middle">and it decides again, with the record one step longer</text>
+        <text class="t-small" x="280" y="248" text-anchor="middle">until it judges the goal met, or something stops it</text>
+      </svg>
+      <figcaption>
+        This is the whole of it, and both of the hard problems live in the return
+        arrow. Errors compound, because a mistake that entered the record on one
+        pass is read as fact on the next. And the record only grows, so a long run
+        steadily fills the context window — at which point the earliest material
+        gets dropped, and the earliest material is where the original instructions
+        were.
+      </figcaption>
+    </figure>
     <p>
       That's the whole architecture. Not a new kind of model, not a mind with
       intentions. A loop, a list of available actions, and a stopping condition.

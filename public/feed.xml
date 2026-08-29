@@ -5,9 +5,16 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-08-28T00:00:00Z</updated>
+  <updated>2026-08-29T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>four diagrams, in the four places the prose was worst</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-four-diagrams-in-the"/>
+    <id>https://plainlyai.org/changes#29-august-2026-four-diagrams-in-the</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">Until today there was not a single image anywhere on this site — no drawing, no photograph, no diagram on any page. That was mostly a good instinct badly applied. It kept the site fast and kept it honest, and it also meant five mechanisms that are fundamentally spatial were being taught entirely in sentences. The worst case was on Context windows, which described a research finding with the words “the shape is a U” to a reader who has, by construction, never seen the graph.</summary>
+  </entry>
   <entry>
     <title>dates a machine can read</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#28-august-2026-dates-a-machine-can"/>

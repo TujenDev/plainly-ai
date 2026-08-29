@@ -128,6 +128,52 @@
       single turn.
     </p>
 
+    <figure class="diagram">
+      <svg viewBox="0 0 560 300" role="img" aria-labelledby="desk-t desk-d" xmlns="http://www.w3.org/2000/svg">
+        <title id="desk-t">The same conversation, laid out again on each turn</title>
+        <desc id="desk-d">Three desks side by side, one per turn. Each turn the whole conversation so far is laid out again from the bottom up, with only the newest message added on top. By the third turn the desk is full and the earliest message has gone over the edge.</desc>
+
+        <!-- the message that no longer fits, tumbling clear of the third desk -->
+        <g transform="rotate(-16 452 40)">
+          <rect class="d-warn" x="389" y="31" width="126" height="17" rx="2"/>
+        </g>
+
+        <rect class="d-surface" x="20" y="75" width="150" height="145" rx="3"/>
+        <rect class="d-block" x="32" y="195" width="126" height="17" rx="2"/>
+        <rect class="d-new"   x="32" y="172" width="126" height="17" rx="2"/>
+
+        <rect class="d-surface" x="205" y="75" width="150" height="145" rx="3"/>
+        <rect class="d-block" x="217" y="195" width="126" height="17" rx="2"/>
+        <rect class="d-block" x="217" y="172" width="126" height="17" rx="2"/>
+        <rect class="d-block" x="217" y="149" width="126" height="17" rx="2"/>
+        <rect class="d-new"   x="217" y="126" width="126" height="17" rx="2"/>
+
+        <rect class="d-surface" x="390" y="75" width="150" height="145" rx="3"/>
+        <rect class="d-block" x="402" y="195" width="126" height="17" rx="2"/>
+        <rect class="d-block" x="402" y="172" width="126" height="17" rx="2"/>
+        <rect class="d-block" x="402" y="149" width="126" height="17" rx="2"/>
+        <rect class="d-block" x="402" y="126" width="126" height="17" rx="2"/>
+        <rect class="d-new"   x="402" y="103" width="126" height="17" rx="2"/>
+
+        <text class="t-small" x="95"  y="243" text-anchor="middle">Turn 1</text>
+        <text class="t-small" x="280" y="243" text-anchor="middle">Turn 2</text>
+        <text class="t-small" x="465" y="243" text-anchor="middle">Turn 3</text>
+        <text class="t-small t-warn" x="465" y="267" text-anchor="middle">the earliest falls off</text>
+
+        <rect class="d-new"   x="20" y="281" width="22" height="13" rx="2"/>
+        <text class="t-small" x="50" y="292">new this turn</text>
+        <rect class="d-block" x="185" y="281" width="22" height="13" rx="2"/>
+        <text class="t-small" x="215" y="292">re-sent, again</text>
+      </svg>
+      <figcaption>
+        The model keeps nothing between turns. On every turn the software re-sends
+        the entire conversation and the model reads it fresh, so the desk is laid
+        out from scratch each time with one new message on top. When the desk is
+        full, the earliest material goes over the edge — which is why a long
+        conversation starts forgetting its own beginning.
+      </figcaption>
+    </figure>
+
     <div class="note">
       <p class="note-title">A conversation is not a conversation</p>
       <p>
@@ -218,6 +264,39 @@
       what anyone expects from a system advertised as reading everything you give
       it.
     </p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 560 275" role="img" aria-labelledby="ushape-t ushape-d" xmlns="http://www.w3.org/2000/svg">
+        <title id="ushape-t">Accuracy against where the material sits in the window</title>
+        <desc id="ushape-d">A U-shaped curve. Accuracy is highest when the relevant passage sits at the very beginning or the very end of the context, and markedly lower when it sits in the middle. The axes carry no numbers; the shape is the finding.</desc>
+
+        <line class="d-rule" x1="70" y1="35" x2="70" y2="212"/>
+        <line class="d-rule" x1="70" y1="212" x2="530" y2="212"/>
+
+        <path class="d-curve" d="M 92 72 C 168 88, 214 176, 300 180 C 386 176, 432 88, 508 72"/>
+
+        <circle class="d-accent-head" cx="92" cy="72" r="5"/>
+        <circle class="d-accent-head" cx="508" cy="72" r="5"/>
+        <circle class="d-head" cx="300" cy="180" r="5"/>
+
+        <line class="d-rule" x1="300" y1="188" x2="300" y2="206" stroke-dasharray="3 3"/>
+        <text class="t-small" x="300" y="152" text-anchor="middle">weakest here</text>
+
+        <text class="t-small" x="92" y="236" text-anchor="middle">start</text>
+        <text class="t-small" x="300" y="236" text-anchor="middle">middle</text>
+        <text class="t-small" x="508" y="236" text-anchor="middle">end</text>
+        <text class="t-small" x="300" y="262" text-anchor="middle">where the passage sits in the window</text>
+
+        <text class="t-small" x="44" y="128" text-anchor="middle" transform="rotate(-90 44 128)">how reliably it is used</text>
+      </svg>
+      <figcaption>
+        Being inside the window is not the same as being read carefully. Moving the
+        same relevant passage through the context and measuring accuracy produces
+        this shape: strongest at the two ends, weakest in the middle. There are no
+        numbers on either axis on purpose — the finding is the shape, and the
+        figures behind it come from a 2023 paper whose models are long retired.
+      </figcaption>
+    </figure>
     <p>
       <strong>Length matters too, and it survives better measurement.</strong>
       That first result is from 2023 and the models it tested are long retired, so

@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>three corrections, and the rule that should have caught one of them</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-three-corrections-and"/>
+    <id>https://plainlyai.org/changes#29-august-2026-three-corrections-and</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">The home page said six guides where there were eight. It had been wrong since 26 August, when two guides were added and the sentence describing them was not. The fix is not to change six to eight. A count on the home page is a figure that has to be remembered every time a page is added, which means it will be wrong again; it has been removed, and the sentence now names the pages instead. In the same sentence, two of them were named without being linked — which is precisely the finding logged here on 12 August about two tracks naming pages they never pointed at. It came back because nothing was watching for it.</summary>
+  </entry>
+  <entry>
     <title>four diagrams, in the four places the prose was worst</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-four-diagrams-in-the"/>
     <id>https://plainlyai.org/changes#29-august-2026-four-diagrams-in-the</id>

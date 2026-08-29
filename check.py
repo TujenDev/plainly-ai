@@ -283,6 +283,73 @@ for name, s in src.items():
                                  f"but the stamp says {m.group(1)}")
 
 
+# 11. Rule 2: model names and prices belong on Model facts and nowhere else.
+#     This is the rule the whole maintenance model rests on — one page rots
+#     instead of nine — and until now nothing enforced it. It was found broken by
+#     reading, not by tooling: Getting better results named a current model well
+#     outside the two-page exemption Model facts grants at line 95.
+#
+#     The names are derived from the table rather than listed here, so this check
+#     cannot fall out of step with the thing it is checking. Every exemption is
+#     written down with the reason it was granted, and an exemption that stops
+#     being needed is reported too — an allowlist nobody prunes quietly turns
+#     into permission for anything.
+#
+#     What it does NOT catch, stated so nobody trusts it further than it goes:
+#     word counts, context sizes written out in prose, and dates. Those cannot be
+#     told apart from ordinary numbers without more false alarms than findings.
+RULE2_ALLOWED = {
+    "changes": "the log quotes figures that were wrong, on purpose; every entry is dated",
+    "concepts/tokens": "the arithmetic exemption Model facts grants at line 95, and the "
+                       "sentence points back at the table by name",
+    "getting-better-results": "quotes a dated vendor caveat naming a model, with the fetch "
+                              "date in the sentence and the staleness as the lesson",
+    "sources": "names which document each figure came from; the figures stay on Model facts",
+}
+
+mf = src.get("model-facts", "")
+model_names = set()
+for body in re.findall(r"<tbody\b[^>]*>(.*?)</tbody>", mf, re.S):
+    for tr in re.findall(r"<tr\b[^>]*>(.*?)</tr>", body, re.S):
+        cells = [re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", c)).strip()
+                 for c in re.findall(r"<t[dh]\b[^>]*>(.*?)</t[dh]>", tr, re.S)]
+        if len(cells) == 8:
+            model_names.add(cells[0])
+        elif len(cells) == 7:
+            model_names.add(cells[1])
+model_names = {n for n in model_names if len(n) > 4 and "/" not in n}
+
+if not model_names:
+    note("rule 2", "no model names could be read from model-facts.html")
+else:
+    used = set()
+    for name, s in src.items():
+        if name == "model-facts":
+            continue
+        m = re.search(r"<main.*?</main>", s, re.S)
+        if not m:
+            continue
+        body = re.sub(r"<[^>]+>", " ", m.group(0))
+        found = sorted(n for n in model_names if n in body)
+        prices = re.findall(r"\$\d", body)
+        if not (found or prices):
+            continue
+        if name in RULE2_ALLOWED:
+            used.add(name)
+            continue
+        what = []
+        if found:
+            what.append("names " + ", ".join(found))
+        if prices:
+            what.append(f"carries {len(prices)} price figure(s)")
+        note("rule 2", f"{name} {' and '.join(what)} — these live on Model facts, or the "
+                       f"exemption needs writing into RULE2_ALLOWED with its reason")
+    for name in sorted(set(RULE2_ALLOWED) - used):
+        if name in src:
+            note("stale exemption", f"{name} is allowlisted for rule 2 but no longer needs "
+                                    f"it — remove it from RULE2_ALLOWED")
+
+
 print(f"{len(pages)} pages, {links} links, {anchors} anchors")
 if problems:
     print(f"\n{len(problems)} problem(s):")

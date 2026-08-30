@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>correction: the first sentence on this site was wrong about the thing it complains about</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-correction-the-first"/>
+    <id>https://plainlyai.org/changes#30-august-2026-correction-the-first</id>
+    <updated>2026-08-30T00:00:00Z</updated>
+    <summary type="text">The home page opened by saying that almost everything ranking for “learn AI” is an affiliate page pointing at a course. That was the justification for this site existing, it sat in the first sentence a reader ever saw, and nobody had checked it since the day it was written on 11 August. It was checked today, by running the search and opening the results, and it does not hold.</summary>
+  </entry>
+  <entry>
     <title>a drawing of the two dates, on the page that asks you to trust them</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-a-drawing-of-the-two"/>
     <id>https://plainlyai.org/changes#30-august-2026-a-drawing-of-the-two</id>

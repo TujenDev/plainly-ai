@@ -162,6 +162,54 @@
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+        <h3 id="29-august-2026-the-deploy-now-refuses">29 August 2026 &mdash; the deploy now refuses to publish a page that is lying about itself<a class="anchor" href="#29-august-2026-the-deploy-now-refuses" aria-label="Permalink to 29 August 2026 — the deploy now refuses to publish a page that is lying about itself">#</a></h3>
+        <p>
+          Entries on this page say whether the change they describe is live or only
+          prepared. It is a small promise and this site broke it earlier today: a
+          deploy went out while an entry still read &#8220;Committed, not yet
+          published&#8221;, so for a while this page was telling readers that
+          something was unpublished at the same moment they were reading the
+          published version of it. On the one page whose entire job is being the
+          honest record.
+        </p>
+        <p>
+          The structural check cannot catch that, and it is worth being precise about
+          why, because the reason is more interesting than the bug. Before a deploy,
+          &#8220;not yet published&#8221; is <em>true</em>. Nothing in the file
+          distinguishes an entry that is honestly waiting from one that was left
+          behind, and no amount of reading the file more carefully will separate them.
+          The only thing in the world that knows the difference is the act of
+          deploying. So that is where the guard had to go, and until today there was
+          no guard there at all &#8212; only the intention to remember.
+        </p>
+        <p>
+          There is now a deploy script, and it refuses to upload anything while a
+          single entry still claims to be unpublished. It also re-runs the two
+          generators, requires the structural check to pass, and requires the working
+          tree to be committed, so that what gets served is what is in the history
+          rather than an edit that exists nowhere else. All of that runs before
+          anything touches the network, because a deploy cannot be taken back: the
+          wrong page is being served the instant it uploads.
+        </p>
+        <p>
+          Afterwards it checks the site rather than the folder it just sent. It fetches
+          this page back and confirms that no entry claims to be unpublished, and it
+          rebuilds <a href="/model-facts.json">model-facts.json</a> from the live
+          <a href="/model-facts">Model facts</a> page and compares it to the live JSON.
+          Verifying the files you uploaded tells you what you meant to publish, which
+          is the thing you already knew.
+        </p>
+        <p>
+          What it will not do is fix the wording for you. Changing
+          &#8220;Committed, not yet published&#8221; to say the opposite is writing a
+          sentence in the log, and no script here writes this site's sentences &#8212;
+          the price watcher has refused to edit a figure since the day it was written,
+          for the same reason. It stops and tells you. And it is worth saying what this
+          does not do: it does not stop anything being deployed that should not be. It
+          stops exactly one lie, which happens to be the one that was told.
+          Committed, not yet published.
+        </p>
+
         <h3 id="29-august-2026-the-table-a-machine">29 August 2026 &mdash; the table a machine can read, and the second parser that is now gone<a class="anchor" href="#29-august-2026-the-table-a-machine" aria-label="Permalink to 29 August 2026 — the table a machine can read, and the second parser that is now gone">#</a></h3>
         <p>
           The two tables on <a href="/model-facts">Model facts</a> are now published

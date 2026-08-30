@@ -58,6 +58,7 @@ README.md               this file
 check.py                the structural check, run after any page changes
 feed.py                 regenerates public/feed.xml from the log
 modelfacts.py           regenerates public/model-facts.json from the model tables
+deploy.sh               the deploy: every guard, then upload, then verify, then push
 prices.py               diffs Model facts against the seven vendor pages, daily
 pricewatch.sh           what the schedule runs: prices.py, logged, notify on trouble
 com.plainlyai.pricewatch.plist   the launchd agent, installed by hand (see below)
@@ -95,6 +96,36 @@ Run it locally the way it is actually served:
 ```bash
 npx wrangler pages dev public
 ```
+
+## Deploying
+
+```bash
+./deploy.sh              # guards, deploy, verify, push
+./deploy.sh --dry-run    # guards only, stops before the deploy
+```
+
+This is a direct-upload Pages project: **a git push does not deploy.** Use the
+script rather than calling `wrangler` yourself, because the guards are the point.
+In order, and all of them before anything reaches the network:
+
+1. **No log entry may still say "Committed, not yet published."** This is the
+   one failure this project has actually had. `check.py` cannot catch it —
+   before a deploy that sentence is true, and nothing in the file separates the
+   honest case from the stale one. Only deploying can, so the guard lives here.
+2. `feed.py` and `modelfacts.py` are re-run, so the derived files cannot be stale.
+3. `check.py` must pass.
+4. **The working tree must be clean.** What is served is then what is in the
+   history — and if step 2 rewrote a derived file, this is what catches it.
+
+After the upload it verifies against what is actually being served rather than
+against the working tree: that the live log carries no unpublished claim, that
+`/model-facts.json` and `/feed.xml` return 200, and that `model-facts.json`
+rebuilt from the *live* page matches the *live* JSON byte for byte. Then it
+pushes.
+
+It refuses rather than fixing. Flipping "Committed, not yet published" to the
+live wording is a change to the words of the log, and the rule that a script
+never writes the site's sentences applies here as much as it does in `prices.py`.
 
 ## The daily price check
 

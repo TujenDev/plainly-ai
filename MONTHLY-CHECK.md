@@ -101,7 +101,11 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
   else: if you cannot prevent a thing, make it visible after the fact.
 
   **Two things make it visible.** First, the log entry you write on `changes.html` must
-  say, in the entry itself, whether the change is live or only prepared. Second,
+  say, in the entry itself, whether the change is live or only prepared. Since 29 August
+  that half is enforced rather than promised: `deploy.sh` refuses to deploy while any
+  entry still reads "Committed, not yet published", so a prepared-but-not-live entry
+  cannot be published as though it were live. The rule against deploying unattended is
+  still prose and still yours to keep — the guard only stops the specific lie. Second,
   `npx wrangler pages deployment list --project-name plainlyai` prints every deployment
   with a timestamp and the commit it came from. Anyone, including Shawn a month later, can
   line that list up against the dates in the log and see whether a check deployed itself.
@@ -148,6 +152,9 @@ longer means what it did. Those need somebody reading the page. A green run from
 ```
 python feed.py && python modelfacts.py && python check.py
 ```
+
+(`deploy.sh` runs all three itself, so if you are deploying you get this for free.
+Run them here anyway — you want to see a clean check before you decide anything.)
 
 From the project root. `feed.py` rewrites `public/feed.xml` from the log you just
 added to, and `modelfacts.py` rewrites `public/model-facts.json` from the two

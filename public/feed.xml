@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>the deploy now refuses to publish a page that is lying about itself</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-the-deploy-now-refuses"/>
+    <id>https://plainlyai.org/changes#29-august-2026-the-deploy-now-refuses</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">Entries on this page say whether the change they describe is live or only prepared. It is a small promise and this site broke it earlier today: a deploy went out while an entry still read “Committed, not yet published”, so for a while this page was telling readers that something was unpublished at the same moment they were reading the published version of it. On the one page whose entire job is being the honest record.</summary>
+  </entry>
+  <entry>
     <title>the table a machine can read, and the second parser that is now gone</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-the-table-a-machine"/>
     <id>https://plainlyai.org/changes#29-august-2026-the-table-a-machine</id>

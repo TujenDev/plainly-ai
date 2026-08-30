@@ -43,6 +43,14 @@
     "name": "Plainly",
     "url": "https://plainlyai.org/"
   },
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "Model facts as JSON",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://plainlyai.org/model-facts.json"
+    }
+  ],
   "variableMeasured": [
     {
       "@type": "PropertyValue",
@@ -122,56 +130,62 @@
 
       <div class="table-scroll" tabindex="0" role="region" aria-label="Anthropic models: pricing, limits and cutoffs. Scrolls horizontally">
         <table>
+          <caption class="visually-hidden">
+            Anthropic's Claude models: API identifier, context window and maximum
+            output in tokens, input and output price in US dollars per million
+            tokens, and the two knowledge cutoff dates. Figures as published by
+            Anthropic on the date verified at the top of this page.
+          </caption>
           <thead>
             <tr>
-              <th>Model</th>
-              <th>API ID</th>
-              <th>Context</th>
-              <th>Max output</th>
-              <th>Input / MTok</th>
-              <th>Output / MTok</th>
-              <th>Reliable cutoff</th>
-              <th>Training cutoff</th>
+              <th scope="col">Model</th>
+              <th scope="col">API ID</th>
+              <th scope="col">Context</th>
+              <th scope="col">Max output</th>
+              <th scope="col">Input / MTok</th>
+              <th scope="col">Output / MTok</th>
+              <th scope="col">Reliable cutoff</th>
+              <th scope="col">Training cutoff</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Claude Fable 5</td>
+              <th scope="row">Claude Fable 5</th>
               <td><code>claude-fable-5</code></td>
-              <td class="num">1M</td>
-              <td class="num">128k</td>
-              <td class="num">$10</td>
-              <td class="num">$50</td>
+              <td class="num" data-tokens="1000000">1M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="10">$10</td>
+              <td class="num" data-usd-per-mtok="50">$50</td>
               <td>Jan 2026</td>
               <td>Jan 2026</td>
             </tr>
             <tr>
-              <td>Claude Opus 5</td>
+              <th scope="row">Claude Opus 5</th>
               <td><code>claude-opus-5</code></td>
-              <td class="num">1M</td>
-              <td class="num">128k</td>
-              <td class="num">$5</td>
-              <td class="num">$25</td>
+              <td class="num" data-tokens="1000000">1M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="5">$5</td>
+              <td class="num" data-usd-per-mtok="25">$25</td>
               <td>May 2026</td>
               <td>May 2026</td>
             </tr>
             <tr>
-              <td>Claude Sonnet 5</td>
+              <th scope="row">Claude Sonnet 5</th>
               <td><code>claude-sonnet-5</code></td>
-              <td class="num">1M</td>
-              <td class="num">128k</td>
-              <td class="num">$2</td>
-              <td class="num">$10</td>
+              <td class="num" data-tokens="1000000">1M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="2">$2</td>
+              <td class="num" data-usd-per-mtok="10">$10</td>
               <td>Jan 2026</td>
               <td>Jan 2026</td>
             </tr>
             <tr>
-              <td>Claude Haiku 4.5</td>
+              <th scope="row">Claude Haiku 4.5</th>
               <td><code>claude-haiku-4-5-20251001</code></td>
-              <td class="num">200k</td>
-              <td class="num">64k</td>
-              <td class="num">$1</td>
-              <td class="num">$5</td>
+              <td class="num" data-tokens="200000">200k</td>
+              <td class="num" data-tokens="64000">64k</td>
+              <td class="num" data-usd-per-mtok="1">$1</td>
+              <td class="num" data-usd-per-mtok="5">$5</td>
               <td>Feb 2025</td>
               <td>Jul 2025</td>
             </tr>
@@ -206,66 +220,80 @@
 
       <div class="table-scroll" tabindex="0" role="region" aria-label="Other vendors: pricing and limits. Scrolls horizontally">
         <table>
+          <caption class="visually-hidden">
+            Current models from OpenAI, Google and Meta: API identifier, context
+            window and maximum output in tokens, and input and output price in US
+            dollars per million tokens. Cells reading &#8220;not published&#8221;,
+            &#8220;n/a&#8221; or &#8220;no first-party price&#8221; are figures the
+            vendor does not publish, left blank rather than estimated.
+          </caption>
           <thead>
             <tr>
-              <th>Vendor</th>
-              <th>Model</th>
-              <th>API ID</th>
-              <th>Context</th>
-              <th>Max output</th>
-              <th>Input / MTok</th>
-              <th>Output / MTok</th>
+              <th scope="col">Vendor</th>
+              <th scope="col">Model</th>
+              <th scope="col">API ID</th>
+              <th scope="col">Context</th>
+              <th scope="col">Max output</th>
+              <th scope="col">Input / MTok</th>
+              <th scope="col">Output / MTok</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>OpenAI</td>
-              <td>GPT-5.6 Sol</td>
+              <th scope="row">GPT-5.6 Sol</th>
               <td><code>gpt-5.6-sol</code></td>
-              <td class="num">1.05M</td>
-              <td class="num">128k</td>
-              <td class="num">$4</td>
-              <td class="num">$20</td>
+              <td class="num" data-tokens="1050000">1.05M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="4">$4</td>
+              <td class="num" data-usd-per-mtok="20">$20</td>
             </tr>
             <tr>
               <td>OpenAI</td>
-              <td>GPT-5.6 Terra</td>
+              <th scope="row">GPT-5.6 Terra</th>
               <td><code>gpt-5.6-terra</code></td>
-              <td class="num">1.05M</td>
-              <td class="num">128k</td>
-              <td class="num">$2</td>
-              <td class="num">$12</td>
+              <td class="num" data-tokens="1050000">1.05M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="2">$2</td>
+              <td class="num" data-usd-per-mtok="12">$12</td>
             </tr>
             <tr>
               <td>Google</td>
-              <td>Gemini 3.6 Flash</td>
+              <th scope="row">Gemini 3.6 Flash</th>
               <td><code>gemini-3.6-flash</code></td>
-              <td class="num">1.05M</td>
-              <td class="num">64k</td>
-              <td class="num">$0.75</td>
-              <td class="num">$3.75</td>
+              <td class="num" data-tokens="1050000">1.05M</td>
+              <td class="num" data-tokens="64000">64k</td>
+              <td class="num" data-usd-per-mtok="0.75">$0.75</td>
+              <td class="num" data-usd-per-mtok="3.75">$3.75</td>
             </tr>
             <tr>
               <td>Meta</td>
-              <td>Muse Spark 1.2</td>
+              <th scope="row">Muse Spark 1.2</th>
               <td><code>muse-spark-1.2</code></td>
-              <td class="unverified">not published</td>
-              <td class="unverified">not published</td>
-              <td class="num">$1.25</td>
-              <td class="num">$4.25</td>
+              <td class="unverified" data-unverified="Meta's pricing page gives rates without stating a context limit">not published</td>
+              <td class="unverified" data-unverified="Meta's pricing page gives rates without stating an output limit">not published</td>
+              <td class="num" data-usd-per-mtok="1.25">$1.25</td>
+              <td class="num" data-usd-per-mtok="4.25">$4.25</td>
             </tr>
             <tr>
               <td>Meta</td>
-              <td>Llama 4 / Llama 3</td>
+              <th scope="row">Llama 4 / Llama 3</th>
               <td><code>—</code></td>
-              <td class="unverified">n/a</td>
-              <td class="unverified">n/a</td>
-              <td class="unverified">no first-party price</td>
-              <td class="unverified">no first-party price</td>
+              <td class="unverified" data-unverified="run by you or your host, so no vendor-set limit exists">n/a</td>
+              <td class="unverified" data-unverified="run by you or your host, so no vendor-set limit exists">n/a</td>
+              <td class="unverified" data-unverified="Meta publishes no per-token price; cost depends on where you run it">no first-party price</td>
+              <td class="unverified" data-unverified="Meta publishes no per-token price; cost depends on where you run it">no first-party price</td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <p class="table-note">
+        Both tables above are also published as
+        <a href="/model-facts.json">model-facts.json</a>, generated from this page
+        rather than maintained beside it, with every figure the vendor does not
+        publish carried as a stated reason rather than a silent blank.
+      </p>
 
       <p class="table-note">
         <strong>Every source behind this table is listed, dated, on

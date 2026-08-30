@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>the table a machine can read, and the second parser that is now gone</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-the-table-a-machine"/>
+    <id>https://plainlyai.org/changes#29-august-2026-the-table-a-machine</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">The two tables on Model facts are now published as model-facts.json as well as HTML. Nobody asked for it, but the alternative was worse than doing nothing, and that is the actual story here.</summary>
+  </entry>
+  <entry>
     <title>a link that read out fifty words, and four repairs behind it</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-a-link-that-read-out"/>
     <id>https://plainlyai.org/changes#29-august-2026-a-link-that-read-out</id>

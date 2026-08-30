@@ -53,9 +53,11 @@ public/                 the deployable site — nothing outside this ships
   sitemap.xml           every page but 404, checked against the files by check.py
   _headers              security headers and cache policy
   feed.xml              Atom feed of the maintenance log, generated
+  model-facts.json      the two model tables, machine-readable, generated
 README.md               this file
 check.py                the structural check, run after any page changes
 feed.py                 regenerates public/feed.xml from the log
+modelfacts.py           regenerates public/model-facts.json from the model tables
 prices.py               diffs Model facts against the seven vendor pages, daily
 pricewatch.sh           what the schedule runs: prices.py, logged, notify on trouble
 com.plainlyai.pricewatch.plist   the launchd agent, installed by hand (see below)
@@ -66,10 +68,22 @@ it will still work in a decade, and there's nothing to keep updated but the
 words.
 
 There is no build step in the sense that matters — every page is committed as
-the HTML that ships, and editing one is editing the file the reader gets. The
-one generated file is `feed.xml`, which `feed.py` derives from the log on
-`changes.html` so the two cannot drift apart. `check.py` fails if it has, which
-is what makes the generation safe to rely on.
+the HTML that ships, and editing one is editing the file the reader gets. Two
+files are generated, both derived from a page rather than maintained beside it:
+`feed.xml`, which `feed.py` builds from the log on `changes.html`, and
+`model-facts.json`, which `modelfacts.py` builds from the two tables on
+`model-facts.html`. `check.py` fails if either has drifted from its source,
+which is what makes the generation safe to rely on. **Edit the page, then run
+the generator** — never the other way round.
+
+The figures in the model tables carry `data-tokens` and `data-usd-per-mtok`
+attributes so the JSON can be built without re-parsing "1.05M", and check 13
+verifies each attribute against the text of its own cell. Those attributes state
+the printed figure as a number and nothing more: `data-tokens="64000"` on a cell
+reading 64k is not a claim that the vendor's limit is exactly 64,000. A cell
+left blank under rule 3 carries `data-unverified` with the reason, and reaches
+the JSON as `null` plus an entry in `unverified` — because `null` on its own
+reads as "unknown", and these are not unknown.
 
 URLs are extensionless (`/concepts/tokens`, not `/concepts/tokens.html`) because
 that is how Cloudflare Pages serves the files — it redirects the `.html` form to

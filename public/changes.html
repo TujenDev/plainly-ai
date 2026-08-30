@@ -162,6 +162,65 @@
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+        <h3 id="29-august-2026-the-table-a-machine">29 August 2026 &mdash; the table a machine can read, and the second parser that is now gone<a class="anchor" href="#29-august-2026-the-table-a-machine" aria-label="Permalink to 29 August 2026 — the table a machine can read, and the second parser that is now gone">#</a></h3>
+        <p>
+          The two tables on <a href="/model-facts">Model facts</a> are now published
+          as <a href="/model-facts.json">model-facts.json</a> as well as HTML. Nobody
+          asked for it, but the alternative was worse than doing nothing, and that is
+          the actual story here.
+        </p>
+        <p>
+          <code>prices.py</code>, the script that checks these figures against each
+          vendor's own page every morning, had its own parser for the tables. That
+          parser is the worst failure this site has had: in August it was quietly
+          dropping rows it could not read and finishing by reporting that the table
+          matched every vendor page. It was patched, and the patch was sound, but the
+          shape of the problem survived it &mdash; one hand-edited table, two separate
+          programs reading it, either of which could go blind on its own. There is now
+          one parser. It lives in <code>modelfacts.py</code>, it writes the JSON, and
+          <code>prices.py</code> reads the JSON rather than the page.
+        </p>
+        <p>
+          What that does not do is make the parsing safe. It is still a regular
+          expression over HTML somebody edits by hand, and it can still be wrong. What
+          changed is that it can only be wrong in one place, and a new structural check
+          rebuilds the JSON from the table on every run and fails if the two disagree
+          &mdash; so a row lost in parsing now stops a deploy instead of turning into a
+          clean price report. That is a smaller claim than deleting the failure, and it
+          is the true one.
+        </p>
+        <p>
+          The figures in the table carry their own values as attributes now, so the
+          JSON can be built without anything having to interpret &#8220;1.05M&#8221;.
+          Those attributes say what the printed cell says and not one thing more:
+          <code>data-tokens="64000"</code> on a cell reading 64k is the number 64k
+          means, not a claim that Google's limit is exactly 64,000 &mdash; it is
+          65,536, and the notes under the table have always said so. Two copies of a
+          figure is the arrangement this site refuses everywhere else, so it is allowed
+          here only because the check compares each attribute against the text of its
+          own cell. If that ever stops being true the attributes should be deleted, not
+          trusted: a reader given <code>4</code> from a cell that now reads $5 is worse
+          off than one who had to read the cell.
+        </p>
+        <p>
+          The blanks needed saying properly too. Four cells on that table are empty
+          because Meta does not publish the figure, and one is empty because Llama
+          models have no vendor-set limit to publish. In JSON all of that would arrive
+          as <code>null</code>, which reads as &#8220;we don't know&#8221; &mdash; the
+          exact impression this site spends its time trying not to give. Each one
+          carries the reason instead, in the file, in words.
+        </p>
+        <p>
+          Separately and much more simply: not one table on this site had a
+          <code>caption</code>, and not one header cell said whether it headed a row or
+          a column. Six tables, thirty-nine rows. Someone reading the dense
+          eight-column price table with a screen reader got cells with nothing to
+          attach them to. Every table now names itself, and every figure now belongs to
+          a named row and a named column. Nothing moved on screen: the two pages that
+          gained only headers and captions render pixel for pixel as they did before.
+          Committed, not yet published.
+        </p>
+
         <h3 id="29-august-2026-a-link-that-read-out">29 August 2026 &mdash; a link that read out fifty words, and four repairs behind it<a class="anchor" href="#29-august-2026-a-link-that-read-out" aria-label="Permalink to 29 August 2026 — a link that read out fifty words, and four repairs behind it">#</a></h3>
         <p>
           Every card on this site was one enormous link. The whole box &mdash;

@@ -2,10 +2,12 @@
 
     python prices.py
 
-`check.py` checks structure and `feed.py` derives the feed. This one checks the
-only thing on the site that can be wrong about money. It fetches the seven
-primary sources listed in MONTHLY-CHECK.md, pulls out the figures that
-`public/model-facts.html` claims, and reports every difference.
+`check.py` checks structure, `feed.py` derives the feed and `modelfacts.py`
+derives the model table as JSON. This one checks the only thing on the site that
+can be wrong about money. It fetches the seven primary sources listed in
+MONTHLY-CHECK.md, reads what Model facts claims from `public/model-facts.json`,
+and reports every difference. Run `modelfacts.py` first if the table was edited;
+check 13 will tell you if you forgot.
 
 Why it exists: on 26 August 2026 the monthly check found GPT-5.6 Sol listed at
 $5/$30 when OpenAI had moved it to $4/$20. That table was checked and correct on
@@ -36,6 +38,7 @@ Exit codes: 0 all clear, 1 something changed or could not be verified.
 """
 import re
 import sys
+import json
 import html
 import urllib.request
 from urllib.error import URLError, HTTPError
@@ -109,48 +112,63 @@ def tokens(s):
     return int(n * {"m": 1_000_000, "k": 1_000, "": 1}[suffix])
 
 
-# The table is hand-edited, so the parser must not assume its own shape holds.
-# `<tr>` written `<tr class="...">`, or a cell promoted from <td> to <th> for
-# accessibility, used to drop the row — and the lookahead that ended a row at
-# the next literal `<tr>` swallowed the following row with it. Two models could
-# go unwatched from one attribute, while the run still printed that Model facts
-# matched every vendor page. Match the tags properly instead.
-TBODY = re.compile(r"<tbody\b[^>]*>(.*?)</tbody>", re.S)
-ROW = re.compile(r"<tr\b[^>]*>(.*?)</tr>", re.S)
-CELL = re.compile(r"<t[dh]\b[^>]*>(.*?)</t[dh]>", re.S)
-
-
 def claims():
-    """Read what model-facts.html asserts. Derived, never duplicated.
+    """Read what Model facts asserts, from the JSON derived from that page.
 
-    Every row inside a <tbody> must parse into a known shape. One that does not
-    is reported UNVERIFIED, never skipped: an unparsed row is a row this script
-    stopped watching, and reporting that as "unchanged" is the false freshness
-    signal the site tells readers to distrust.
+    This used to parse model-facts.html here, with its own regexes. That parser
+    is the reason C1 exists: it dropped rows it could not read and the run still
+    printed that the table matched every vendor page. There is now one parser for
+    that table, in modelfacts.py, and check 13 fails if its output has drifted
+    from the page — so a row lost in parsing is a structural failure before it
+    can ever become a clean price report.
+
+    Keys are the model name, matching what the probes below look up. The shape is
+    flattened back to the string-ish form the probes expect, because the vendor
+    pages publish strings and the comparisons are written against strings; the
+    JSON's own numbers are what make the row count and the blanks trustworthy.
     """
-    s = (ROOT / "model-facts.html").read_text(encoding="utf-8")
+    path = ROOT / "model-facts.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        note(UNVERIFIED, "model-facts.json", f"could not be read: {e} — run modelfacts.py")
+        return {}
+
     rows = {}
-    seen = 0
-    for body in TBODY.findall(s):
-        for tr in ROW.findall(body):
-            seen += 1
-            cells = [re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", c)).strip()
-                     for c in CELL.findall(tr)]
-            if len(cells) == 8 and cells[0].startswith("Claude"):
-                rows[cells[0]] = dict(zip(
-                    ("model", "api_id", "context", "max_output", "input", "output",
-                     "reliable_cutoff", "training_cutoff"), cells))
-            elif len(cells) == 7:
-                rows[cells[1]] = dict(zip(
-                    ("vendor", "model", "api_id", "context", "max_output", "input",
-                     "output"), cells))
-            else:
-                note(UNVERIFIED, "model-facts.html",
-                     f"a table row did not parse ({len(cells)} cells): "
-                     f"{' | '.join(cells)[:70]!r}")
-    if seen != EXPECTED_ROWS:
-        note(UNVERIFIED, "model-facts.html",
-             f"{seen} table rows found, expected {EXPECTED_ROWS} — if a model was "
+    for m in data.get("models", []):
+        name = m.get("model")
+        if not name:
+            note(UNVERIFIED, "model-facts.json", "a record has no model name")
+            continue
+        unver = m.get("unverified", {})
+
+        def cell(key, fmt):
+            """The vendor-facing string, or the page's own wording for a blank.
+
+            Rule 4 blanks come back as the words the page prints, which is what
+            they were before: cmp_money reports them UNVERIFIED rather than
+            treating a missing figure as agreement.
+            """
+            if key in unver:
+                return unver[key]["shown"]
+            v = m.get(key)
+            return "" if v is None else fmt(v)
+
+        rows[name] = {
+            "vendor": m.get("vendor", ""),
+            "model": name,
+            "api_id": m.get("api_id", ""),
+            "context": cell("context", lambda v: f"{v}"),
+            "max_output": cell("max_output", lambda v: f"{v}"),
+            "input": cell("input_usd_per_mtok", lambda v: f"${v:g}"),
+            "output": cell("output_usd_per_mtok", lambda v: f"${v:g}"),
+            "reliable_cutoff": m.get("reliable_cutoff", ""),
+            "training_cutoff": m.get("training_cutoff", ""),
+        }
+
+    if len(rows) != EXPECTED_ROWS:
+        note(UNVERIFIED, "model-facts.json",
+             f"{len(rows)} models found, expected {EXPECTED_ROWS} — if a model was "
              f"added or removed, bump EXPECTED_ROWS in prices.py")
     return rows
 
@@ -199,7 +217,10 @@ def cmp_tokens(subject, claimed, live):
     if abs(c - l) <= max(c, l) * 0.05:
         note(OK, subject, claimed)
     else:
-        note(CHANGED, subject, f"{claimed} ({c:,}) -> {l:,}")
+        # claims now arrive as plain integers from the JSON, so the parenthetical
+        # is only worth printing when the page wrote something else ("200k").
+        shown = claimed if claimed.strip() == str(c) else f"{claimed} ({c:,})"
+        note(CHANGED, subject, f"{shown} -> {l:,}")
 
 
 def cmp_text(subject, claimed, live):
@@ -371,7 +392,8 @@ def meta(C):
 def main():
     C = claims()
     if not C:
-        print("prices.py: could not read any rows from model-facts.html")
+        print("prices.py: could not read any models from model-facts.json — "
+              "run modelfacts.py")
         return 1
     for probe in (anthropic, openai, google, meta):
         probe(C)

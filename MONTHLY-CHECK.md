@@ -143,14 +143,18 @@ to stop saying "not published", or a caveat whose wording is still present but n
 longer means what it did. Those need somebody reading the page. A green run from
 `prices.py` means nothing has moved under the table, not that the table is right.
 
-## Before you finish, regenerate the feed and run the structural check
+## Before you finish, regenerate the derived files and run the structural check
 
 ```
-python feed.py && python check.py
+python feed.py && python modelfacts.py && python check.py
 ```
 
 From the project root. `feed.py` rewrites `public/feed.xml` from the log you just
-added to; it is derived and never edited by hand. `check.py` takes a second,
+added to, and `modelfacts.py` rewrites `public/model-facts.json` from the two
+tables on Model facts. Both are derived and never edited by hand — if you changed
+a figure this month, the JSON is stale until you run it, and `prices.py` reads
+the JSON, so a forgotten run means tomorrow's price watch compares against last
+month's numbers. Check 13 fails on exactly that. `check.py` takes a second,
 exits non-zero on failure, and covers the things that break silently: links that
 stopped resolving, heading permalinks that broke, duplicated ids, pages that
 became reachable only from the nav, nav drift across the pages, and a feed that

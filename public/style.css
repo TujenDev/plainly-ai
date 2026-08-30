@@ -69,6 +69,24 @@ html { -webkit-text-size-adjust: 100%; }
   left: 0;
 }
 
+/* Removed from the page but not from the accessibility tree. Used for table
+   captions: a caption names the table at the point a screen reader enters it,
+   which nothing else does, but every table here already sits under a heading
+   that says as much to a sighted reader. `display: none` and
+   `visibility: hidden` would take it out of the tree as well, which is the one
+   thing it must not do. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -438,9 +456,24 @@ th {
   color: var(--ink-soft);
 }
 
-tbody tr:last-child td { border-bottom: none; }
+tbody tr:last-child td,
+tbody tr:last-child th { border-bottom: none; }
 
-td.num { font-variant-numeric: tabular-nums; }
+/* A row's first cell is now <th scope="row"> so a screen reader can say which
+   row a figure belongs to. That is a semantic change and not a visual one, so
+   every bit of the <th> treatment above is put back to what a <td> looks like.
+   If the header styling is ever changed, change it here too. */
+tbody th {
+  background: none;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  color: inherit;
+}
+
+td.num, th.num { font-variant-numeric: tabular-nums; }
 
 .unverified {
   color: var(--flag);

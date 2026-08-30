@@ -1,0 +1,138 @@
+{
+  "$comment": "Derived from https://plainlyai.org/model-facts by modelfacts.py. Do not edit: the page is the source and this file is regenerated from it. Token counts are the figures printed on the page normalised to integers, not a claim about a vendor's exact limit; where a vendor publishes an exact figure the page says so in its notes. A null figure is never 'unknown' — see unverified.",
+  "source": "https://plainlyai.org/model-facts",
+  "verified": "2026-08-26",
+  "units": {
+    "context": "tokens",
+    "max_output": "tokens",
+    "input_usd_per_mtok": "USD per million input tokens",
+    "output_usd_per_mtok": "USD per million output tokens"
+  },
+  "rights": "Free to quote. If you reproduce a figure from here, carry its verified date with it.",
+  "models": [
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Fable 5",
+      "api_id": "claude-fable-5",
+      "context": 1000000,
+      "max_output": 128000,
+      "input_usd_per_mtok": 10.0,
+      "output_usd_per_mtok": 50.0,
+      "reliable_cutoff": "Jan 2026",
+      "training_cutoff": "Jan 2026",
+      "unverified": {}
+    },
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Opus 5",
+      "api_id": "claude-opus-5",
+      "context": 1000000,
+      "max_output": 128000,
+      "input_usd_per_mtok": 5.0,
+      "output_usd_per_mtok": 25.0,
+      "reliable_cutoff": "May 2026",
+      "training_cutoff": "May 2026",
+      "unverified": {}
+    },
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Sonnet 5",
+      "api_id": "claude-sonnet-5",
+      "context": 1000000,
+      "max_output": 128000,
+      "input_usd_per_mtok": 2.0,
+      "output_usd_per_mtok": 10.0,
+      "reliable_cutoff": "Jan 2026",
+      "training_cutoff": "Jan 2026",
+      "unverified": {}
+    },
+    {
+      "vendor": "Anthropic",
+      "model": "Claude Haiku 4.5",
+      "api_id": "claude-haiku-4-5-20251001",
+      "context": 200000,
+      "max_output": 64000,
+      "input_usd_per_mtok": 1.0,
+      "output_usd_per_mtok": 5.0,
+      "reliable_cutoff": "Feb 2025",
+      "training_cutoff": "Jul 2025",
+      "unverified": {}
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-5.6 Sol",
+      "api_id": "gpt-5.6-sol",
+      "context": 1050000,
+      "max_output": 128000,
+      "input_usd_per_mtok": 4.0,
+      "output_usd_per_mtok": 20.0,
+      "unverified": {}
+    },
+    {
+      "vendor": "OpenAI",
+      "model": "GPT-5.6 Terra",
+      "api_id": "gpt-5.6-terra",
+      "context": 1050000,
+      "max_output": 128000,
+      "input_usd_per_mtok": 2.0,
+      "output_usd_per_mtok": 12.0,
+      "unverified": {}
+    },
+    {
+      "vendor": "Google",
+      "model": "Gemini 3.6 Flash",
+      "api_id": "gemini-3.6-flash",
+      "context": 1050000,
+      "max_output": 64000,
+      "input_usd_per_mtok": 0.75,
+      "output_usd_per_mtok": 3.75,
+      "unverified": {}
+    },
+    {
+      "vendor": "Meta",
+      "model": "Muse Spark 1.2",
+      "api_id": "muse-spark-1.2",
+      "context": null,
+      "max_output": null,
+      "input_usd_per_mtok": 1.25,
+      "output_usd_per_mtok": 4.25,
+      "unverified": {
+        "context": {
+          "shown": "not published",
+          "reason": "Meta's pricing page gives rates without stating a context limit"
+        },
+        "max_output": {
+          "shown": "not published",
+          "reason": "Meta's pricing page gives rates without stating an output limit"
+        }
+      }
+    },
+    {
+      "vendor": "Meta",
+      "model": "Llama 4 / Llama 3",
+      "api_id": "—",
+      "context": null,
+      "max_output": null,
+      "input_usd_per_mtok": null,
+      "output_usd_per_mtok": null,
+      "unverified": {
+        "context": {
+          "shown": "n/a",
+          "reason": "run by you or your host, so no vendor-set limit exists"
+        },
+        "max_output": {
+          "shown": "n/a",
+          "reason": "run by you or your host, so no vendor-set limit exists"
+        },
+        "input_usd_per_mtok": {
+          "shown": "no first-party price",
+          "reason": "Meta publishes no per-token price; cost depends on where you run it"
+        },
+        "output_usd_per_mtok": {
+          "shown": "no first-party price",
+          "reason": "Meta publishes no per-token price; cost depends on where you run it"
+        }
+      }
+    }
+  ]
+}

@@ -383,6 +383,75 @@ else:
                                       f"home page, which is why Guides is not in the nav")
 
 
+# 13. model-facts.json still matches the table it is derived from, and the
+#     machine-readable attributes still match the figures a reader sees.
+#
+#     Two copies of a price is exactly the arrangement this site refuses
+#     everywhere else. It is allowed here for the same reason the JSON-LD dates
+#     are: this check makes them impossible to disagree. If that ever stops being
+#     true, delete the attributes rather than letting them drift — a scraper
+#     reading data-usd-per-mtok="4" off a cell that now reads $5 is worse served
+#     than one that had to parse the text.
+#
+#     The first half catches a table edited without re-running modelfacts.py.
+#     The second catches a cell whose visible figure was changed while its
+#     attribute was not, which the first half cannot see: the generator would
+#     faithfully publish the stale attribute and both files would agree.
+try:
+    import modelfacts
+except Exception as e:                        # pragma: no cover - import guard
+    note("model-facts.json", f"modelfacts.py could not be imported: {e}")
+else:
+    mf_src = pages["model-facts"].read_text(encoding="utf-8")
+    json_path = ROOT / "model-facts.json"
+    if not json_path.exists():
+        note("model-facts.json", "is missing — run modelfacts.py")
+    else:
+        try:
+            expected = modelfacts.dump(modelfacts.build(mf_src))
+        except SystemExit as e:
+            expected = None
+            note("model-facts.json", f"cannot be generated from the table: {e}")
+        if expected is not None and json_path.read_text(encoding="utf-8") != expected:
+            note("model-facts.json",
+                 "does not match the table on model-facts.html — run modelfacts.py")
+
+    # the attributes against the text of their own cells
+    def as_tokens(t):
+        m = re.fullmatch(r"([\d.]+)\s*([MmKk]?)", t.strip())
+        if not m:
+            return None
+        return int(float(m.group(1)) * {"m": 1_000_000, "k": 1_000, "": 1}[m.group(2).lower()])
+
+    cells = re.findall(r"<t[dh]\b([^>]*)>(.*?)</t[dh]>", mf_src, re.S)
+    checked = 0
+    for attrs, inner in cells:
+        shown = re.sub(r"\s+", " ", re.sub(r"<[^>]*>", "", inner)).strip()
+        tok = re.search(r'data-tokens="([^"]*)"', attrs)
+        usd = re.search(r'data-usd-per-mtok="([^"]*)"', attrs)
+        if tok:
+            checked += 1
+            if as_tokens(shown) != int(tok.group(1)):
+                note("model-facts attribute",
+                     f'data-tokens="{tok.group(1)}" but the cell reads {shown!r}')
+        if usd:
+            checked += 1
+            try:
+                same = abs(float(shown.replace("$", "")) - float(usd.group(1))) < 1e-9
+            except ValueError:
+                same = False
+            if not same:
+                note("model-facts attribute",
+                     f'data-usd-per-mtok="{usd.group(1)}" but the cell reads {shown!r}')
+        if 'class="unverified"' in attrs and "data-unverified" not in attrs:
+            note("model-facts attribute",
+                 f"a cell flagged unverified carries no reason: {shown!r}")
+    if checked == 0:
+        note("model-facts attribute",
+             "no data-tokens or data-usd-per-mtok attributes found — the figures "
+             "are no longer machine-readable, or this check has gone blind")
+
+
 print(f"{len(pages)} pages, {links} links, {anchors} anchors")
 if problems:
     print(f"\n{len(problems)} problem(s):")

@@ -62,6 +62,23 @@ findings = []          # (verdict, subject, detail)
 covered = set()        # claim keys a probe actually compared against a vendor
 OK, CHANGED, UNVERIFIED = "unchanged", "CHANGED", "UNVERIFIED"
 
+
+def exact(api_id):
+    r"""A pattern matching this API id and not a longer one that contains it.
+
+    `\b` is wrong here and was used anyway. An API id ends in a word character
+    and the next character in `gpt-5.6-sol-mini` is a hyphen, so `\b` matches
+    happily in the middle of a different model's name. Vendors list the small
+    variants of a model right beside it, often first, so this is not a hypothetical
+    ordering — the probe would read the mini variant's block, compare its prices
+    against the full model's row, and report a change that had not happened. The
+    worse case is quieter: if the two ever agreed on a figure, it would report
+    unchanged while watching the wrong model.
+
+    The lookarounds exclude a hyphen as well as a word character, on both sides.
+    """
+    return r"(?<![-\w])" + re.escape(api_id) + r"(?![-\w])"
+
 # Bump deliberately when a model is added to or removed from Model facts. A row
 # count that drifts on its own means the table changed shape under the parser.
 EXPECTED_ROWS = 9
@@ -76,8 +93,13 @@ def cover(model):
 
     Rule 2 says a figure that could not be checked must not pass as unchanged.
     A row can go unchecked without any probe noticing — a vendor renamed on the
-    page, a `next()` that found the wrong row — so main() asserts that every row
-    parsed out of the table reached a probe, rather than trusting that it did.
+    page, for instance — so main() asserts that every row parsed out of the table
+    reached a probe, rather than trusting that it did.
+
+    This is the backstop, not the check. It used to be doing the work of one: the
+    Google and Meta probes each looked at a single row and this assertion was what
+    reported the rest. Both now iterate, and each says which model it could not
+    verify and why, so a failure names the thing that needs fixing.
     """
     covered.add(model)
 
@@ -299,7 +321,7 @@ def openai(C):
                 continue
             cover(model)
             api = claim["api_id"]
-            m = re.search(re.escape(api) + r"\b(.{0,320}?)Tools", txt, re.S)
+            m = re.search(exact(api) + r"(.{0,320}?)Tools", txt, re.S)
             if not m:
                 note(UNVERIFIED, f"{model}", f"{api} not found in the model catalogue")
                 continue
@@ -321,7 +343,7 @@ def openai(C):
         for model, claim in C.items():
             if claim.get("vendor") != "OpenAI":
                 continue
-            m = re.search(re.escape(claim["api_id"]) +
+            m = re.search(exact(claim["api_id"]) +
                           r"\s*\$([\d.]+)\s*\$[\d.]+\s*\$[\d.]+\s*\$([\d.]+)", txt)
             if not m:
                 note(UNVERIFIED, f"{model} price (pricing page)",
@@ -332,61 +354,124 @@ def openai(C):
 
 
 def google(C):
-    key, claim = next(((k, c) for k, c in C.items() if c.get("vendor") == "Google"),
-                      (None, None))
-    if claim is None:
+    """Every Google row, not the first one.
+
+    This used to take `next(...)`, compare that single row and return. A second
+    Google row would have been silently unwatched — main()'s coverage assertion
+    would have caught it after the fact, which is a backstop, not a check. The
+    probe now looks at each row and says out loud when it cannot.
+    """
+    rows = [(k, c) for k, c in C.items() if c.get("vendor") == "Google"]
+    if not rows:
         return note(UNVERIFIED, "Google row", "no Google row on Model facts")
-    cover(key)
-    txt = fetch("google_pricing")
-    if txt is not None:
-        i = txt.find("Gemini 3.6 Flash")
-        blk = txt[i:i + 1200] if i >= 0 else ""
-        inp = re.search(r"Input price.*?\$([\d.]+) through", blk, re.S)
-        out = re.search(r"Output price.*?\$([\d.]+) through", blk, re.S)
-        cmp_money("Gemini 3.6 Flash input", claim["input"], inp.group(1) if inp else None)
-        cmp_money("Gemini 3.6 Flash output", claim["output"], out.group(1) if out else None)
-        # the page states an expiry, and the site prints that date: watch both
-        phrase("Gemini rate expiry", blk, "through December 31, 2026",
-               "the current rate ending 31 Dec 2026")
-        phrase("Gemini successor rate", blk, "starting January 1, 2027",
-               "the increase on 1 Jan 2027")
-    txt = fetch("google_flash")
-    if txt is not None:
-        cmp_tokens("Gemini 3.6 Flash context", claim["context"],
-                   (re.search(r"Input token limit ([\d,]+)", txt) or [None, None])[1])
-        cmp_tokens("Gemini 3.6 Flash max output", claim["max_output"],
-                   (re.search(r"Output token limit ([\d,]+)", txt) or [None, None])[1])
-        if re.search(r"knowledge cutoff", txt, re.I):
-            note(CHANGED, "Gemini cutoff",
-                 "a knowledge cutoff is now published; the table says none is")
+
+    pricing = fetch("google_pricing")
+    limits = fetch("google_flash")
+    # The limits page is one model's page, and which model is in its URL. Deriving
+    # it here means adding a Google row without adding a source cannot pass as
+    # checked: that row reports unverified, naming what is missing.
+    limits_model = SRC["google_flash"].rsplit("/", 1)[-1]
+
+    for key, claim in rows:
+        cover(key)
+        name = claim["model"]
+
+        if pricing is None:
+            note(UNVERIFIED, f"{name} price", "pricing page not fetched")
         else:
-            note(OK, "Gemini cutoff", "still unpublished, as the table says")
+            i = pricing.find(name)
+            blk = pricing[i:i + 1200] if i >= 0 else ""
+            if not blk:
+                note(UNVERIFIED, f"{name} price",
+                     "model not found on Google's pricing page")
+            else:
+                inp = re.search(r"Input price.*?\$([\d.]+) through", blk, re.S)
+                out = re.search(r"Output price.*?\$([\d.]+) through", blk, re.S)
+                cmp_money(f"{name} input", claim["input"], inp.group(1) if inp else None)
+                cmp_money(f"{name} output", claim["output"], out.group(1) if out else None)
+                # The site prints an expiry date for this rate, so the wording that
+                # date comes from is watched too. It is named per model because the
+                # note on Model facts is about a particular model's rate, not
+                # Google's pricing in general.
+                if claim["api_id"] == "gemini-3.6-flash":
+                    phrase(f"{name} rate expiry", blk, "through December 31, 2026",
+                           "the current rate ending 31 Dec 2026")
+                    phrase(f"{name} successor rate", blk, "starting January 1, 2027",
+                           "the increase on 1 Jan 2027")
+
+        if claim["api_id"] != limits_model:
+            note(UNVERIFIED, f"{name} limits",
+                 f"no source page for this model — SRC has one Google model page, "
+                 f"for {limits_model}. Add one before this row can be watched.")
+        elif limits is None:
+            note(UNVERIFIED, f"{name} limits", "model page not fetched")
+        else:
+            cmp_tokens(f"{name} context", claim["context"],
+                       (re.search(r"Input token limit ([\d,]+)", limits) or [None, None])[1])
+            cmp_tokens(f"{name} max output", claim["max_output"],
+                       (re.search(r"Output token limit ([\d,]+)", limits) or [None, None])[1])
+            if re.search(r"knowledge cutoff", limits, re.I):
+                note(CHANGED, f"{name} cutoff",
+                     "a knowledge cutoff is now published; the table says none is")
+            else:
+                note(OK, f"{name} cutoff", "still unpublished, as the table says")
 
 
 def meta(C):
-    key, claim = next(((k, c) for k, c in C.items()
-                       if c.get("vendor") == "Meta" and "$" in c.get("input", "")),
-                      (None, None))
+    """Every Meta row, priced and unpriced.
+
+    Same fix as google() above, plus one honest limit stated rather than hidden:
+    Meta's standard-tier table is not keyed by model, so parsing a price out of it
+    is only unambiguous while Model facts carries exactly one priced Meta row. If
+    a second is ever added, each row is looked up by name instead, and a row that
+    cannot be found that way is reported rather than guessed at.
+    """
     txt = fetch("meta_pricing")
-    if txt is None or claim is None:
-        return note(UNVERIFIED, "Meta row", "page not fetched or no priced Meta row")
-    cover(key)
-    std = txt.split("### Contributor tier")[0]
-    cmp_money("Muse Spark input", claim["input"],
-              (re.search(r"\|\s*Input\s*\|\s*\$([\d.]+)", std) or [None, None])[1])
-    cmp_money("Muse Spark output", claim["output"],
-              (re.search(r"\|\s*Output\s*\|\s*\$([\d.]+)", std) or [None, None])[1])
-    phrase("Meta contributor tier", txt, "Contributor tier", "the cheaper tier the notes mention")
-    # The unpriced Meta rows are the subject of the probe below: the table's
-    # claim about them is that no first-party price exists, and that is checked.
-    for k, c in C.items():
-        if c.get("vendor") == "Meta" and "$" not in c.get("input", ""):
+    priced = [(k, c) for k, c in C.items()
+              if c.get("vendor") == "Meta" and "$" in c.get("input", "")]
+    unpriced = [(k, c) for k, c in C.items()
+                if c.get("vendor") == "Meta" and "$" not in c.get("input", "")]
+
+    if txt is None:
+        for k, _ in priced + unpriced:
             cover(k)
-    if re.search(r"llama[^\n]{0,80}\$[\d.]", txt, re.I):
-        note(CHANGED, "Llama first-party price",
-             "Meta now appears to publish one; the table says it does not")
-    else:
-        note(OK, "Llama first-party price", "still not published, as the table says")
+            note(UNVERIFIED, k, "Meta's pricing page was not fetched")
+        return
+    if not priced:
+        note(UNVERIFIED, "Meta row", "no priced Meta row on Model facts")
+
+    std = txt.split("### Contributor tier")[0]
+    for key, claim in priced:
+        cover(key)
+        name = claim["model"]
+        if len(priced) == 1:
+            blk = std                      # unambiguous: one priced row, one table
+        else:
+            i = std.find(name)
+            blk = std[i:i + 800] if i >= 0 else ""
+            if not blk:
+                note(UNVERIFIED, f"{name} price",
+                     "more than one priced Meta row, and this model's own block "
+                     "was not found on the pricing page")
+                continue
+        cmp_money(f"{name} input", claim["input"],
+                  (re.search(r"\|\s*Input\s*\|\s*\$([\d.]+)", blk) or [None, None])[1])
+        cmp_money(f"{name} output", claim["output"],
+                  (re.search(r"\|\s*Output\s*\|\s*\$([\d.]+)", blk) or [None, None])[1])
+
+    phrase("Meta contributor tier", txt, "Contributor tier",
+           "the cheaper tier the notes mention")
+
+    # The unpriced rows make a claim too — that Meta publishes no first-party
+    # price — and that claim is what gets checked here.
+    for key, _ in unpriced:
+        cover(key)
+    if unpriced:
+        if re.search(r"llama[^\n]{0,80}\$[\d.]", txt, re.I):
+            note(CHANGED, "Llama first-party price",
+                 "Meta now appears to publish one; the table says it does not")
+        else:
+            note(OK, "Llama first-party price", "still not published, as the table says")
 
 
 def main():

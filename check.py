@@ -42,6 +42,19 @@ for f in ROOT.rglob("*.html"):
     pages[rel or "index"] = f
 
 src = {n: f.read_text(encoding="utf-8") for n, f in pages.items()}
+
+# L9. Several checks below index straight into these by name. A page renamed or
+# deleted made this file raise a KeyError, which is the worst way for a checker
+# to fail: it stops at the first one, every check after it never runs, and the
+# output looks like a broken script rather than a broken site. Name the pages the
+# checks depend on, report the missing one, and let the rest of the run continue
+# against what is there.
+REQUIRED = ("index", "changes", "guides", "model-facts")
+for _req in REQUIRED:
+    if _req not in src:
+        problems.append(f"missing page: {_req}.html is gone or renamed, and checks "
+                        f"below depend on it by name")
+src = {**{r: "" for r in REQUIRED}, **src}
 ids = {n: re.findall(r'\sid="([^"]+)"', s) for n, s in src.items()}
 
 
@@ -54,8 +67,22 @@ def resolve(href):
 
 
 # 1. every root-relative link resolves, and its fragment exists on the target
+#
+#    L10. This only ever looked at hrefs starting with "/". Every other internal
+#    form — "../concepts/tokens", "tokens.html", "./guides" — was not checked and
+#    not reported, so the first relative link anybody wrote would have been the
+#    one link on the site nothing was watching. The site's convention is that
+#    internal links are root-relative and extensionless, because that is how Pages
+#    serves them without a redirect hop; anything else is now a finding rather
+#    than a blind spot. External http(s), mailto: and #fragments are handled
+#    elsewhere or deliberately not followed.
+RELATIVE = re.compile(r'href="(?!https?:|mailto:|#|/)([^"]+)"')
 links = 0
 for name, s in src.items():
+    for href in RELATIVE.findall(s):
+        note("relative link", f"{name} -> {href} (internal links are root-relative "
+                              f"and extensionless here, so this is unchecked by the "
+                              f"link check below)")
     for href in re.findall(r'href="(/[^"]*)"', s):
         links += 1
         target, _, frag = href.partition("#")
@@ -131,7 +158,20 @@ else:
     if feed is not None:
         fids = [e.findtext("a:id", "", NS).partition("#")[2]
                 for e in feed.findall("a:entry", NS)]
-        log = src["changes"].split('<h2 id="the-log">', 1)
+        # L13. Discovered rather than named, exactly as feed.py does it, so a
+        # year-based split of the log adds an archive page and edits neither
+        # program. The two used to reach for changes.html by name, which made
+        # splitting the log a change to two pieces of tooling as well as the page.
+        # Order matters: the live log leads, archives follow newest-first. Sorting
+        # the names is wrong — "changes-2026" sorts before "changes" — and this
+        # check is what caught that when the split was rehearsed.
+        LOG_MARKER = '<h2 id="the-log">'
+        _archives = sorted((n for n in src
+                            if n.startswith("changes-") and LOG_MARKER in src[n]),
+                           reverse=True)
+        _order = ([n for n in ("changes",) if LOG_MARKER in src.get(n, "")] + _archives)
+        log_bodies = [src[n].split(LOG_MARKER, 1)[1] for n in _order]
+        log = ["", "".join(log_bodies)] if log_bodies else [""]
         # Match id wherever it sits in the tag. This check and feed.py used to
         # share a pattern that required id to come first, so a heading written
         # with any other attribute order was invisible to both: feed.py skipped
@@ -144,7 +184,7 @@ else:
                 note("log", f"{headings} entry headings but {len(lids)} carry an id "
                             "— feed.py cannot link the ones without")
         if not lids:
-            note("feed", "could not find the log on changes.html")
+            note("feed", "no page carries a log section")
         elif fids != lids:
             missing = [i for i in lids if i not in fids]
             extra = [i for i in fids if i not in lids]
@@ -373,7 +413,7 @@ if not guide_list:
     note("guides", "could not read the guide list from guides.html")
 else:
     listed = [h.strip("/") for h in re.findall(r'href="(/[^"#]+)"', guide_list.group(1))]
-    home = re.search(r"<main.*?</main>", src["index"], re.S)
+    home = re.search(r"<main.*?</main>", src.get("index", ""), re.S)
     home = home.group(0) if home else ""
     if not listed:
         note("guides", "the guide list on guides.html is empty")
@@ -402,7 +442,7 @@ try:
 except Exception as e:                        # pragma: no cover - import guard
     note("model-facts.json", f"modelfacts.py could not be imported: {e}")
 else:
-    mf_src = pages["model-facts"].read_text(encoding="utf-8")
+    mf_src = src.get("model-facts", "")
     json_path = ROOT / "model-facts.json"
     if not json_path.exists():
         note("model-facts.json", "is missing — run modelfacts.py")
@@ -450,6 +490,40 @@ else:
         note("model-facts attribute",
              "no data-tokens or data-usd-per-mtok attributes found — the figures "
              "are no longer machine-readable, or this check has gone blind")
+
+
+# 14. the log is not yet too big to serve in one piece.
+#     L13. changes.html grows monotonically and never shrinks: 94% of that page is
+#     the log, and a reader who wants the newest entry downloads all of it. The
+#     split into per-year archives is not due yet — every entry so far is from one
+#     year, so splitting today would produce an empty archive — but "not yet" is
+#     the kind of judgement that survives long past the point it stopped being
+#     true. This is the trigger, written down, so the decision happens on a number
+#     rather than on somebody noticing.
+#
+#     feed.py and check 6 both discover log pages by their marker, so the split
+#     needs no tooling change at all. Rehearsed on 30 August by actually splitting
+#     the log and running both: the feed came out complete and in the right order
+#     with nothing edited. What the rehearsal showed the archive page does need,
+#     all of it ordinary page work that the checks above will name for you:
+#       - keep <h2 id="the-log"> and every entry id byte-for-byte, or permalinks die
+#       - its own canonical, og:url and JSON-LD url (checks 8 and 10)
+#       - an entry in sitemap.xml (check 9)
+#       - a link from changes.html body text, not just the nav (check 5)
+#       - a note-title that is not a copy of the one on changes.html (check 4)
+#     Then run feed.py. The rehearsal also caught a bug in this very mechanism:
+#     "changes-2026.html" sorts before "changes.html", so ordering log pages by
+#     filename put the oldest entries at the top of the feed. Both files now name
+#     the live log first and take archives in reverse.
+LOG_LIMIT = 200_000
+_log_page = pages.get("changes")
+if _log_page:
+    _size = _log_page.stat().st_size
+    if _size > LOG_LIMIT:
+        note("log size",
+             f"changes.html is {_size:,} bytes, over the {LOG_LIMIT:,} trigger. "
+             f"Split the older entries into public/changes-YYYY.html — the tooling "
+             f"finds log pages by their marker, so nothing else needs changing.")
 
 
 print(f"{len(pages)} pages, {links} links, {anchors} anchors")

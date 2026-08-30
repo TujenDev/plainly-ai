@@ -17,6 +17,15 @@
      for the date stamps and table notes. This is ~5:1. */
   --ink-faint: #656f79;
   --rule: #e2e4df;
+  /* L2. --rule is a hairline at 1.25:1 on --paper, which is right for a card
+     edge and wrong for a table row separator: in a dense eight-column table the
+     separator is what lets you carry a row across, so it is content, not
+     decoration, and WCAG 1.4.11 asks 3:1 of it. Darkening --rule itself would
+     have put that weight on every card and divider on the site. This is the
+     same hue at 3.22:1 on --paper and 3.00:1 on --paper-sunk, and it is close
+     to the #999 the print stylesheet has always used for rules — the table has
+     been printing with a separator this strong all along. */
+  --rule-strong: #8c8e89;
   --accent: #0b6e63;
   --accent-soft: #e6f2f0;
   --flag: #9a5b12;
@@ -38,6 +47,7 @@
     --ink-soft: #b0b8c0;
     --ink-faint: #8a939c;
     --rule: #2b323a;
+    --rule-strong: #646b73;   /* 3.30:1 on --paper, 3.04:1 on --paper-sunk */
     --accent: #5fc7b8;
     --accent-soft: #17302d;
     --flag: #e0a860;
@@ -291,9 +301,15 @@ h3:hover > .anchor,
 /* ---------- Verification stamp ---------- */
 /* The load-bearing element of this whole site. Every page carries one. */
 
+/* L3. Ten styles here sit under 14px. Most are labels — a kicker, an eyebrow,
+   a tag — which are short, set in caps or bold, and conventional at that size.
+   Three were not labels: the stamp carries the dates this whole site turns on,
+   the table notes carry the corrections and the tiering warning that costs
+   money, and a column heading in a dense table is read as often as the cells.
+   Those three are now at 0.875rem. The rest keep their size deliberately. */
 .stamp {
   font-family: var(--sans);
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   color: var(--ink-faint);
   border-left: 2px solid var(--accent);
   padding: 0.15rem 0 0.15rem 0.75rem;
@@ -443,14 +459,14 @@ table {
 th, td {
   text-align: left;
   padding: 0.7rem 0.9rem;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule-strong);
   white-space: nowrap;
 }
 
 th {
   background: var(--paper-sunk);
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: 0.875rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -483,7 +499,7 @@ td.num, th.num { font-variant-numeric: tabular-nums; }
 
 .table-note {
   font-family: var(--sans);
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   color: var(--ink-faint);
   margin: 0 0 2rem;
 }

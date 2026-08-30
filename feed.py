@@ -60,13 +60,47 @@ def iso(heading, inherited):
     return f"{year}-{MONTHS.index(month) + 1:02d}-{int(day):02d}"
 
 
+LOG_MARKER = '<h2 id="the-log">'
+
+
+def log_sections():
+    """Every page carrying a log section, newest-first by filename.
+
+    L13. changes.html grows monotonically and will eventually have to be split by
+    year. Both this file and check.py used to reach for changes.html by name and
+    split on the marker once, which made that split a change to two programs as
+    well as to the page — the kind of coupling that gets a necessary thing put off.
+
+    Log pages are discovered by the marker instead. An archive page carrying the
+    same `<h2 id="the-log">` is picked up by this file and by check 6 without
+    either being edited.
+
+    Order matters and is not alphabetical. A first attempt sorted the filenames and
+    was wrong in a way only a real split showed: "changes-2026.html" sorts BEFORE
+    "changes.html", because a hyphen sorts before a full stop, so the feed led with
+    the oldest entries on the site. changes.html is therefore named first
+    explicitly, and archives follow in reverse order so the most recent year comes
+    next. Check 6 compares feed order against log order and caught this.
+    """
+    live = ROOT / "changes.html"
+    archives = sorted((f for f in ROOT.glob("changes-*.html")), reverse=True)
+    found = []
+    for f in [live, *archives]:
+        if not f.exists():
+            continue
+        text_ = f.read_text(encoding="utf-8")
+        if LOG_MARKER in text_:
+            found.append((f.name, text_.split(LOG_MARKER, 1)[1]))
+    if not found:
+        raise SystemExit("feed.py: no page carries a log section")
+    return found
+
+
 def entries():
-    src = (ROOT / "changes.html").read_text(encoding="utf-8")
-    log = src.split('<h2 id="the-log">', 1)
-    if len(log) != 2:
-        raise SystemExit("feed.py: could not find the log section on changes.html")
     out, last = [], None
-    for eid, heading, body in ENTRY.findall(log[1]):
+    sections = log_sections()
+    body_all = "".join(sec for _, sec in sections)
+    for eid, heading, body in ENTRY.findall(body_all):
         heading = text(heading)
         last = iso(heading, last)
         first = FIRST_P.search(body)
@@ -82,7 +116,7 @@ def entries():
     # Every <h3> in the log is an entry. If one didn't parse, it is missing its
     # id or its anchor link, and writing a feed that is quietly one entry short
     # is worse than not writing one: a subscriber never learns of a correction.
-    headings = len(H3.findall(log[1]))
+    headings = len(H3.findall(body_all))
     if headings != len(out):
         raise SystemExit(
             f"feed.py: {headings} log headings but {len(out)} parsed — an entry is "

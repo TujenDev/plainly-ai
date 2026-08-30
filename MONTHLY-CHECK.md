@@ -118,8 +118,25 @@ site's whole credibility and the log explains it to readers at `/changes#dates`.
   in the report and say it in the log entry too, rather than deploying to close the loop.
   "Corrected, not yet published" is an honest public state. Silently leaving readers on a
   wrong figure while the fix sits on disk is not.
-- Do not add affiliate links, ads, a newsletter, or a comparison table. All are refused on
-  the record, for reasons, in the site's planning notes.
+- **Do not add affiliate links, ads, a newsletter, or a comparison table.** These used to
+  point at the site's planning notes for the reasons, and those notes are gitignored and
+  not in this checkout — so the record of what the site has refused on purpose was
+  somewhere nobody reading this could reach it, which is no record at all. The reasons
+  are here now, where the rule is:
+
+  - **Affiliate links and ads.** The home page states in its own words that nothing here
+    is an affiliate link, and the whole positioning is that this site is the one page on
+    the subject with nothing to sell. Adding either does not merely change the business
+    model, it makes a published sentence false.
+  - **A newsletter.** The site's answer to "how do I keep up" already exists and is
+    better: `/feed.xml`, which carries every log entry, costs the reader no email address,
+    and cannot be used to sell anything later. A subscribe box turns a reference into a
+    funnel, which is the thing the front page complains about.
+  - **A comparison table, a "best value" note, or a normalised column.** Refused above
+    under the Model facts rules, for a factual reason rather than a stylistic one:
+    tokenisers differ between vendors, so the same text is a different number of tokens
+    depending on who is counting, and a per-token comparison across vendors is therefore
+    weaker than it looks. The page says so itself.
 - Do not add hard figures to any page other than Model facts.
 
 Em dashes are allowed on this project, unlike Shawn's other work. Match the surrounding

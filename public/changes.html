@@ -162,6 +162,54 @@
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+        <h3 id="29-august-2026-the-price-watcher-was">29 August 2026 &mdash; the price watcher could have been reading the wrong model<a class="anchor" href="#29-august-2026-the-price-watcher-was" aria-label="Permalink to 29 August 2026 — the price watcher could have been reading the wrong model">#</a></h3>
+        <p>
+          <strong>No figure on <a href="/model-facts">Model facts</a> was wrong, and
+          nothing on this site changed.</strong> This is a repair to the thing that
+          checks the figures, not a correction to the figures, and it is logged
+          because a check nobody can see is only worth what its faults are known to
+          be.
+        </p>
+        <p>
+          The watcher finds a model on a vendor's page by its API identifier, then
+          reads the prices and limits printed next to it. It marked the end of that
+          identifier with a word boundary, which sounds right and is not: an
+          identifier ends in a letter or a digit, and the next character in a name
+          like <code>gpt-5.6-sol-mini</code> is a hyphen, so the boundary matches
+          perfectly well in the middle of a different model's name. Vendors list the
+          small variant of a model directly beside it, frequently first. On a
+          constructed page that does exactly that, the old pattern read the cheaper
+          variant's prices and compared them against the full model's row.
+        </p>
+        <p>
+          The loud version of that failure is a change reported that never happened,
+          which wastes a morning. The quiet version is worse and is the reason this
+          is written down: if the two models ever agreed on a figure, the watcher
+          would have reported the row unchanged while looking at the wrong model
+          entirely &#8212; a clean result from a check that had stopped checking. That
+          is the failure this site has already had once, in a different disguise.
+        </p>
+        <p>
+          The second fault was plainer. For two of the four vendors the watcher took
+          the first matching row and returned, so a second model from either would
+          simply not have been looked at. A backstop did catch it &#8212; every row
+          has to have been reached by some probe or the run fails &#8212; but it could
+          only say that a row went unchecked, not why. Both now work through every
+          row and say what they could not verify and what is missing. Where a source
+          page covers one model and the table gains another, the new row reports
+          itself unverified and names the page that needs adding, rather than
+          borrowing the answer from its neighbour.
+        </p>
+        <p>
+          The watcher's own limit is now stated in it as well: one vendor publishes a
+          price table that is not labelled by model, so reading a price out of it is
+          only unambiguous while the table here carries a single priced row from that
+          vendor. A second one would be looked up by name, and reported rather than
+          guessed at if it could not be found. Before and after the repair, the run
+          against all seven vendor pages is the same: fifty-two figures, none
+          changed, none unverified. Committed, not yet published.
+        </p>
+
         <h3 id="29-august-2026-the-deploy-now-refuses">29 August 2026 &mdash; the deploy now refuses to publish a page that is lying about itself<a class="anchor" href="#29-august-2026-the-deploy-now-refuses" aria-label="Permalink to 29 August 2026 — the deploy now refuses to publish a page that is lying about itself">#</a></h3>
         <p>
           Entries on this page say whether the change they describe is live or only

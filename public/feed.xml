@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>the price watcher could have been reading the wrong model</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-the-price-watcher-was"/>
+    <id>https://plainlyai.org/changes#29-august-2026-the-price-watcher-was</id>
+    <updated>2026-08-29T00:00:00Z</updated>
+    <summary type="text">No figure on Model facts was wrong, and nothing on this site changed. This is a repair to the thing that checks the figures, not a correction to the figures, and it is logged because a check nobody can see is only worth what its faults are known to be.</summary>
+  </entry>
+  <entry>
     <title>the deploy now refuses to publish a page that is lying about itself</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-the-deploy-now-refuses"/>
     <id>https://plainlyai.org/changes#29-august-2026-the-deploy-now-refuses</id>

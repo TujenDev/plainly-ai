@@ -155,6 +155,57 @@
         come first, and any figure that couldn't be checked against a primary source
         is flagged in orange rather than filled in with something plausible-looking.
       </p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 560 320" role="img" aria-labelledby="dates-t dates-d" xmlns="http://www.w3.org/2000/svg">
+          <title id="dates-t">Why two dates say more than one</title>
+          <desc id="dates-d">Two timelines. On the first, the published date and the last-verified date sit far apart, and the stretch between them is marked as the period in which somebody opened the sources again. On the second, both dates sit on the same point: there is no stretch between them, because the page has not been re-checked since the day it was written.</desc>
+
+          <defs>
+            <marker id="ah-dates" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="d-head" d="M 0 0 L 10 5 L 0 10 z"/>
+            </marker>
+          </defs>
+
+          <text class="t-lead"  x="20"  y="32">Dates that differ</text>
+          <text class="t-small t-accent" x="280" y="80" text-anchor="middle">the sources were opened again in here</text>
+
+          <line class="d-rule"  x1="24" y1="98" x2="536" y2="98" marker-end="url(#ah-dates)"/>
+          <line class="d-curve" x1="96" y1="98" x2="448" y2="98"/>
+          <circle class="d-new" cx="96"  cy="98" r="6"/>
+          <circle class="d-new" cx="448" cy="98" r="6"/>
+          <line class="d-rule" x1="96"  y1="106" x2="96"  y2="114"/>
+          <line class="d-rule" x1="448" y1="106" x2="448" y2="114"/>
+          <text class="t-small" x="96"  y="130" text-anchor="middle">Published</text>
+          <text class="t-small" x="448" y="130" text-anchor="middle">Last verified</text>
+
+          <text class="t-lead"  x="20"  y="192">Dates that match</text>
+          <!-- Same x as the accent label above, so the eye compares the stretch
+               against the place the stretch is missing from. -->
+          <text class="t-small t-warn" x="280" y="240" text-anchor="middle">no stretch to open the sources in</text>
+
+          <line class="d-rule" x1="24" y1="258" x2="536" y2="258" marker-end="url(#ah-dates)"/>
+          <!-- Two markers, overlapping rather than concentric. Drawn on top of one
+               another they read as a single ring, which loses the whole point: there
+               are two dates here and they are in the same place. -->
+          <circle class="d-warn" cx="92"  cy="258" r="6"/>
+          <circle class="d-warn" cx="101" cy="258" r="6"/>
+          <line class="d-rule" x1="96" y1="266" x2="96" y2="274"/>
+          <text class="t-small" x="96" y="290" text-anchor="middle">Published</text>
+          <text class="t-small" x="96" y="310" text-anchor="middle">Last verified</text>
+        </svg>
+        <figcaption>
+          One date tells you almost nothing. Published is the day a page went up and
+          it never moves again; last verified is the most recent day somebody opened
+          the sources and checked that the page is still true. Only the stretch
+          between them carries information. When the two dates match — as they still
+          do on most of this site — nobody has re-checked that page since the day it
+          was written, and the honest reading of that is unproven rather than proven.
+          Which is the argument for printing both instead of one reassuring
+          &#8220;updated&#8221; stamp that could mean either.
+        </figcaption>
+      </figure>
+
       <p>
         Who writes this, what it costs to run, and the one commercial connection it
         has: <a href="/about">about this site</a>. Every correction is logged and

@@ -5,9 +5,16 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-08-29T00:00:00Z</updated>
+  <updated>2026-08-30T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>a drawing of the two dates, on the page that asks you to trust them</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-a-drawing-of-the-two"/>
+    <id>https://plainlyai.org/changes#30-august-2026-a-drawing-of-the-two</id>
+    <updated>2026-08-30T00:00:00Z</updated>
+    <summary type="text">The home page explained the two dates in a single dense paragraph and then asked you to take the rest of the site on the strength of it. The claim that does the most work here had the least room. There is now a diagram beside that paragraph: two timelines, one where the published and last-verified dates sit apart with the stretch between them marked, and one where they sit on the same point and there is no stretch at all.</summary>
+  </entry>
   <entry>
     <title>the price watcher could have been reading the wrong model</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#29-august-2026-the-price-watcher-was"/>

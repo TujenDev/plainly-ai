@@ -9,6 +9,20 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>three pages that were missing, two of them because they were hard to write honestly</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-three-pages-that"/>
+    <id>https://plainlyai.org/changes#30-august-2026-three-pages-that</id>
+    <updated>2026-08-30T00:00:00Z</updated>
+    <summary type="text">How to choose an assistant closes a real dead end. Start here has been telling the curious reader to use one deliberately for a week and then naming no assistant at all, which is advice with a hole in the middle of it. The page gives six criteria you can check yourself in a few minutes, each one traceable to a mechanism explained elsewhere here, and no product names whatsoever. The reason for that is on the page: a recommendation is a product name attached to a price, this site's method for anything of that shape is to cite a vendor page and diff against it every morning, and there is no vendor page for “which one is best”. It would be the one data-bearing thing here with nothing to check it against.</summary>
+  </entry>
+  <entry>
+    <title>the rules in the tables were too faint to be doing their job</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-the-rules-in-the"/>
+    <id>https://plainlyai.org/changes#30-august-2026-the-rules-in-the</id>
+    <updated>2026-08-30T00:00:00Z</updated>
+    <summary type="text">The hairline used everywhere on this site sits at 1.25:1 against the page. That is right for the edge of a card, where the line is decoration. It is wrong for the row separator in an eight-column table, where the line is the thing that lets you carry a figure back to the model it belongs to — that is content, and the accessibility guideline asks 3:1 of it. Darkening the hairline everywhere would have put that weight on every divider on the site, so there is now a second, stronger rule used only inside tables. It is close to what the print stylesheet has always used, so the printed table has had a separator this strong all along.</summary>
+  </entry>
+  <entry>
     <title>correction: the first sentence on this site was wrong about the thing it complains about</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-correction-the-first"/>
     <id>https://plainlyai.org/changes#30-august-2026-correction-the-first</id>

@@ -157,4 +157,21 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://plainlyai.org/myths</loc>
+    <lastmod>2026-08-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://plainlyai.org/choosing-an-assistant</loc>
+    <lastmod>2026-08-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://plainlyai.org/your-data</loc>
+    <lastmod>2026-08-30</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>

@@ -173,6 +173,88 @@
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+        <h3 id="30-august-2026-three-pages-that">30 August 2026 &mdash; three pages that were missing, two of them because they were hard to write honestly<a class="anchor" href="#30-august-2026-three-pages-that" aria-label="Permalink to 30 August 2026 — three pages that were missing, two of them because they were hard to write honestly">#</a></h3>
+        <p>
+          <a href="/choosing-an-assistant">How to choose an assistant</a> closes a real
+          dead end. <a href="/start-here">Start here</a> has been telling the curious
+          reader to use one deliberately for a week and then naming no assistant at all,
+          which is advice with a hole in the middle of it. The page gives six criteria
+          you can check yourself in a few minutes, each one traceable to a mechanism
+          explained elsewhere here, and no product names whatsoever. The reason for that
+          is on the page: a recommendation is a product name attached to a price, this
+          site's method for anything of that shape is to cite a vendor page and diff
+          against it every morning, and there is no vendor page for &#8220;which one is
+          best&#8221;. It would be the one data-bearing thing here with nothing to check
+          it against.
+        </p>
+        <p>
+          <a href="/your-data">What happens to what you type</a> answers a top-three
+          beginner question that was entirely absent. It is written as mechanism &#8212;
+          your text goes to somebody else's computer, and everything else follows
+          &#8212; and it separates the one question people ask into the three that
+          actually have answers: retention, training, and deletion. It gives no
+          per-vendor figures at all, and says why in a section of its own. Those
+          settings change without announcement and differ by account type and country,
+          so a page here stating them would be confidently wrong in a way no reader
+          could detect. That is the same reasoning that keeps every other figure on
+          <a href="/model-facts">Model facts</a> and nowhere else.
+        </p>
+        <p>
+          <a href="/myths">Common myths, and where each one is answered</a> was the one
+          worth being most careful about. A myth-busting page is a page of confident
+          claims about what these systems cannot do, and this site's own
+          <a href="/is-this-out-of-date">page on staleness</a> argues that such a
+          sentence has the shortest shelf life in the field &#8212; so a page built from
+          them would rot fastest here while still reading as authoritative. It is
+          therefore a router and not an argument: sixteen beliefs, each a link to the
+          page that explains the mechanism, and nothing asserted that is not argued
+          elsewhere with its sources attached. The rule that keeps it that way is
+          printed on the page, because the failure mode is not writing it wrong today,
+          it is letting claims accumulate on it later.
+        </p>
+        <p>
+          All three are on <a href="/guides">Guides</a> and linked from the home page,
+          which is the condition the structural check holds the site to. Committed, not yet published.
+        </p>
+
+        <h3 id="30-august-2026-the-rules-in-the">30 August 2026 &mdash; the rules in the tables were too faint to be doing their job<a class="anchor" href="#30-august-2026-the-rules-in-the" aria-label="Permalink to 30 August 2026 — the rules in the tables were too faint to be doing their job">#</a></h3>
+        <p>
+          The hairline used everywhere on this site sits at 1.25:1 against the page.
+          That is right for the edge of a card, where the line is decoration. It is
+          wrong for the row separator in an eight-column table, where the line is the
+          thing that lets you carry a figure back to the model it belongs to &#8212;
+          that is content, and the accessibility guideline asks 3:1 of it. Darkening the
+          hairline everywhere would have put that weight on every divider on the site,
+          so there is now a second, stronger rule used only inside tables. It is close
+          to what the print stylesheet has always used, so the printed table has had a
+          separator this strong all along.
+        </p>
+        <p>
+          In the same pass, three text styles that were under fourteen pixels went up to
+          fourteen. Most of the small type here is labels &#8212; a kicker, an eyebrow,
+          a tag &#8212; which are short and conventional at that size. Three were not
+          labels: the date stamp, which carries the two dates this whole site turns on;
+          the notes under the tables, which carry the corrections and the pricing
+          warning that costs money; and the column headings, which are read as often as
+          the cells under them. Setting the site's own load-bearing element in its
+          second-smallest size was not a defensible choice.
+        </p>
+        <p>
+          Behind the scenes, three things that only matter when something goes wrong.
+          The structural check used to raise an error rather than report a problem if a
+          page it depends on were renamed, which is the worst way for a checker to fail:
+          it stops at the first fault and every check after it never runs. It only ever
+          examined links beginning with a slash, so the first relative link anybody wrote
+          would have been the one link on the site nothing was watching. And this log,
+          now past 140KB and growing every time it does its job, will eventually have to
+          be split by year; the feed builder and the check that guards it both used to
+          reach for this page by name, which made that split a change to two programs as
+          well as to a page. They now find log pages by their markings, so an archive is
+          picked up by both without either being edited. That was rehearsed by actually
+          performing the split, which is how a bug in the new arrangement was found:
+          filenames sorted the wrong way and the feed came out oldest-first. Committed, not yet published.
+        </p>
+
         <h3 id="30-august-2026-correction-the-first">30 August 2026 &mdash; correction: the first sentence on this site was wrong about the thing it complains about<a class="anchor" href="#30-august-2026-correction-the-first" aria-label="Permalink to 30 August 2026 — correction: the first sentence on this site was wrong about the thing it complains about">#</a></h3>
         <p>
           The home page opened by saying that almost everything ranking for

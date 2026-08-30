@@ -45,9 +45,20 @@ say "1. No entry may still claim to be unpublished"
 if [ ! -f "$LOG_SRC" ]; then
   fail "$LOG_SRC is missing — this guard cannot see the log it is guarding."
 fi
-stale=$(grep -c "not yet published" "$LOG_SRC" || true)
+# The marker is the full sentence, ending in its full stop. Matching the loose
+# phrase "not yet published" instead was the first version of this guard, and it
+# tripped on the very entry that describes the guard, which quotes the marker
+# three times in prose. A guard that fires on writing *about* the thing is a
+# guard somebody eventually switches off.
+#
+# The remaining ambiguity is deliberate and biased safely: an entry that quotes
+# the sentence with the full stop inside the quotation will trip this. That is a
+# refusal to deploy until a human looks, which costs a minute. Missing a real
+# stale marker publishes a false statement, which is what happened. The line
+# numbers are printed so the difference takes one glance to settle.
+stale=$(grep -c "Committed, not yet published\." "$LOG_SRC" || true)
 if [ "$stale" -ne 0 ]; then
-  grep -n "not yet published" "$LOG_SRC" >&2 || true
+  grep -n "Committed, not yet published\." "$LOG_SRC" >&2 || true
   if [ "$stale" -eq 1 ]; then which="one log entry above still says"
   else which="$stale log entries above still say"; fi
   fail "$which
@@ -104,7 +115,7 @@ done
   || fail "could not fetch $SITE/changes after the deploy. The upload may have
   succeeded — check the site by hand before deploying again."
 
-live_stale=$(printf '%s' "$live" | grep -c "not yet published" || true)
+live_stale=$(printf '%s' "$live" | grep -c "Committed, not yet published\." || true)
 [ "$live_stale" -eq 0 ] \
   && echo "   live: no entry claims to be unpublished" \
   || fail "the LIVE page still claims to be unpublished in $live_stale place(s).

@@ -1,7 +1,7 @@
 {
   "$comment": "Derived from https://plainlyai.org/model-facts by modelfacts.py. Do not edit: the page is the source and this file is regenerated from it. Token counts are the figures printed on the page normalised to integers, not a claim about a vendor's exact limit; where a vendor publishes an exact figure the page says so in its notes. A null figure is never 'unknown' — see unverified.",
   "source": "https://plainlyai.org/model-facts",
-  "verified": "2026-08-26",
+  "verified": "2026-09-01",
   "units": {
     "context": "tokens",
     "max_output": "tokens",
@@ -12,14 +12,14 @@
   "models": [
     {
       "vendor": "Anthropic",
-      "model": "Claude Fable 5",
-      "api_id": "claude-fable-5",
+      "model": "Claude Fable 5.1",
+      "api_id": "claude-fable-5-1",
       "context": 1000000,
       "max_output": 128000,
       "input_usd_per_mtok": 10.0,
       "output_usd_per_mtok": 50.0,
-      "reliable_cutoff": "Jan 2026",
-      "training_cutoff": "Jan 2026",
+      "reliable_cutoff": "Jun 2026",
+      "training_cutoff": "Jun 2026",
       "unverified": {}
     },
     {

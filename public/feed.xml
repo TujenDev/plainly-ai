@@ -5,9 +5,16 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-08-30T00:00:00Z</updated>
+  <updated>2026-09-01T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>the price watcher went blind on one row, which is the thing it was built to do</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#1-september-2026-the-price-watcher"/>
+    <id>https://plainlyai.org/changes#1-september-2026-the-price-watcher</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <summary type="text">The daily watcher reported UNVERIFIED against Claude Fable 5 this morning and exited non-zero: model no longer on the vendor's table. That is not a price moving. Anthropic has released Claude Fable 5.1 and moved Fable 5 off the headline table it publishes, and the watcher reads that table by column heading, so the row it had been checking every day was suddenly not there to check. It could have said “unchanged ” — every figure it had last seen was, after all, still the figure on file — and that is exactly the quiet blindness it was written to refuse. It refused, and said which row and why.</summary>
+  </entry>
   <entry>
     <title>three pages that were missing, two of them because they were hard to write honestly</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#30-august-2026-three-pages-that"/>

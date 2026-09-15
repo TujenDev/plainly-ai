@@ -31,7 +31,7 @@
   "url": "https://plainlyai.org/changes",
   "inLanguage": "en",
   "isAccessibleForFree": true,
-  "dateModified": "2026-09-01",
+  "dateModified": "2026-09-15",
   "publisher": {
     "@type": "Organization",
     "name": "Plainly",
@@ -68,7 +68,7 @@
     </p>
 
     <p class="stamp">
-      Last updated <time datetime="2026-09-01"><b>1 September 2026</b></time> &nbsp;·&nbsp; Every page also carries its own
+      Last updated <time datetime="2026-09-15"><b>15 September 2026</b></time> &nbsp;·&nbsp; Every page also carries its own
       pair of dates at the top &nbsp;·&nbsp; <a href="/feed.xml">Atom feed</a> of
       everything below
     </p>
@@ -119,7 +119,7 @@
         </p>
         <ul>
           <li>
-            <strong>Model facts, monthly. Next due 11 September 2026.</strong>
+            <strong>Model facts, monthly. Next due 11 October 2026.</strong>
             Prices, model IDs and limits, checked against each vendor's own
             documentation. The fastest-rotting page on the site by a wide margin, and
             the only thing here checked on a clock. Since 26 August a script also
@@ -172,6 +172,135 @@
 
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+        <h3 id="15-september-2026-the-monthly-check">15 September 2026 &mdash; the monthly check, four days late, and the watcher stopping a correction that would have been wrong<a class="anchor" href="#15-september-2026-the-monthly-check" aria-label="Permalink to 15 September 2026 — the monthly check, four days late, and the watcher stopping a correction that would have been wrong">#</a></h3>
+        <p>
+          <strong>This check was due on 11 September and ran on the 15th.</strong> The
+          machine it runs on stopped working and went in for repair, taking the daily
+          watcher with it; the check happened on a replacement once the site was
+          cloned back onto it. Four days is four days, and the section above says
+          plainly that a missed date means the promise was broken, so it is recorded
+          here rather than quietly absorbed. The daily watcher was also dark for that
+          stretch. It was run before this check and reported 52 figures unchanged, so
+          nothing moved unseen while it was off &mdash; but a watcher nobody is
+          running is not a watcher, and its silence proved nothing at the time.
+        </p>
+        <p>
+          <strong>The check tried to correct a figure that was already right, and the
+          daily watcher stopped it.</strong> This is the most useful thing that
+          happened today, so it goes first and in full.
+        </p>
+        <p>
+          Anthropic's models overview page renders a comparison table showing
+          <em>Reliable knowledge cutoff</em> and folds the rest away behind a
+          &ldquo;Show all details&rdquo; control. Read as a web page, it appears to
+          publish one cutoff per model and no training cutoff at all. Working from
+          that, and from the Transparency Hub &mdash; which gives Claude Haiku 4.5 a
+          single &ldquo;knowledge cutoff date of February 2025&rdquo; and no separate
+          training date &mdash; this check concluded that Haiku's training cutoff of
+          July 2025 had no source behind it, that July 2025 was probably Claude Sonnet
+          4.5's date misread off a neighbouring row, and that the cell should read
+          February 2025. It was edited to say so.
+        </p>
+        <p>
+          That was wrong. Appending <code>.md</code> to the same URL returns the
+          complete table, including a <strong>Training data cutoff</strong> row, and
+          that row gives Haiku 4.5 <strong>Jul 2025</strong> &mdash; exactly what this
+          table has said all along. The figure was correct, the five-month gap is
+          real, and the reasoning that replaced it was confident, plausible and
+          entirely mistaken. <code>prices.py</code> reads the markdown variant, so
+          when it was run after the edit it immediately reported
+          <code>CHANGED &mdash; Claude Haiku 4.5 training cutoff Feb 2025 -&gt; Jul
+          2025</code>: the table had moved away from the vendor, not towards it. The
+          edit has been reverted and the cell reads Jul 2025.
+        </p>
+        <p>
+          Three things are worth taking from that. <strong>A rendered page and its
+          markdown source are different documents</strong>, and a figure behind a
+          disclosure control is invisible to anyone who does not know to open it; this
+          page is now checked against <code>overview.md</code> and says so. <strong>An
+          absence of evidence read as evidence of absence is how a right figure gets
+          overwritten</strong> &mdash; two sources failing to show a number is not the
+          same as a source contradicting it, and the rule in
+          <code>MONTHLY-CHECK.md</code> that says an unverified cell is fine exists
+          precisely so that gap does not have to be filled by inference. And
+          <strong>the watcher earned its keep in the direction nobody designed it
+          for</strong>: it was built to catch the vendor moving under a stale table,
+          and today it caught the table moving away from an accurate vendor page.
+        </p>
+        <p>
+          <strong>GPT-5.6 Sol's $4 / $20 is promotional, and this page never said
+          so.</strong> OpenAI's pricing page carries a line that was not there when
+          this table took the $4 / $20 figure on 26 August: &ldquo;GPT-5.6 Sol's
+          promotional pricing is available at least through November 21, 2026.&rdquo;
+          The figure is unchanged and correct. What was missing is that it has a stated
+          horizon, which is exactly the kind of thing this page exists to carry. It now
+          sits in an open block beside Gemini 3.6 Flash's 1 January 2027 increase, the
+          only other dated price on the page. Note the difference in wording: Google
+          states when its rate <em>ends</em>, OpenAI only when its rate is guaranteed
+          <em>until</em>. Those are not the same promise and the block says so.
+        </p>
+        <p>
+          <strong>A sentence went wrong without any figure moving.</strong> The API IDs
+          note said Claude Haiku 4.5 was &ldquo;the only row where the distinction
+          &rdquo; between a pinned ID and an alias shows. OpenAI's GPT-5.6 Sol page
+          states that &ldquo;the <code>gpt-5.6</code> alias routes requests to GPT-5.6
+          Sol&rdquo;, with <code>gpt-5.6-sol</code> as the default snapshot. That
+          is not a change on OpenAI's side that this page failed to catch &mdash; it
+          was simply never true of the OpenAI rows, and the daily watcher cannot see it
+          because it compares figures and this is prose. Corrected, and left visible
+          rather than tidied away.
+        </p>
+        <p>
+          <strong><a href="/sources">Sources</a> now says how to read the Anthropic
+          page.</strong> The row for the models overview carries the instruction that
+          cost this check an hour: read it as <code>overview.md</code>, because the
+          rendered table hides the training cutoff. <a href="/model-facts">Model
+          facts</a> carries the same warning beside its verification note. Neither is
+          a new source &mdash; it is the same document, read the way the watcher has
+          always read it, which is the part that was not written down anywhere until
+          today.
+        </p>
+        <p>
+          <strong>Seen on the vendor pages, not added to the table.</strong> Four
+          models are now published that this table does not list: OpenAI's
+          <code>gpt-6-astra</code>, which its own docs call the flagship and recommend
+          as the default starting point; Google's Gemini 3.8 Flash, alongside which the
+          pricing page now describes Gemini 3.6 Flash as &ldquo;our previous generation
+          Flash model&rdquo;; Anthropic's Claude Mythos 5.1, which is limited
+          availability; and Meta's <code>muse-spark-1.3</code>, which shares the
+          standard pricing already printed here. The Gemini one matters most: this
+          table's stated selection is current general-purpose models, and 3.6 Flash is
+          now described by Google as the previous generation. Adding or moving a row is
+          a decision about what this table is for, so all four are noted here and left
+          for a human rather than taken by a check.
+        </p>
+        <p>
+          <strong>Every figure was unchanged.</strong> All 52 were read against the
+          vendor's own page today, and none of them had moved. Anthropic's four rows, OpenAI's two,
+          Google's one and Meta's two match, including both long-context tiers, the
+          Gemini expiry wording, Google's exact 1,048,576 and 65,536 token limits,
+          Meta's contributor tier, and the cells that read &ldquo;not published&rdquo;
+          on purpose. One caveat could not be re-verified in its own words: the
+          11 August correction quotes Anthropic's pricing page on the Sonnet 5 rate
+          becoming permanent, and that language is no longer on the page. The substance
+          holds &mdash; it is 15 September and Sonnet 5 is still $2 / $10, so the
+          increase did not occur &mdash; but a reader following that link today will
+          not find the sentence in quotation marks. The note is dated and carries its
+          fetch date, so it has been left standing rather than rewritten.
+        </p>
+        <p>
+          <strong>Still outstanding: the home page check</strong>, also due 11
+          September, has not been run and its date above has deliberately not been
+          moved. Moving it would claim a check that did not happen, which is the exact
+          failure this section is built to make visible.
+        </p>
+        <p>
+          <strong>Committed, not yet published.</strong> This check ran unattended
+          under the rule in <code>MONTHLY-CHECK.md</code> that says to prepare
+          everything and stop. The corrections above are on disk and in the repository;
+          they are not live on the site until someone deploys them deliberately.
+        </p>
 
         <h3 id="1-september-2026-the-price-watcher">1 September 2026 &mdash; the price watcher went blind on one row, which is the thing it was built to do<a class="anchor" href="#1-september-2026-the-price-watcher" aria-label="Permalink to 1 September 2026 — the price watcher went blind on one row, which is the thing it was built to do">#</a></h3>
         <p>

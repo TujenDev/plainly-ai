@@ -32,7 +32,26 @@ cd "$(dirname "$0")"
 DRY_RUN=no
 [ "${1:-}" = "--dry-run" ] && DRY_RUN=yes
 
-PYTHON=python3
+# This was `python3` until 15 September 2026, which is correct on a Mac and
+# wrong on Windows twice over: the interpreter is installed as `python`, and
+# `python3` still resolves — to a zero-byte Microsoft Store stub that prints an
+# advert and exits non-zero. So the name being on PATH proves nothing, and the
+# check has to be whether it actually runs. Set PYTHON in the environment to
+# override.
+if [ -z "${PYTHON:-}" ]; then
+  for candidate in python3 python py; do
+    if command -v "$candidate" >/dev/null 2>&1 \
+       && "$candidate" -c 'import sys' >/dev/null 2>&1; then
+      PYTHON=$candidate
+      break
+    fi
+  done
+fi
+[ -n "${PYTHON:-}" ] || {
+  printf '\nREFUSING TO DEPLOY: no working python found (tried python3, python, py).\n' >&2
+  exit 1
+}
+
 SITE="https://plainlyai.org"
 LOG_SRC="public/changes.html"
 

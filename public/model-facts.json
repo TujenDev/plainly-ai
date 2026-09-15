@@ -1,7 +1,7 @@
 {
   "$comment": "Derived from https://plainlyai.org/model-facts by modelfacts.py. Do not edit: the page is the source and this file is regenerated from it. Token counts are the figures printed on the page normalised to integers, not a claim about a vendor's exact limit; where a vendor publishes an exact figure the page says so in its notes. A null figure is never 'unknown' — see unverified.",
   "source": "https://plainlyai.org/model-facts",
-  "verified": "2026-09-01",
+  "verified": "2026-09-15",
   "units": {
     "context": "tokens",
     "max_output": "tokens",

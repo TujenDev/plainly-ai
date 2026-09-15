@@ -32,7 +32,7 @@
   "inLanguage": "en",
   "isAccessibleForFree": true,
   "datePublished": "2026-08-11",
-  "dateModified": "2026-09-01",
+  "dateModified": "2026-09-15",
   "publisher": {
     "@type": "Organization",
     "name": "Plainly",
@@ -105,8 +105,8 @@
     </p>
 
     <p class="stamp">
-      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-09-01"><b>1 September 2026</b></time> against each vendor's own documentation,
-      across five passes that produced five corrections, all logged on
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-09-15"><b>15 September 2026</b></time> against each vendor's own documentation,
+      across six passes that produced six corrections, all logged on
       <a href="/changes">the changes page</a>. Anything not verified is flagged in
       orange.
     </p>
@@ -318,6 +318,26 @@
           </p>
         </details>
 
+        <details class="cost" open>
+          <summary>Two of the prices above have published end dates</summary>
+          <p>
+            <strong>GPT-5.6 Sol: $4 / $20 is promotional.</strong> OpenAI's pricing
+            page states that &ldquo;GPT-5.6 Sol&rsquo;s promotional pricing is
+            available at least through November 21, 2026.&rdquo; Noted here on
+            15 September 2026. The wording sets a floor rather than an expiry &mdash;
+            <em>at least</em> through that date &mdash; so it says when the rate is
+            guaranteed until, not when it ends. This table carried the $4 / $20 figure
+            from 26 August 2026 with no indication it was promotional at all.
+          </p>
+          <p>
+            <strong>Gemini 3.6 Flash: $0.75 / $3.75 expires on 1 January 2027.</strong>
+            Google's pricing page gives those rates &ldquo;through December 31,
+            2026&rdquo; and $1.50 / $7.50 &ldquo;starting January 1, 2027&rdquo;, both
+            still worded exactly that way today. That is a dated increase rather than
+            a floor, and it is the one figure on this page with a known expiry.
+          </p>
+        </details>
+
         <details>
           <summary>Correction, 26 August 2026 &mdash; OpenAI cut the price of GPT-5.6 Sol, and this table was a fortnight behind</summary>
           <p>
@@ -354,9 +374,12 @@
         </details>
 
         <details>
-          <summary>Verified 1 September 2026, against each vendor's own documentation</summary>
+          <summary>Verified 15 September 2026, against each vendor's own documentation</summary>
           <p>
-            OpenAI's <a href="https://developers.openai.com/api/docs/pricing">pricing</a>
+            Anthropic's
+            <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>
+            and <a href="https://platform.claude.com/docs/en/about-claude/pricing">pricing</a>
+            pages, OpenAI's <a href="https://developers.openai.com/api/docs/pricing">pricing</a>
             and <a href="https://developers.openai.com/api/docs/models">models</a>
             pages, Google's
             <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
@@ -364,6 +387,16 @@
             <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
             model page, and Meta's
             <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.
+          </p>
+          <p>
+            <strong>Read Anthropic's overview page as markdown, not as a web page.</strong>
+            Its rendered table shows the reliable cutoff and folds the training cutoff
+            away behind a &ldquo;Show all details&rdquo; control, so a reader — or a
+            tool — that takes the visible table at face value will conclude the
+            training cutoff is not published at all. It is: appending <code>.md</code>
+            to the URL returns the full table with both rows. That is the read this
+            page is checked against, and on 15 September 2026 the difference between
+            the two views nearly put a wrong figure on this table.
           </p>
         </details>
 
@@ -395,14 +428,25 @@
         </details>
 
         <details>
-          <summary>API IDs: which string each row carries, and the one alias worth knowing</summary>
+          <summary>API IDs: which string each row carries, and the two aliases worth knowing</summary>
           <p>
-            The string in that column is the one Anthropic documents as the API ID.
+            The string in that column is the one the vendor documents as the API ID.
             For Claude Haiku 4.5 that is the dated
             <code>claude-haiku-4-5-20251001</code>; the shorter
             <code>claude-haiku-4-5</code> is documented as an alias and also works.
             From the 4.6 generation onward the two are identical, so Haiku is the only
-            row where the distinction shows.
+            Anthropic row where the distinction shows.
+          </p>
+          <p>
+            OpenAI documents a second one. Its
+            <a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol">GPT-5.6 Sol</a>
+            page states that &ldquo;the <code>gpt-5.6</code> alias routes requests to
+            GPT-5.6 Sol&rdquo;, with <code>gpt-5.6-sol</code> as the default snapshot —
+            the same pinned-versus-alias split as the Haiku row. This page claimed
+            until 15 September 2026 that Haiku was the only row where that distinction
+            showed, which was never true of the OpenAI rows. It is the kind of sentence
+            that goes wrong without any figure moving, and the daily watcher cannot
+            catch it, because it compares numbers and this is prose.
           </p>
         </details>
 

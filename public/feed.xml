@@ -5,9 +5,16 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-09-01T00:00:00Z</updated>
+  <updated>2026-09-15T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>the monthly check, four days late, and the watcher stopping a correction that would have been wrong</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#15-september-2026-the-monthly-check"/>
+    <id>https://plainlyai.org/changes#15-september-2026-the-monthly-check</id>
+    <updated>2026-09-15T00:00:00Z</updated>
+    <summary type="text">This check was due on 11 September and ran on the 15th. The machine it runs on stopped working and went in for repair, taking the daily watcher with it; the check happened on a replacement once the site was cloned back onto it. Four days is four days, and the section above says plainly that a missed date means the promise was broken, so it is recorded here rather than quietly absorbed. The daily watcher was also dark for that stretch. It was run before this check and reported 52 figures unchanged, so nothing moved unseen while it was off — but a watcher nobody is running is not a watcher, and its silence proved nothing at the time.</summary>
+  </entry>
   <entry>
     <title>the price watcher went blind on one row, which is the thing it was built to do</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#1-september-2026-the-price-watcher"/>

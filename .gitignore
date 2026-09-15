@@ -10,6 +10,12 @@ X-POSTS-DRAFT.md
 .wrangler/
 node_modules/
 
+# Bytecode from feed.py / modelfacts.py / check.py. Untracked, it leaves the
+# working tree dirty, and deploy.sh guard 3 refuses to deploy a dirty tree — so
+# running the generators would block the deploy they exist to prepare for.
+__pycache__/
+*.pyc
+
 # OS / editor noise
 Thumbs.db
 desktop.ini

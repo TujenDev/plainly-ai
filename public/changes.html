@@ -173,6 +173,63 @@
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
 
+        <h3 id="15-september-2026-two-rows-changed">15 September 2026 &mdash; two rows on Model facts, one of which changed no numbers at all<a class="anchor" href="#15-september-2026-two-rows-changed" aria-label="Permalink to 15 September 2026 — two rows on Model facts, one of which changed no numbers at all">#</a></h3>
+        <p>
+          The monthly check earlier today noted four models published by vendors that
+          <a href="/model-facts">Model facts</a> does not list, and left them for a
+          human rather than deciding on its own. Two have been acted on. Claude Mythos
+          5.1 stays out, because Anthropic lists it as limited availability. Meta's
+          <code>muse-spark-1.3</code> stays out too: it shares the standard pricing
+          already printed for 1.2, so adding it would grow the table without telling a
+          reader anything.
+        </p>
+        <p>
+          <strong>Gemini 3.6 Flash became Gemini 3.8 Flash, and not one figure
+          moved.</strong> Same 1,048,576 context limit, same 65,536 output limit, same
+          $0.75 and $3.75, same increase on 1 January 2027 worded the same way, and
+          still no published knowledge cutoff. Only the name and the API ID differ. The
+          reason to swap it has nothing to do with the numbers: Google's pricing page
+          now calls 3.6 Flash &ldquo;our previous generation Flash model&rdquo;, and
+          this table says it lists current ones. A row can go stale on that claim while
+          every figure in it stays correct, and the daily watcher cannot see it,
+          because the watcher compares numbers and this is a claim about which model
+          matters.
+        </p>
+        <p>
+          <strong>GPT-6 Astra is new, and replaces nothing.</strong> OpenAI documents
+          it as the model to start with, above the GPT-5.6 family, which stays where it
+          is. Its limits are identical to Sol's &mdash; 1.05M context, 128k max output
+          &mdash; so the whole difference is money and recency: $10 and $50 against
+          Sol's $4 and $20, and a cutoff of 30 April 2026 against 16 February. It
+          carries no promotional wording, so unlike Sol's rate it has no stated
+          horizon. Its long-context tier, $20 and $75, is in the tiering note with the
+          others.
+        </p>
+        <p>
+          <strong>OpenAI calls two different models its flagship, and this table prints
+          neither claim.</strong> The model catalogue labels GPT-5.6 Sol
+          &ldquo;flagship model for complex professional work&rdquo;; the
+          choosing-a-model section on the same page says to use GPT-6 Astra, &ldquo;our
+          flagship model&rdquo;. Both sentences are live right now. Picking one would
+          be settling something the vendor has not settled, and a tidier story than the
+          source supports is the exact failure this site is arranged against. So the
+          contradiction is recorded and the word is left off the page.
+        </p>
+        <p>
+          <strong>The watcher was moved with the table, which is the part that could
+          have rotted quietly.</strong> <code>prices.py</code> holds one Google model
+          page in its source list and derives the model it expects from that URL, so a
+          table row and a source that disagree make the row report
+          <code>UNVERIFIED</code> rather than passing unchecked. Both the URL and the
+          rate-expiry wording it watches now name 3.8 Flash.
+          <a href="/sources">Sources</a> records the same move and why the two are
+          tied together.
+        </p>
+        <p>
+          <strong>Committed, not yet published.</strong> Prepared on a branch and not
+          deployed.
+        </p>
+
         <h3 id="15-september-2026-the-home-page-check">15 September 2026 &mdash; the home page check, four days late, and the first sentence is drifting again<a class="anchor" href="#15-september-2026-the-home-page-check" aria-label="Permalink to 15 September 2026 — the home page check, four days late, and the first sentence is drifting again">#</a></h3>
         <p>
           <strong>Due 11 September, run on the 15th.</strong> The machine this site is

@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>two rows on Model facts, one of which changed no numbers at all</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#15-september-2026-two-rows-changed"/>
+    <id>https://plainlyai.org/changes#15-september-2026-two-rows-changed</id>
+    <updated>2026-09-15T00:00:00Z</updated>
+    <summary type="text">The monthly check earlier today noted four models published by vendors that Model facts does not list, and left them for a human rather than deciding on its own. Two have been acted on. Claude Mythos 5.1 stays out, because Anthropic lists it as limited availability. Meta's muse-spark-1.3 stays out too: it shares the standard pricing already printed for 1.2, so adding it would grow the table without telling a reader anything.</summary>
+  </entry>
+  <entry>
     <title>the home page check, four days late, and the first sentence is drifting again</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#15-september-2026-the-home-page-check"/>
     <id>https://plainlyai.org/changes#15-september-2026-the-home-page-check</id>

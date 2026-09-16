@@ -54,7 +54,7 @@ SRC = {
     "openai_pricing": "https://developers.openai.com/api/docs/pricing",
     "openai_models": "https://developers.openai.com/api/docs/models",
     "google_pricing": "https://ai.google.dev/gemini-api/docs/pricing",
-    "google_flash": "https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash",
+    "google_flash": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
     "meta_pricing": "https://dev.meta.ai/docs/pricing-rate-limits.md",
 }
 
@@ -81,7 +81,7 @@ def exact(api_id):
 
 # Bump deliberately when a model is added to or removed from Model facts. A row
 # count that drifts on its own means the table changed shape under the parser.
-EXPECTED_ROWS = 9
+EXPECTED_ROWS = 10  # 9 until 15 September 2026, when GPT-6 Astra was added
 
 
 def note(verdict, subject, detail=""):
@@ -379,11 +379,23 @@ def google(C):
         if pricing is None:
             note(UNVERIFIED, f"{name} price", "pricing page not fetched")
         else:
-            i = pricing.find(name)
-            blk = pricing[i:i + 1200] if i >= 0 else ""
+            # This took the first mention of the model name, which was the pricing
+            # block right up until Google put "Gemini 3.8 Flash is now available"
+            # in a banner at the top of the page. The banner sits about 1,200
+            # characters above the real block, so the window opened on the wrong
+            # text and every figure in the row reported unverified — a false alarm,
+            # which is the failure mode that teaches people to ignore this script.
+            # Take the first occurrence whose window actually holds the table.
+            blk = ""
+            for match in re.finditer(re.escape(name), pricing):
+                window = pricing[match.start():match.start() + 1200]
+                if "Input price" in window:
+                    blk = window
+                    break
             if not blk:
                 note(UNVERIFIED, f"{name} price",
-                     "model not found on Google's pricing page")
+                     "no pricing table found under any mention of this model on "
+                     "Google's pricing page")
             else:
                 inp = re.search(r"Input price.*?\$([\d.]+) through", blk, re.S)
                 out = re.search(r"Output price.*?\$([\d.]+) through", blk, re.S)
@@ -393,7 +405,7 @@ def google(C):
                 # date comes from is watched too. It is named per model because the
                 # note on Model facts is about a particular model's rate, not
                 # Google's pricing in general.
-                if claim["api_id"] == "gemini-3.6-flash":
+                if claim["api_id"] == "gemini-3.8-flash":
                     phrase(f"{name} rate expiry", blk, "through December 31, 2026",
                            "the current rate ending 31 Dec 2026")
                     phrase(f"{name} successor rate", blk, "starting January 1, 2027",

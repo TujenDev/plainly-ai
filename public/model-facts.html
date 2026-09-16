@@ -241,6 +241,15 @@
           <tbody>
             <tr>
               <td>OpenAI</td>
+              <th scope="row">GPT-6 Astra</th>
+              <td><code>gpt-6-astra</code></td>
+              <td class="num" data-tokens="1050000">1.05M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="10">$10</td>
+              <td class="num" data-usd-per-mtok="50">$50</td>
+            </tr>
+            <tr>
+              <td>OpenAI</td>
               <th scope="row">GPT-5.6 Sol</th>
               <td><code>gpt-5.6-sol</code></td>
               <td class="num" data-tokens="1050000">1.05M</td>
@@ -259,8 +268,8 @@
             </tr>
             <tr>
               <td>Google</td>
-              <th scope="row">Gemini 3.6 Flash</th>
-              <td><code>gemini-3.6-flash</code></td>
+              <th scope="row">Gemini 3.8 Flash</th>
+              <td><code>gemini-3.8-flash</code></td>
               <td class="num" data-tokens="1050000">1.05M</td>
               <td class="num" data-tokens="64000">64k</td>
               <td class="num" data-usd-per-mtok="0.75">$0.75</td>
@@ -307,9 +316,11 @@
         <details class="cost" open>
           <summary>Tiering: the prices above are short-context rates, and long-context work costs more</summary>
           <p>
-            OpenAI's pricing page lists GPT-5.6 Sol at $8 input / $30 output above its
-            context threshold, against the $4 / $20 quoted here, and GPT-5.6 Terra at
-            $4 / $18 against $2 / $12: double on input in both cases. Google prices
+            OpenAI's pricing page lists GPT-6 Astra at $20 input / $75 output above its
+            context threshold, against the $10 / $50 quoted here; GPT-5.6 Sol at
+            $8 / $30 against $4 / $20; and GPT-5.6 Terra at $4 / $18 against $2 / $12.
+            Input doubles on all three; output rises by half on Astra and rather more
+            on the other two. Google prices
             some models the same way, above and below a prompt-size threshold, and
             offers batch, flex and priority rates that differ substantially from the
             standard rate quoted. Meta publishes a cheaper &ldquo;contributor&rdquo;
@@ -330,11 +341,45 @@
             from 26 August 2026 with no indication it was promotional at all.
           </p>
           <p>
-            <strong>Gemini 3.6 Flash: $0.75 / $3.75 expires on 1 January 2027.</strong>
+            <strong>Gemini 3.8 Flash: $0.75 / $3.75 expires on 1 January 2027.</strong>
             Google's pricing page gives those rates &ldquo;through December 31,
             2026&rdquo; and $1.50 / $7.50 &ldquo;starting January 1, 2027&rdquo;, both
             still worded exactly that way today. That is a dated increase rather than
             a floor, and it is the one figure on this page with a known expiry.
+          </p>
+        </details>
+
+        <details>
+          <summary>15 September 2026 &mdash; GPT-6 Astra added, and the Gemini row moved to 3.8 Flash</summary>
+          <p>
+            <strong>Gemini 3.6 Flash became Gemini 3.8 Flash, and not one figure
+            moved.</strong> Same context limit of 1,048,576, same output limit of
+            65,536, same $0.75 and $3.75, same expiry on 1 January 2027 in the same
+            words, and still no published cutoff. Only the name and the API ID are
+            different. The row was swapped because Google's own pricing page now
+            describes 3.6 Flash as &ldquo;our previous generation Flash model&rdquo;,
+            and this table says it lists current models &mdash; a row can go stale on
+            that claim alone while every number in it stays right, which is the sort of
+            rot the daily watcher cannot see.
+          </p>
+          <p>
+            <strong>GPT-6 Astra is new here, and replaces nothing.</strong> OpenAI
+            documents it as the model to start with, above the GPT-5.6 family, which
+            stays. Its limits are identical to Sol's &mdash; 1.05M context, 128k max
+            output &mdash; and the difference is the money and the cutoff: $10 and $50
+            against Sol's $4 and $20, and a knowledge cutoff of 30 April 2026 against
+            16 February. It carries no promotional wording, so unlike Sol's rate there
+            is no stated horizon on it.
+          </p>
+          <p>
+            <strong>One thing this table will not resolve: OpenAI calls two different
+            models its flagship.</strong> The model catalogue labels GPT-5.6 Sol
+            &ldquo;flagship model for complex professional work&rdquo;, while the
+            choosing-a-model section on the same page says to use GPT-6 Astra,
+            &ldquo;our flagship model&rdquo;. Both sentences are live today. This page
+            prints neither word, because picking one would be settling a question the
+            vendor has not settled, and inventing a tidier story than the source
+            supports is the failure this whole site is arranged against.
           </p>
         </details>
 
@@ -384,7 +429,7 @@
             pages, Google's
             <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini API pricing</a>
             and its
-            <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash">Gemini 3.6 Flash</a>
+            <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash">Gemini 3.8 Flash</a>
             model page, and Meta's
             <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.
           </p>
@@ -463,8 +508,9 @@
           <summary>Cutoffs: who publishes one, and why a column is missing</summary>
           <p>
             OpenAI publishes a knowledge cutoff of 16 February 2026 for the GPT-5.6
-            family. Google's model page for Gemini 3.6 Flash does not publish one,
-            which is why there is no cutoff column here.
+            family and 30 April 2026 for GPT-6 Astra. Google's model page for Gemini
+            3.8 Flash does not publish one, which is why there is no cutoff column
+            here.
           </p>
         </details>
 

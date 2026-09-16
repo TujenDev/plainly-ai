@@ -60,6 +60,16 @@
     },
     {
       "vendor": "OpenAI",
+      "model": "GPT-6 Astra",
+      "api_id": "gpt-6-astra",
+      "context": 1050000,
+      "max_output": 128000,
+      "input_usd_per_mtok": 10.0,
+      "output_usd_per_mtok": 50.0,
+      "unverified": {}
+    },
+    {
+      "vendor": "OpenAI",
       "model": "GPT-5.6 Sol",
       "api_id": "gpt-5.6-sol",
       "context": 1050000,
@@ -80,8 +90,8 @@
     },
     {
       "vendor": "Google",
-      "model": "Gemini 3.6 Flash",
-      "api_id": "gemini-3.6-flash",
+      "model": "Gemini 3.8 Flash",
+      "api_id": "gemini-3.8-flash",
       "context": 1050000,
       "max_output": 64000,
       "input_usd_per_mtok": 0.75,

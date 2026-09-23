@@ -7,12 +7,12 @@ file, and ticking a box there edits it here. (It sits outside `public/`, so it n
 Seeded 22 Sep 2026 from the repo and `changes.html` — correct anything that's off.
 
 ## State
-Live at plainlyai.org, serving `0e9026a`, deployed and pushed through `deploy.sh` on 23 Sep
-2026. That deploy carried the 15 Sep Astra / Gemini 3.8 Flash change and the 23 Sep monthly
-check, run early: Opus 5.5 replaced Opus 5, and GPT-6 Sol and Luna replaced GPT-5.6 Sol and
-Terra. Main is ahead of live by one public change, not yet deployed: Getting better results
-re-read early on 23 Sep (every quote still word for word, Opus 5 caveat unchanged), with its
-log entry still saying "Committed, not yet published". The daily price watch runs from Windows Task Scheduler ("Plainly price watch", 09:15
+Live at plainlyai.org, serving `1ec1e81`, deployed and pushed through `deploy.sh` on 23 Sep
+2026. The deploy before it (`0e9026a`, same day) carried the 15 Sep Astra / Gemini 3.8 Flash
+change and the 23 Sep monthly check, run early: Opus 5.5 replaced Opus 5, and GPT-6 Sol and
+Luna replaced GPT-5.6 Sol and Terra. `1ec1e81` added Getting better results, re-read early
+because Opus 5 went legacy: every quote still word for word, Opus 5 caveat unchanged, last
+verified now 23 Sep. The daily price watch runs from Windows Task Scheduler ("Plainly price watch", 09:15
 with hourly catch-up, log at `%LOCALAPPDATA%\plainlyai\pricewatch.log`). The monthly Model
 facts and home page checks run as the Claude scheduled task `plainly-monthly-check`, on the
 11th at 10:00, while the app is open. The quarterly concepts/guides and Start here checks
@@ -33,5 +33,4 @@ quarterly ones 11 Nov.
 (none)
 
 ## Blocked on Shawn
-- [ ] Say go on deploying the 23 Sep Getting better results re-read. Claude then flips its "Committed, not yet published" line and runs `deploy.sh`
 - [ ] Post the X drafts from `PROMO.md` as they arrive, via MyDash's promo panel. Nothing posts them for you

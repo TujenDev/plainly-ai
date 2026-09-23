@@ -1,8 +1,15 @@
 # The monthly Model facts check
 
 This is the procedure for the re-verification that [plainlyai.org/changes](https://plainlyai.org/changes)
-promises publicly, with a date attached. It runs on the 11th of each month, as a scheduled
-task on Shawn's own machine. A human can follow it just as well.
+promises publicly, with a date attached, and for the home page check promised for the same
+day (see the section on it below). Both run on the 11th of each month at 10:00, as the
+Claude scheduled task `plainly-monthly-check` in the desktop app on Shawn's PC. That task
+runs only while the app is open; if the app was closed at 10:00, it runs at the next launch,
+and a late run says so in the log. A human can follow this file just as well.
+
+Like the daily watcher, this schedule belongs to a machine and not to the repo. It lapsed
+once already: it lived on a Mac, and when the Mac went in September 2026 nothing on the new
+machine replaced it until 23 September. On a new machine, recreate the task.
 
 It deliberately does **not** run in a cloud sandbox. That was tried on 14 August 2026 and
 the sandbox's egress proxy blocked `developers.openai.com`, `ai.google.dev` and
@@ -175,6 +182,34 @@ should be added, a pricing tier that did not exist last month, a cell that ought
 to stop saying "not published", or a caveat whose wording is still present but no
 longer means what it did. Those need somebody reading the page. A green run from
 `prices.py` means nothing has moved under the table, not that the table is right.
+
+## The home page check, same day
+
+`/changes` also promises the home page monthly, due the same day. It exists because the
+home page's first sentence makes a claim about the outside world, about what a search for
+"learn AI" returns, that nobody can check from the page itself. It has needed correcting
+twice (30 August and 15 September 2026), both times for stating as an absolute something
+a search only samples. It also summarises every other page, so it goes wrong whenever the
+site changes shape. What the 15 September check did, which is the procedure:
+
+1. **Run the search.** One web search for `learn AI`, using whatever search tool the session
+   has. Read the first page of results and compare them against the home page's opening
+   claim. If the claim no longer holds, correct it and log the correction, including what
+   was returned. Say how the search was run: one query, once, from where, through what
+   tool. Results differ by person, place and day, so that is evidence, not a census. If
+   no search tool works, say so and leave the claim and the date alone.
+2. **Walk the page.** Every claim the home page makes about this site: the three tracks
+   resolve; the concept pages it lists match what is on `/concepts/`; every page on the
+   site is linked from the home page, cross-checked against `/guides`; there are no
+   affiliate links, sponsors or newsletter boxes anywhere; and its descriptions of the two
+   dates, the orange flagging and the one-page rule for figures still match how the site
+   works.
+3. **Move the home page's `Last verified` to today** (the stamp and the JSON-LD
+   `dateModified` both; check 10 holds them together), only if both steps were actually
+   done.
+4. **Give it its own log entry**, dated today, separate from the Model facts entry, ending
+   with the same "Committed, not yet published" line. Update the home page line in
+   "Checks that are due" to the 11th of next month.
 
 ## Before you finish, regenerate the derived files and run the structural check
 

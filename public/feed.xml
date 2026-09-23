@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>a sentence on Sources that no longer matched the table under it</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#23-september-2026-a-sentence-on-sources"/>
+    <id>https://plainlyai.org/changes#23-september-2026-a-sentence-on-sources</id>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary type="text">The date line at the top of Sources said that seven of the documents on it had been re-read in full for the Model facts check on 1 September 2026. No row in the table below it says 1 September any more; ten now say 23 September. A reader checking that sentence against the table, which is what the page is for, would have found nothing it described. It now says what the last column means, the day each document was last read in full, instead of counting rows as of one date, so it cannot fall behind the table again. No source or figure changed, and the page's verified date stays where it is, because nothing was re-checked.</summary>
+  </entry>
+  <entry>
     <title>one guide re-read early, because the model its caveat is about has been replaced</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#23-september-2026-getting-better-results"/>
     <id>https://plainlyai.org/changes#23-september-2026-getting-better-results</id>

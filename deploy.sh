@@ -150,12 +150,34 @@ done
 # server. check.py proves that about the working tree; this proves it about
 # what a reader and a scraper actually get.
 say "7. Live JSON still matches the live table"
-curl -fsS "$SITE/model-facts" -o /tmp/plainly-live-mf.html
-curl -fsS "$SITE/model-facts.json" -o /tmp/plainly-live-mf.json
-$PYTHON - <<'PY'
-import modelfacts, sys
-built = modelfacts.dump(modelfacts.build(open("/tmp/plainly-live-mf.html").read()))
-live = open("/tmp/plainly-live-mf.json").read()
+# These went to /tmp until 15 September 2026, which broke on Windows: the shell
+# writes to a Git Bash /tmp that a native Windows Python cannot open, so the
+# check died on FileNotFoundError after a deploy that had already succeeded —
+# the worst place to fail, since the upload is irreversible by then. The files
+# now land beside this script under relative paths, which the shell and the
+# interpreter resolve identically on both platforms, and are removed afterwards.
+#
+# Having Python fetch them directly instead was tried the same day and reverted.
+# Cloudflare hands a browser-shaped User-Agent 367 bytes of injected markup that
+# curl never sees, so the rebuilt JSON stopped matching for a reason that had
+# nothing to do with the site being wrong — a check that cries wolf about its own
+# fetch is worse than no check. curl gets the page a reader's tooling gets.
+LIVE_HTML=.deploy-live-model-facts.html
+LIVE_JSON=.deploy-live-model-facts.json
+trap 'rm -f "$LIVE_HTML" "$LIVE_JSON"' EXIT
+
+curl -fsS "$SITE/model-facts" -o "$LIVE_HTML"
+curl -fsS "$SITE/model-facts.json" -o "$LIVE_JSON"
+
+LIVE_HTML="$LIVE_HTML" LIVE_JSON="$LIVE_JSON" $PYTHON - <<'PY'
+import modelfacts, os, sys
+
+# encoding is explicit because Windows would otherwise decode as cp1252 and
+# mangle every em dash on the page.
+built = modelfacts.dump(
+    modelfacts.build(open(os.environ["LIVE_HTML"], encoding="utf-8").read())
+)
+live = open(os.environ["LIVE_JSON"], encoding="utf-8").read()
 if built != live:
     sys.exit("   the live model-facts.json does NOT match the live table")
 print("   live: model-facts.json rebuilt from the live page matches byte for byte")

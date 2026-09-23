@@ -349,8 +349,6 @@ RULE2_ALLOWED = {
     "changes": "the log quotes figures that were wrong, on purpose; every entry is dated",
     "concepts/tokens": "the arithmetic exemption Model facts grants at line 95, and the "
                        "sentence points back at the table by name",
-    "getting-better-results": "quotes a dated vendor caveat naming a model, with the fetch "
-                              "date in the sentence and the staleness as the lesson",
     "sources": "names which document each figure came from; the figures stay on Model facts",
 }
 

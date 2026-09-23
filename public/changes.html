@@ -31,7 +31,7 @@
   "url": "https://plainlyai.org/changes",
   "inLanguage": "en",
   "isAccessibleForFree": true,
-  "dateModified": "2026-09-15",
+  "dateModified": "2026-09-23",
   "publisher": {
     "@type": "Organization",
     "name": "Plainly",
@@ -68,7 +68,7 @@
     </p>
 
     <p class="stamp">
-      Last updated <time datetime="2026-09-15"><b>15 September 2026</b></time> &nbsp;·&nbsp; Every page also carries its own
+      Last updated <time datetime="2026-09-23"><b>23 September 2026</b></time> &nbsp;·&nbsp; Every page also carries its own
       pair of dates at the top &nbsp;·&nbsp; <a href="/feed.xml">Atom feed</a> of
       everything below
     </p>
@@ -172,6 +172,163 @@
 
       <section aria-labelledby="the-log">
         <h2 id="the-log">The log<a class="anchor" href="#the-log" aria-label="Permalink to The log">#</a></h2>
+
+        <h3 id="23-september-2026-the-monthly-check-early">23 September 2026 &mdash; the monthly check, run early, because three rows had stopped being current<a class="anchor" href="#23-september-2026-the-monthly-check-early" aria-label="Permalink to 23 September 2026 — the monthly check, run early, because three rows had stopped being current">#</a></h3>
+        <p>
+          <strong>Run early, and for a reason.</strong> The 15 September change below
+          was still waiting to be deployed, and before it went out the price watcher
+          was run by hand to make sure nothing had moved underneath it. It could not
+          verify three rows: Claude Opus 5, GPT-5.6 Sol and GPT-5.6 Terra. None of
+          their figures had changed. Their vendors had stopped listing them as
+          current. Deciding what replaces a row is the part of the check a script
+          cannot do, so the whole monthly check ran today rather than on 11 October.
+          The next one is still due on 11 October.
+        </p>
+        <p>
+          <strong>Claude Opus 5.5 replaces Claude Opus 5, and costs less.</strong>
+          Anthropic's models overview now puts Opus 5.5 in its headline table and
+          lists Opus 5 among legacy models that are still available. Opus 5.5 is $4
+          input and $20 output against Opus 5's $5 and $25, with the same 1M context
+          and 128k output, and both its cutoffs are June 2026 against May. Opus 5 is
+          still active, with retirement not sooner than 24 July 2027, at the price this
+          table gave for it.
+        </p>
+        <p>
+          <strong>The OpenAI rows are now GPT-6 Astra, Sol and Luna, and the name Sol
+          now means a different tier.</strong> OpenAI's model catalogue lists those
+          three as its flagship models, and GPT-5.6 Sol and Terra have gone from it
+          and from the standard price table. GPT-5.6 Sol was a flagship at $4 and $20.
+          GPT-6 Sol is the model OpenAI says to choose &ldquo;to balance intelligence
+          and cost&rdquo;, which is how it described Terra, at $2 and $10. Anyone
+          switching from <code>gpt-5.6-sol</code> to <code>gpt-6-sol</code> because
+          the names match is moving to the middle of the new lineup, not its top; the
+          top is GPT-6 Astra. GPT-6 Luna, at $0.10 and $0.50, is now the cheapest row
+          on the table. All three have the same 1.05M context and 128k output, and
+          knowledge cutoffs of 30 April, 20 April and 18 May 2026. Neither GPT-5.6
+          model has a shutdown date, and both still carry the prices this table gave
+          them.
+        </p>
+        <p>
+          <strong>The contradiction recorded on 15 September has settled.</strong>
+          That entry found OpenAI calling two different models its flagship, and left
+          the word off the page. The catalogue now calls GPT-6 Astra &ldquo;our
+          flagship model&rdquo; and no longer lists GPT-5.6 Sol at all. Sol's own model
+          page still calls it a flagship, but that page no longer backs a row here.
+        </p>
+        <p>
+          <strong>Correction: a note under the table said two different numbers were
+          the same.</strong> The note on context figures, written on 11 August, said
+          Google's 1,048,576 and OpenAI's 1.05M were the same number written two ways.
+          OpenAI's model pages give 1,050,000 exactly. The table still prints both as
+          1.05M, which is fair as rounding, and the note now says they are close, not
+          equal. Nothing anyone could budget from depends on the difference. It is
+          logged because it was wrong, and because it sat directly under the figures
+          it was there to explain.
+        </p>
+        <p>
+          <strong>The watcher had been passing a row it could not see.</strong> When
+          GPT-5.6 Sol left OpenAI's standard price table, <code>prices.py</code>
+          cross-checked it against the pricing page, found the same ID further down in
+          a table of cyber-security models, read $4 and $20 there, and reported the
+          price unchanged. Its other OpenAI probe did flag the row, so the run still
+          failed, but one line of it said all was well about a model the vendor no
+          longer listed as a standard offering. It now reads only the standard table,
+          and a model missing from it is reported as unverified.
+        </p>
+        <p>
+          <strong>Everything else was re-read and holds.</strong> Fable 5.1, Sonnet 5
+          and Haiku 4.5; GPT-6 Astra on both OpenAI pages; Gemini 3.8 Flash, with the
+          rate change on 1 January 2027 in the same words; Muse Spark 1.2 and the
+          contributor tier; and Meta still publishing no Llama price. The long-context
+          note now carries the GPT-6 tiers. The note on end dates has one left,
+          Gemini's, because GPT-5.6 Sol's promotional rate went with its row.
+          Anthropic's and OpenAI's deprecations pages are now listed on
+          <a href="/sources">Sources</a>, because Model facts now tells you, of four
+          models it no longer lists, that they are still on sale, and that claim
+          should be as checkable as a price.
+        </p>
+        <p>
+          <strong>The daily check had stopped, and nothing said so.</strong> The price
+          watcher described under <a href="#checks-that-are-due">Checks that are
+          due</a> ran on a schedule kept on one machine. When work on this site moved
+          to another machine in September, the schedule did not move with it. So for
+          part of this month, the daily check that section promises was not happening.
+          Exactly how long is not known, because the record of its last run was on the
+          old machine. It is scheduled again from today, with the same rules as before:
+          a missed day is reported, not quietly made up. The setup is now written down
+          beside the code, so the next move cannot lose it the same way without
+          someone skipping a documented step.
+        </p>
+        <p>
+          <strong>Committed, not yet published.</strong> Prepared on a branch together
+          with the 15 September change below, and not deployed.
+        </p>
+
+        <h3 id="15-september-2026-two-rows-changed">15 September 2026 &mdash; two rows on Model facts, one of which changed no numbers at all<a class="anchor" href="#15-september-2026-two-rows-changed" aria-label="Permalink to 15 September 2026 — two rows on Model facts, one of which changed no numbers at all">#</a></h3>
+        <p>
+          The monthly check earlier today noted four models published by vendors that
+          <a href="/model-facts">Model facts</a> does not list, and left them for a
+          human rather than deciding on its own. Two have been acted on. Claude Mythos
+          5.1 stays out, because Anthropic lists it as limited availability. Meta's
+          <code>muse-spark-1.3</code> stays out too: it shares the standard pricing
+          already printed for 1.2, so adding it would grow the table without telling a
+          reader anything.
+        </p>
+        <p>
+          <strong>Gemini 3.6 Flash became Gemini 3.8 Flash, and not one figure
+          moved.</strong> Same 1,048,576 context limit, same 65,536 output limit, same
+          $0.75 and $3.75, same increase on 1 January 2027 worded the same way, and
+          still no published knowledge cutoff. Only the name and the API ID differ. The
+          reason to swap it has nothing to do with the numbers: Google's pricing page
+          now calls 3.6 Flash &ldquo;our previous generation Flash model&rdquo;, and
+          this table says it lists current ones. A row can go stale on that claim while
+          every figure in it stays correct, and the daily watcher cannot see it,
+          because the watcher compares numbers and this is a claim about which model
+          matters.
+        </p>
+        <p>
+          <strong>GPT-6 Astra is new, and replaces nothing.</strong> OpenAI documents
+          it as the model to start with, above the GPT-5.6 family, which stays where it
+          is. Its limits are identical to Sol's &mdash; 1.05M context, 128k max output
+          &mdash; so the whole difference is money and recency: $10 and $50 against
+          Sol's $4 and $20, and a cutoff of 30 April 2026 against 16 February. It
+          carries no promotional wording, so unlike Sol's rate it has no stated
+          horizon. Its long-context tier, $20 and $75, is in the tiering note with the
+          others.
+        </p>
+        <p>
+          <strong>OpenAI calls two different models its flagship, and this table prints
+          neither claim.</strong> The model catalogue labels GPT-5.6 Sol
+          &ldquo;flagship model for complex professional work&rdquo;; the
+          choosing-a-model section on the same page says to use GPT-6 Astra, &ldquo;our
+          flagship model&rdquo;. Both sentences are live right now. Picking one would
+          be settling something the vendor has not settled, and a tidier story than the
+          source supports is the exact failure this site is arranged against. So the
+          contradiction is recorded and the word is left off the page.
+        </p>
+        <p>
+          <strong>The watcher was moved with the table, which is the part that could
+          have rotted quietly.</strong> <code>prices.py</code> holds one Google model
+          page in its source list and derives the model it expects from that URL, so a
+          table row and a source that disagree make the row report
+          <code>UNVERIFIED</code> rather than passing unchecked. Both the URL and the
+          rate-expiry wording it watches now name 3.8 Flash.
+          <a href="/sources">Sources</a> records the same move and why the two are
+          tied together.
+        </p>
+        <p>
+          <strong>Overtaken before it went out.</strong> This entry was written on
+          15 September and not deployed that day, and before it could be, OpenAI
+          moved the GPT-5.6 models off its catalogue. So the GPT-5.6 family no
+          longer &ldquo;stays where it is&rdquo;, and the flagship contradiction above
+          has settled. The 23 September entry above says what changed. This one is
+          left as it was written, because the log records what was done and known on
+          the day.
+        </p>
+        <p>
+          <strong>Committed, not yet published.</strong> Prepared on a branch and not
+          deployed.
+        </p>
 
         <h3 id="15-september-2026-the-home-page-check">15 September 2026 &mdash; the home page check, four days late, and the first sentence is drifting again<a class="anchor" href="#15-september-2026-the-home-page-check" aria-label="Permalink to 15 September 2026 — the home page check, four days late, and the first sentence is drifting again">#</a></h3>
         <p>

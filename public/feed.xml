@@ -9,6 +9,13 @@
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
   <entry>
+    <title>one guide re-read early, because the model its caveat is about has been replaced</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#23-september-2026-getting-better-results"/>
+    <id>https://plainlyai.org/changes#23-september-2026-getting-better-results</id>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary type="text">Re-read early, for a reason. Getting better results quotes one exception from Anthropic's prompting guidance: that Claude Opus 5 checks its own work without being asked, so telling it to can cost tokens and latency for nothing. The monthly check below replaced Opus 5 on Model facts today, which made this the page on the site most likely to have gone stale. It belongs to the quarterly check due on 11 November, and there was no reason to leave it seven weeks.</summary>
+  </entry>
+  <entry>
     <title>the monthly check, run early, because three rows had stopped being current</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#23-september-2026-the-monthly-check-early"/>
     <id>https://plainlyai.org/changes#23-september-2026-the-monthly-check-early</id>

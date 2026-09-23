@@ -23,3 +23,11 @@ desktop.ini
 *.swp
 .vscode/
 .idea/
+
+# Secrets - never commit these
+.env
+.env.*
+!.env.example
+.dev.vars
+*.pem
+*.key

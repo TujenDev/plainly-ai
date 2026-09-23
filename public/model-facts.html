@@ -32,7 +32,7 @@
   "inLanguage": "en",
   "isAccessibleForFree": true,
   "datePublished": "2026-08-11",
-  "dateModified": "2026-09-15",
+  "dateModified": "2026-09-23",
   "publisher": {
     "@type": "Organization",
     "name": "Plainly",
@@ -105,8 +105,8 @@
     </p>
 
     <p class="stamp">
-      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-09-15"><b>15 September 2026</b></time> against each vendor's own documentation,
-      across six passes that produced six corrections, all logged on
+      Published <time datetime="2026-08-11"><b>11 August 2026</b></time> &nbsp;&middot;&nbsp; Last verified <time datetime="2026-09-23"><b>23 September 2026</b></time> against each vendor's own documentation,
+      across seven passes that produced seven corrections, all logged on
       <a href="/changes">the changes page</a>. Anything not verified is flagged in
       orange.
     </p>
@@ -160,14 +160,14 @@
               <td>Jun 2026</td>
             </tr>
             <tr>
-              <th scope="row">Claude Opus 5</th>
-              <td><code>claude-opus-5</code></td>
+              <th scope="row">Claude Opus 5.5</th>
+              <td><code>claude-opus-5-5</code></td>
               <td class="num" data-tokens="1000000">1M</td>
               <td class="num" data-tokens="128000">128k</td>
-              <td class="num" data-usd-per-mtok="5">$5</td>
-              <td class="num" data-usd-per-mtok="25">$25</td>
-              <td>May 2026</td>
-              <td>May 2026</td>
+              <td class="num" data-usd-per-mtok="4">$4</td>
+              <td class="num" data-usd-per-mtok="20">$20</td>
+              <td>Jun 2026</td>
+              <td>Jun 2026</td>
             </tr>
             <tr>
               <th scope="row">Claude Sonnet 5</th>
@@ -250,21 +250,21 @@
             </tr>
             <tr>
               <td>OpenAI</td>
-              <th scope="row">GPT-5.6 Sol</th>
-              <td><code>gpt-5.6-sol</code></td>
-              <td class="num" data-tokens="1050000">1.05M</td>
-              <td class="num" data-tokens="128000">128k</td>
-              <td class="num" data-usd-per-mtok="4">$4</td>
-              <td class="num" data-usd-per-mtok="20">$20</td>
-            </tr>
-            <tr>
-              <td>OpenAI</td>
-              <th scope="row">GPT-5.6 Terra</th>
-              <td><code>gpt-5.6-terra</code></td>
+              <th scope="row">GPT-6 Sol</th>
+              <td><code>gpt-6-sol</code></td>
               <td class="num" data-tokens="1050000">1.05M</td>
               <td class="num" data-tokens="128000">128k</td>
               <td class="num" data-usd-per-mtok="2">$2</td>
-              <td class="num" data-usd-per-mtok="12">$12</td>
+              <td class="num" data-usd-per-mtok="10">$10</td>
+            </tr>
+            <tr>
+              <td>OpenAI</td>
+              <th scope="row">GPT-6 Luna</th>
+              <td><code>gpt-6-luna</code></td>
+              <td class="num" data-tokens="1050000">1.05M</td>
+              <td class="num" data-tokens="128000">128k</td>
+              <td class="num" data-usd-per-mtok="0.1">$0.10</td>
+              <td class="num" data-usd-per-mtok="0.5">$0.50</td>
             </tr>
             <tr>
               <td>Google</td>
@@ -307,8 +307,8 @@
       <p class="table-note">
         <strong>Every source behind this table is listed, dated, on
         <a href="/sources">Sources</a>.</strong> What was corrected and when, and the
-        decisions behind what is and is not in the table, are below. They are folded
-        because there are nine of them. The one that costs money is not.
+        decisions behind what is and is not in the table, are below. Most are folded,
+        because there are a lot of them. The ones that cost money are not.
       </p>
 
       <div class="table-notes">
@@ -317,69 +317,87 @@
           <summary>Tiering: the prices above are short-context rates, and long-context work costs more</summary>
           <p>
             OpenAI's pricing page lists GPT-6 Astra at $20 input / $75 output above its
-            context threshold, against the $10 / $50 quoted here; GPT-5.6 Sol at
-            $8 / $30 against $4 / $20; and GPT-5.6 Terra at $4 / $18 against $2 / $12.
-            Input doubles on all three; output rises by half on Astra and rather more
-            on the other two. Google prices
+            context threshold, against the $10 / $50 quoted here; GPT-6 Sol at
+            $4 / $15 against $2 / $10; and GPT-6 Luna at $0.20 / $0.75 against
+            $0.10 / $0.50. Input doubles on all three and output rises by half, which
+            is how OpenAI's model pages state the rule: a prompt of more than 272K input
+            tokens is charged at those rates for the whole request, not just the part
+            over the line. Google prices
             some models the same way, above and below a prompt-size threshold, and
             offers batch, flex and priority rates that differ substantially from the
             standard rate quoted. Meta publishes a cheaper &ldquo;contributor&rdquo;
-            tier. Nobody should budget a long-context job from this table; read the
-            vendor's own page.
+            tier, and says it has no long-context premium at all. Nobody should budget
+            a long-context job from this table; read the vendor's own page.
           </p>
         </details>
 
         <details class="cost" open>
-          <summary>Two of the prices above have published end dates</summary>
-          <p>
-            <strong>GPT-5.6 Sol: $4 / $20 is promotional.</strong> OpenAI's pricing
-            page states that &ldquo;GPT-5.6 Sol&rsquo;s promotional pricing is
-            available at least through November 21, 2026.&rdquo; Noted here on
-            15 September 2026. The wording sets a floor rather than an expiry &mdash;
-            <em>at least</em> through that date &mdash; so it says when the rate is
-            guaranteed until, not when it ends. This table carried the $4 / $20 figure
-            from 26 August 2026 with no indication it was promotional at all.
-          </p>
+          <summary>One of the prices above has a published end date</summary>
           <p>
             <strong>Gemini 3.8 Flash: $0.75 / $3.75 expires on 1 January 2027.</strong>
             Google's pricing page gives those rates &ldquo;through December 31,
             2026&rdquo; and $1.50 / $7.50 &ldquo;starting January 1, 2027&rdquo;, both
-            still worded exactly that way today. That is a dated increase rather than
-            a floor, and it is the one figure on this page with a known expiry.
+            still worded exactly that way today. That is a dated increase, and it is
+            the one figure on this page with a known expiry. Until 23 September 2026
+            this note also carried GPT-5.6 Sol's promotional rate, which left with
+            its row.
           </p>
         </details>
 
         <details>
-          <summary>15 September 2026 &mdash; GPT-6 Astra added, and the Gemini row moved to 3.8 Flash</summary>
+          <summary>23 September 2026 &mdash; the OpenAI rows became the GPT-6 family, Opus 5.5 replaced Opus 5, and the Gemini row moved to 3.8 Flash</summary>
           <p>
-            <strong>Gemini 3.6 Flash became Gemini 3.8 Flash, and not one figure
-            moved.</strong> Same context limit of 1,048,576, same output limit of
-            65,536, same $0.75 and $3.75, same expiry on 1 January 2027 in the same
-            words, and still no published cutoff. Only the name and the API ID are
-            different. The row was swapped because Google's own pricing page now
-            describes 3.6 Flash as &ldquo;our previous generation Flash model&rdquo;,
-            and this table says it lists current models &mdash; a row can go stale on
-            that claim alone while every number in it stays right, which is the sort of
-            rot the daily watcher cannot see.
+            <strong>Every row that changed here changed because its vendor stopped
+            listing the old model as current, and every model that left is still on
+            sale.</strong> None of their figures had moved. That matters if you are
+            calling one of them today: the old row's numbers still describe what you
+            are paying.
           </p>
           <p>
-            <strong>GPT-6 Astra is new here, and replaces nothing.</strong> OpenAI
-            documents it as the model to start with, above the GPT-5.6 family, which
-            stays. Its limits are identical to Sol's &mdash; 1.05M context, 128k max
-            output &mdash; and the difference is the money and the cutoff: $10 and $50
-            against Sol's $4 and $20, and a knowledge cutoff of 30 April 2026 against
-            16 February. It carries no promotional wording, so unlike Sol's rate there
-            is no stated horizon on it.
+            <strong>Claude Opus 5.5 took Opus 5's place.</strong> Anthropic's models
+            overview now puts Opus 5.5 in its headline table and lists Opus 5 under
+            &ldquo;Legacy models (still available)&rdquo;. Its
+            <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations">model deprecations</a>
+            page has Opus 5 as active, with retirement not sooner than 24 July 2027,
+            and its pricing page still charges the $5 and $25 this table gave for it.
+            It is the same move as Fable 5 to Fable 5.1 on 1 September, with one
+            difference: the newer model is cheaper. Opus 5.5 is $4 and $20 with the
+            same limits, and both its cutoffs are June 2026 against Opus 5's May.
           </p>
           <p>
-            <strong>One thing this table will not resolve: OpenAI calls two different
-            models its flagship.</strong> The model catalogue labels GPT-5.6 Sol
-            &ldquo;flagship model for complex professional work&rdquo;, while the
-            choosing-a-model section on the same page says to use GPT-6 Astra,
-            &ldquo;our flagship model&rdquo;. Both sentences are live today. This page
-            prints neither word, because picking one would be settling a question the
-            vendor has not settled, and inventing a tidier story than the source
-            supports is the failure this whole site is arranged against.
+            <strong>The OpenAI rows are GPT-6 Astra, Sol and Luna, and the name Sol
+            now means a different tier.</strong> OpenAI's model catalogue lists those
+            three as its flagship models, and GPT-5.6 Sol and Terra are gone from it
+            and from the standard table on the pricing page. GPT-5.6 Sol was, on its
+            own model page, a flagship model at $4 and $20. GPT-6 Sol is the one the
+            catalogue says to choose &ldquo;to balance intelligence and cost&rdquo;,
+            which is how Terra's page describes Terra, and it is $2 and $10. The top
+            of the lineup is GPT-6 Astra. Moving from <code>gpt-5.6-sol</code> to
+            <code>gpt-6-sol</code> because the names match is a move to the middle of
+            the new lineup, not to its top. GPT-6 Luna, the third, is the one OpenAI
+            points at &ldquo;cost-sensitive, high-volume workloads&rdquo;.
+          </p>
+          <p>
+            <strong>Neither GPT-5.6 model has a shutdown date.</strong> Both model
+            pages are still up with no deprecation notice, and OpenAI's
+            <a href="https://developers.openai.com/api/docs/deprecations">deprecations</a>
+            page names them as the replacements for older models rather than
+            scheduling their own removal. Sol's page still gives $4 and $20, with the
+            promotional wording this table used to print, and Terra's still gives $2
+            and $12.
+          </p>
+          <p>
+            <strong>GPT-6 Astra, and the move from Gemini 3.6 Flash to 3.8 Flash, were
+            prepared on 15 September and are part of the same change.</strong> The
+            Gemini row moved without one figure changing &mdash; the same 1,048,576
+            and 65,536, the same $0.75 and $3.75, the same expiry in the same words,
+            still no published cutoff &mdash; because Google's pricing page calls 3.6
+            Flash &ldquo;our previous generation Flash model&rdquo;, and this table
+            says it lists current ones. A row can go stale on that claim alone while
+            every number in it stays right. The watcher sees that only when the old
+            model vanishes from the page it reads, which is how the three rows above
+            were caught. When a vendor merely relabels a model, as Google did with
+            3.6 Flash, only a person reading the page will notice.
           </p>
         </details>
 
@@ -419,7 +437,7 @@
         </details>
 
         <details>
-          <summary>Verified 15 September 2026, against each vendor's own documentation</summary>
+          <summary>Verified 23 September 2026, against each vendor's own documentation</summary>
           <p>
             Anthropic's
             <a href="https://platform.claude.com/docs/en/about-claude/models/overview">models overview</a>
@@ -432,6 +450,10 @@
             <a href="https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash">Gemini 3.8 Flash</a>
             model page, and Meta's
             <a href="https://dev.meta.ai/docs/pricing-rate-limits.md">Model API pricing</a>.
+            For the three rows that left, also Anthropic's
+            <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations">model deprecations</a>
+            page, OpenAI's <a href="https://developers.openai.com/api/docs/deprecations">deprecations</a>
+            page, and OpenAI's own pages for GPT-5.6 Sol and Terra.
           </p>
           <p>
             <strong>Read Anthropic's overview page as markdown, not as a web page.</strong>
@@ -473,7 +495,7 @@
         </details>
 
         <details>
-          <summary>API IDs: which string each row carries, and the two aliases worth knowing</summary>
+          <summary>API IDs: which string each row carries, and the one alias worth knowing</summary>
           <p>
             The string in that column is the one the vendor documents as the API ID.
             For Claude Haiku 4.5 that is the dated
@@ -483,34 +505,42 @@
             Anthropic row where the distinction shows.
           </p>
           <p>
-            OpenAI documents a second one. Its
-            <a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol">GPT-5.6 Sol</a>
-            page states that &ldquo;the <code>gpt-5.6</code> alias routes requests to
-            GPT-5.6 Sol&rdquo;, with <code>gpt-5.6-sol</code> as the default snapshot —
-            the same pinned-versus-alias split as the Haiku row. This page claimed
-            until 15 September 2026 that Haiku was the only row where that distinction
-            showed, which was never true of the OpenAI rows. It is the kind of sentence
-            that goes wrong without any figure moving, and the daily watcher cannot
-            catch it, because it compares numbers and this is prose.
+            OpenAI documents no alias for the three GPT-6 rows: each model page lists
+            one ID and nothing else. So Haiku is now the only row on this page where
+            the distinction shows. That was not true while this table carried GPT-5.6
+            Sol, whose
+            <a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol">model page</a>
+            states that &ldquo;the <code>gpt-5.6</code> alias routes requests to
+            GPT-5.6 Sol&rdquo;. This page missed that alias until 15 September 2026
+            and said Haiku was the only such row. The sentence is true again now, but
+            only because the Sol row left. Claims like this go wrong, and right again,
+            without any figure moving, and the daily watcher cannot catch them,
+            because it compares numbers and this is prose.
           </p>
         </details>
 
         <details>
-          <summary>Context figures: why two vendors' numbers look different and are not</summary>
+          <summary>Correction, 23 September 2026 &mdash; context figures: two vendors, one printed figure, two different numbers</summary>
           <p>
             Google publishes an exact input limit of 1,048,576 tokens and an output
-            limit of 65,536; OpenAI publishes 1.05M and 128K. The first two are the
-            same number written two ways.
+            limit of 65,536. OpenAI's model pages give 1,050,000 and 128,000, which its
+            catalogue writes as 1.05M and 128K. This table prints both context limits
+            as 1.05M. That is fair as rounding, but they are not the same number:
+            Google's is a power of two, and OpenAI's is a round decimal figure. Until
+            23 September 2026 this note said they were the same number written two
+            ways. Nothing you could budget from depends on the difference, but the
+            sentence was wrong, and it sat directly under the figures it was
+            explaining.
           </p>
         </details>
 
         <details>
           <summary>Cutoffs: who publishes one, and why a column is missing</summary>
           <p>
-            OpenAI publishes a knowledge cutoff of 16 February 2026 for the GPT-5.6
-            family and 30 April 2026 for GPT-6 Astra. Google's model page for Gemini
-            3.8 Flash does not publish one, which is why there is no cutoff column
-            here.
+            OpenAI publishes a knowledge cutoff of 30 April 2026 for GPT-6 Astra,
+            20 April 2026 for GPT-6 Sol and 18 May 2026 for GPT-6 Luna. Google's model
+            page for Gemini 3.8 Flash does not publish one, which is why there is no
+            cutoff column here.
           </p>
         </details>
 

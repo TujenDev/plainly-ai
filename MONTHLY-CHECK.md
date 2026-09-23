@@ -43,8 +43,10 @@ tables against these primary sources, which are also listed with their purpose i
 | https://developers.openai.com/api/docs/pricing | GPT prices, and the long-context tiers the table deliberately does not reproduce |
 | https://developers.openai.com/api/docs/models | Context and output limits, knowledge cutoff |
 | https://ai.google.dev/gemini-api/docs/pricing | Gemini prices and tiering |
-| https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash | Context and output limits, and the absence of a published cutoff |
+| https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash | Context and output limits, and the absence of a published cutoff. It follows the Google row, and `prices.py` derives the model it expects from this URL |
 | https://dev.meta.ai/docs/pricing-rate-limits.md | Muse pricing, the contributor tier, and the absence of a first-party Llama price |
+| https://platform.claude.com/docs/en/about-claude/model-deprecations | Whether a Claude model that left the headline table is still on sale, and its earliest retirement date |
+| https://developers.openai.com/api/docs/deprecations | Whether a GPT model that left the catalogue has a shutdown date |
 
 Also confirm the API ID column still matches, including the distinction between a pinned
 model ID and an alias, which the vendor documents separately.
@@ -64,6 +66,14 @@ model ID and an alias, which the vendor documents separately.
   comparison, a "best value" note, or a normalised column.
 - **A new model on a vendor page is not automatically a new row.** Propose it in the
   report; do not silently restructure the table.
+- **A row can go stale with every figure still right.** When a vendor moves a model
+  off its headline table or calls it "previous generation", the row no longer lists a
+  current model, whatever its numbers say. It was found on Gemini 3.6 Flash on
+  15 September 2026, and on Claude Opus 5 and both GPT-5.6 rows on 23 September. Before writing
+  that the old model is still on sale, check the deprecations pages above.
+- **A model's name does not tell you its tier.** GPT-5.6 Sol was OpenAI's flagship;
+  GPT-6 Sol is its middle model, doing the job GPT-5.6 Terra had. When a generation
+  changes, match rows by the vendor's own description of each model, not by name.
 
 ## What to do with what you find
 

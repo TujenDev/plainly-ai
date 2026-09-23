@@ -7,22 +7,26 @@ file, and ticking a box there edits it here. (It sits outside `public/`, so it n
 Seeded 22 Sep 2026 from the repo and `changes.html` — correct anything that's off.
 
 ## State
-Live at plainlyai.org. Last monthly model-facts check 15 Sep 2026 (four days late); the next
-model-facts and home-page checks are both due 11 Oct 2026, the quarterly ones 11 Nov. The GPT-6
-Astra / Gemini 3.8 Flash update is committed on `add-astra-gemini38-2026-09-15` but not merged
-or deployed — its log entry still says "Committed, not yet published".
+Live at plainlyai.org, serving main as of the 15 Sep deploy (`c4d0ae0`; checked against the
+live pages on 23 Sep). The monthly model-facts check ran early on 23 Sep 2026 and is committed
+on `monthly-check-2026-09-23`, not merged or deployed. That branch also carries the 15 Sep
+Astra / Gemini 3.8 Flash change and everything on main. Both of those log entries still say
+"Committed, not yet published". main is 4 commits ahead of origin (the `.gitignore` block,
+this file, and the deploy fix); `deploy.sh` pushes them. The next model-facts and home-page
+checks are both due 11 Oct 2026, and the quarterly ones 11 Nov.
 
 ## Next up
-- [ ] Merge `add-astra-gemini38-2026-09-15` and deploy it with `deploy.sh`, so the live model-facts page catches up
-- [ ] Merge or close `fix-deploy-tmp-2026-09-15` (the post-deploy check fix)
-- [ ] Monthly model-facts check and home-page check — due 11 Oct 2026
-- [ ] Quarterly concepts/guides and start-here resource checks — due 11 Nov 2026
+- [ ] Deploy `monthly-check-2026-09-23`: flip both "Committed, not yet published" lines to the live wording, merge into main, run `deploy.sh --dry-run`, then `deploy.sh`
+- [ ] Monthly model-facts and home-page checks, due 11 Oct 2026. Anthropic gives Haiku 4.5's retirement as not sooner than 15 Oct 2026, so look at that row closely
+- [ ] Quarterly concepts/guides and start-here checks, due 11 Nov 2026. Getting better results quotes a Claude Opus 5 caveat fetched 12 Aug, and Opus 5 is now a legacy model, so re-read Anthropic's prompting best practices then
+- [ ] Anthropic's models overview now answers with a 307 (temporary) redirect to `/docs/en/models/overview`. Every link still works; move them over if it turns permanent
 
 ## Live bugs
-(none)
+- Live Model facts lists Claude Opus 5, GPT-5.6 Sol and GPT-5.6 Terra as current models. Their vendors moved on after 15 Sep. Fixed on `monthly-check-2026-09-23`, not deployed
+- Live Model facts' context-figures note says Google's 1,048,576 and OpenAI's 1.05M are the same number. OpenAI's pages give 1,050,000. Fixed on the same branch, not deployed
+- `/changes` says `prices.py` checks the table daily. Nothing schedules it on this Windows PC; whether the Mac still runs it is unknown
 
 ## Blocked on Shawn
-- [ ] Say go on merging and deploying the Astra / Gemini 3.8 Flash branch — deploys go through `deploy.sh` only
-- [ ] Commit the `.gitignore` secrets block (uncommitted since 16 Sep) — `deploy.sh` refuses to deploy a dirty tree
-- [ ] Check the daily price watcher still runs somewhere — it was a macOS launchd agent, nothing schedules it on this Windows PC, and the site says it runs daily
+- [ ] Say go on deploying `monthly-check-2026-09-23`, which includes the Astra / Gemini 3.8 Flash change. Deploys go through `deploy.sh` only
+- [ ] Is the Mac still running the daily price watcher? If not, either schedule it on this PC or reword the public "daily" claim before the deploy
 - [ ] Post the X drafts once the daily task starts writing `PROMO.md`

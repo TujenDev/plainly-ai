@@ -5,9 +5,16 @@
   <link rel="self" type="application/atom+xml" href="https://plainlyai.org/feed.xml"/>
   <link rel="alternate" type="text/html" href="https://plainlyai.org/changes"/>
   <id>https://plainlyai.org/changes</id>
-  <updated>2026-09-15T00:00:00Z</updated>
+  <updated>2026-09-23T00:00:00Z</updated>
   <author><name>Plainly</name><uri>https://plainlyai.org/about</uri></author>
   <rights>Free to quote. If you reproduce a fact from here, carry its last-verified date with it.</rights>
+  <entry>
+    <title>the monthly check, run early, because three rows had stopped being current</title>
+    <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#23-september-2026-the-monthly-check-early"/>
+    <id>https://plainlyai.org/changes#23-september-2026-the-monthly-check-early</id>
+    <updated>2026-09-23T00:00:00Z</updated>
+    <summary type="text">Run early, and for a reason. The 15 September change below was still waiting to be deployed, and before it went out the price watcher was run by hand to make sure nothing had moved underneath it. It could not verify three rows: Claude Opus 5, GPT-5.6 Sol and GPT-5.6 Terra. None of their figures had changed. Their vendors had stopped listing them as current. Deciding what replaces a row is the part of the check a script cannot do, so the whole monthly check ran today rather than on 11 October. The next one is still due on 11 October.</summary>
+  </entry>
   <entry>
     <title>two rows on Model facts, one of which changed no numbers at all</title>
     <link rel="alternate" type="text/html" href="https://plainlyai.org/changes#15-september-2026-two-rows-changed"/>

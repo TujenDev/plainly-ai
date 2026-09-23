@@ -81,7 +81,8 @@ def exact(api_id):
 
 # Bump deliberately when a model is added to or removed from Model facts. A row
 # count that drifts on its own means the table changed shape under the parser.
-EXPECTED_ROWS = 10  # 9 until 15 September 2026, when GPT-6 Astra was added
+EXPECTED_ROWS = 10  # 9 until 15 September 2026, when GPT-6 Astra was added. The
+                    # 23 September swaps (Opus 5.5, GPT-6 Sol and Luna) were one for one.
 
 
 def note(verdict, subject, detail=""):
@@ -338,16 +339,32 @@ def openai(C):
 
     # cross-check the prices against the separate pricing page: one page can be
     # mid-update, and a figure confirmed twice is the one worth printing.
+    #
+    # Only the standard table is searched. This used to search the whole page and
+    # take the first row with the right ID, which was the standard table only for
+    # as long as the model was in it. On 23 September 2026 gpt-5.6-sol had left
+    # that table but was still listed further down, under cyber models, at the
+    # same $4 and $20 — so the probe read that row and reported the price
+    # unchanged, for a model the vendor no longer listed as a standard offering.
+    # The catalogue probe above did report the row unverified; this one passed it.
+    # A row that is not in the standard table now says so.
     txt = fetch("openai_pricing")
     if txt is not None:
+        start = txt.find("Standard Short context")
+        end = txt.find("All models", start) if start >= 0 else -1
+        std = txt[start:end] if 0 <= start < end else None
         for model, claim in C.items():
             if claim.get("vendor") != "OpenAI":
                 continue
+            if std is None:
+                note(UNVERIFIED, f"{model} price (pricing page)",
+                     "the standard price table was not found on the pricing page")
+                continue
             m = re.search(exact(claim["api_id"]) +
-                          r"\s*\$([\d.]+)\s*\$[\d.]+\s*\$[\d.]+\s*\$([\d.]+)", txt)
+                          r"\s*\$([\d.]+)\s*\$[\d.]+\s*\$[\d.]+\s*\$([\d.]+)", std)
             if not m:
                 note(UNVERIFIED, f"{model} price (pricing page)",
-                     "standard short-context row did not parse")
+                     "not in the standard price table")
                 continue
             cmp_money(f"{model} input (2nd source)", claim["input"], m.group(1))
             cmp_money(f"{model} output (2nd source)", claim["output"], m.group(2))

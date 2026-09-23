@@ -27,7 +27,6 @@ quarterly ones 11 Nov.
 - [ ] Watch Haiku 4.5 in that check: Anthropic gives its retirement as not sooner than 15 Oct 2026
 - [ ] 11 Nov: the first scheduled quarterly check. It stops if that day's monthly check hasn't finished, so check it ran. Getting better results was already re-read on 23 Sep because Opus 5 went legacy, and its Opus 5 caveat still held word for word; it gets re-read with the rest regardless
 - [ ] Anthropic's models overview answers with a 307 (temporary) redirect to `/docs/en/models/overview`. Every link still works; move them over if it turns permanent
-- [ ] Tidy merged branches, local and on GitHub: `add-astra-gemini38-2026-09-15`, `fix-deploy-tmp-2026-09-15`, `fix-deploy-python-2026-09-15`, `home-check-2026-09-15`, `monthly-check-2026-09-15`, `monthly-check-2026-09-23`, `getting-better-results-2026-09-23`
 
 ## Live bugs
 (none)

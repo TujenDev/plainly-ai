@@ -13,13 +13,17 @@ check, run early: Opus 5.5 replaced Opus 5, and GPT-6 Sol and Luna replaced GPT-
 Terra. The daily price watch runs from Windows Task Scheduler ("Plainly price watch", 09:15
 with hourly catch-up, log at `%LOCALAPPDATA%\plainlyai\pricewatch.log`). The monthly Model
 facts and home page checks run as the Claude scheduled task `plainly-monthly-check`, on the
-11th at 10:00, while the app is open. Both are documented in README.md and MONTHLY-CHECK.md.
-Next monthly checks are due 11 Oct 2026, and the quarterly ones 11 Nov.
+11th at 10:00, while the app is open. The quarterly concepts/guides and Start here checks
+run as `plainly-quarterly-check` at 14:00 on 11 Feb/May/Aug/Nov, on top of that day's
+monthly branch. X post drafts are written to `PROMO.md` (gitignored) daily at 08:10 by
+`plainly-daily-x-drafts`, for MyDash's promo panel. The procedures are in README.md,
+MONTHLY-CHECK.md and QUARTERLY-CHECK.md. Next monthly checks are due 11 Oct 2026, and the
+quarterly ones 11 Nov.
 
 ## Next up
 - [ ] 11 Oct: the scheduled monthly check prepares a `monthly-check-2026-10-11` branch. Review it, flip its "Committed, not yet published" lines, merge, and deploy through `deploy.sh`. Its first run may pause for tool approvals, which stick once given. Keep the app open that morning
 - [ ] Watch Haiku 4.5 in that check: Anthropic gives its retirement as not sooner than 15 Oct 2026
-- [ ] Quarterly concepts/guides and start-here checks, due 11 Nov 2026, not scheduled. Getting better results quotes a Claude Opus 5 caveat fetched 12 Aug, and Opus 5 is now legacy, so re-read Anthropic's prompting best practices then
+- [ ] 11 Nov: the first scheduled quarterly check. It stops if that day's monthly check hasn't finished, so check it ran. Getting better results quotes a Claude Opus 5 caveat fetched 12 Aug, and Opus 5 is now legacy, so that page is the one most likely to move
 - [ ] Anthropic's models overview answers with a 307 (temporary) redirect to `/docs/en/models/overview`. Every link still works; move them over if it turns permanent
 - [ ] Tidy merged branches, local and on GitHub: `add-astra-gemini38-2026-09-15`, `fix-deploy-tmp-2026-09-15`, `fix-deploy-python-2026-09-15`, `home-check-2026-09-15`, `monthly-check-2026-09-15`, `monthly-check-2026-09-23`
 
@@ -27,4 +31,5 @@ Next monthly checks are due 11 Oct 2026, and the quarterly ones 11 Nov.
 (none)
 
 ## Blocked on Shawn
-- [ ] Post the X drafts once the daily task starts writing `PROMO.md`. That daily task isn't scheduled on this PC
+- [ ] Click "Run now" once on "Plainly — daily X post drafts" (Scheduled, in the sidebar) and approve its tools, so the unattended 08:10 runs don't stall on permission prompts
+- [ ] Post the X drafts from `PROMO.md` as they arrive, via MyDash's promo panel. Nothing posts them for you

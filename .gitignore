@@ -5,6 +5,10 @@
 CONTENT-PLAN.md
 REVIEW-*.md
 X-POSTS-DRAFT.md
+# The daily X drafts. Written by a scheduled task every morning and edited by
+# MyDash, never committed. Untracked, it would leave the tree dirty every day,
+# and deploy.sh refuses to deploy a dirty tree.
+PROMO.md
 
 # Local wrangler dev state (created by `wrangler pages dev public`)
 .wrangler/

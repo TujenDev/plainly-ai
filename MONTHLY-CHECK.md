@@ -5,7 +5,9 @@ promises publicly, with a date attached, and for the home page check promised fo
 day (see the section on it below). Both run on the 11th of each month at 10:00, as the
 Claude scheduled task `plainly-monthly-check` in the desktop app on Shawn's PC. That task
 runs only while the app is open; if the app was closed at 10:00, it runs at the next launch,
-and a late run says so in the log. A human can follow this file just as well.
+and a late run says so in the log. A human can follow this file just as well. The
+quarterly checks, due on the same day four times a year, are in
+[QUARTERLY-CHECK.md](QUARTERLY-CHECK.md) and run four hours later, on top of this one.
 
 Like the daily watcher, this schedule belongs to a machine and not to the repo. It lapsed
 once already: it lived on a Mac, and when the Mac went in September 2026 nothing on the new

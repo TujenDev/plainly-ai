@@ -31,5 +31,4 @@ quarterly ones 11 Nov.
 (none)
 
 ## Blocked on Shawn
-- [ ] Click "Run now" once on "Plainly — daily X post drafts" (Scheduled, in the sidebar) and approve its tools, so the unattended 08:10 runs don't stall on permission prompts
 - [ ] Post the X drafts from `PROMO.md` as they arrive, via MyDash's promo panel. Nothing posts them for you

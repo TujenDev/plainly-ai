@@ -155,7 +155,9 @@ prose, which is plain, specific, and unhurried.
 ## The daily watcher, and what it does not do
 
 `prices.py` fetches all seven sources below and diffs them against what
-`public/model-facts.html` claims. Run it daily:
+`public/model-facts.html` claims. It runs daily from the scheduled task described in
+`README.md`, through `pricewatch.py`, which logs to `%LOCALAPPDATA%\plainlyai\pricewatch.log`.
+By hand:
 
 ```
 python prices.py

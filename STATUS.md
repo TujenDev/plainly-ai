@@ -24,9 +24,9 @@ checks are both due 11 Oct 2026, and the quarterly ones 11 Nov.
 ## Live bugs
 - Live Model facts lists Claude Opus 5, GPT-5.6 Sol and GPT-5.6 Terra as current models. Their vendors moved on after 15 Sep. Fixed on `monthly-check-2026-09-23`, not deployed
 - Live Model facts' context-figures note says Google's 1,048,576 and OpenAI's 1.05M are the same number. OpenAI's pages give 1,050,000. Fixed on the same branch, not deployed
-- `/changes` says `prices.py` checks the table daily. Nothing schedules it on this Windows PC; whether the Mac still runs it is unknown
+- The daily price check lapsed for part of September when the Mac went, and `/changes` doesn't say so yet. It has been scheduled on this PC since 23 Sep (Task Scheduler, "Plainly price watch", via `pricewatch.py`), and the lapse is written up in the 23 Sep log entry on the branch, not deployed
 
 ## Blocked on Shawn
 - [ ] Say go on deploying `monthly-check-2026-09-23`, which includes the Astra / Gemini 3.8 Flash change. Deploys go through `deploy.sh` only
-- [ ] Is the Mac still running the daily price watcher? If not, either schedule it on this PC or reword the public "daily" claim before the deploy
-- [ ] Post the X drafts once the daily task starts writing `PROMO.md`
+- [ ] Nothing schedules the monthly check on this PC either. MONTHLY-CHECK.md says it runs "as a scheduled task on Shawn's own machine", and this PC has no Claude scheduled tasks at all. Say whether to set one up for the 11th
+- [ ] Post the X drafts once the daily task starts writing `PROMO.md`. That daily task isn't scheduled on this PC either

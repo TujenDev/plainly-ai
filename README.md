@@ -60,8 +60,8 @@ feed.py                 regenerates public/feed.xml from the log
 modelfacts.py           regenerates public/model-facts.json from the model tables
 deploy.sh               the deploy: every guard, then upload, then verify, then push
 prices.py               diffs Model facts against the seven vendor pages, daily
-pricewatch.sh           what the schedule runs: prices.py, logged, notify on trouble
-com.plainlyai.pricewatch.plist   the launchd agent, installed by hand (see below)
+pricewatch.py           what the schedule runs: prices.py, logged, notify on trouble
+pricewatch-task.ps1     registers the Windows scheduled task, run by hand (see below)
 ```
 
 Static HTML and one stylesheet. No framework and no JavaScript: it loads fast,
@@ -129,42 +129,57 @@ never writes the site's sentences applies here as much as it does in `prices.py`
 
 ## The daily price check
 
-`prices.py` is only useful if it actually runs daily. On macOS that is a launchd
-agent, installed by hand rather than by anything in this repo:
+`prices.py` is only useful if it actually runs daily. It runs from Windows Task
+Scheduler, registered by hand rather than by anything in the deploy:
 
-```bash
-cp com.plainlyai.pricewatch.plist ~/Library/LaunchAgents/
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.plainlyai.pricewatch.plist
-launchctl kickstart -k gui/$(id -u)/com.plainlyai.pricewatch   # run it once now
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File pricewatch-task.ps1
+Start-ScheduledTask -TaskName 'Plainly price watch'    # launch it once now
 ```
 
-It runs at 09:15, and it catches up. launchd re-runs a calendar job missed while
-the machine was asleep, which cron does not — but it drops one missed while the
-machine was powered *off*, without a trace anywhere. That is not a hypothetical:
-the machine was shut down over 09:15 on 27 August 2026 and the day's check simply
-never happened, while the site went on promising a daily one.
+**The schedule belongs to a machine, not to the repo, and it has already been
+lost that way once.** It used to be a launchd agent on a Mac. When work moved to
+a Windows PC in September 2026, nothing replaced it, and the site went on
+promising a daily check that nothing was running until 23 September. Moving to a
+new machine means running `pricewatch-task.ps1` on it. The script replaces the
+task rather than adding a second one, so running it again is safe.
 
-So the agent also ticks hourly, and `pricewatch.sh` decides whether the day's run
-is owed — it records the date of the last real run and exits in milliseconds when
-that date is today. The effect is at most one check a day: at 09:15 if the
-machine is up then, and at the first opportunity afterwards if it wasn't. A run
-that finds days missing since the last one says so in the log and notifies,
-because healing the gap quietly would leave the log agreeing with a promise the
-site hadn't actually kept. `PRICEWATCH_FORCE=1` skips the time-of-day guard, so
-the whole path can be exercised now rather than tomorrow morning.
+It runs at 09:15, and it catches up. The task ticks hourly from 09:15, and
+`pricewatch.py` decides whether the day's run is owed: it records the date of the
+last real run and exits at once when that date is today. The effect is at most
+one check a day, at 09:15 if the machine is on then and at the first tick
+afterwards if it wasn't. The design dates from the Mac, whose scheduler dropped a
+run missed while the machine was powered off. That is not a hypothetical: the
+machine was shut down over 09:15 on 27 August 2026, and the day's check simply
+never happened while the site went on promising a daily one. A run that finds days
+missing since the last one says so in the log and notifies, because healing the
+gap quietly would leave the log agreeing with a promise the site hadn't actually
+kept. `PRICEWATCH_FORCE=1` skips the time-of-day guard, so the whole path can be
+exercised now rather than tomorrow morning.
 
-Runs append to `~/Library/Logs/plainlyai-pricewatch.log`. A run that is not clean
-also raises a notification, because a scheduled check whose output only reaches a
-log file nobody opens is the quiet failure the script was written to prevent. A
-run with no network is logged as skipped and does not notify: a watcher that
-cries wolf gets dismissed, which costs more than the missed run. It leaves the
-day's run owed, so the next tick tries again, and logs the skip only once a day.
+Runs append to `%LOCALAPPDATA%\plainlyai\pricewatch.log`. A run that is not clean
+also raises a Windows notification, because a scheduled check whose output only
+reaches a log file nobody opens is the quiet failure the script was written to
+prevent. A run with no network is logged as skipped and does not notify: a
+watcher that cries wolf gets dismissed, which costs more than the missed run. It
+leaves the day's run owed, so the next tick tries again, and logs the skip only
+once a day. It runs under `pythonw`, so the hourly tick never opens a window, and
+for the same reason a crash in the wrapper itself is logged and notified rather
+than lost.
+
+It checks whatever is checked out: `prices.py` reads `public/model-facts.json`
+from the working tree, so a run while a half-edited branch is checked out reports
+on that branch.
 
 To stop it:
 
-```bash
-launchctl bootout gui/$(id -u)/com.plainlyai.pricewatch
+```powershell
+Unregister-ScheduledTask -TaskName 'Plainly price watch' -Confirm:$false
 ```
+
+The macOS wrapper and its launchd agent were retired on 23 September 2026 and are
+in the history. `pricewatch.py` still notifies on macOS, if the site ever moves
+back to one.
 
 ## On crawlers
 
